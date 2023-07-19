@@ -69,7 +69,7 @@ class KetuaKelompokController extends Controller
   public function show(Ketua_kelompok $ketua_kelompok)
   {
       //
-  }
+  } 
 
   /**
    * Show the form for editing the specified resource.
