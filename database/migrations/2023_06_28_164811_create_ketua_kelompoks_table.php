@@ -16,6 +16,7 @@ class CreateKetuaKelompoksTable extends Migration
         Schema::create('ketua_kelompoks', function (Blueprint $table) {
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
+            $table->integer('id_user');
             $table->date('tanggal_registKK');
             $table->string('refrensiKK', 50)->nullable();
             $table->string('sapaanKK', 50)->nullable();
@@ -92,7 +93,7 @@ class CreateKetuaKelompoksTable extends Migration
             $table->text('kemampuan_bahasaKK')->nullable();
             $table->text('penyakitKK')->nullable();
             $table->string('kolom_cadanganCBSatuKK', 10)->nullable();
-            $table->string('kolom_cadanganCBDuaKK', 10)->nllable();
+            $table->string('kolom_cadanganCBDuaKK', 10)->nullable();
             $table->string('kolom_cadanganCBTigaKK', 10)->nullable();
             $table->string('kolom_cadanganCBEmpatKK', 10)->nullable();
             $table->string('kolom_cadanganCBLimaKK', 10)->nullable();

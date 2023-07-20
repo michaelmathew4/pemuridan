@@ -141,7 +141,8 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="" method="post">
+                      <form action="{{ route('data-ketua-kelompok.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group-input">
                           <div class="form-header-group mb-3">
                             <h6>PERSONAL</h6>
@@ -151,10 +152,15 @@
                               <div class="mb-3 row">
                                 <label for="tglRegistrasiKetuaKelompok" class="col-sm-3 px-1">Tgl Registrasi <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
-                                  <input type="date" required name="tglRegistrasiKetuaKelompok" class="form-control form-control-sm" id="tglRegistrasiKetuaKelompok">
-                                  <div class="invalid-feedback">
-                                    Silahkan Masukkan Tanggal Registrasi.
-                                  </div>
+                                  <input type="date" name="tglRegistrasiKetuaKelompok" class="form-control form-control-sm" id="tglRegistrasiKetuaKelompok">
+                                  @error('tglRegistrasiKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -183,10 +189,15 @@
                               <div class="mb-3 row">
                                 <label for="namaKetuaKelompok" class="col-sm-3 px-1">Nama Lengkap <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
-                                  <input type="text" name="namaKetuaKelompok" required class="form-control form-control-sm" id="namaKetuaKelompok" placeholder="cth: Angelica Gabriel">
-                                  <div class="invalid-feedback">
-                                    Silahkan Masukkan Nama Lengkap.
-                                  </div>
+                                  <input type="text" name="namaKetuaKelompok" class="form-control form-control-sm" id="namaKetuaKelompok" placeholder="cth: Angelica Gabriel">
+                                  @error('namaKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -274,12 +285,28 @@
                                 <label for="fotoKetuaKelompok" class="col-sm-3 px-1">Foto</label>
                                 <div class="col-sm-9">
                                   <input type="file" name="fotoKetuaKelompok" class="form-control form-control-sm" id="fotoKetuaKelompok">
+                                  @error('fotoKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
                               <div class="mb-3 row">
                                 <label for="fotoBitmapKetuaKelompok" class="col-sm-3 px-1">Foto Bitmap</label>
                                 <div class="col-sm-9">
                                   <input type="file" name="fotoBitmapKetuaKelompok" class="form-control form-control-sm" id="fotoBitmapKetuaKelompok">
+                                  @error('fotoBitmapKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
                             </div>
@@ -870,8 +897,8 @@
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGSKetuaKelompok[]" style="width: 100%;" id="pilihanGSKetuaKelompok" aria-label="multiple select pilihanGSKetuaKelompok" multiple>
                                       <option>-Personality - MBTI-</option>
-                                      @foreach ($perMbtis as $perMbti)
-                                        <option value="{{$perMbti->mbti}}">{{$perMbti->mbti}}</option>
+                                      @foreach ($persMbtis as $persMbti)
+                                        <option value="{{$persMbti->mbti}}">{{$persMbti->mbti}}</option>
                                       @endforeach
                                     </select>
                                   </div>
@@ -887,10 +914,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGDKetuaKelompok[]" style="width: 100%;" id="pilihanGDKetuaKelompok" aria-label="multiple select pilihanGDKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Personality - Holland</option>
+                                      @foreach ($persHollands as $persHolland)
+                                        <option value="{{$persHolland->holland}}">{{$persHolland->holland}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -905,10 +932,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGTKetuaKelompok[]" style="width: 100%;" id="pilihanGTKetuaKelompok" aria-label="multiple select pilihanGTKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Spiritual Gifts-</option>
+                                      @foreach ($spiritGifts as $spiritGift)
+                                        <option value="{{$spiritGift->gifts}}">{{$spiritGift->gifts}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -923,10 +950,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGEKetuaKelompok[]" style="width: 100%;" id="pilihanGEKetuaKelompok" aria-label="multiple select pilihanGEKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Abilities-</option>
+                                      @foreach ($abilities as $ability)
+                                        <option value="{{$ability->abilities}}">{{$ability->abilities}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -941,10 +968,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGLKetuaKelompok[]" style="width: 100%;" id="pilihanGLKetuaKelompok" aria-label="multiple select pilihanGLKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Ganda Lima-</option>
+                                      @foreach ($gandaLimas as $gandaLima)
+                                        <option value="{{$gandaLima->ganda_lima}}">{{$gandaLima->ganda_lima}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -959,10 +986,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGEnKetuaKelompok[]" style="width: 100%;" id="pilihanGEnKetuaKelompok" aria-label="multiple select pilihanGEnKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Kemampuan Bahasa-</option>
+                                      @foreach ($kemBahasas as $kemBahasa)
+                                        <option value="{{$kemBahasa->kem_bahasa}}">{{$kemBahasa->kem_bahasa}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -977,10 +1004,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGTuKetuaKelompok[]" style="width: 100%;" id="pilihanGTuKetuaKelompok" aria-label="multiple select pilihanGTuKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Pernah Menderita Penyakit-</option>
+                                      @foreach ($penyakits as $penyakit)
+                                        <option value="{{$penyakit->penyakit}}">{{$penyakit->penyakit}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -1076,7 +1103,7 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahBaptisAnakKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
@@ -1097,6 +1124,14 @@
                                   <hr>
                                   <label for="fileUploadBaptisAnakKetuaKelompok" class="">File</label>
                                   <input type="file" name="fileUploadBaptisAnakKetuaKelompok" class="form-control form-control-sm" id="fileUploadBaptisAnakKetuaKelompok">
+                                  @error('fileUploadBaptisAnakKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
                                   <label for="ketBaptisAnakKetuaKelompok" class="">Keterangan</label>
                                   <textarea class="form-control" name="ketBaptisAnakKetuaKelompok" id="ketBaptisAnakKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
@@ -1112,7 +1147,7 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahMenikahKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
@@ -1133,6 +1168,14 @@
                                   <hr>
                                   <label for="fileUploadMenikahKetuaKelompok" class="">File</label>
                                   <input type="file" name="fileUploadMenikahKetuaKelompok" class="form-control form-control-sm" id="fileUploadMenikahKetuaKelompok">
+                                  @error('fileUploadMenikahKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
                                   <label for="ketMenikahKetuaKelompok" class="">Keterangan</label>
                                   <textarea class="form-control" name="ketMenikahKetuaKelompok" id="ketMenikahKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
@@ -1148,7 +1191,7 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahBaptisKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
@@ -1169,6 +1212,14 @@
                                   <hr>
                                   <label for="fileUploadBaptisKetuaKelompok" class="">File</label>
                                   <input type="file" name="fileUploadBaptisKetuaKelompok" class="form-control form-control-sm" id="fileUploadBaptisKetuaKelompok">
+                                  @error('fileUploadBaptisKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
                                   <label for="ketBaptisKetuaKelompok" class="">Keterangan</label>
                                   <textarea class="form-control" name="ketBaptisKetuaKelompok" id="ketBaptisKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
@@ -1184,7 +1235,7 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahMeninggalDuniaKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
@@ -1205,6 +1256,14 @@
                                   <hr>
                                   <label for="fileUploadMeninggalDuniaKetuaKelompok" class="">File</label>
                                   <input type="file" name="fileUploadMeninggalDuniaKetuaKelompok" class="form-control form-control-sm" id="fileUploadMeninggalDuniaKetuaKelompok">
+                                  @error('fileUploadMeninggalDuniaKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
                                   <label for="ketMeninggalDuniaKetuaKelompok" class="">Keterangan</label>
                                   <textarea class="form-control" name="ketMeninggalDuniaKetuaKelompok" id="ketMeninggalDuniaKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
@@ -1220,7 +1279,7 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahPenyerahanAnakKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
@@ -1241,6 +1300,14 @@
                                   <hr>
                                   <label for="fileUploadPenyerahanAnakKetuaKelompok" class="">File</label>
                                   <input type="file" name="fileUploadPenyerahanAnakKetuaKelompok" class="form-control form-control-sm" id="fileUploadPenyerahanAnakKetuaKelompok">
+                                  @error('fileUploadPenyerahanAnakKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
                                   <label for="ketPenyerahanAnakKetuaKelompok" class="">Keterangan</label>
                                   <textarea class="form-control" name="ketPenyerahanAnakKetuaKelompok" id="ketPenyerahanAnakKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
@@ -1256,7 +1323,7 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahEvangelismExplosionKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
@@ -1277,6 +1344,14 @@
                                   <hr>
                                   <label for="fileUploadEvangelismExplosionKetuaKelompok" class="">File</label>
                                   <input type="file" name="fileUploadEvangelismExplosionKetuaKelompok" class="form-control form-control-sm" id="fileUploadEvangelismExplosionKetuaKelompok">
+                                  @error('fileUploadEvangelismExplosionKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
                                   <label for="ketEvangelismExplosionKetuaKelompok" class="">Keterangan</label>
                                   <textarea class="form-control" name="ketEvangelismExplosionKetuaKelompok" id="ketEvangelismExplosionKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
@@ -1292,7 +1367,7 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahIkatanDinasKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
@@ -1313,6 +1388,14 @@
                                   <hr>
                                   <label for="fileUploadIkatanDinasKetuaKelompok" class="">File</label>
                                   <input type="file" name="fileUploadIkatanDinasKetuaKelompok" class="form-control form-control-sm" id="fileUploadIkatanDinasKetuaKelompok">
+                                  @error('fileUploadIkatanDinasKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
                                   <label for="ketIkatanDinasKetuaKelompok" class="">Keterangan</label>
                                   <textarea class="form-control" name="ketIkatanDinasKetuaKelompok" id="ketIkatanDinasKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
@@ -1328,30 +1411,38 @@
                                 <div class="col-sm-9">
                                   <label for="" class="">Sudah?</label>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <input class="form-check-input" name="sudahPrktkDuaThnKetuaKelompok" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                       Sudah
                                     </label>
                                   </div>
                                   <hr>
-                                  <label for="tglPrktk2ThnKetuaKelompok" class="">Tanggal</label>
-                                  <input type="date" name="tglPrktk2ThnKetuaKelompok" class="form-control form-control-sm" id="tglPrktk2ThnKetuaKelompok">
+                                  <label for="tglPrktkDuaThnKetuaKelompok" class="">Tanggal</label>
+                                  <input type="date" name="tglPrktkDuaThnKetuaKelompok" class="form-control form-control-sm" id="tglPrktkDuaThnKetuaKelompok">
                                   <hr>
                                   <label for="" class="">Tempat</label><br>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatPrktk2ThnKetuaKelompok" id="tempatPrktk2ThnKetuaKelompok" value="Gereja Lokal">
-                                    <label class="form-check-label" for="tempatPrktk2ThnKetuaKelompok">Gereja Lokal</label>
+                                    <input class="form-check-input" type="radio" name="tempatPrktkDuaThnKetuaKelompok" id="tempatPrktkDuaThnKetuaKelompok" value="Gereja Lokal">
+                                    <label class="form-check-label" for="tempatPrktkDuaThnKetuaKelompok">Gereja Lokal</label>
                                   </div>
                                   <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatPrktk2ThnKetuaKelompok" id="tempatPrktk2ThnLKetuaKelompok" value="Gereja Lain">
-                                    <label class="form-check-label" for="tempatPrktk2ThnLKetuaKelompok">Gereja Lain</label>
+                                    <input class="form-check-input" type="radio" name="tempatPrktkDuaThnKetuaKelompok" id="tempatPrktkDuaThnLKetuaKelompok" value="Gereja Lain">
+                                    <label class="form-check-label" for="tempatPrktkDuaThnLKetuaKelompok">Gereja Lain</label>
                                   </div>
                                   <hr>
-                                  <label for="fileUploadPrktk2ThnKetuaKelompok" class="">File</label>
-                                  <input type="file" name="fileUploadPrktk2ThnKetuaKelompok" class="form-control form-control-sm" id="fileUploadPrktk2ThnKetuaKelompok">
+                                  <label for="fileUploadPrktkDuaThnKetuaKelompok" class="">File</label>
+                                  <input type="file" name="fileUploadPrktkDuaThnKetuaKelompok" class="form-control form-control-sm" id="fileUploadPrktkDuaThnKetuaKelompok">
+                                  @error('fileUploadPrktkDuaThnKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                   <hr>
-                                  <label for="ketPrktk2ThnKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketPrktk2ThnKetuaKelompok" id="ketPrktk2ThnKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <label for="ketPrktkDuaThnKetuaKelompok" class="">Keterangan</label>
+                                  <textarea class="form-control" name="ketPrktkDuaThnKetuaKelompok" id="ketPrktk2ThnKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1404,6 +1495,14 @@
                                 <label for="kata_sandiKetuaKelompok" class="col-sm-3 px-1">Kata Sandi</label>
                                 <div class="col-sm-9">
                                   <input class="form-control" type="password" name="kata_sandiKetuaKelompok" id="kata_sandiKetuaKelompok" rows="3" placeholder="********">
+                                  @error('kata_sandiKetuaKelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -1416,8 +1515,8 @@
                           </div>
                         </div>
                         <div class="modal-footer mt-2">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                          <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                       </form>
                     </div>
