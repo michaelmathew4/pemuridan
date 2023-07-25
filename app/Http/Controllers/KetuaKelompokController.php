@@ -11,6 +11,9 @@ use App\Models\Sekolah_univ;
 use App\Models\Bidang_keterampilan;
 use App\Models\Bidang_ketertarikan;
 use App\Models\P_mbti;
+use App\Models\Pers_holland;
+use App\Models\Spirit_gifts;
+use App\Models\Abilities;
 use Illuminate\Http\Request;
 
 class KetuaKelompokController extends Controller
@@ -33,10 +36,13 @@ class KetuaKelompokController extends Controller
     $sekolahUnivs = Sekolah_univ::all();
     $bidKeterampilans = Bidang_keterampilan::all();
     $bidKetertarikans = Bidang_ketertarikan::all();
-    $perMbtis = P_mbti::all();
+    $persMbtis = P_mbti::all();
+    $persHollands = Pers_holland::all();
+    $spiritualGifts = Spirit_gifts::all();
+    $spiritualGifts = Abilities::all();
 
     return view('admin.data-ketua-kelompok', compact(['ketuaKelompoks', 'noKetuaKelompoks', 'pekerjaans', 'statusPekerjaans', 'sektorIndustris', 'tingkatPendidikans', 'sekolahUnivs',
-                                                      'bidKeterampilans', 'bidKetertarikans', 'perMbtis']));
+                                                      'bidKeterampilans', 'bidKetertarikans', 'persMbtis', 'persHollands', 'spiritualGifts']));
   }
 
   /**

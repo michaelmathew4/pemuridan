@@ -870,8 +870,8 @@
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGSKetuaKelompok[]" style="width: 100%;" id="pilihanGSKetuaKelompok" aria-label="multiple select pilihanGSKetuaKelompok" multiple>
                                       <option>-Personality - MBTI-</option>
-                                      @foreach ($perMbtis as $perMbti)
-                                        <option value="{{$perMbti->mbti}}">{{$perMbti->mbti}}</option>
+                                      @foreach ($persMbtis as $persMbti)
+                                        <option value="{{$persMbti->mbti}}">{{$persMbti->mbti}}</option>
                                       @endforeach
                                     </select>
                                   </div>
@@ -887,10 +887,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGDKetuaKelompok[]" style="width: 100%;" id="pilihanGDKetuaKelompok" aria-label="multiple select pilihanGDKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Personality - Holland-</option>
+                                      @foreach ($persHollands as $persHolland)
+                                        <option value="{{$persHolland->Holland}}">{{$persHolland->holland}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -905,10 +905,10 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGTKetuaKelompok[]" style="width: 100%;" id="pilihanGTKetuaKelompok" aria-label="multiple select pilihanGTKetuaKelompok" multiple>
-                                      <option>Open this select menu</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
+                                      <option>-Spiritual Gifts-</option>
+                                      @foreach ($spiritualGifts as $spiritualGift)
+                                        <option value="{{$spiritualGift->gifts}}">{{$spiritualGift->gifts}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
