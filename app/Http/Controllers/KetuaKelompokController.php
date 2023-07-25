@@ -105,7 +105,7 @@ class KetuaKelompokController extends Controller
       'fileUploadPenyerahanAnakKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadEvangelismExplosionKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadIkatanDinasKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fotoBitmapKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadPrktkDuaThnKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
       'kata_sandiKetuaKelompok.required' => 'Kata Sandi tidak boleh kosong.'
     ]);
 
@@ -120,6 +120,7 @@ class KetuaKelompokController extends Controller
     $storeData->nama_panggilanKK = $request->namaPanggilanKetuaKelompok;
     $storeData->peranKK = $request->peranKetuaKelompok;
     $storeData->jenis_identitasKK = $request->jenisIdentitasKetuaKelompok;
+    $storeData->no_identitasKK = $request->noIdentitasKetuaKelompok;
     $storeData->tempat_lahirKK = $request->tempatLahirKetuaKelompok;
     $storeData->tanggal_lahirKK = $request->tglLahirKetuaKelompok;
     $storeData->jkKK = $request->jenisKelaminKetuaKelompok;

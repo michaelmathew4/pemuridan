@@ -26,6 +26,7 @@ class CreateKetuaKelompoksTable extends Migration
             $table->string('nama_panggilanKK',50)->nullable();
             $table->string('peranKK', 50)->nullable();
             $table->string('jenis_identitasKK', 50)->nullable();
+            $table->string('no_identitasKK', 20)->nullable();
             $table->text('tempat_lahirKK')->nullable();
             $table->date('tanggal_lahirKK')->nullable();
             $table->string('jkKK', 20)->nullable();
