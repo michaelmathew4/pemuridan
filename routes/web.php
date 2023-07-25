@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelModulController;
+use App\Http\Controllers\KcPilihanController;
 use App\Http\Controllers\KcPilganController;
 use App\Http\Controllers\KetuaKelompokController;
 use App\Http\Controllers\KetuaLokasiController;
@@ -48,9 +49,7 @@ Route::resource('/admin/pekerjaan', PekerjaanController::class);
 
 Route::resource('/admin/studi-minat', StudiMinatController::class);
 
-Route::get('/admin/kolom-pilihan', function () {
-  return view('admin/kolom-pilihan');
-});
+Route::resource('/admin/kolom-pilihan', KcPilihanController::class);
 
 Route::resource('/admin/kolom-pilihan-ganda', KcPilganController::class);
 

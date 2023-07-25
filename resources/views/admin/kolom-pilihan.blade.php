@@ -114,7 +114,7 @@
 
   <section class="section dashboard">
     <div class="row">
-      <div class="col-12">
+      <div class="col-6">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -126,66 +126,6 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
-            </div>
-            <hr>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">Ubah | Hapus</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    <a href="#lihatKolCadPilSatu" data-bs-toggle="modal" class="text-info">
-                      Brandon Jacob <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
-                    </a>
-                  </td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-                  <td>
-                    <div class="icon-action">
-                      <a href="#ubahKolCadPilSatu" data-bs-toggle="modal" class="text-primary">
-                        <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                      </a>
-                      |
-                      <a href="#hapusKolCadPilSatu" data-bs-toggle="modal" class="text-danger">
-                        <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- Modal Lihat Data -->
-            <div class="modal fade" id="lihatKolCadPilSatu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatKolCadPilSatuLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="lihatKolCadPilSatuLabel">
-                      <i class="bi bi-info-circle text-info"></i>
-                      Lihat Kolom Cadangan (Pilihan) 1
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Lihat Data -->
             <!-- Modal Tambah Data -->
             <div class="modal fade" id="tambahKolCadPilSatu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilSatuLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -197,64 +137,124 @@
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
+                  <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                      <div class="form-group-input">
+                        <div class="input-center ps-5">
+                          <div class="w-75">
+                            <div class="mb-3 row">
+                              <label for="kc_pilsatu" class="col-sm-3 px-1 form-label">Pilihan 1</label>
+                              <div class="col-sm-9">
+                                <input type="text" name="kc_pilsatu" class="form-control form-control-sm" id="kc_pilsatu" placeholder="Pilihan 1">
+                                @error('kc_pilsatu')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="p-1 pb-0" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <input type="text" name="sub" value="kc_pilsatu" hidden>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                      <button type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
             <!-- End Modal Tambah Data -->
-            <!-- Modal Ubah Data -->
-            <div class="modal fade" id="ubahKolCadPilSatu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilSatuLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="ubahKolCadPilSatuLabel">
-                      <i class="bi bi-pencil-square text-primary"></i>
-                      Ubah Kolom Cadangan (Pilihan) 1
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
             </div>
-            <!-- End Modal Ubah Data -->
-            <!-- Modal Hapus Data -->
-            <div class="modal fade" id="hapusKolCadPilSatu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilSatuLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="hapusKolCadPilSatuLabel">
-                      <i class="bi bi-trash text-danger"></i>
-                      Hapus Kolom Cadangan (Pilihan) 1
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <hr>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Pilihan 1</th>
+                  <th scope="col">Tanggal Input</th>
+                  <th scope="col">Ubah | Hapus</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse ($kc_pilsatus as $kc_pilsatu)
+                  <tr>
+                    <th scope="row">{{$noKc_pilsatus++}}</th>
+                    <td>{{$kc_pilsatu->kc_pilsatu}}</td>
+                    <td>{{$kc_pilsatu->created_at}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kolom Cadangan (Pilihan) 1
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="modal-body">
-                    ...
+                  <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKolCadPilSatu{{$kc_pilsatu->kc_pilsatu}}Label">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Kolom Cadangan (Pilihan) 1
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                  <!-- End Modal Hapus Data -->
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
                   </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Hapus Data -->
+                @endforelse
+              </tbody>
+            </table>
           </div>
         </div>
-        <hr>
+      </div>
+      <div class="col-6">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -394,7 +394,9 @@
             <!-- End Modal Hapus Data -->
           </div>
         </div>
-        <hr>
+      </div>
+      <hr>
+      <div class="col-6">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -534,7 +536,8 @@
             <!-- End Modal Hapus Data -->
           </div>
         </div>
-        <hr>
+      </div>
+      <div class="col-6">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -674,7 +677,9 @@
             <!-- End Modal Hapus Data -->
           </div>
         </div>
-        <hr>
+      </div>
+      <hr>
+      <div class="col-6">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -814,7 +819,8 @@
             <!-- End Modal Hapus Data -->
           </div>
         </div>
-        <hr>
+      </div>
+      <div class="col-6">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -954,7 +960,9 @@
             <!-- End Modal Hapus Data -->
           </div>
         </div>
-        <hr>
+      </div>
+      <hr>
+      <div class="col-6">
         <div class="card">
           <div class="card-body">
             <div class="row">

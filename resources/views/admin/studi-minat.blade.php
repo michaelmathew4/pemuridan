@@ -514,8 +514,8 @@
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Bidang Ketertarikan</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
@@ -682,8 +682,8 @@
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Bidang Keterampilan</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
