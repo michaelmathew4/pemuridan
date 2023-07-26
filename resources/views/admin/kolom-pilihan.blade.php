@@ -126,51 +126,51 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahKolCadPilSatu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilSatuLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahKolCadPilSatuLabel">
-                      <i class="bi bi-plus-circle text-success"></i>
-                      Tambah Kolom Cadangan (Pilihan) 1
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                      <div class="form-group-input">
-                        <div class="input-center ps-5">
-                          <div class="w-75">
-                            <div class="mb-3 row">
-                              <label for="kc_pilsatu" class="col-sm-3 px-1 form-label">Pilihan 1</label>
-                              <div class="col-sm-9">
-                                <input type="text" name="kc_pilsatu" class="form-control form-control-sm" id="kc_pilsatu" placeholder="Pilihan 1">
-                                @error('kc_pilsatu')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="p-1 pb-0" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahKolCadPilSatu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilSatuLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahKolCadPilSatuLabel">
+                        <i class="bi bi-plus-circle text-success"></i>
+                        Tambah Kolom Cadangan (Pilihan) 1
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group-input">
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="kc_pilsatu" class="col-sm-3 px-1 form-label">Pilihan 1</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="kc_pilsatu" class="form-control form-control-sm" id="kc_pilsatu" placeholder="Pilihan 1">
+                                  @error('kc_pilsatu')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
                               </div>
+                              <input type="text" name="sub" value="kc_pilsatu" hidden>
                             </div>
-                            <input type="text" name="sub" value="kc_pilsatu" hidden>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                      <button type="submit" class="btn btn-success">Simpan</button>
-                    </div>
-                  </form>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- End Modal Tambah Data -->
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
@@ -211,13 +211,37 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <form action="{{ route('kolom-pilihan.update', $kc_pilsatu->id) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editKc_pilsatu" class="col-sm-3 px-1 form-label">Pilihan 1</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editKc_pilsatu" class="form-control form-control-sm" id="editKc_pilsatu" value="{{$kc_pilsatu->kc_pilsatu}}">
+                                      @error('editKc_pilsatu')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <input type="text" name="subEdit" value="kc_pilsatu" hidden>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -233,13 +257,17 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <form action="{{ route('kolom-pilihan.destroy', $kc_pilsatu->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Pilihan 1 {{$kc_pilsatu->kc_pilsatu}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -266,132 +294,159 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahKolCadPilDua" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilDuaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahKolCadPilDuaLabel">
+                        <i class="bi bi-plus-circle text-success"></i>
+                        Tambah Kolom Cadangan (Pilihan) 2
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group-input">
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="kc_pildua" class="col-sm-3 px-1 form-label">Pilihan 2</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="kc_pildua" class="form-control form-control-sm" id="kc_pildua" placeholder="Pilihan 2">
+                                  @error('kc_pildua')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <input type="text" name="sub" value="kc_pildua" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Pilihan 2</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    <a href="#lihatKolCadPilDua" data-bs-toggle="modal" class="text-info">
-                      Brandon Jacob <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
-                    </a>
-                  </td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-                  <td>
-                    <div class="icon-action">
-                      <a href="#ubahKolCadPilDua" data-bs-toggle="modal" class="text-primary">
-                        <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                      </a>
-                      |
-                      <a href="#hapusKolCadPilDua" data-bs-toggle="modal" class="text-danger">
-                        <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                      </a>
+                @forelse ($kc_pilduas as $kc_pildua)
+                  <tr>
+                    <th scope="row">{{$noKc_pilduas++}}</th>
+                    <td>{{$kc_pildua->kc_pildua}}</td>
+                    <td>{{$kc_pildua->created_at}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKolCadPilDua{{$kc_pildua->id}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKolCadPilDua{{$kc_pildua->id}}" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKolCadPilDua{{$kc_pildua->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilDua{{$kc_pildua->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKolCadPilDua{{$kc_pildua->id}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kolom Cadangan (Pilihan) 2
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.update', $kc_pildua->id) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editKc_pildua" class="col-sm-3 px-1 form-label">Pilihan 2</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editKc_pildua" class="form-control form-control-sm" id="editKc_pildua" value="{{$kc_pildua->kc_pildua}}">
+                                      @error('editKc_pildua')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <input type="text" name="subEdit" value="kc_pildua" hidden>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                  <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKolCadPilDua{{$kc_pildua->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilDua{{$kc_pildua->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKolCadPilDua{{$kc_pildua->id}}Label">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Kolom Cadangan (Pilihan) 2
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.destroy', $kc_pildua->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Pilihan 2 {{$kc_pildua->kc_pildua}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Hapus Data -->
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
+                  </div>
+                @endforelse
               </tbody>
             </table>
-            <!-- Modal Lihat Data -->
-            <div class="modal fade" id="lihatKolCadPilDua" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatKolCadPilDuaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="lihatKolCadPilDuaLabel">
-                      <i class="bi bi-info-circle text-info"></i>
-                      Lihat Kolom Cadangan (Pilihan) 2
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Lihat Data -->
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahKolCadPilDua" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilDuaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahKolCadPilDuaLabel">
-                      <i class="bi bi-plus-circle text-success"></i>
-                      Tambah Kolom Cadangan (Pilihan) 2
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Tambah Data -->
-            <!-- Modal Ubah Data -->
-            <div class="modal fade" id="ubahKolCadPilDua" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilDuaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="ubahKolCadPilDuaLabel">
-                      <i class="bi bi-pencil-square text-primary"></i>
-                      Ubah Kolom Cadangan (Pilihan) 2
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Ubah Data -->
-            <!-- Modal Hapus Data -->
-            <div class="modal fade" id="hapusKolCadPilDua" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilDuaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="hapusKolCadPilDuaLabel">
-                      <i class="bi bi-trash text-danger"></i>
-                      Hapus Kolom Cadangan (Pilihan) 2
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Hapus Data -->
           </div>
         </div>
       </div>
@@ -408,132 +463,159 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahKolCadPilTiga" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilTigaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahKolCadPilTigaLabel">
+                        <i class="bi bi-plus-circle text-success"></i>
+                        Tambah Kolom Cadangan (Pilihan) 3
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group-input">
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="kc_piltiga" class="col-sm-3 px-1 form-label">Pilihan 3</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="kc_piltiga" class="form-control form-control-sm" id="kc_piltiga" placeholder="Pilihan 3">
+                                  @error('kc_piltiga')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <input type="text" name="sub" value="kc_piltiga" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Pilihan 3</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    <a href="#lihatKolCadPilTiga" data-bs-toggle="modal" class="text-info">
-                      Brandon Jacob <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
-                    </a>
-                  </td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-                  <td>
-                    <div class="icon-action">
-                      <a href="#ubahKolCadPilTiga" data-bs-toggle="modal" class="text-primary">
-                        <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                      </a>
-                      |
-                      <a href="#hapusKolCadPilTiga" data-bs-toggle="modal" class="text-danger">
-                        <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                      </a>
+                @forelse ($kc_piltigas as $kc_piltiga)
+                  <tr>
+                    <th scope="row">{{$noKc_piltigas++}}</th>
+                    <td>{{$kc_piltiga->kc_piltiga}}</td>
+                    <td>{{$kc_piltiga->created_at}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKolCadPilTiga{{$kc_piltiga->id}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKolCadPilTiga{{$kc_piltiga->id}}" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKolCadPilTiga{{$kc_piltiga->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilTiga{{$kc_piltiga->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKolCadPilTiga{{$kc_piltiga->id}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kolom Cadangan (Pilihan) 3
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.update', $kc_piltiga->id) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editKc_piltiga" class="col-sm-3 px-1 form-label">Pilihan 3</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editKc_piltiga" class="form-control form-control-sm" id="editKc_piltiga" value="{{$kc_piltiga->kc_piltiga}}">
+                                      @error('editKc_piltiga')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <input type="text" name="subEdit" value="kc_piltiga" hidden>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                  <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKolCadPilTiga{{$kc_piltiga->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilTiga{{$kc_piltiga->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKolCadPilTiga{{$kc_piltiga->id}}Label">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Kolom Cadangan (Pilihan) 3
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.destroy', $kc_piltiga->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Pilihan 3 {{$kc_piltiga->kc_piltiga}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Hapus Data -->
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
+                  </div>
+                @endforelse
               </tbody>
             </table>
-            <!-- Modal Lihat Data -->
-            <div class="modal fade" id="lihatKolCadPilTiga" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatKolCadPilTigaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="lihatKolCadPilTigaLabel">
-                      <i class="bi bi-info-circle text-info"></i>
-                      Lihat Kolom Cadangan (Pilihan) 3
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Lihat Data -->
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahKolCadPilTiga" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilTigaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahKolCadPilTigaLabel">
-                      <i class="bi bi-plus-circle text-success"></i>
-                      Tambah Kolom Cadangan (Pilihan) 3
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Tambah Data -->
-            <!-- Modal Ubah Data -->
-            <div class="modal fade" id="ubahKolCadPilTiga" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilTigaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="ubahKolCadPilTigaLabel">
-                      <i class="bi bi-pencil-square text-primary"></i>
-                      Ubah Kolom Cadangan (Pilihan) 3
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Ubah Data -->
-            <!-- Modal Hapus Data -->
-            <div class="modal fade" id="hapusKolCadPilTiga" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilTigaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="hapusKolCadPilTigaLabel">
-                      <i class="bi bi-trash text-danger"></i>
-                      Hapus Kolom Cadangan (Pilihan) 3
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Hapus Data -->
           </div>
         </div>
       </div>
@@ -549,132 +631,159 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahKolCadPilEmpat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilEmpatLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahKolCadPilEmpatLabel">
+                        <i class="bi bi-plus-circle text-success"></i>
+                        Tambah Kolom Cadangan (Pilihan) 4
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group-input">
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="kc_pilempat" class="col-sm-3 px-1 form-label">Pilihan 4</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="kc_pilempat" class="form-control form-control-sm" id="kc_pilempat" placeholder="Pilihan 4">
+                                  @error('kc_pilempat')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <input type="text" name="sub" value="kc_pilempat" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Pilihan 4</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    <a href="#lihatKolCadPilEmpat" data-bs-toggle="modal" class="text-info">
-                      Brandon Jacob <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
-                    </a>
-                  </td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-                  <td>
-                    <div class="icon-action">
-                      <a href="#ubahKolCadPilEmpat" data-bs-toggle="modal" class="text-primary">
-                        <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                      </a>
-                      |
-                      <a href="#hapusKolCadPilEmpat" data-bs-toggle="modal" class="text-danger">
-                        <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                      </a>
+                @forelse ($kc_pilempats as $kc_pilempat)
+                  <tr>
+                    <th scope="row">{{$noKc_pilempats++}}</th>
+                    <td>{{$kc_pilempat->kc_pilempat}}</td>
+                    <td>{{$kc_pilempat->created_at}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKolCadPilEmpat{{$kc_pilempat->id}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKolCadPilEmpat" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKolCadPilEmpat{{$kc_pilempat->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilEmpat{{$kc_pilempat->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKolCadPilEmpat{{$kc_pilempat->id}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kolom Cadangan (Pilihan) 4
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.update', $kc_pilempat->id) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editKc_pilempat" class="col-sm-3 px-1 form-label">Pilihan 4</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editKc_pilempat" class="form-control form-control-sm" id="editKc_pilempat" value="{{$kc_pilempat->kc_pilempat}}">
+                                      @error('editKc_pilempat')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <input type="text" name="subEdit" value="kc_pilempat" hidden>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                  <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKolCadPilEmpat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilEmpatLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKolCadPilEmpatLabel">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Kolom Cadangan (Pilihan) 4
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.destroy', $kc_pilempat->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Pilihan 4 {{$kc_pilempat->kc_pilempat}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Hapus Data -->
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
+                  </div>
+                @endforelse
               </tbody>
             </table>
-            <!-- Modal Lihat Data -->
-            <div class="modal fade" id="lihatKolCadPilEmpat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatKolCadPilEmpatLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="lihatKolCadPilEmpatLabel">
-                      <i class="bi bi-info-circle text-info"></i>
-                      Lihat Kolom Cadangan (Pilihan) 4
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Lihat Data -->
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahKolCadPilEmpat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilEmpatLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahKolCadPilEmpatLabel">
-                      <i class="bi bi-plus-circle text-success"></i>
-                      Tambah Kolom Cadangan (Pilihan) 4
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Tambah Data -->
-            <!-- Modal Ubah Data -->
-            <div class="modal fade" id="ubahKolCadPilEmpat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilEmpatLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="ubahKolCadPilEmpatLabel">
-                      <i class="bi bi-pencil-square text-primary"></i>
-                      Ubah Kolom Cadangan (Pilihan) 4
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Ubah Data -->
-            <!-- Modal Hapus Data -->
-            <div class="modal fade" id="hapusKolCadPilEmpat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilEmpatLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="hapusKolCadPilEmpatLabel">
-                      <i class="bi bi-trash text-danger"></i>
-                      Hapus Kolom Cadangan (Pilihan) 4
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Hapus Data -->
           </div>
         </div>
       </div>
@@ -691,132 +800,159 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahKolCadPilLima" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilLimaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahKolCadPilLimaLabel">
+                        <i class="bi bi-plus-circle text-success"></i>
+                        Tambah Kolom Cadangan (Pilihan) 5
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group-input">
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="kc_pillima" class="col-sm-3 px-1 form-label">Pilihan 5</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="kc_pillima" class="form-control form-control-sm" id="kc_pillima" placeholder="Pilihan 5">
+                                  @error('kc_pillima')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <input type="text" name="sub" value="kc_pillima" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Pilihan 5</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    <a href="#lihatKolCadPilLima" data-bs-toggle="modal" class="text-info">
-                      Brandon Jacob <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
-                    </a>
-                  </td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-                  <td>
-                    <div class="icon-action">
-                      <a href="#ubahKolCadPilLima" data-bs-toggle="modal" class="text-primary">
-                        <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                      </a>
-                      |
-                      <a href="#hapusKolCadPilLima" data-bs-toggle="modal" class="text-danger">
-                        <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                      </a>
+                @forelse ($kc_pillimas as $kc_pillima)
+                  <tr>
+                    <th scope="row">{{$noKc_pillimas++}}</th>
+                    <td>{{$kc_pillima->kc_pillima}}</td>
+                    <td>{{$kc_pillima->created_at}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKolCadPilLima{{$kc_pillima->id}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKolCadPilLima{{$kc_pillima->id}}" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKolCadPilLima{{$kc_pillima->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilLima{{$kc_pillima->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKolCadPilLima{{$kc_pillima->id}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kolom Cadangan (Pilihan) 5
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.update', $kc_pillima->id) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editKc_pillima" class="col-sm-3 px-1 form-label">Pilihan 5</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editKc_pillima" class="form-control form-control-sm" id="editKc_pillima" value="{{$kc_pillima->kc_pillima}}">
+                                      @error('editKc_pillima')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <input type="text" name="subEdit" value="kc_pillima" hidden>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                  <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKolCadPilLima{{$kc_pillima->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilLima{{$kc_pillima->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKolCadPilLima{{$kc_pillima->id}}Label">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Kolom Cadangan (Pilihan) 5
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.destroy', $kc_pillima->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Pilihan 5 {{$kc_pillima->kc_pillima}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Hapus Data -->
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
+                  </div>
+                @endforelse
               </tbody>
             </table>
-            <!-- Modal Lihat Data -->
-            <div class="modal fade" id="lihatKolCadPilLima" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatKolCadPilLimaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="lihatKolCadPilLimaLabel">
-                      <i class="bi bi-info-circle text-info"></i>
-                      Lihat Kolom Cadangan (Pilihan) 5
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Lihat Data -->
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahKolCadPilLima" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilLimaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahKolCadPilLimaLabel">
-                      <i class="bi bi-plus-circle text-success"></i>
-                      Tambah Kolom Cadangan (Pilihan) 5
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Tambah Data -->
-            <!-- Modal Ubah Data -->
-            <div class="modal fade" id="ubahKolCadPilLima" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilLimaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="ubahKolCadPilLimaLabel">
-                      <i class="bi bi-pencil-square text-primary"></i>
-                      Ubah Kolom Cadangan (Pilihan) 5
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Ubah Data -->
-            <!-- Modal Hapus Data -->
-            <div class="modal fade" id="hapusKolCadPilLima" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilLimaLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="hapusKolCadPilLimaLabel">
-                      <i class="bi bi-trash text-danger"></i>
-                      Hapus Kolom Cadangan (Pilihan) 5
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Hapus Data -->
           </div>
         </div>
       </div>
@@ -832,132 +968,159 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahKolCadPilEnam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilEnamLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahKolCadPilEnamLabel">
+                        <i class="bi bi-plus-circle text-success"></i>
+                        Tambah Kolom Cadangan (Pilihan) 6
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group-input">
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="kc_pilenam" class="col-sm-3 px-1 form-label">Pilihan 6</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="kc_pilenam" class="form-control form-control-sm" id="kc_pilenam" placeholder="Pilihan 6">
+                                  @error('kc_pilenam')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <input type="text" name="sub" value="kc_pilenam" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Pilihan 6</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    <a href="#lihatKolCadPilEnam" data-bs-toggle="modal" class="text-info">
-                      Brandon Jacob <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
-                    </a>
-                  </td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-                  <td>
-                    <div class="icon-action">
-                      <a href="#ubahKolCadPilEnam" data-bs-toggle="modal" class="text-primary">
-                        <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                      </a>
-                      |
-                      <a href="#hapusKolCadPilEnam" data-bs-toggle="modal" class="text-danger">
-                        <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                      </a>
+                @forelse ($kc_pilenams as $kc_pilenam)
+                  <tr>
+                    <th scope="row">{{$noKc_pilenams++}}</th>
+                    <td>{{$kc_pilenam->kc_pilenam}}</td>
+                    <td>{{$kc_pilenam->created_at}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKolCadPilEnam{{$kc_pilenam->id}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKolCadPilEnam{{$kc_pilenam->id}}" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKolCadPilEnam{{$kc_pilenam->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilEnam{{$kc_pilenam->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKolCadPilEnam{{$kc_pilenam->id}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kolom Cadangan (Pilihan) 6
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.update', $kc_pilenam->id) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editKc_pilenam" class="col-sm-3 px-1 form-label">Pilihan 6</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editKc_pilenam" class="form-control form-control-sm" id="editKc_pilenam" value="{{$kc_pilenam->kc_pilenam}}">
+                                      @error('editKc_pilenam')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <input type="text" name="subEdit" value="kc_pilenam" hidden>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                  <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKolCadPilEnam{{$kc_pilenam->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilEnam{{$kc_pilenam->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKolCadPilEnam{{$kc_pilenam->id}}Label">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Kolom Cadangan (Pilihan) 6
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.destroy', $kc_pilenam->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Pilihan 6 {{$kc_pilenam->kc_pilenam}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Hapus Data -->
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
+                  </div>
+                @endforelse
               </tbody>
             </table>
-            <!-- Modal Lihat Data -->
-            <div class="modal fade" id="lihatKolCadPilEnam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatKolCadPilEnamLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="lihatKolCadPilEnamLabel">
-                      <i class="bi bi-info-circle text-info"></i>
-                      Lihat Kolom Cadangan (Pilihan) 6
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Lihat Data -->
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahKolCadPilEnam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilEnamLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahKolCadPilEnamLabel">
-                      <i class="bi bi-plus-circle text-success"></i>
-                      Tambah Kolom Cadangan (Pilihan) 6
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Tambah Data -->
-            <!-- Modal Ubah Data -->
-            <div class="modal fade" id="ubahKolCadPilEnam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilEnamLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="ubahKolCadPilEnamLabel">
-                      <i class="bi bi-pencil-square text-primary"></i>
-                      Ubah Kolom Cadangan (Pilihan) 6
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Ubah Data -->
-            <!-- Modal Hapus Data -->
-            <div class="modal fade" id="hapusKolCadPilEnam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilEnamLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="hapusKolCadPilEnamLabel">
-                      <i class="bi bi-trash text-danger"></i>
-                      Hapus Kolom Cadangan (Pilihan) 6
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Hapus Data -->
           </div>
         </div>
       </div>
@@ -974,132 +1137,159 @@
                   <i class="bi bi-plus-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahKolCadPilTujuh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilTujuhLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahKolCadPilTujuhLabel">
+                        <i class="bi bi-plus-circle text-success"></i>
+                        Tambah Kolom Cadangan (Pilihan) 7
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('kolom-pilihan.store') }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group-input">
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="kc_piltujuh" class="col-sm-3 px-1 form-label">Pilihan 7</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="kc_piltujuh" class="form-control form-control-sm" id="kc_piltujuh" placeholder="Pilihan 7">
+                                  @error('kc_piltujuh')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <input type="text" name="sub" value="kc_piltujuh" hidden>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Position</th>
-                  <th scope="col">Age</th>
-                  <th scope="col">Start Date</th>
+                  <th scope="col">Pilihan 7</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
-                    <a href="#lihatKolCadPilTujuh" data-bs-toggle="modal" class="text-info">
-                      Brandon Jacob <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
-                    </a>
-                  </td>
-                  <td>Designer</td>
-                  <td>28</td>
-                  <td>2016-05-25</td>
-                  <td>
-                    <div class="icon-action">
-                      <a href="#ubahKolCadPilTujuh" data-bs-toggle="modal" class="text-primary">
-                        <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                      </a>
-                      |
-                      <a href="#hapusKolCadPilTujuh" data-bs-toggle="modal" class="text-danger">
-                        <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                      </a>
+                @forelse ($kc_piltujuhs as $kc_piltujuh)
+                  <tr>
+                    <th scope="row">{{$noKc_piltujuhs++}}</th>
+                    <td>{{$kc_piltujuh->kc_piltujuh}} </td>
+                    <td>{{{$kc_piltujuh->created_at}}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKolCadPilTujuh{{$kc_piltujuh->id}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKolCadPilTujuh" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKolCadPilTujuh{{$kc_piltujuh->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilTujuh{{$kc_piltujuh->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKolCadPilTujuh{{$kc_piltujuh->id}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kolom Cadangan (Pilihan) 7
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.update', $kc_piltujuh->id) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editKc_piltujuh" class="col-sm-3 px-1 form-label">Pilihan 7</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editKc_piltujuh" class="form-control form-control-sm" id="editKc_piltujuh" value="{{$kc_piltujuh->kc_piltujuh}}">
+                                      @error('editKc_piltujuh')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <input type="text" name="subEdit" value="kc_piltujuh" hidden>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                  </td>
-                </tr>
+                  </div>
+                  <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKolCadPilTujuh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilTujuhLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKolCadPilTujuhLabel">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Kolom Cadangan (Pilihan) 7
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kolom-pilihan.destroy', $kc_piltujuh->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Pilihan 7 {{$kc_piltujuh->kc_piltujuh}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Hapus Data -->
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
+                  </div>
+                @endforelse
               </tbody>
             </table>
-            <!-- Modal Lihat Data -->
-            <div class="modal fade" id="lihatKolCadPilTujuh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatKolCadPilTujuhLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="lihatKolCadPilTujuhLabel">
-                      <i class="bi bi-info-circle text-info"></i>
-                      Lihat Kolom Cadangan (Pilihan) 7
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Lihat Data -->
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahKolCadPilTujuh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahKolCadPilTujuhLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahKolCadPilTujuhLabel">
-                      <i class="bi bi-plus-circle text-success"></i>
-                      Tambah Kolom Cadangan (Pilihan) 7
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Tambah Data -->
-            <!-- Modal Ubah Data -->
-            <div class="modal fade" id="ubahKolCadPilTujuh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKolCadPilTujuhLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="ubahKolCadPilTujuhLabel">
-                      <i class="bi bi-pencil-square text-primary"></i>
-                      Ubah Kolom Cadangan (Pilihan) 7
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Ubah Data -->
-            <!-- Modal Hapus Data -->
-            <div class="modal fade" id="hapusKolCadPilTujuh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKolCadPilTujuhLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="hapusKolCadPilTujuhLabel">
-                      <i class="bi bi-trash text-danger"></i>
-                      Hapus Kolom Cadangan (Pilihan) 7
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Modal Hapus Data -->
           </div>
         </div>
       </div>

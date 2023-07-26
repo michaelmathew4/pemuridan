@@ -17,6 +17,13 @@ use App\Models\Abilities;
 use App\Models\Ganda_lima;
 use App\Models\Kem_bahasa;
 use App\Models\Penyakit;
+use App\Models\Kc_pilsatu;
+use App\Models\Kc_pildua;
+use App\Models\Kc_piltiga;
+use App\Models\Kc_pilempat;
+use App\Models\Kc_pillima;
+use App\Models\Kc_pilenam;
+use App\Models\Kc_piltujuh;
 use Illuminate\Http\Request;
 
 class KetuaKelompokController extends Controller
@@ -46,9 +53,17 @@ class KetuaKelompokController extends Controller
     $gandaLimas = Ganda_lima::all();
     $kemBahasas = Kem_bahasa::all();
     $penyakits = Penyakit::all();
+    $kc_pilsatus = Kc_pilsatu::all();
+    $kc_pilduas = Kc_pildua::all();
+    $kc_piltigas = Kc_piltiga::all();
+    $kc_pilempats = Kc_pilempat::all();
+    $kc_pillimas = Kc_pillima::all();
+    $kc_pilenams = Kc_pilenam::all();
+    $kc_piltujuhs = Kc_piltujuh::all();
 
     return view('admin.data-ketua-kelompok', compact(['ketuaKelompoks', 'noKetuaKelompoks', 'pekerjaans', 'statusPekerjaans', 'sektorIndustris', 'tingkatPendidikans', 'sekolahUnivs',
-                                                      'bidKeterampilans', 'bidKetertarikans', 'persMbtis', 'persHollands', 'spiritGifts', 'abilities', 'gandaLimas', 'kemBahasas', 'penyakits']));
+                                                      'bidKeterampilans', 'bidKetertarikans', 'persMbtis', 'persHollands', 'spiritGifts', 'abilities', 'gandaLimas', 'kemBahasas', 'penyakits',
+                                                      'kc_pilsatus', 'kc_pilduas', 'kc_piltigas', 'kc_pilempats', 'kc_pillimas', 'kc_pilenams', 'kc_piltujuhs']));
   }
 
   /**
@@ -79,246 +94,246 @@ class KetuaKelompokController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'tglRegistrasiKetuaKelompok'     => 'required',
-      'namaKetuaKelompok'   => 'required',
-      'fotoKetuaKelompok'  => 'image|mimes:png,jpg,jpeg',
-      'fotoBitmapKetuaKelompok'  => 'image|mimes:png,jpg,jpeg',
-      'fileUploadBaptisAnakKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadMenikahKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadBaptisKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadMeninggalDuniaKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadPenyerahanAnakKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadEvangelismExplosionKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadIkatanDinasKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadPrktkDuaThnKetuaKelompok'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'kata_sandiKetuaKelompok'  => 'required'
+      'tglRegistrasiKetuaKelompoks'     => 'required',
+      'namaKetuaKelompoks'   => 'required',
+      'fotoKetuaKelompoks'  => 'image|mimes:png,jpg,jpeg',
+      'fotoBitmapKetuaKelompoks'  => 'image|mimes:png,jpg,jpeg',
+      'fileUploadBaptisAnakKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'fileUploadMenikahKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'fileUploadBaptisKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'fileUploadMeninggalDuniaKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'fileUploadPenyerahanAnakKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'fileUploadEvangelismExplosionKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'fileUploadIkatanDinasKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'fileUploadPrktkDuaThnKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'kata_sandiKetuaKelompoks'  => 'required'
     ],
     [
-      'tglRegistrasiKetuaKelompok.required' => 'Tanggal Registrasi tidak boleh kosong.',
-      'namaKetuaKelompok.required' => 'Nama Lengkap tidak boleh kosong.',
-      'fotoKetuaKelompok.image' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
-      'fotoBitmapKetuaKelompok.image' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
-      'fileUploadBaptisAnakKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fileUploadMenikahKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fileUploadBaptisKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fileUploadMeninggalDuniaKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fileUploadPenyerahanAnakKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fileUploadEvangelismExplosionKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fileUploadIkatanDinasKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'fileUploadPrktkDuaThnKetuaKelompok.file' => 'Berkas harus berupa Dokumen.',
-      'kata_sandiKetuaKelompok.required' => 'Kata Sandi tidak boleh kosong.'
+      'tglRegistrasiKetuaKelompoks.required' => 'Tanggal Registrasi tidak boleh kosong.',
+      'namaKetuaKelompoks.required' => 'Nama Lengkap tidak boleh kosong.',
+      'fotoKetuaKelompoks.image' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
+      'fotoBitmapKetuaKelompoks.image' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
+      'fileUploadBaptisAnakKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadMenikahKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadBaptisKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadMeninggalDuniaKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadPenyerahanAnakKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadEvangelismExplosionKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadIkatanDinasKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadPrktkDuaThnKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'kata_sandiKetuaKelompoks.required' => 'Kata Sandi tidak boleh kosong.'
     ]);
 
     $storeData = new Ketua_kelompok;
     $storeData->id_user = $this->randomCode();
-    $storeData->tanggal_registKK = $request->tglRegistrasiKetuaKelompok;
-    $storeData->refrensiKK = $request->referensiKetuaKelompok;
-    $storeData->sapaanKK = $request->sapaanKetuaKelompok;
-    $storeData->gelar_awalanKK = $request->gelarAwalanKetuaKelompok;
-    $storeData->nama_lengkapKK = $request->namaKetuaKelompok;
-    $storeData->gelar_akhiranKK = $request->gelarAkhiranKetuaKelompok;
-    $storeData->nama_panggilanKK = $request->namaPanggilanKetuaKelompok;
-    $storeData->peranKK = $request->peranKetuaKelompok;
-    $storeData->jenis_identitasKK = $request->jenisIdentitasKetuaKelompok;
-    $storeData->no_identitasKK = $request->noIdentitasKetuaKelompok;
-    $storeData->tempat_lahirKK = $request->tempatLahirKetuaKelompok;
-    $storeData->tanggal_lahirKK = $request->tglLahirKetuaKelompok;
-    $storeData->jkKK = $request->jenisKelaminKetuaKelompok;
-    $storeData->goldarKK = $request->golonganDarahKetuaKelompok;
-    $storeData->status_pernikahanKK = $request->statusPernikahanKetuaKelompok;
-    if ($request->hasfile('fotoKetuaKelompok')) {
+    $storeData->tanggal_registKK = $request->tglRegistrasiKetuaKelompoks;
+    $storeData->refrensiKK = $request->referensiKetuaKelompoks;
+    $storeData->sapaanKK = $request->sapaanKetuaKelompoks;
+    $storeData->gelar_awalanKK = $request->gelarAwalanKetuaKelompoks;
+    $storeData->nama_lengkapKK = $request->namaKetuaKelompoks;
+    $storeData->gelar_akhiranKK = $request->gelarAkhiranKetuaKelompoks;
+    $storeData->nama_panggilanKK = $request->namaPanggilanKetuaKelompoks;
+    $storeData->peranKK = $request->peranKetuaKelompoks;
+    $storeData->jenis_identitasKK = $request->jenisIdentitasKetuaKelompoks;
+    $storeData->no_identitasKK = $request->noIdentitasKetuaKelompoks;
+    $storeData->tempat_lahirKK = $request->tempatLahirKetuaKelompoks;
+    $storeData->tanggal_lahirKK = $request->tglLahirKetuaKelompoks;
+    $storeData->jkKK = $request->jenisKelaminKetuaKelompoks;
+    $storeData->goldarKK = $request->golonganDarahKetuaKelompoks;
+    $storeData->status_pernikahanKK = $request->statusPernikahanKetuaKelompoks;
+    if ($request->hasfile('fotoKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Foto";
-      $filenameFoto = $request->file('fotoKetuaKelompok');
+      $filenameFoto = $request->file('fotoKetuaKelompoks');
       $filenameFoto->move($destination, $filenameFoto->getClientOriginalName());
       $fotoToTb = $filenameFoto->getClientOriginalName();
     } else {
       $fotoToTb = '';
     }
     $storeData->fotoKK = $fotoToTb;
-    if ($request->hasfile('fotoBitmapKetuaKelompok')) {
+    if ($request->hasfile('fotoBitmapKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Foto Bitmap";
-      $filenameFotoBitmap = $request->file('fotoBitmapKetuaKelompok');
+      $filenameFotoBitmap = $request->file('fotoBitmapKetuaKelompoks');
       $filenameFotoBitmap->move($destination, $filenameFotoBitmap->getClientOriginalName());
       $fotoBitmapToTb = $filenameFotoBitmap->getClientOriginalName();
     } else {
       $fotoBitmapToTb = '';
     }
     $storeData->foto_bitmapKK = $fotoBitmapToTb;
-    $storeData->alamatKK = $request->alamatKetuaKelompok;
-    $storeData->ket_arahKK = $request->keteranganArahKetuaKelompok;
-    $storeData->petaKK = $request->petaKetuaKelompok;
-    $storeData->negaraKK = $request->negaraKetuaKelompok;
-    $storeData->provinsiKK = $request->provinsiKetuaKelompok;
-    $storeData->kotaKK = $request->kotaKetuaKelompok;
-    $storeData->kecamatanKK = $request->kecamatanKetuaKelompok;
-    $storeData->kelurahanKK = $request->kelurahanKetuaKelompok;
-    $storeData->kode_posKK = $request->kodePosKetuaKelompok;
-    $storeData->dusunKK = $request->dusunKetuaKelompok;
-    $storeData->rtKK = $request->rtKetuaKelompok;
-    $storeData->rwKK = $request->rwKetuaKelompok;
-    $storeData->areaKK = $request->areaKetuaKelompok;
-    $storeData->no_telpKK = $request->noTelpSKetuaKelompok;
-    $storeData->no_rumahKK = $request->telpRumahKetuaKelompok;
-    $storeData->no_hpsatuKK = $request->noHpSKetuaKelompok;
-    $storeData->bisa_smsKK = $request->terimaSMSKetuaKelompok;
-    $storeData->no_hpduaKK = $request->noHpDKetuaKelompok;
-    $storeData->no_lainnyaKK = $request->noLainKetuaKelompok;
-    $storeData->fax_rumahKK = $request->faxKetuaKelompok;
-    $storeData->alamat_surelKK = $request->emailKetuaKelompok;
-    $storeData->bisa_emailKK = $request->terimaEmailKetuaKelompok;
-    $storeData->websiteKK = $request->websiteKetuaKelompok;
-    $storeData->pekerjaanKK = $request->pekerjaanKetuaKelompok;
-    $storeData->jabatanKK = $request->jabatanKetuaKelompok;
-    $storeData->status_pekerjaanKK = $request->statusPekerjaanKetuaKelompok;
-    $storeData->nama_perusahaanKK = $request->namaPerusahaanKetuaKelompok;
-    $storeData->sektor_industriKK = $request->sektorIndustriKetuaKelompok;
-    $storeData->alamat_kantorKK = $request->alamatKantorKetuaKelompok;
-    $storeData->telp_kantorKK = $request->telpKantorKetuaKelompok;
-    $storeData->extKK = $request->extKetuaKelompok;
-    $storeData->tingkat_pendidikanKK = $request->tingkatPendidikanKetuaKelompok;
-    $storeData->sekolah_univKK = $request->sekolahKetuaKelompok;
-    $storeData->bidang_ketertarikanKK = json_encode($request->bKetertarikanKetuaKelompok);
-    $storeData->bidang_keterampilanKK = json_encode($request->bKeterampilanKetuaKelompok);
-    $storeData->catatanKK = $request->catatanKetuaKelompok;
-    $storeData->statusKK = $request->statusKetuaKelompok;
-    $storeData->verif_emailKK = $request->verifEmailKetuaKelompok;
-    $storeData->no_rekeningKK = $request->noRekKetuaKelompok;
-    $storeData->periode_beasiswaKK = $request->perBeasiswaKetuaKelompok;
-    $storeData->periode_kerja_praktikKK = $request->perKerjaPKetuaKelompok;
-    $storeData->riwayat_pelayananSatuKK = $request->riwayatPelSKetuaKelompok;
-    $storeData->riwayat_pelayananDuaKK = $request->riwayatPelDKetuaKelompok;
-    $storeData->riwayat_pelayananTigaKK = $request->riwayatPelTKetuaKelompok;
-    $storeData->riwayat_pelayananEmpatKK = $request->riwayatPelEKetuaKelompok;
-    $storeData->kolom_cadanganPSatuKK = $request->pilihanSKetuaKelompok;
-    $storeData->kolom_cadanganPDuaKK = $request->pilihanDKetuaKelompok;
-    $storeData->kolom_cadanganPTigaKK = $request->pilihanTKetuaKelompok;
-    $storeData->kolom_cadanganPEmpatKK = $request->pilihanEKetuaKelompok;
-    $storeData->kolom_cadanganPLimaKK = $request->pilihanLKetuaKelompok;
-    $storeData->kolom_cadanganPEnamKK = $request->pilihanEnKetuaKelompok;
-    $storeData->kolom_cadanganPTujuhKK = $request->pilihanTuKetuaKelompok;
-    $storeData->personality_mbtiKK = json_encode($request->pilihanGSKetuaKelompok);
-    $storeData->personality_hollandKK = json_encode($request->pilihanGDKetuaKelompok);
-    $storeData->spiritual_giftsKK = json_encode($request->pilihanGTKetuaKelompok);
-    $storeData->abilitiesKK = json_encode($request->pilihanGEKetuaKelompok);
-    $storeData->kolom_cadanganPGLimaKK = json_encode($request->pilihanGLKetuaKelompok);
-    $storeData->kemampuan_bahasaKK = json_encode($request->pilihanGEnKetuaKelompok);
-    $storeData->penyakitKK = json_encode($request->pilihanGTuKetuaKelompok);
-    $storeData->kolom_cadanganCBSatuKK = $request->checkSKetuaKelompok;
-    $storeData->kolom_cadanganCBDuaKK = $request->checkDKetuaKelompok;
-    $storeData->kolom_cadanganCBTigaKK = $request->checkTKetuaKelompok;
-    $storeData->kolom_cadanganCBEmpatKK = $request->checkEKetuaKelompok;
-    $storeData->kolom_cadanganCBLimaKK = $request->checkLKetuaKelompok;
-    $storeData->kolom_cadanganCBEnamKK = $request->checkEnKetuaKelompok;
-    $storeData->kolom_cadanganCBTujuhKK = $request->checkTuKetuaKelompok;
-    $storeData->ba_sudahKK = $request->sudahBaptisAnakKetuaKelompok;
-    $storeData->ba_tanggalKK = $request->tglBaptisAnakKetuaKelompok;
-    $storeData->ba_tempatKK = $request->tempatBaptisAnakKetuaKelompok;
-    if ($request->hasfile('fileUploadBaptisAnakKetuaKelompok')) {
+    $storeData->alamatKK = $request->alamatKetuaKelompoks;
+    $storeData->ket_arahKK = $request->keteranganArahKetuaKelompoks;
+    $storeData->petaKK = $request->petaKetuaKelompoks;
+    $storeData->negaraKK = $request->negaraKetuaKelompoks;
+    $storeData->provinsiKK = $request->provinsiKetuaKelompoks;
+    $storeData->kotaKK = $request->kotaKetuaKelompoks;
+    $storeData->kecamatanKK = $request->kecamatanKetuaKelompoks;
+    $storeData->kelurahanKK = $request->kelurahanKetuaKelompoks;
+    $storeData->kode_posKK = $request->kodePosKetuaKelompoks;
+    $storeData->dusunKK = $request->dusunKetuaKelompoks;
+    $storeData->rtKK = $request->rtKetuaKelompoks;
+    $storeData->rwKK = $request->rwKetuaKelompoks;
+    $storeData->areaKK = $request->areaKetuaKelompoks;
+    $storeData->no_telpKK = $request->noTelpSKetuaKelompoks;
+    $storeData->no_rumahKK = $request->telpRumahKetuaKelompoks;
+    $storeData->no_hpsatuKK = $request->noHpSKetuaKelompoks;
+    $storeData->bisa_smsKK = $request->terimaSMSKetuaKelompoks;
+    $storeData->no_hpduaKK = $request->noHpDKetuaKelompoks;
+    $storeData->no_lainnyaKK = $request->noLainKetuaKelompoks;
+    $storeData->fax_rumahKK = $request->faxKetuaKelompoks;
+    $storeData->alamat_surelKK = $request->emailKetuaKelompoks;
+    $storeData->bisa_emailKK = $request->terimaEmailKetuaKelompoks;
+    $storeData->websiteKK = $request->websiteKetuaKelompoks;
+    $storeData->pekerjaanKK = $request->pekerjaanKetuaKelompoks;
+    $storeData->jabatanKK = $request->jabatanKetuaKelompoks;
+    $storeData->status_pekerjaanKK = $request->statusPekerjaanKetuaKelompoks;
+    $storeData->nama_perusahaanKK = $request->namaPerusahaanKetuaKelompoks;
+    $storeData->sektor_industriKK = $request->sektorIndustriKetuaKelompoks;
+    $storeData->alamat_kantorKK = $request->alamatKantorKetuaKelompoks;
+    $storeData->telp_kantorKK = $request->telpKantorKetuaKelompoks;
+    $storeData->extKK = $request->extKetuaKelompoks;
+    $storeData->tingkat_pendidikanKK = $request->tingkatPendidikanKetuaKelompoks;
+    $storeData->sekolah_univKK = $request->sekolahKetuaKelompoks;
+    $storeData->bidang_ketertarikanKK = json_encode($request->bKetertarikanKetuaKelompoks);
+    $storeData->bidang_keterampilanKK = json_encode($request->bKeterampilanKetuaKelompoks);
+    $storeData->catatanKK = $request->catatanKetuaKelompoks;
+    $storeData->statusKK = $request->statusKetuaKelompoks;
+    $storeData->verif_emailKK = $request->verifEmailKetuaKelompoks;
+    $storeData->no_rekeningKK = $request->noRekKetuaKelompoks;
+    $storeData->periode_beasiswaKK = $request->perBeasiswaKetuaKelompoks;
+    $storeData->periode_kerja_praktikKK = $request->perKerjaPKetuaKelompoks;
+    $storeData->riwayat_pelayananSatuKK = $request->riwayatPelSKetuaKelompoks;
+    $storeData->riwayat_pelayananDuaKK = $request->riwayatPelDKetuaKelompoks;
+    $storeData->riwayat_pelayananTigaKK = $request->riwayatPelTKetuaKelompoks;
+    $storeData->riwayat_pelayananEmpatKK = $request->riwayatPelEKetuaKelompoks;
+    $storeData->kolom_cadanganPSatuKK = $request->pilihanSKetuaKelompoks;
+    $storeData->kolom_cadanganPDuaKK = $request->pilihanDKetuaKelompoks;
+    $storeData->kolom_cadanganPTigaKK = $request->pilihanTKetuaKelompoks;
+    $storeData->kolom_cadanganPEmpatKK = $request->pilihanEKetuaKelompoks;
+    $storeData->kolom_cadanganPLimaKK = $request->pilihanLKetuaKelompoks;
+    $storeData->kolom_cadanganPEnamKK = $request->pilihanEnKetuaKelompoks;
+    $storeData->kolom_cadanganPTujuhKK = $request->pilihanTuKetuaKelompoks;
+    $storeData->personality_mbtiKK = json_encode($request->pilihanGSKetuaKelompoks);
+    $storeData->personality_hollandKK = json_encode($request->pilihanGDKetuaKelompoks);
+    $storeData->spiritual_giftsKK = json_encode($request->pilihanGTKetuaKelompoks);
+    $storeData->abilitiesKK = json_encode($request->pilihanGEKetuaKelompoks);
+    $storeData->kolom_cadanganPGLimaKK = json_encode($request->pilihanGLKetuaKelompoks);
+    $storeData->kemampuan_bahasaKK = json_encode($request->pilihanGEnKetuaKelompoks);
+    $storeData->penyakitKK = json_encode($request->pilihanGTuKetuaKelompoks);
+    $storeData->kolom_cadanganCBSatuKK = $request->checkSKetuaKelompoks;
+    $storeData->kolom_cadanganCBDuaKK = $request->checkDKetuaKelompoks;
+    $storeData->kolom_cadanganCBTigaKK = $request->checkTKetuaKelompoks;
+    $storeData->kolom_cadanganCBEmpatKK = $request->checkEKetuaKelompoks;
+    $storeData->kolom_cadanganCBLimaKK = $request->checkLKetuaKelompoks;
+    $storeData->kolom_cadanganCBEnamKK = $request->checkEnKetuaKelompoks;
+    $storeData->kolom_cadanganCBTujuhKK = $request->checkTuKetuaKelompoks;
+    $storeData->ba_sudahKK = $request->sudahBaptisAnakKetuaKelompoks;
+    $storeData->ba_tanggalKK = $request->tglBaptisAnakKetuaKelompoks;
+    $storeData->ba_tempatKK = $request->tempatBaptisAnakKetuaKelompoks;
+    if ($request->hasfile('fileUploadBaptisAnakKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Baptis Anak";
-      $filenameBptsAnak = $request->file('fileUploadBaptisAnakKetuaKelompok');
+      $filenameBptsAnak = $request->file('fileUploadBaptisAnakKetuaKelompoks');
       $filenameBptsAnak->move($destination, $filenameBptsAnak->getClientOriginalName());
       $fileBaptisAnak = $filenameBptsAnak->getClientOriginalName();
     } else {
       $fileBaptisAnak = '';
     }
     $storeData->ba_fileKK = $fileBaptisAnak;
-    $storeData->ba_ketKK = $request->ketBaptisAnakKetuaKelompok;
-    $storeData->menikah_sudahKK = $request->sudahMenikahKetuaKelompok;
-    $storeData->menikah_tanggalKK = $request->tglMenikahKetuaKelompok;
-    $storeData->menikah_tempatKK = $request->tempatMenikahKetuaKelompok;
-    if ($request->hasfile('fileUploadMenikahKetuaKelompok')) {
+    $storeData->ba_ketKK = $request->ketBaptisAnakKetuaKelompoks;
+    $storeData->menikah_sudahKK = $request->sudahMenikahKetuaKelompoks;
+    $storeData->menikah_tanggalKK = $request->tglMenikahKetuaKelompoks;
+    $storeData->menikah_tempatKK = $request->tempatMenikahKetuaKelompoks;
+    if ($request->hasfile('fileUploadMenikahKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Menikah";
-      $filenameMenikah = $request->file('fileUploadMenikahKetuaKelompok');
+      $filenameMenikah = $request->file('fileUploadMenikahKetuaKelompoks');
       $filenameMenikah->move($destination, $filenameMenikah->getClientOriginalName());
       $fileMenikah = $filenameMenikah->getClientOriginalName();
     } else {
       $fileMenikah = '';
     }
     $storeData->menikah_fileKK = $fileMenikah;
-    $storeData->menikah_ketKK = $request->ketMenikahKetuaKelompok;
-    $storeData->bap_sudahKK = $request->sudahBaptisKetuaKelompok;
-    $storeData->bap_tanggalKK = $request->tglBaptisKetuaKelompok;
-    $storeData->bap_tempatKK = $request->tempatBaptisKetuaKelompok;
-    if ($request->hasfile('fileUploadBaptisKetuaKelompok')) {
+    $storeData->menikah_ketKK = $request->ketMenikahKetuaKelompoks;
+    $storeData->bap_sudahKK = $request->sudahBaptisKetuaKelompoks;
+    $storeData->bap_tanggalKK = $request->tglBaptisKetuaKelompoks;
+    $storeData->bap_tempatKK = $request->tempatBaptisKetuaKelompoks;
+    if ($request->hasfile('fileUploadBaptisKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Baptis";
-      $filenameBaptis = $request->file('fileUploadBaptisKetuaKelompok');
+      $filenameBaptis = $request->file('fileUploadBaptisKetuaKelompoks');
       $filenameBaptis->move($destination, $filenameBaptis->getClientOriginalName());
       $fileBaptis = $filenameBaptis->getClientOriginalName();
     } else {
       $fileBaptis = '';
     }
     $storeData->bap_fileKK = $fileBaptis;
-    $storeData->bap_ketKK = $request->ketBaptisKetuaKelompok;
-    $storeData->md_sudahKK = $request->sudahMeninggalDuniaKetuaKelompok;
-    $storeData->md_tanggalKK = $request->tglMeninggalDuniaKetuaKelompok;
-    $storeData->md_tempatKK = $request->tempatMeninggalDuniaKetuaKelompok;
-    if ($request->hasfile('fileUploadMeninggalDuniaKetuaKelompok')) {
+    $storeData->bap_ketKK = $request->ketBaptisKetuaKelompoks;
+    $storeData->md_sudahKK = $request->sudahMeninggalDuniaKetuaKelompoks;
+    $storeData->md_tanggalKK = $request->tglMeninggalDuniaKetuaKelompoks;
+    $storeData->md_tempatKK = $request->tempatMeninggalDuniaKetuaKelompoks;
+    if ($request->hasfile('fileUploadMeninggalDuniaKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Meninggal Dunia";
-      $filenameMeninggalD = $request->file('fileUploadMeninggalDuniaKetuaKelompok');
+      $filenameMeninggalD = $request->file('fileUploadMeninggalDuniaKetuaKelompoks');
       $filenameMeninggalD->move($destination, $filenameMeninggalD->getClientOriginalName());
       $fileMeninggalD = $filenameMeninggalD->getClientOriginalName();
     } else {
       $fileMeninggalD = '';
     }
     $storeData->md_fileKK = $fileMeninggalD;
-    $storeData->md_ketKK = $request->ketMeninggalDuniaKetuaKelompok;
-    $storeData->pa_sudahKK = $request->sudahPenyerahanAnakKetuaKelompok;
-    $storeData->pa_tanggalKK = $request->tglPenyerahanAnakKetuaKelompok;
-    $storeData->pa_tempatKK = $request->tempatPenyerahanAnakKetuaKelompok;
-    if ($request->hasfile('fileUploadPenyerahanAnakKetuaKelompok')) {
+    $storeData->md_ketKK = $request->ketMeninggalDuniaKetuaKelompoks;
+    $storeData->pa_sudahKK = $request->sudahPenyerahanAnakKetuaKelompoks;
+    $storeData->pa_tanggalKK = $request->tglPenyerahanAnakKetuaKelompoks;
+    $storeData->pa_tempatKK = $request->tempatPenyerahanAnakKetuaKelompoks;
+    if ($request->hasfile('fileUploadPenyerahanAnakKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Penyerahan Anak";
-      $filenamePenyAnak = $request->file('fileUploadPenyerahanAnakKetuaKelompok');
+      $filenamePenyAnak = $request->file('fileUploadPenyerahanAnakKetuaKelompoks');
       $filenamePenyAnak->move($destination, $filenamePenyAnak->getClientOriginalName());
       $filePenyAnak = $filenamePenyAnak->getClientOriginalName();
     } else {
       $filePenyAnak = '';
     }
     $storeData->pa_fileKK = $filePenyAnak;
-    $storeData->pa_ketKK = $request->ketPenyerahanAnakKetuaKelompok;
-    $storeData->ee_sudahKK = $request->sudahEvangelismExplosionKetuaKelompok;
-    $storeData->ee_tanggalKK = $request->tglEvangelismExplosionKetuaKelompok;
-    $storeData->ee_tempatKK = $request->tempatEvangelismExplosionKetuaKelompok;
-    if ($request->hasfile('fileUploadEvangelismExplosionKetuaKelompok')) {
+    $storeData->pa_ketKK = $request->ketPenyerahanAnakKetuaKelompoks;
+    $storeData->ee_sudahKK = $request->sudahEvangelismExplosionKetuaKelompoks;
+    $storeData->ee_tanggalKK = $request->tglEvangelismExplosionKetuaKelompoks;
+    $storeData->ee_tempatKK = $request->tempatEvangelismExplosionKetuaKelompoks;
+    if ($request->hasfile('fileUploadEvangelismExplosionKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Evangelism Explosion";
-      $filenameEvExplo = $request->file('fileUploadEvangelismExplosionKetuaKelompok');
+      $filenameEvExplo = $request->file('fileUploadEvangelismExplosionKetuaKelompoks');
       $filenameEvExplo->move($destination, $filenameEvExplo->getClientOriginalName());
       $fileEvExplo = $filenameEvExplo->getClientOriginalName();
     } else {
       $fileEvExplo = '';
     }
     $storeData->ee_fileKK = $fileEvExplo;
-    $storeData->ee_ketKK = $request->ketEvangelismExplosionKetuaKelompok;
-    $storeData->bid_sudahKK = $request->sudahIkatanDinasKetuaKelompok;
-    $storeData->bid_tanggalKK = $request->tglIkatanDinasKetuaKelompok;
-    $storeData->bid_tempatKK = $request->tempatIkatanDinasKetuaKelompok;
-    if ($request->hasfile('fileUploadIkatanDinasKetuaKelompok')) {
+    $storeData->ee_ketKK = $request->ketEvangelismExplosionKetuaKelompoks;
+    $storeData->bid_sudahKK = $request->sudahIkatanDinasKetuaKelompoks;
+    $storeData->bid_tanggalKK = $request->tglIkatanDinasKetuaKelompoks;
+    $storeData->bid_tempatKK = $request->tempatIkatanDinasKetuaKelompoks;
+    if ($request->hasfile('fileUploadIkatanDinasKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Berakhir Ikatan Dinas";
-      $filenameBerIkNas = $request->file('fileUploadIkatanDinasKetuaKelompok');
+      $filenameBerIkNas = $request->file('fileUploadIkatanDinasKetuaKelompoks');
       $filenameBerIkNas->move($destination, $filenameBerIkNas->getClientOriginalName());
       $fileBerIkNas = $filenameBerIkNas->getClientOriginalName();
     } else {
       $fileBerIkNas = '';
     }
     $storeData->bid_fileKK = $fileBerIkNas;
-    $storeData->bid_ketKK = $request->ketIkatanDinasKetuaKelompok;
-    $storeData->pdt_sudahKK = $request->sudahPrktkDuaThnKetuaKelompok;
-    $storeData->pdt_tanggalKK = $request->tglPrktkDuaThnKetuaKelompok;
-    $storeData->pdt_tempatKK = $request->tempatPrktkDuaThnKetuaKelompok;
-    if ($request->hasfile('fileUploadPrktkDuaThnKetuaKelompok')) {
+    $storeData->bid_ketKK = $request->ketIkatanDinasKetuaKelompoks;
+    $storeData->pdt_sudahKK = $request->sudahPrktkDuaThnKetuaKelompoks;
+    $storeData->pdt_tanggalKK = $request->tglPrktkDuaThnKetuaKelompoks;
+    $storeData->pdt_tempatKK = $request->tempatPrktkDuaThnKetuaKelompoks;
+    if ($request->hasfile('fileUploadPrktkDuaThnKetuaKelompoks')) {
       $destination = "images/Ketua Kelompok/Dokumen Praktek 2 Tahun";
-      $filenamePrakDuaThn = $request->file('fileUploadPrktkDuaThnKetuaKelompok');
+      $filenamePrakDuaThn = $request->file('fileUploadPrktkDuaThnKetuaKelompoks');
       $filenamePrakDuaThn->move($destination, $filenamePrakDuaThn->getClientOriginalName());
       $filePrakDuaThn = $filenamePrakDuaThn->getClientOriginalName();
     } else {
       $filePrakDuaThn = '';
     }
     $storeData->pdt_fileKK = $filePrakDuaThn;
-    $storeData->pdt_ketKK = $request->ketPrktkDuaThnKetuaKelompok;
-    $storeData->nama_grupKK = $request->namaGrupKetuaKelompok;
-    $storeData->jbt_grupKK = $request->jbtnGrupKetuaKelompok;
-    $storeData->tgl_gabung_grupKK = $request->tglGabungKetuaKelompok;
-    $storeData->catatan_masuk_grupKK = $request->cttnMasukKetuaKelompok;
-    $storeData->kata_sandiKK = $request->kata_sandiKetuaKelompok;
+    $storeData->pdt_ketKK = $request->ketPrktkDuaThnKetuaKelompoks;
+    $storeData->nama_grupKK = $request->namaGrupKetuaKelompoks;
+    $storeData->jbt_grupKK = $request->jbtnGrupKetuaKelompoks;
+    $storeData->tgl_gabung_grupKK = $request->tglGabungKetuaKelompoks;
+    $storeData->catatan_masuk_grupKK = $request->cttnMasukKetuaKelompoks;
+    $storeData->kata_sandiKK = $request->kata_sandiKetuaKelompoks;
     $storeData->save();
 
     if($storeData){

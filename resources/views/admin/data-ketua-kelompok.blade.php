@@ -322,7 +322,7 @@
                               <div class="mb-3 row">
                                 <label for="keteranganArahKetuaKelompok" class="col-sm-3 px-1">Keterangan Arah</label>
                                 <div class="col-sm-9">
-                                  <textarea class="form-control" name="keteranganArahKetuaKelompoks" id="keteranganArahKetuaKelompok" rows="3" placeholder="Keterangan Arah"></textarea>
+                                  <textarea class="form-control form-control-sm" name="keteranganArahKetuaKelompoks" id="keteranganArahKetuaKelompok" rows="3" placeholder="Keterangan Arah"></textarea>
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -439,7 +439,7 @@
                               <div class="mb-3 row">
                                 <label for="noHpDKetuaKelompok" class="col-sm-3 px-1">No HP 2</label>
                                 <div class="col-sm-9">
-                                  <input type="text" name="noHpDKetuaKelompok" class="form-control form-control-sm" id="noHpDKetuaKelompok" placeholder="cth: +62856789456">
+                                  <input type="text" name="noHpDKetuaKelompoks" class="form-control form-control-sm" id="noHpDKetuaKelompok" placeholder="cth: +62856789456">
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -489,7 +489,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pekerjaanKetuaKelompoks" id="pekerjaanKetuaKelompok" aria-label=".form-select-sm pekerjaanKetuaKelompok">
-                                      <option>-Pekerjaan-</option>
+                                      <option value="">-Pekerjaan-</option>
                                       @foreach ($pekerjaans as $pekerjaan)
                                         <option value="{{$pekerjaan->nama_pekerjaanPJ}}">{{$pekerjaan->nama_pekerjaanPJ}}</option>
                                       @endforeach
@@ -513,7 +513,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="statusPekerjaanKetuaKelompoks" id="statusPekerjaanKetuaKelompok" aria-label=".form-select-sm statusPekerjaanKetuaKelompok">
-                                      <option>-Status Pekerjaan-</option>
+                                      <option value="">-Status Pekerjaan-</option>
                                       @foreach ($statusPekerjaans as $statusPekerjaan)
                                         <option value="{{$statusPekerjaan->status_pekerjaanSPJ}}">{{$statusPekerjaan->status_pekerjaanSPJ}}</option>
                                       @endforeach
@@ -582,7 +582,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="tingkatPendidikanKetuaKelompoks" id="tingkatPendidikanKetuaKelompok" aria-label="form-select-sm tingkatPendidikanKetuaKelompok">
-                                      <option>-Tingkat Pendidikan-</option>
+                                      <option value="">-Tingkat Pendidikan-</option>
                                       @foreach ($tingkatPendidikans as $tingkatPendidikan)
                                         <option value="{{$tingkatPendidikan->tingkat_pendidikan}}">{{$tingkatPendidikan->tingkat_pendidikan}}</option>
                                       @endforeach
@@ -600,7 +600,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="sekolahKetuaKelompoks" id="sekolahKetuaKelompok" aria-label="form-select-sm sekolahKetuaKelompok">
-                                      <option>-Sekolah / Universitas</option>
+                                      <option value="">-Sekolah / Universitas</option>
                                       @foreach ($sekolahUnivs as $sekolahUniv)
                                         <option value="{{$sekolahUniv->sekolah_univ}}">{{$sekolahUniv->sekolah_univ}}</option>
                                       @endforeach
@@ -661,7 +661,7 @@
                               <div class="mb-3 row">
                                 <label for="catatanKetuaKelompok" class="col-sm-3 px-1">Catatan</label>
                                 <div class="col-sm-9">
-                                  <textarea class="form-control" name="catatanKetuaKelompoks" id="catatanKetuaKelompok" rows="3" placeholder="Catatan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="catatanKetuaKelompoks" id="catatanKetuaKelompok" rows="3" placeholder="Catatan"></textarea>
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -751,6 +751,9 @@
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pilihanSKetuaKelompoks" id="pilihanSKetuaKelompok" aria-label=".form-select-sm pilihanSKetuaKelompok">
                                       <option value="">-Kolom Cadangan (Pilihan) 1</option>
+                                      @foreach ($kc_pilsatus as $kc_pilsatu)
+                                        <option value="{{$kc_pilsatu->kc_pilsatu}}">{{$kc_pilsatu->kc_pilsatu}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -766,6 +769,9 @@
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pilihanDKetuaKelompoks" id="pilihanDKetuaKelompok" aria-label=".form-select-sm pilihanDKetuaKelompok">
                                       <option value="">-Kolom Cadangan (Pilihan) 2</option>
+                                      @foreach ($kc_pilduas as $kc_pildua)
+                                        <option value="{{$kc_pildua->kc_pildua}}">{{$kc_pildua->kc_pildua}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -781,6 +787,9 @@
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pilihanTKetuaKelompoks" id="pilihanTKetuaKelompok" aria-label=".form-select-sm pilihanTKetuaKelompok">
                                       <option value="">-Kolom Cadangan (Pilihan) 3</option>
+                                      @foreach ($kc_piltigas as $kc_piltiga)
+                                        <option value="{{$kc_piltiga->kc_piltiga}}">{{$kc_piltiga->kc_piltiga}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -796,6 +805,9 @@
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pilihanEKetuaKelompoks" id="pilihanEKetuaKelompok" aria-label=".form-select-sm pilihanEKetuaKelompok">
                                       <option value="">-Kolom Cadangan (Pilihan) 4</option>
+                                      @foreach ($kc_pilempats as $kc_pilempat)
+                                        <option value="{{$kc_pilempat->kc_pilempat}}">{{$kc_pilempat->kc_pilempat}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -811,6 +823,9 @@
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pilihanLKetuaKelompoks" id="pilihanLKetuaKelompok" aria-label=".form-select-sm pilihanLKetuaKelompok">
                                       <option value="">-Kolom Cadangan (Pilihan) 5</option>
+                                      @foreach ($kc_pillimas as $kc_pillima)
+                                        <option value="{{$kc_pillima->kc_pillima}}">{{$kc_pillima->kc_pillima}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -826,6 +841,9 @@
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pilihanEnKetuaKelompoks" id="pilihanEnKetuaKelompok" aria-label=".form-select-sm pilihanEnKetuaKelompok">
                                       <option value="">-Kolom Cadangan (Pilihan) 6</option>
+                                      @foreach ($kc_pilenams as $kc_pilenam)
+                                        <option value="{{$kc_pilenam->kc_pilenam}}">{{$kc_pilenam->kc_pilenam}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -841,6 +859,9 @@
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="pilihanTuKetuaKelompoks" id="pilihanTuKetuaKelompok" aria-label=".form-select-sm pilihanTuKetuaKelompok">
                                       <option value="">-Kolom Cadangan (Pilihan) 7</option>
+                                      @foreach ($kc_piltujuhs as $kc_piltujuh)
+                                        <option value="{{$kc_piltujuh->kc_piltujuh}}">{{$kc_piltujuh->kc_piltujuh}}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -1102,7 +1123,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketBaptisAnakKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketBaptisAnakKetuaKelompoks" id="ketBaptisAnakKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketBaptisAnakKetuaKelompoks" id="ketBaptisAnakKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1146,7 +1167,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketMenikahKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketMenikahKetuaKelompoks" id="ketMenikahKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketMenikahKetuaKelompoks" id="ketMenikahKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1190,7 +1211,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketBaptisKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketBaptisKetuaKelompoks" id="ketBaptisKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketBaptisKetuaKelompoks" id="ketBaptisKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1234,7 +1255,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketMeninggalDuniaKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketMeninggalDuniaKetuaKelompoks" id="ketMeninggalDuniaKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketMeninggalDuniaKetuaKelompoks" id="ketMeninggalDuniaKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1278,7 +1299,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketPenyerahanAnakKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketPenyerahanAnakKetuaKelompoks" id="ketPenyerahanAnakKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketPenyerahanAnakKetuaKelompoks" id="ketPenyerahanAnakKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1322,7 +1343,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketEvangelismExplosionKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketEvangelismExplosionKetuaKelompoks" id="ketEvangelismExplosionKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketEvangelismExplosionKetuaKelompoks" id="ketEvangelismExplosionKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1366,7 +1387,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketIkatanDinasKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketIkatanDinasKetuaKelompoks" id="ketIkatanDinasKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketIkatanDinasKetuaKelompoks" id="ketIkatanDinasKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1410,7 +1431,7 @@
                                   @enderror
                                   <hr>
                                   <label for="ketPrktkDuaThnKetuaKelompok" class="">Keterangan</label>
-                                  <textarea class="form-control" name="ketPrktkDuaThnKetuaKelompoks" id="ketPrktk2ThnKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="ketPrktkDuaThnKetuaKelompoks" id="ketPrktk2ThnKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1441,7 +1462,7 @@
                                 </div>
                                 <div class="col-3">
                                   <label for="cttnMasukKetuaKelompok" class="">Catatan Masuk</label>
-                                  <textarea class="form-control" name="cttnMasukKetuaKelompoks" id="cttnMasukKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="cttnMasukKetuaKelompoks" id="cttnMasukKetuaKelompok" rows="3" placeholder="Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -1456,7 +1477,7 @@
                               <div class="mb-3 row">
                                 <label for="kata_sandiKetuaKelompok" class="col-sm-3 px-1">Kata Sandi</label>
                                 <div class="col-sm-9">
-                                  <input class="form-control" type="password" name="kata_sandiKetuaKelompoks" id="kata_sandiKetuaKelompok" rows="3" placeholder="********">
+                                  <input class="form-control form-control-sm" type="password" name="kata_sandiKetuaKelompoks" id="kata_sandiKetuaKelompok" rows="3" placeholder="********">
                                   @error('kata_sandiKetuaKelompoks')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                       <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -1470,7 +1491,7 @@
                               <div class="mb-3 row">
                                 <label for="konfirmasi_kata_sandiKetuaKelompok" class="col-sm-3 px-1">Konfirmasi Kata Sandi</label>
                                 <div class="col-sm-9">
-                                  <input class="form-control" type="password" name="konfirmasi_kata_sandiKetuaKelompoks" id="konfirmasi_kata_sandiKetuaKelompok" rows="3" placeholder="********">
+                                  <input class="form-control form-control-sm" type="password" name="konfirmasi_kata_sandiKetuaKelompoks" id="konfirmasi_kata_sandiKetuaKelompok" rows="3" placeholder="********">
                                 </div>
                               </div>
                             </div>
@@ -1946,7 +1967,7 @@
                                     <div class="col-4"></div>
                                     <div class="col-8">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->kolom_cadanganCBSatuKK}}" id="kolom_cadanganCBSatuKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="kolom_cadanganCBSatuKK" disabled {{$ketuaKelompok->kolom_cadanganCBSatuKK == "Ya" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="kolom_cadanganCBSatuKK">
                                           Ya
                                         </label>
@@ -1957,7 +1978,7 @@
                                     <div class="col-4"></div>
                                     <div class="col-8">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->kolom_cadanganCBDuaKK}}" id="kolom_cadanganCBDuaKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="kolom_cadanganCBDuaKK" disabled {{$ketuaKelompok->kolom_cadanganCBDuaKK == "Ya" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="kolom_cadanganCBDuaKK">
                                           Ya
                                         </label>
@@ -1968,7 +1989,7 @@
                                     <div class="col-4"></div>
                                     <div class="col-8">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->kolom_cadanganCBTigaKK}}" id="kolom_cadanganCBTigaKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="kolom_cadanganCBTigaKK" disabled {{$ketuaKelompok->kolom_cadanganCBTigaKK == "Ya" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="kolom_cadanganCBTigaKK">
                                           Ya
                                         </label>
@@ -1979,7 +2000,7 @@
                                     <div class="col-4"></div>
                                     <div class="col-8">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->kolom_cadanganCBEmpatKK}}" id="kolom_cadanganCBEmpatKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="kolom_cadanganCBEmpatKK" disabled {{$ketuaKelompok->kolom_cadanganCBEmpatKK == "Ya" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="kolom_cadanganCBEmpatKK">
                                           Ya
                                         </label>
@@ -1990,7 +2011,7 @@
                                     <div class="col-4"></div>
                                     <div class="col-8">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->kolom_cadanganCBLimaKK}}" id="kolom_cadanganCBLimaKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="kolom_cadanganCBLimaKK" disabled {{$ketuaKelompok->kolom_cadanganCBLimaKK == "Ya" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="kolom_cadanganCBLimaKK">
                                           Ya
                                         </label>
@@ -2001,7 +2022,7 @@
                                     <div class="col-4"></div>
                                     <div class="col-8">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->kolom_cadanganCBEnamKK}}" id="kolom_cadanganCBEnamKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="kolom_cadanganCBEnamKK" disabled {{$ketuaKelompok->kolom_cadanganCBEnamKK == "Ya" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="kolom_cadanganCBEnamKK">
                                           Ya
                                         </label>
@@ -2012,7 +2033,7 @@
                                     <div class="col-4"></div>
                                     <div class="col-8">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->kolom_cadanganCBTujuhKK}}" id="kolom_cadanganCBTujuhKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="kolom_cadanganCBTujuhKK" disabled {{$ketuaKelompok->kolom_cadanganCBTujuhKK == "Ya" ? 'checked' : ''}}>
                                         <label class="form-check-label" for="kolom_cadanganCBTujuhKK">
                                           Ya
                                         </label>
@@ -2041,19 +2062,19 @@
                                     <div class="col-2">Baptis Anak</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->ba_sudahKK}}" id="ba_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="ba_sudahKK" disabled {{$ketuaKelompok->ba_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->ba_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->ba_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ba_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ba_tempatLoKK" disabled {{$ketuaKelompok->ba_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="ba_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ba_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ba_tempatLaKK" disabled {{$ketuaKelompok->ba_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="ba_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2067,19 +2088,19 @@
                                     <div class="col-2">Menikah</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->menikah_sudahKK}}" id="menikah_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="menikah_sudahKK" disabled {{$ketuaKelompok->menikah_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->menikah_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->menikah_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="menikah_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="menikah_tempatLoKK" disabled {{$ketuaKelompok->menikah_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="menikah_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="menikah_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="menikah_tempatLaKK" disabled {{$ketuaKelompok->menikah_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="menikah_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2093,19 +2114,19 @@
                                     <div class="col-2">Baptis</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->bap_sudahKK}}" id="bap_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="bap_sudahKK" disabled {{$ketuaKelompok->bap_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->bap_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->bap_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bap_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bap_tempatLoKK" disabled {{$ketuaKelompok->bap_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="bap_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bap_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bap_tempatLaKK" disabled {{$ketuaKelompok->bap_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="bap_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2118,19 +2139,19 @@
                                     <div class="col-2">Meninggal Dunia</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->md_sudahKK}}" id="md_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="md_sudahKK" disabled {{$ketuaKelompok->md_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->md_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->md_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="md_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="md_tempatLoKK" disabled {{$ketuaKelompok->md_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="md_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="md_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="md_tempatLaKK" disabled {{$ketuaKelompok->md_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="md_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2144,19 +2165,19 @@
                                     <div class="col-2">Penyerahan Anak</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->pa_sudahKK}}" id="pa_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="pa_sudahKK" disabled {{$ketuaKelompok->pa_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->pa_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->pa_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pa_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pa_tempatLoKK" disabled {{$ketuaKelompok->pa_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="pa_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pa_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pa_tempatLaKK" disabled {{$ketuaKelompok->pa_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="pa_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2170,19 +2191,19 @@
                                     <div class="col-2">Evangelism Explosion</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->ee_sudahKK}}" id="ee_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="ee_sudahKK" disabled {{$ketuaKelompok->ee_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->ee_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->ee_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ee_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ee_tempatLoKK" disabled {{$ketuaKelompok->ee_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="ee_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ee_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="ee_tempatLaKK" disabled {{$ketuaKelompok->ee_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="ee_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2196,19 +2217,19 @@
                                     <div class="col-2">Tgl berakhir ikatan dinas</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->bid_sudahKK}}" id="bid_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="bid_sudahKK" disabled {{$ketuaKelompok->bid_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->bid_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->bid_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bid_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bid_tempatLoKK" disabled {{$ketuaKelompok->bid_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="bid_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bid_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bid_tempatLaKK" disabled {{$ketuaKelompok->bid_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="bid_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2222,19 +2243,19 @@
                                     <div class="col-2">Praktek 2 Tahun</div>
                                     <div class="col-1">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{$ketuaKelompok->pdt_sudahKK}}" id="pdt_sudahKK">
+                                        <input class="form-check-input" type="checkbox" value="" id="pdt_sudahKK" disabled {{$ketuaKelompok->pdt_sudahKK == 'Sudah' ? 'checked' : ''}}>
                                       </div>
                                     </div>
                                     <div class="col-2">{{$ketuaKelompok->pdt_tanggalKK}}</div>
-                                    <div class="col-2">{{$ketuaKelompok->pdt_tempatKK}}
+                                    <div class="col-2">
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pdt_tempatLoKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pdt_tempatLoKK" disabled {{$ketuaKelompok->pdt_tempatKK == 'Gereja Lokal' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="pdt_tempatLoKK">
                                           Gereja Lokal
                                         </label>
                                       </div>
                                       <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pdt_tempatLaKK">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pdt_tempatLaKK" disabled {{$ketuaKelompok->pdt_tempatKK == 'Gereja Lain' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="pdt_tempatLaKK">
                                           Gereja Lain
                                         </label>
@@ -2311,9 +2332,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for=editReferensiKetuaKelompok" class="col-sm-3 px-1">Referensi Dari</label>
+                                    <label for="editReferensiKetuaKelompok" class="col-sm-3 px-1">Referensi Dari</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name=editReferensiKetuaKelompok" class="form-control form-control-sm" id=editReferensiKetuaKelompok" placeholder="Referensi Dari" value="{{$ketuaKelompok->refrensiKK}}">
+                                      <input type="text" name="editReferensiKetuaKelompok" class="form-control form-control-sm" id="editReferensiKetuaKelompok" placeholder="Referensi Dari" value="{{$ketuaKelompok->refrensiKK}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
@@ -2469,7 +2490,7 @@
                                   <div class="mb-3 row">
                                     <label for="editKeteranganArahKetuaKelompok" class="col-sm-3 px-1">Keterangan Arah</label>
                                     <div class="col-sm-9">
-                                      <textarea class="form-control" name="editKeteranganArahKetuaKelompok" id="editKeteranganArahKetuaKelompok" rows="3" placeholder="Keterangan Arah"> {{$ketuaKelompok->ket_arahKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKeteranganArahKetuaKelompok" id="editKeteranganArahKetuaKelompok" rows="3" placeholder="Keterangan Arah"> {{$ketuaKelompok->ket_arahKK}}</textarea>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
@@ -2805,7 +2826,7 @@
                                   <div class="mb-3 row">
                                     <label for="editCatatanKetuaKelompok" class="col-sm-3 px-1">Catatan</label>
                                     <div class="col-sm-9">
-                                      <textarea class="form-control" name="editCatatanKetuaKelompok" id="editCatatanKetuaKelompok" rows="3" placeholder="Catatan"> {{$ketuaKelompok->catatanKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editCatatanKetuaKelompok" id="editCatatanKetuaKelompok" rows="3" placeholder="Catatan"> {{$ketuaKelompok->catatanKK}}</textarea>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
@@ -2895,6 +2916,9 @@
                                       <div class="col-11">
                                         <select class="form-select form-select-sm" name="editPilihanSKetuaKelompok" id="editPilihanSKetuaKelompok" aria-label=".form-select-sm editPilihanSKetuaKelompok">
                                           <option value="{{$ketuaKelompok->kolom_cadanganPSatuKK}}"> {{$ketuaKelompok->kolom_cadanganPSatuKK}}</option>
+                                          @foreach ($kc_pilsatus as $kc_pilsatu)
+                                            <option value="{{$kc_pilsatu->kc_pilsatu}}">{{$kc_pilsatu->kc_pilsatu}}</option>
+                                          @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
@@ -2910,6 +2934,9 @@
                                       <div class="col-11">
                                         <select class="form-select form-select-sm" name="editPilihanDKetuaKelompok" id="editPilihanDKetuaKelompok" aria-label=".form-select-sm editPilihanDKetuaKelompok">
                                           <option value="{{$ketuaKelompok->kolom_cadanganPDuaKK}}"> {{$ketuaKelompok->kolom_cadanganPDuaKK}}</option>
+                                          @foreach ($kc_pilduas as $kc_pildua)
+                                            <option value="{{$kc_pildua->kc_pildua}}">{{$kc_pildua->kc_pildua}}</option>
+                                          @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
@@ -2925,6 +2952,9 @@
                                       <div class="col-11">
                                         <select class="form-select form-select-sm" name="editPilihanTKetuaKelompok" id="editPilihanTKetuaKelompok" aria-label=".form-select-sm editPilihanTKetuaKelompok">
                                           <option value="{{$ketuaKelompok->kolom_cadanganPTigaKK}}"> {{$ketuaKelompok->kolom_cadanganPTigaKK}}</option>
+                                          @foreach ($kc_piltigas as $kc_piltiga)
+                                            <option value="{{$kc_piltiga->kc_piltiga}}">{{$kc_piltiga->kc_piltiga}}</option>
+                                          @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
@@ -2940,6 +2970,9 @@
                                       <div class="col-11">
                                         <select class="form-select form-select-sm" name="editPilihanEKetuaKelompok" id="editPilihanEKetuaKelompok" aria-label=".form-select-sm editPilihanEKetuaKelompok">
                                           <option value="{{$ketuaKelompok->kolom_cadanganPEmpatKK}}"> {{$ketuaKelompok->kolom_cadanganPEmpatKK}}</option>
+                                          @foreach ($kc_pilempats as $kc_pilempat)
+                                            <option value="{{$kc_pilempat->kc_pilempat}}">{{$kc_pilempat->kc_pilempat}}</option>
+                                          @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
@@ -2955,6 +2988,9 @@
                                       <div class="col-11">
                                         <select class="form-select form-select-sm" name="editPilihanLKetuaKelompok" id="editPilihanLKetuaKelompok" aria-label=".form-select-sm editPilihanLKetuaKelompok">
                                           <option value="{{$ketuaKelompok->kolom_cadanganPLimaKK}}"> {{$ketuaKelompok->kolom_cadanganPLimaKK}}</option>
+                                          @foreach ($kc_pillimas as $kc_pillima)
+                                            <option value="{{$kc_pillima->kc_pillima}}">{{$kc_pillima->kc_pillima}}</option>
+                                          @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
@@ -2970,6 +3006,9 @@
                                       <div class="col-11">
                                         <select class="form-select form-select-sm" name="editPilihanEnKetuaKelompok" id="editPilihanEnKetuaKelompok" aria-label=".form-select-sm editPilihanEnKetuaKelompok">
                                           <option value="{{$ketuaKelompok->kolom_cadanganPEnamKK}}"> {{$ketuaKelompok->kolom_cadanganPEnamKK}}</option>
+                                          @foreach ($kc_pilenams as $kc_pilenam)
+                                            <option value="{{$kc_pilenam->kc_pilenam}}">{{$kc_pilenam->kc_pilenam}}</option>
+                                          @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
@@ -2985,6 +3024,9 @@
                                       <div class="col-11">
                                         <select class="form-select form-select-sm" name="editPilihanTuKetuaKelompok" id="editPilihanTuKetuaKelompok" aria-label=".form-select-sm editPilihanTuKetuaKelompok">
                                           <option value="{{$ketuaKelompok->kolom_cadanganPTujuhKK}}"> {{$ketuaKelompok->kolom_cadanganPTujuhKK}}</option>
+                                          @foreach ($kc_piltujuhs as $kc_piltujuh)
+                                            <option value="{{$kc_piltujuh->kc_piltujuh}}">{{$kc_piltujuh->kc_piltujuh}}</option>
+                                          @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
@@ -3142,7 +3184,7 @@
                                     <label for="editCheckSKetuaKelompok" class="col-sm-3 px-1"></label>
                                     <div class="col-sm-9 pt-1">
                                       <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckSKetuaKelompok" type="checkbox" id="editCheckSKetuaKelompok" {{$ketuaKelompok->kolom_cadanganCBSatuKK == 'Ya' ? 'checked' : ''}}>
+                                        <input class="form-check-input" name="editCheckSKetuaKelompok" type="checkbox" id="editCheckSKetuaKelompok" value="Ya" {{$ketuaKelompok->kolom_cadanganCBSatuKK == 'Ya' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="editCheckSKetuaKelompok">Ya</label>
                                       </div>
                                     </div>
@@ -3151,7 +3193,7 @@
                                     <label for="editCheckDKetuaKelompok" class="col-sm-3 px-1"></label>
                                     <div class="col-sm-9 pt-1">
                                       <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckDKetuaKelompok" type="checkbox" id="editCheckDKetuaKelompok" {{$ketuaKelompok->kolom_cadanganCBDuaKK == 'Ya' ? 'checked' : ''}}>
+                                        <input class="form-check-input" name="editCheckDKetuaKelompok" type="checkbox" id="editCheckDKetuaKelompok" value="Ya" {{$ketuaKelompok->kolom_cadanganCBDuaKK == 'Ya' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="editCheckDKetuaKelompok">Ya</label>
                                       </div>
                                     </div>
@@ -3160,7 +3202,7 @@
                                     <label for="editCheckTKetuaKelompok" class="col-sm-3 px-1"></label>
                                     <div class="col-sm-9 pt-1">
                                       <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckTKetuaKelompok" type="checkbox" id="editCheckTKetuaKelompok" {{$ketuaKelompok->kolom_cadanganCBTigaKK == 'Ya' ? 'checked' : ''}}>
+                                        <input class="form-check-input" name="editCheckTKetuaKelompok" type="checkbox" id="editCheckTKetuaKelompok" value="Ya" {{$ketuaKelompok->kolom_cadanganCBTigaKK == 'Ya' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="editCheckTKetuaKelompok">Ya</label>
                                       </div>
                                     </div>
@@ -3169,7 +3211,7 @@
                                     <label for="editCheckEKetuaKelompok" class="col-sm-3 px-1"></label>
                                     <div class="col-sm-9 pt-1">
                                       <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckEKetuaKelompok" type="checkbox" id="editCheckEKetuaKelompok" {{$ketuaKelompok->kolom_cadanganCBEmpatKK == 'Ya' ? 'checked' : ''}}>
+                                        <input class="form-check-input" name="editCheckEKetuaKelompok" type="checkbox" id="editCheckEKetuaKelompok" value="Ya" {{$ketuaKelompok->kolom_cadanganCBEmpatKK == 'Ya' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="editCheckEKetuaKelompok">Ya</label>
                                       </div>
                                     </div>
@@ -3178,7 +3220,7 @@
                                     <label for="editCheckLKetuaKelompok" class="col-sm-3 px-1"></label>
                                     <div class="col-sm-9 pt-1">
                                       <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckLKetuaKelompok" type="checkbox" id="editCheckLKetuaKelompok" {{$ketuaKelompok->kolom_cadanganCBLimaKK == 'Ya' ? 'checked' : ''}}>
+                                        <input class="form-check-input" name="editCheckLKetuaKelompok" type="checkbox" id="editCheckLKetuaKelompok" value="Ya" {{$ketuaKelompok->kolom_cadanganCBLimaKK == 'Ya' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="editCheckLKetuaKelompok">Ya</label>
                                       </div>
                                     </div>
@@ -3187,7 +3229,7 @@
                                     <label for="editCheckEnKetuaKelompok" class="col-sm-3 px-1"></label>
                                     <div class="col-sm-9 pt-1">
                                       <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckEnKetuaKelompok" type="checkbox" id="editCheckEnKetuaKelompok" {{$ketuaKelompok->kolom_cadanganCBEnamKK == 'Ya' ? 'checked' : ''}}>
+                                        <input class="form-check-input" name="editCheckEnKetuaKelompok" type="checkbox" id="editCheckEnKetuaKelompok" value="Ya" {{$ketuaKelompok->kolom_cadanganCBEnamKK == 'Ya' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="editCheckEnKetuaKelompok">Ya</label>
                                       </div>
                                     </div>
@@ -3196,7 +3238,7 @@
                                     <label for="editCheckTuKetuaKelompok" class="col-sm-3 px-1"></label>
                                     <div class="col-sm-9 pt-1">
                                       <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckTuKetuaKelompok" type="checkbox" id="editCheckTuKetuaKelompok" {{$ketuaKelompok->kolom_cadanganCBTujuhKK == 'Ya' ? 'checked' : ''}}>
+                                        <input class="form-check-input" name="editCheckTuKetuaKelompok" type="checkbox" id="editCheckTuKetuaKelompok" value="Ya" {{$ketuaKelompok->kolom_cadanganCBTujuhKK == 'Ya' ? 'checked' : ''}}>
                                         <label class="form-check-label" for="editCheckTuKetuaKelompok">Ya</label>
                                       </div>
                                     </div>
@@ -3246,7 +3288,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetBaptisAnakKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetBaptisAnakKetuaKelompok" id="editKetBaptisAnakKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->ba_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetBaptisAnakKetuaKelompok" id="editKetBaptisAnakKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->ba_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3290,7 +3332,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetMenikahKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetMenikahKetuaKelompok" id="editKetMenikahKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->menikah_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetMenikahKetuaKelompok" id="editKetMenikahKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->menikah_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3334,7 +3376,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetBaptisKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetBaptisKetuaKelompok" id="editKetBaptisKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->bap_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetBaptisKetuaKelompok" id="editKetBaptisKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->bap_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3378,7 +3420,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetMeninggalDuniaKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetMeninggalDuniaKetuaKelompok" id="editKetMeninggalDuniaKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->md_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetMeninggalDuniaKetuaKelompok" id="editKetMeninggalDuniaKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->md_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3422,7 +3464,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetPenyerahanAnakKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetPenyerahanAnakKetuaKelompok" id="editKetPenyerahanAnakKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->pa_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetPenyerahanAnakKetuaKelompok" id="editKetPenyerahanAnakKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->pa_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3466,7 +3508,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetEvangelismExplosionKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetEvangelismExplosionKetuaKelompok" id="editKetEvangelismExplosionKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->ee_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetEvangelismExplosionKetuaKelompok" id="editKetEvangelismExplosionKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->ee_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3510,7 +3552,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetIkatanDinasKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetIkatanDinasKetuaKelompok" id="editKetIkatanDinasKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->bid_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetIkatanDinasKetuaKelompok" id="editKetIkatanDinasKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->bid_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3554,7 +3596,7 @@
                                       @enderror
                                       <hr>
                                       <label for="editKetPrktkDuaThnKetuaKelompok" class="">Keterangan</label>
-                                      <textarea class="form-control" name="editKetPrktkDuaThnKetuaKelompok" id="editKetPrktkDuaThnKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->pdt_ketKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKetPrktkDuaThnKetuaKelompok" id="editKetPrktkDuaThnKetuaKelompok" rows="3" placeholder="Keterangan">{{$ketuaKelompok->pdt_ketKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3585,7 +3627,7 @@
                                     </div>
                                     <div class="col-3">
                                       <label for="editCttnMasukKetuaKelompok" class="">Catatan Masuk</label>
-                                      <textarea class="form-control" name="editCttnMasukKetuaKelompok" id="editCttnMasukKetuaKelompok" rows="3" placeholder="Catatan Masuk Grup">{{$ketuaKelompok->catatan_masuk_grupKK}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editCttnMasukKetuaKelompok" id="editCttnMasukKetuaKelompok" rows="3" placeholder="Catatan Masuk Grup">{{$ketuaKelompok->catatan_masuk_grupKK}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3600,7 +3642,7 @@
                                   <div class="mb-3 row">
                                     <label for="kata_sandiLamaKetuaKelompok" class="col-sm-3 px-1">Masukkan Kata Sandi Lama</label>
                                     <div class="col-sm-9">
-                                      <input class="form-control" type="password" name="kata_sandiLamaKetuaKelompok" id="kata_sandiLamaKetuaKelompok" rows="3" placeholder="********">
+                                      <input class="form-control form-control-sm" type="password" name="kata_sandiLamaKetuaKelompok" id="kata_sandiLamaKetuaKelompok" rows="3" placeholder="********">
                                       @error('kata_sandiLamaKetuaKelompok')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -3614,7 +3656,7 @@
                                   <div class="mb-3 row">
                                     <label for="editKata_sandiKetuaKelompok" class="col-sm-3 px-1">Kata Sandi</label>
                                     <div class="col-sm-9">
-                                      <input class="form-control" type="password" name="editKata_sandiKetuaKelompok" id="editKata_sandiKetuaKelompok" rows="3" placeholder="********">
+                                      <input class="form-control form-control-sm" type="password" name="editKata_sandiKetuaKelompok" id="editKata_sandiKetuaKelompok" rows="3" placeholder="********">
                                       @error('editKata_sandiKetuaKelompok')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -3628,7 +3670,7 @@
                                   <div class="mb-3 row">
                                     <label for="konfirmasi_editKata_sandiKetuaKelompok" class="col-sm-3 px-1">Konfirmasi Kata Sandi</label>
                                     <div class="col-sm-9">
-                                      <input class="form-control" type="password" name="konfirmasi_editKata_sandiKetuaKelompok" id="konfirmasi_editKata_sandiKetuaKelompok" rows="3" placeholder="********">
+                                      <input class="form-control form-control-sm" type="password" name="konfirmasi_editKata_sandiKetuaKelompok" id="konfirmasi_editKata_sandiKetuaKelompok" rows="3" placeholder="********">
                                     </div>
                                   </div>
                                 </div>
