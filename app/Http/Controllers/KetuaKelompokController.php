@@ -383,8 +383,75 @@ class KetuaKelompokController extends Controller
    * @param  \App\Models\Ketua_kelompok  $ketua_kelompok
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Ketua_kelompok $ketua_kelompok)
+  public function destroy($id)
   {
-      //
+    $deleteDataKetuaKelompok = Ketua_kelompok::find($id);
+    if ($deleteDataKetuaKelompok->fotoKK != '') {
+      $destination = 'images/Ketua Kelompok/Foto/'.$deleteDataKetuaKelompok->fotoKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->foto_bitmapKK != '') {
+      $destination = 'images/Ketua Kelompok/Foto Bitmap/'.$deleteDataKetuaKelompok->foto_bitmapKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->ba_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Dokumen Baptis Anak/'.$deleteDataKetuaKelompok->ba_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->menikah_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Dokumen Menikah/'.$deleteDataKetuaKelompok->menikah_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->bap_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Dokumen Baptis/'.$deleteDataKetuaKelompok->bap_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->md_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Dokumen Meninggal/'.$deleteDataKetuaKelompok->md_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->pa_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Dokumen Penyerahan Anak/'.$deleteDataKetuaKelompok->pa_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->ee_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Evangelism Explosion/'.$deleteDataKetuaKelompok->ee_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->bid_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Dokumen Berakhir Ikatan Dinas/'.$deleteDataKetuaKelompok->bid_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    if ($deleteDataKetuaKelompok->pdt_fileKK != '') {
+      $destination = 'images/Ketua Kelompok/Dokumen Praktek 2 Tahun/'.$deleteDataKetuaKelompok->pdt_fileKK;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    $deleteDataKetuaKelompok->delete();
+
+    if($deleteDataKetuaKelompok){
+      return redirect()->route('data-ketua-kelompok.index')->with(['success' => 'Ketua Kelompok Berhasil Dihapus!']);
+    }else{
+      return redirect()->route('data-ketua-kelompok.index')->with(['error' => 'Ketua Kelompok Gagal Dihapus!']);
+    }
   }
 }

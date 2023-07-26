@@ -174,6 +174,8 @@
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" name="sapaanKetuaKelompoks" id="sapaanKetuaKelompok" aria-label=".form-select-sm sapaanKetuaKelompok">
                                     <option value="">-Sapaan-</option>
+                                    <option value="Bapak">Bapak</option>
+                                    <option value="Ibu">Ibu</option>
                                   </select>
                                 </div>
                               </div>
@@ -214,6 +216,8 @@
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" name="peranKetuaKelompoks" id="peranKetuaKelompok" aria-label=".form-select-sm peranKetuaKelompok">
                                     <option value="">-Peran dalam Keluarga-</option>
+                                    <option value="Kepala Keluarga">Kepala Keluarga</option>
+                                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
                                   </select>
                                 </div>
                               </div>
@@ -222,6 +226,8 @@
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" name="jenisIdentitasKetuaKelompoks" id="jenisIdentitasKetuaKelompok" aria-label=".form-select-sm jenisIdentitasKetuaKelompok">
                                     <option value="">-Jenis Identitas-</option>
+                                    <option value="KTP">KTP</option>
+                                    <option value="SIM">SIM</option>
                                   </select>
                                 </div>
                               </div>
@@ -273,6 +279,8 @@
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" name="statusPernikahanKetuaKelompoks" id="statusPernikahanKetuaKelompok" aria-label=".form-select-sm statusPernikahanKetuaKelompok">
                                     <option value="">-Status Pernikahan-</option>
+                                    <option value="Cerai">Cerai</option>
+                                    <option value="Belum Menikah">Belum Menikah</option>
                                   </select>
                                 </div>
                               </div>
@@ -336,9 +344,9 @@
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" name="negaraKetuaKelompoks" id="negaraKetuaKelompok" aria-label=".form-select-sm negaraKetuaKelompok">
                                     <option value="">-Negara-</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="USA">USA</option>
+                                    <option value="England">England</option>
                                   </select>
                                 </div>
                               </div>
@@ -397,6 +405,8 @@
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" name="areaKetuaKelompoks" id="areaKetuaKelompok" aria-label=".form-select-sm areaKetuaKelompok">
                                     <option value="">-Area-</option>
+                                    <option value="021">021</option>
+                                    <option value="022">022</option>
                                   </select>
                                 </div>
                               </div>
