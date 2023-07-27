@@ -18,9 +18,4 @@ class Catatan extends Model
     protected $fillable = [
       'catatan', 'id_peserta', 'tgl_kontak'
     ];
-
-    public function peserta() 
-    {
-      return $this->belongsTo(Peserta::class);  
-    }
 }

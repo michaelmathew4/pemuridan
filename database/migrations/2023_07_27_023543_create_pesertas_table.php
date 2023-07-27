@@ -14,7 +14,7 @@ class CreatePesertasTable extends Migration
     public function up()
     {
         Schema::create('pesertas', function (Blueprint $table) {
-            $table->bigInteger('id', 20);
+            $table->id();
             $table->string('id_peserta', 10);
             $table->string('nama_peserta', 50);
             $table->string('jk_peserta', 15);
@@ -26,7 +26,6 @@ class CreatePesertasTable extends Migration
             $table->string('suku_peserta', 50);
             $table->string('status_peserta', 25);
             $table->string('foto_peserta');
-            $table->primary(['id_peserta']); 
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class CreateCatatansTable extends Migration
             $table->date('tgl_kontak');
             $table->timestamps();
             
-            $table->foreign('id_peserta')->references('id_peserta')->on('pesertas')->onDelete('cascade');
+            // $table->foreign('id_peserta')->references('id_peserta')->on('pesertas')->onDelete('cascade');
         });
     }
 

@@ -22,7 +22,7 @@ class CreateSkalasTable extends Migration
             $table->string('status', 15);
             $table->timestamps();
             
-            $table->foreign('id_peserta')->references('id_peserta')->on('pesertas')->onDelete('cascade');
+            // $table->foreign('id_peserta')->references('id_peserta')->on('pesertas')->onDelete('cascade');
         });
     }
 

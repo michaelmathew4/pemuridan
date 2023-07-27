@@ -17,9 +17,4 @@ class Skala extends Model
     protected $fillable = [
       'skala', 'keterangan', 'id_peserta', 'tgl_kontak', 'status'
     ];
-
-    public function peserta() 
-    {
-      return $this->belongsTo(Peserta::class);  
-    }
 }
