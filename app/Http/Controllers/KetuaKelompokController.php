@@ -79,7 +79,7 @@ class KetuaKelompokController extends Controller
   function randomCode()
   {
     do {
-      $kode = random_int(1000000, 9999999);
+      $kode = random_int(100000000, 999999999);
     } while (Ketua_kelompok::where("id_user", "=", $kode)->first());
 
     return $kode;

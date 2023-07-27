@@ -8,6 +8,7 @@ use App\Http\Controllers\KetuaKelompokController;
 use App\Http\Controllers\KetuaLokasiController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PengurusController;
+use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ShapeController;
 use App\Http\Controllers\StudiMinatController;
 use App\Http\Controllers\VideoYoutubeController;
@@ -61,9 +62,7 @@ Route::resource('/admin/data-ketua-lokasi', KetuaLokasiController::class);
 
 Route::resource('/admin/data-ketua-kelompok', KetuaKelompokController::class);
 
-Route::get('/admin/data-peserta', function () {
-  return view('admin/data-peserta');
-});
+Route::resource('/admin/data-peserta', PesertaController::class);
 
 //Pengurus
 Route::get('/pengurus', function () {

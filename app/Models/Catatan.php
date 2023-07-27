@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Keterangan extends Model
+class Catatan extends Model
 {
     use HasFactory;
+
 
     /**
      * fillable
@@ -15,6 +16,11 @@ class Keterangan extends Model
      * @var array
      */
     protected $fillable = [
-      'keterangan', 'id_peserta'
+      'catatan', 'id_peserta', 'tgl_kontak'
     ];
+
+    public function peserta() 
+    {
+      return $this->belongsTo(Peserta::class);  
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkalasTable extends Migration
+class CreateKelompoksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateSkalasTable extends Migration
      */
     public function up()
     {
-        Schema::create('skalas', function (Blueprint $table) {
+        Schema::create('kelompoks', function (Blueprint $table) {
             $table->id();
-            $table->string('skala', 10);
-            $table->text('keterangan');
+            $table->string('id_ketua_kelompok', 10);
             $table->string('id_peserta', 10);
-            $table->date('tgl_kontak');
-            $table->string('status', 15);
+            $table->string('generasi', 10);
             $table->timestamps();
-            
-            $table->foreign('id_peserta')->references('id_peserta')->on('pesertas')->onDelete('cascade');
         });
     }
 
@@ -33,6 +29,6 @@ class CreateSkalasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skalas');
+        Schema::dropIfExists('kelompoks');
     }
 }

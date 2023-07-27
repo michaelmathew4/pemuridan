@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKeterangansTable extends Migration
+class CreateCatatansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateKeterangansTable extends Migration
      */
     public function up()
     {
-        Schema::create('keterangans', function (Blueprint $table) {
+        Schema::create('catatans', function (Blueprint $table) {
             $table->id();
-            $table->text('keterangan');
+            $table->text('catatan');
             $table->string('id_peserta', 10);
+            $table->date('tgl_kontak');
             $table->timestamps();
+            
+            $table->foreign('id_peserta')->references('id_peserta')->on('pesertas')->onDelete('cascade');
         });
     }
 
@@ -28,6 +31,6 @@ class CreateKeterangansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('keterangans');
+        Schema::dropIfExists('catatans');
     }
 }

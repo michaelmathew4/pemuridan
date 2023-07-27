@@ -1539,7 +1539,7 @@
                     <th scope="row">{{$noKetuaKelompoks++}}</th>
                     <td>{{$ketuaKelompok->id_user}}</td>
                     <td>
-                      <a href="#lihatData{{$ketuaKelompok->id}}" data-bs-toggle="modal" class="text-info">
+                      <a href="#lihatData{{$ketuaKelompok->id_user}}" data-bs-toggle="modal" class="text-info">
                         {{$ketuaKelompok->nama_lengkapKK}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
                       </a>
                     </td>
@@ -1549,11 +1549,11 @@
                     <td>{{$ketuaKelompok->alamatKK}}</td>
                     <td>
                       <div class="icon-action">
-                        <a data-bs-target="#ubahData{{$ketuaKelompok->id}}" id="ubahData" data-bs-toggle="modal" class="text-primary" data-user="{{$ketuaKelompok->id}}">
+                        <a data-bs-target="#ubahData{{$ketuaKelompok->id_user}}" id="ubahData" data-bs-toggle="modal" class="text-primary" data-user="{{$ketuaKelompok->id}}">
                           <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
                         </a>
                         |
-                        <a href="#hapusData{{$ketuaKelompok->id}}" data-bs-toggle="modal" class="text-danger">
+                        <a href="#hapusData{{$ketuaKelompok->id_user}}" data-bs-toggle="modal" class="text-danger">
                           <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
                         </a>
                       </div>
@@ -1565,11 +1565,11 @@
                     </td>
                   </tr>
                   <!-- Modal Lihat Data -->
-                  <div class="modal fade" id="lihatData{{$ketuaKelompok->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatData{{$ketuaKelompok->id}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatData{{$ketuaKelompok->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatData{{$ketuaKelompok->id_user}}Label" aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-dialog-scrollable">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatData{{$ketuaKelompok->id}}Label">
+                          <h5 class="modal-title" id="lihatData{{$ketuaKelompok->id_user}}Label">
                             <i class="bi bi-info-circle text-info"></i>
                             Lihat Data Ketua Kelompok
                           </h5>
@@ -2307,11 +2307,11 @@
                   </div>
                   <!-- End Modal Lihat Data -->
                   <!-- Modal Ubah Data -->
-                  <div class="modal fade" id="ubahData{{$ketuaKelompok->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$ketuaKelompok->id}}Label" aria-hidden="true">
+                  <div class="modal fade" id="ubahData{{$ketuaKelompok->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$ketuaKelompok->id_user}}Label" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="ubahData{{$ketuaKelompok->id}}Label">
+                          <h5 class="modal-title" id="ubahData{{$ketuaKelompok->id_user}}Label">
                             <i class="bi bi-pencil-square text-primary"></i>
                             Ubah Data Ketua Kelompok
                           </h5>
@@ -3697,11 +3697,11 @@
                   </div>
                   <!-- End Modal Ubah Data -->
                   <!-- Modal Hapus Data -->
-                  <div class="modal fade" id="hapusData{{$ketuaKelompok->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusData{{$ketuaKelompok->id}}Label" aria-hidden="true">
+                  <div class="modal fade" id="hapusData{{$ketuaKelompok->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusData{{$ketuaKelompok->id_user}}Label" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="hapusData{{$ketuaKelompok->id}}Label">
+                          <h5 class="modal-title" id="hapusData{{$ketuaKelompok->id_user}}Label">
                             <i class="bi bi-trash text-danger"></i>
                             Hapus Data Ketua Kelompok
                           </h5>
