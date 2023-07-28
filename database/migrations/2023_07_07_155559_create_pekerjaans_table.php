@@ -16,7 +16,7 @@ class CreatePekerjaansTable extends Migration
         Schema::create('pekerjaans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pekerjaanPJ');
-            $table->string('deskripsi_pekerjaanPJ');
+            $table->string('deskripsi_pekerjaanPJ')->nullable();
             $table->timestamps();
         });
     }

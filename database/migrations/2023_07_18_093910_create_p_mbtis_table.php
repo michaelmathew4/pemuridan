@@ -16,7 +16,7 @@ class CreatePMbtisTable extends Migration
         Schema::create('p_mbtis', function (Blueprint $table) {
             $table->id();
             $table->string('mbti');
-            $table->string('deskripsiMBTI');
+            $table->string('deskripsiMBTI')->nullable();
             $table->timestamps();
         });
     }

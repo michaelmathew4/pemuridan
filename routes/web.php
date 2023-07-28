@@ -69,3 +69,15 @@ Route::get('/pengurus', function () {
   return view('pengurus/index');
 });
 
+
+//Ketua Lokasi
+Route::get('/ketua-lokasi', function () {
+  return view('ketua-lokasi/index');
+});
+
+//Ketua Kelompok
+Route::get('/ketua-kelompok', function () {
+  return view('ketua-kelompok/index');
+});
+
+

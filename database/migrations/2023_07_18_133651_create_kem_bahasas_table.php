@@ -16,7 +16,7 @@ class CreateKemBahasasTable extends Migration
         Schema::create('kem_bahasas', function (Blueprint $table) {
             $table->id();
             $table->string('kem_bahasa');
-            $table->string('deskripsiKB');
+            $table->string('deskripsiKB')->nullable();
             $table->timestamps();
         });
     }

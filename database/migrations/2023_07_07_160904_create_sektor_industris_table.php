@@ -16,7 +16,7 @@ class CreateSektorIndustrisTable extends Migration
         Schema::create('sektor_industris', function (Blueprint $table) {
             $table->id();
             $table->string('sektor_industriSI');
-            $table->string('deskripsiSI');
+            $table->string('deskripsiSI')->nullable();
             $table->timestamps();
         });
     }

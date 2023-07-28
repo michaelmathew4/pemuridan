@@ -5,37 +5,25 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link " href="{{url('/pengurus')}}">
+    <a class="nav-link " href="{{url('/ketua-kelompok')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-pengurus')}}">
-      <i class="bi bi-person"></i>
-      <span>Data Pengurus</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-ketua-lokasi')}}">
-      <i class="bi bi-person-circle"></i>
-      <span>Data Ketua Lokasi</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-ketua-kelompok')}}">
+    <a class="nav-link collapsed" href="{{url('/ketua-kelompok/data-ketua-kelompok')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-peserta')}}">
+    <a class="nav-link collapsed" href="{{url('/ketua-kelompok/data-peserta')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-laporan')}}">
+    <a class="nav-link collapsed" href="{{url('/ketua-kelompok/data-laporan')}}">
       <i class="bi bi-bar-chart-line"></i>
       <span>Laporan</span>
     </a>
@@ -47,7 +35,7 @@
     <h1>Beranda</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="">Pengurus</a></li>
+        <li class="breadcrumb-item"><a href="">Ketua Kelompok</a></li>
         <li class="breadcrumb-item active">Beranda</li>
       </ol>
     </nav>

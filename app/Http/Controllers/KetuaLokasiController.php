@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Image;
 use  File;
 use App\Models\Ketua_lokasi;
+use App\Models\Lokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +20,8 @@ class KetuaLokasiController extends Controller
   {
     $lokasis = Ketua_lokasi::all();
     $no = 1;
-    return view('admin.data-ketua-lokasi', compact(['lokasis', 'no']));
+    $lokasiWilayahs = Lokasi::all();
+    return view('admin.data-ketua-lokasi', compact(['lokasis', 'no', 'lokasiWilayahs']));
   }
 
   /**

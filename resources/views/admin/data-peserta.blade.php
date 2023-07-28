@@ -192,8 +192,18 @@
                             </div>
                             <div class="mb-3 row">
                               <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span></label>
-                              <div class="col-sm-9 range-wrap">
-                                <input type="range" name="skalaPeserta"
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
+                                  <option value="">-Skala-</option>
+                                  <option value="-3">Skala -3</option>
+                                  <option value="-2">Skala -2</option>
+                                  <option value="-1">Skala -1</option>
+                                  <option value="0">Skala 0</option>
+                                  <option value="1">Skala 1</option>
+                                  <option value="2">Skala 2</option>
+                                  <option value="3">Skala 3</option>
+                                </select>
+                                <!-- <input type="range" name="skalaPeserta"
                                   data-provide="slider"
                                   data-slider-ticks="[-3, -2, -1, 0, 1, 2, 3]"
                                   data-slider-ticks-labels='["-3", "-2", "-1", "0", "1", "2", "3"]'
@@ -201,8 +211,8 @@
                                   data-slider-min="-3"
                                   data-slider-max="3"
                                   data-slider-step="1"
-                                  data-slider-value=""
-                                  data-slider-tooltip="hide">
+                                  data-slider-value="-3"
+                                  data-slider-tooltip="hide"> -->
                                 @error('skalaPeserta')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
@@ -287,10 +297,15 @@
                               <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  <option value="">-Pekerjaan-</option>
+                                  <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                                  <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
+                                  <option value="Pegawai Swasta">Pegawai Swasta</option>
+                                  <option value="Guru / Dosen">Guru / Dosen</option>
+                                  <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                                  <option value="Petani / Peternak">Petani / Peternak</option>
+                                  <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                                  <option value="Lain-lain">Lain-lain</option>
                                 </select>
                                 @error('pekerjaanPeserta')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -334,6 +349,25 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
+                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
+                                  <option value="">-Lokasi Kontak-</option>
+                                  @foreach ($lokasis as $lokasi)
+                                    <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                  @endforeach
+                                </select>
+                                @error('lokasiPeserta')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <div class="mb-3 row">
                               <label for="fotoPeserta" class="col-sm-3 px-1">Foto</label>
                               <div class="col-sm-9">
                                 <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
@@ -347,6 +381,7 @@
                                 @enderror
                               </div>
                             </div>
+                            <input type="text" name="inputTambah" id="" value="tambahData" hidden>
                           </div>
                         </div>
                       </div>
@@ -373,6 +408,7 @@
                   <th scope="col">Skala</th>
                   <th scope="col">Catatan</th>
                   <th scope="col">Status</th>
+                  <th scope="col">Lokasi</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
@@ -389,11 +425,15 @@
                     <td>{{$peserta->jk_peserta}}</td>
                     <td>{{$peserta->alamat_peserta}}</td>
                     <td>
-                      @foreach ($peserta->skala as $skala)
-                        {{$skala->skala}}
-                      @endforeach
+                      <a href="#lihatSkala{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                        {{$peserta->skala}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Skala"></i>
+                      </a>
                     </td>
-                    <td>28</td>
+                    <td>
+                      <a href="#lihatCatatan{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                        {{$peserta->catatan}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Catatan"></i>
+                      </a>
+                    </td>
                     <td>{{$peserta->status_peserta}}</td>
                     <td>
                       <div class="icon-action">
@@ -408,8 +448,8 @@
                     </td>
                   </tr>
                   <!-- Modal Lihat Data -->
-                  <div class="modal fade" id="lihatData{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatData{{$peserta->id_peserta}}Label" aria-hidden="true">
-                    <div class="modal-dialog">
+                  <div class="modal fade" id="lihatData{{$peserta->id_peserta}}" tabindex="-1" aria-labelledby="lihatData{{$peserta->id_peserta}}Label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-scrollable">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="lihatData{{$peserta->id_peserta}}Label">
@@ -419,11 +459,54 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          ...
+                          <div class="container">
+                            <img src="{{ $peserta->foto_peserta != '' ? asset('images/Peserta/Foto/'.$peserta->foto_peserta) : asset('images/no-user.png') }}" class="img-fluid img-thumbnail rounded mx-auto d-block w-25" alt="...">
+                          </div>
+                          <hr>
+                          <div class="content">
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">ID</div>
+                              <div class="col-8">{{$peserta->id_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">Nama Kontak</div>
+                              <div class="col-8">{{$peserta->nama_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">Tempat, Tanggal Lahir</div>
+                              <div class="col-8">{{$peserta->tempat_lahir_peserta}}, {{$peserta->tgl_lahir_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">Jenis Kelamin</div>
+                              <div class="col-8">{{$peserta->jk_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">No Handphone</div>
+                              <div class="col-8">{{$peserta->no_hp_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">Alamat</div>
+                              <div class="col-8">{{$peserta->alamat_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">Suku</div>
+                              <div class="col-8">{{$peserta->suku_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">Pekerjaan</div>
+                              <div class="col-8">{{$peserta->pekerjaan_peserta}}</div>
+                            </div>
+                            <div class="row p-2 border-bottom">
+                              <div class="col-4">Status</div>
+                              <div class="col-8">{{$peserta->status_peserta}}</div>
+                            </div>
+                            <div class="row p-2">
+                              <div class="col-4">Lokasi</div>
+                            </div>
+                          </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
                         </div>
                       </div>
                     </div>
@@ -440,13 +523,254 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <form action="{{ route('data-peserta.update', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
+                          @csrf
+                          <div class="form-group-input">
+                            <div class="form-header-group mb-3">
+                              <h6>PERSONAL</h6>
+                            </div>
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
+                                  <div class="col-sm-9">
+                                    <input type="date" required name="tglKontakPeserta" class="form-control form-control-sm" id="tglKontakPeserta">
+                                    @error('tglKontakPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="namaKontakPeserta" class="col-sm-3 px-1">Nama Kontak <span class="required-input">(*)</span></label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="namaKontakPeserta" required class="form-control form-control-sm" id="namaKontakPeserta" placeholder="cth: Angelica Gabriel">
+                                    @error('namaKontakPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="jenisKelaminPeserta" class="col-sm-3 px-1">Jenis Kelamin <span class="required-input">(*)</span></label>
+                                  <div class="col-sm-9">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminPPeserta" value="Pria">
+                                      <label class="form-check-label" for="jenisKelaminPPeserta">Pria</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminWPeserta" value="Wanita">
+                                      <label class="form-check-label" for="jenisKelaminWPeserta">Wanita</label>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span></label>
+                                  <div class="col-sm-9">
+                                    <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
+                                      <option value="">-Skala-</option>
+                                      <option value="-3">Skala -3</option>
+                                      <option value="-2">Skala -2</option>
+                                      <option value="-1">Skala -1</option>
+                                      <option value="0">Skala 0</option>
+                                      <option value="1">Skala 1</option>
+                                      <option value="2">Skala 2</option>
+                                      <option value="3">Skala 3</option>
+                                    </select>
+                                    <!-- <input type="range" name="skalaPeserta"
+                                      data-provide="slider"
+                                      data-slider-ticks="[-3, -2, -1, 0, 1, 2, 3]"
+                                      data-slider-ticks-labels='["-3", "-2", "-1", "0", "1", "2", "3"]'
+                                      data-slider-ticks-positions="[0,16.6,33.2,49.8,66.4,83,100]"
+                                      data-slider-min="-3"
+                                      data-slider-max="3"
+                                      data-slider-step="1"
+                                      data-slider-value="-3"
+                                      data-slider-tooltip="hide"> -->
+                                    @error('skalaPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="catatanPeserta" class="col-sm-3 px-1">Catatan</label>
+                                  <div class="col-sm-9">
+                                    <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
+                                    @error('catatanPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP</label>
+                                  <div class="col-sm-9">
+                                    <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999">
+                                    @error('noHpPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="alamatPeserta" class="col-sm-3 px-1">Alamat</label>
+                                  <div class="col-sm-9">
+                                    <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
+                                    @error('alamatPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
+                                  <div class="col-sm-5">
+                                    <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung">
+                                    @error('tempatLahirPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                  <div class="col-sm-1">
+                                    <p>/</p>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <input type="date" name="tanggalLahirPeserta" class="form-control form-control-sm" id="tanggalLahirPeserta">
+                                    @error('tanggalLahirPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
+                                  <div class="col-sm-9">
+                                    <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
+                                      <option value="">-Pekerjaan-</option>
+                                      <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                                      <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
+                                      <option value="Pegawai Swasta">Pegawai Swasta</option>
+                                      <option value="Guru / Dosen">Guru / Dosen</option>
+                                      <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                                      <option value="Petani / Peternak">Petani / Peternak</option>
+                                      <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                                      <option value="Lain-lain">Lain-lain</option>
+                                    </select>
+                                    @error('pekerjaanPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda">
+                                    @error('sukuPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="statusPeserta" class="col-sm-3 px-1">Status</label>
+                                  <div class="col-sm-9">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" value="Aktif">
+                                      <label class="form-check-label" for="aktif">Aktif</label>
+                                    </div>
+                                    @error('statusPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
+                                  <div class="col-sm-9">
+                                    <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
+                                      <option value="">-Lokasi Kontak-</option>
+                                      @foreach ($lokasis as $lokasi)
+                                        <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                      @endforeach
+                                    </select>
+                                    @error('lokasiPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="fotoPeserta" class="col-sm-3 px-1">Foto</label>
+                                  <div class="col-sm-9">
+                                    <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
+                                    @error('fotoPeserta')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer mt-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -473,6 +797,105 @@
                     </div>
                   </div>
                   <!-- End Modal Hapus Data -->
+                  <!-- Modal Lihat Skala -->
+                  <div class="modal fade" id="lihatSkala{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkala{{$peserta->id_peserta}}Label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="lihatSkala{{$peserta->id_peserta}}Label">
+                            <i class="bi bi-graph-up text-info"></i>
+                            Lihat Skala Kontak
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('data-peserta.store') }}" method="post">
+                          @csrf
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-4">Tanggal Kontak</div>
+                              <div class="col-4">Skala</div>
+                              <div class="col-4">Keterangan</div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-4">{{$peserta->skala}}</div>
+                            </div>
+                            <hr class="text-muted">
+                            <div class="row">
+                              <div class="col-4">
+                                <input type="date" class="form-control form-control-sm" name="tambahTgl_kontak">
+                                <input type="text" name="inputTambah" id="" value="inputSkala">
+                                <input type="text" name="id_pesertaSkala" id="" value="{{$peserta->id_peserta}}">
+                              </div>
+                              <div class="col-4">
+                                <select class="form-select form-select-sm" name="tambahSkalaPeserta" id="tambahSkalaPeserta" aria-label=".form-select-sm tambahSkalaPeserta">
+                                  <option value="{{$peserta->skala}}">{{$peserta->skala}}</option>
+                                  <option value="-3">Skala -3</option>
+                                  <option value="-2">Skala -2</option>
+                                  <option value="-1">Skala -1</option>
+                                  <option value="0">Skala 0</option>
+                                  <option value="1">Skala 1</option>
+                                  <option value="2">Skala 2</option>
+                                  <option value="3">Skala 3</option>
+                                </select>
+                              </div>
+                              <div class="col-4">
+                                <textarea class="form-control form-control-sm" name="tambahKeteranganSkalaPeserta" id="" cols="30" rows="3" placeholder="Tambah Keterangan"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Lihat Skala -->
+                  <!-- Modal Lihat Catatan -->
+                  <div class="modal fade" id="lihatCatatan{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatan{{$peserta->id_peserta}}Label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="lihatCatatan{{$peserta->id_peserta}}Label">
+                            <i class="bi bi-journal-text text-info"></i>
+                            Lihat Catatan Kontak
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('data-peserta.store') }}" method="post">
+                          @csrf
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-4">Tanggal Kontak</div>
+                              <div class="col-8">Catatan</div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-8">{{$peserta->catatan}}</div>
+                            </div>
+                            <hr class="text-muted">
+                            <div class="row">
+                              <div class="col-4">
+                                <input type="date" class="form-control form-control-sm" name="tambahTgl_kontakCatatan">
+                                <input type="text" name="inputTambah" id="" value="inputCatatan">
+                                <input type="text" name="id_pesertaCatatan" id="" value="{{$peserta->id_peserta}}">
+                              </div>
+                              <div class="col-4">
+                                <textarea class="form-control form-control-sm" name="tambahCatatanPeserta" id="" cols="30" rows="3" placeholder="Tambah Catatan"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Lihat Catatan -->
                 @empty
                   <div class="alert alert-danger">
                     Data Tidak Ada
@@ -483,7 +906,7 @@
           </div>
         </div>
       </div>
-      <hr>
+      <!-- <hr>
       <div class="col-12">
         <div class="card">
           <div class="card-body">
@@ -532,9 +955,9 @@
                   </td>
                 </tr>
               </tbody>
-            </table>
+            </table> -->
             <!-- Modal Terima Skala -->
-            <div class="modal fade" id="terimaSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="terimaSkalaLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="terimaSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="terimaSkalaLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -553,10 +976,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- End Modal Terima Skala -->
             <!-- Modal Tolak Skala -->
-            <div class="modal fade" id="tolakSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolakSkalaLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="tolakSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolakSkalaLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -575,11 +998,11 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- End Modal Tolak Skala -->
-          </div>
+          <!-- </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 @endsection

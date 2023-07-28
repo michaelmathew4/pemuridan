@@ -251,9 +251,10 @@
                                 <label for="lokasiKL" class="col-sm-3 px-1 form-label">Lokasi</label>
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="lokasiKL" id="lokasiKL">
-                                    <option>Lokasi</option>
-                                    <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
-                                    <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
+                                    <option value="">-Lokasi-</option>
+                                    @foreach ($lokasiWilayahs as $lokasiWilayah)
+                                      <option value="{{$lokasiWilayah->nama_lokasi}}">{{$lokasiWilayah->nama_lokasi}}</option>
+                                    @endforeach
                                   </select>
                                   @error('lokasiKL')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -586,8 +587,9 @@
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editLokasiKL" id="editLokasiKL">
                                         <option value="{{$lokasi->lokasiKL}}">{{$lokasi->lokasiKL}}</option>
-                                        <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
-                                        <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
+                                          @foreach ($lokasiWilayahs as $lokasiWilayah)
+                                            <option value="{{$lokasiWilayah->kode_lokasi}}">{{$lokasiWilayah->nama_lokasi}}</option>
+                                          @endforeach
                                       </select>
                                       @error('editLokasiKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">

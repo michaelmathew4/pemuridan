@@ -16,7 +16,7 @@ class CreatePenyakitsTable extends Migration
         Schema::create('penyakits', function (Blueprint $table) {
             $table->id();
             $table->string('penyakit');
-            $table->string('deskripsiPKT');
+            $table->string('deskripsiPKT')->nullable();
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CreateSpiritGiftsTable extends Migration
         Schema::create('spirit_gifts', function (Blueprint $table) {
             $table->id();
             $table->string('gifts');
-            $table->string('deskripsiGFT');
+            $table->string('deskripsiGFT')->nullable();
             $table->timestamps();
         });
     }

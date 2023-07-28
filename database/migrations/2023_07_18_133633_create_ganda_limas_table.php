@@ -16,7 +16,7 @@ class CreateGandaLimasTable extends Migration
         Schema::create('ganda_limas', function (Blueprint $table) {
             $table->id();
             $table->string('ganda_lima');
-            $table->string('deskripsiGL');
+            $table->string('deskripsiGL')->nullable();
             $table->timestamps();
         });
     }

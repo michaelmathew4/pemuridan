@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatusPekerjaansTable extends Migration
+class CreateWilayahsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateStatusPekerjaansTable extends Migration
      */
     public function up()
     {
-        Schema::create('status_pekerjaans', function (Blueprint $table) {
+        Schema::create('wilayahs', function (Blueprint $table) {
             $table->id();
-            $table->string('status_pekerjaanSPJ');
-            $table->string('deskripsiSPJ')->nullable();
+            $table->string('kode_wilayah', 20);
+            $table->string('nama_wilayah', 50);
+            $table->string('provinsi_wilayah', 50);
+            $table->string('negara_wilayah', 50);
+            $table->string('peta')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateStatusPekerjaansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_pekerjaans');
+        Schema::dropIfExists('wilayahs');
     }
 }

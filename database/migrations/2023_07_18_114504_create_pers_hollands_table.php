@@ -16,7 +16,7 @@ class CreatePersHollandsTable extends Migration
       Schema::create('pers_hollands', function (Blueprint $table) {
           $table->id();
           $table->string('holland');
-          $table->string('deskripsiHLD');
+          $table->string('deskripsiHLD')->nullable();
           $table->timestamps();
       });
   }
