@@ -28,16 +28,24 @@ class PesertaController extends Controller
             'catatan' => Catatan::select('catatan')
                 ->whereColumn('id_peserta', 'pesertas.id_peserta')
                 ->orderBy('created_at', 'desc')
-                ->limit(1)])->get();
+                ->limit(1)
+            ])->get();
 
     $peserts = Peserta::all();
     foreach ($peserts as $pesert) {
       $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
+      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
+      // foreach ($skalas as $skala) {
+        // $dataSkalas = $getDataSkala->tgl_kontak;
+      // dd($skala);
+      // }
     }
     $no = 1;
+    $noSkalas = 1;
+    $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('admin.data-peserta', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans']));
+    return view('admin.data-peserta', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
   }
 
   /**

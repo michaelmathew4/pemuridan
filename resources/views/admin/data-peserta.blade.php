@@ -433,7 +433,7 @@
               <tbody>
                 @forelse ($pesertas as $peserta)
                   <tr>
-                    <th scope="row">{{$no++}}</th>
+                    <th scope="row">{{$no++}}.</th>
                     <td>
                       <a href="#lihatData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
                         {{$peserta->nama_peserta}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
@@ -521,6 +521,7 @@
                             </div>
                             <div class="row p-2">
                               <div class="col-4">Lokasi</div>
+                              <div class="col-8">{{$peserta->lokasi_peserta}}</div>
                             </div>
                           </div>
                         </div>
@@ -533,7 +534,7 @@
                   <!-- End Modal Lihat Data -->
                   <!-- Modal Ubah Data -->
                   <div class="modal fade" id="ubahData{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$peserta->id_peserta}}Label" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="ubahData{{$peserta->id_peserta}}Label">
@@ -553,7 +554,7 @@
                                 <div class="mb-3 row">
                                   <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
                                   <div class="col-sm-9">
-                                    <input type="date" required name="tglKontakPeserta" class="form-control form-control-sm" id="tglKontakPeserta">
+                                    <input type="date" required name="tglKontakPeserta" class="form-control form-control-sm" id="tglKontakPeserta" value="{{$peserta->tgl_kontak}}">
                                     @error('tglKontakPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -567,7 +568,7 @@
                                 <div class="mb-3 row">
                                   <label for="namaKontakPeserta" class="col-sm-3 px-1">Nama Kontak <span class="required-input">(*)</span></label>
                                   <div class="col-sm-9">
-                                    <input type="text" name="namaKontakPeserta" required class="form-control form-control-sm" id="namaKontakPeserta" placeholder="cth: Angelica Gabriel">
+                                    <input type="text" name="namaKontakPeserta" required class="form-control form-control-sm" id="namaKontakPeserta" placeholder="cth: Angelica Gabriel" value="{{$peserta->nama_peserta}}">
                                     @error('namaKontakPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -582,11 +583,11 @@
                                   <label for="jenisKelaminPeserta" class="col-sm-3 px-1">Jenis Kelamin <span class="required-input">(*)</span></label>
                                   <div class="col-sm-9">
                                     <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminPPeserta" value="Pria">
+                                      <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminPPeserta" value="Pria" {{($peserta->jk_peserta == 'Pria') ? 'checked' : ''}}>
                                       <label class="form-check-label" for="jenisKelaminPPeserta">Pria</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminWPeserta" value="Wanita">
+                                      <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminWPeserta" value="Wanita" {{($peserta->jk_peserta == 'Wanita') ? 'checked' : ''}}>
                                       <label class="form-check-label" for="jenisKelaminWPeserta">Wanita</label>
                                     </div>
                                   </div>
@@ -595,7 +596,7 @@
                                   <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span></label>
                                   <div class="col-sm-9">
                                     <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
-                                      <option value="">-Skala-</option>
+                                      <option value="{{$peserta->skala}}">{{$peserta->skala}}</option>
                                       <option value="-3">Skala -3</option>
                                       <option value="-2">Skala -2</option>
                                       <option value="-1">Skala -1</option>
@@ -627,7 +628,7 @@
                                 <div class="mb-3 row">
                                   <label for="catatanPeserta" class="col-sm-3 px-1">Catatan</label>
                                   <div class="col-sm-9">
-                                    <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
+                                    <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta">{{$peserta->catatan}}</textarea>
                                     @error('catatanPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -641,7 +642,7 @@
                                 <div class="mb-3 row">
                                   <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP</label>
                                   <div class="col-sm-9">
-                                    <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999">
+                                    <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999" value="{{$peserta->no_hp_peserta}}">
                                     @error('noHpPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -655,7 +656,7 @@
                                 <div class="mb-3 row">
                                   <label for="alamatPeserta" class="col-sm-3 px-1">Alamat</label>
                                   <div class="col-sm-9">
-                                    <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
+                                    <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta">{{$peserta->alamat_peserta}}</textarea>
                                     @error('alamatPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -669,7 +670,7 @@
                                 <div class="mb-3 row">
                                   <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
                                   <div class="col-sm-5">
-                                    <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung">
+                                    <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung" value="{{$peserta->tempat_lahir_peserta}}">
                                     @error('tempatLahirPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -683,7 +684,7 @@
                                     <p>/</p>
                                   </div>
                                   <div class="col-sm-3">
-                                    <input type="date" name="tanggalLahirPeserta" class="form-control form-control-sm" id="tanggalLahirPeserta">
+                                    <input type="date" name="tanggalLahirPeserta" class="form-control form-control-sm" id="tanggalLahirPeserta" value="{{$peserta->tgl_lahir_peserta}}">
                                     @error('tanggalLahirPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -698,7 +699,7 @@
                                   <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
                                   <div class="col-sm-9">
                                     <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
-                                      <option value="">-Pekerjaan-</option>
+                                      <option value="{{$peserta->pekerjaan_peserta}}">{{$peserta->pekerjaan_peserta}}</option>
                                       <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
                                       <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
                                       <option value="Pegawai Swasta">Pegawai Swasta</option>
@@ -721,7 +722,7 @@
                                 <div class="mb-3 row">
                                   <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku</label>
                                   <div class="col-sm-9">
-                                    <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda">
+                                    <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda" value="{{$peserta->suku_peserta}}">
                                     @error('sukuPeserta')
                                       <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                         <p class="" style="font-size: 10pt;">
@@ -736,7 +737,7 @@
                                   <label for="statusPeserta" class="col-sm-3 px-1">Status</label>
                                   <div class="col-sm-9">
                                     <div class="form-check form-switch">
-                                      <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" value="Aktif">
+                                      <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" {{($peserta->status_peserta == 'Aktif') ? 'checked' : ''}}>
                                       <label class="form-check-label" for="aktif">Aktif</label>
                                     </div>
                                     @error('statusPeserta')
@@ -753,7 +754,7 @@
                                   <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
                                   <div class="col-sm-9">
                                     <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
-                                      <option value="">-Lokasi Kontak-</option>
+                                      <option value="{{$peserta->lokasi_peserta}}">{{$peserta->lokasi_peserta}}</option>
                                       @foreach ($lokasis as $lokasi)
                                         <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
                                       @endforeach
@@ -831,27 +832,32 @@
                           @csrf
                           <div class="modal-body">
                             <div class="row">
-                              <div class="col-4">Tanggal Kontak</div>
-                              <div class="col-4">Skala</div>
-                              <div class="col-4">Keterangan</div>
+                              <div class="col-1">No.</div>
+                              <div class="col-3">Tanggal Kontak</div>
+                              <div class="col-2">Skala</div>
+                              <div class="col-3">Status</div>
+                              <div class="col-3">Keterangan</div>
                             </div>
                             <hr>
                             @forelse ($skalas as $skala)
                               <div class="row">
-                                <div class="col-4">{{$skala->tgl_kontak}}</div>
-                                <div class="col-4">{{$skala->skala}}</div>
-                                <div class="col-4">{{$skala->keterangan}}</div>
+                                <div class="col-1">{{$noSkalas++}}.</div>
+                                <div class="col-3">{{$skala->tgl_kontak}}</div>
+                                <div class="col-2">{{$skala->skala}}</div>
+                                <div class="col-3">{{$skala->status}}</div>
+                                <div class="col-3">{{$skala->keterangan}}</div>
                               </div>
                               <hr class="text-muted">
                             @empty
                             @endforelse
                             <div class="row">
-                              <div class="col-4">
+                              <div class="col-1"></div>
+                              <div class="col-3">
                                 <input type="date" class="form-control form-control-sm" name="tambahTgl_kontak">
-                                <input type="text" name="inputTambah" id="" value="inputSkala">
-                                <input type="text" name="id_pesertaSkala" id="" value="{{$peserta->id_peserta}}">
+                                <input type="text" name="inputTambah" id="" value="inputSkala" hidden>
+                                <input type="text" name="id_pesertaSkala" id="" value="{{$peserta->id_peserta}}" hidden>
                               </div>
-                              <div class="col-4">
+                              <div class="col-2">
                                 <select class="form-select form-select-sm" name="tambahSkalaPeserta" id="tambahSkalaPeserta" aria-label=".form-select-sm tambahSkalaPeserta">
                                   <option value="{{$peserta->skala}}">{{$peserta->skala}}</option>
                                   <option value="-3">Skala -3</option>
@@ -863,7 +869,7 @@
                                   <option value="3">Skala 3</option>
                                 </select>
                               </div>
-                              <div class="col-4">
+                              <div class="col-3">
                                 <textarea class="form-control form-control-sm" name="tambahKeteranganSkalaPeserta" id="" cols="30" rows="3" placeholder="Tambah Keterangan"></textarea>
                               </div>
                             </div>
@@ -892,25 +898,28 @@
                           @csrf
                           <div class="modal-body">
                             <div class="row">
+                              <div class="col-1">No.</div>
                               <div class="col-4">Tanggal Kontak</div>
-                              <div class="col-8">Catatan</div>
+                              <div class="col-7">Catatan</div>
                             </div>
                             <hr>
                             @forelse ($catatans as $catatan)
                               <div class="row">
+                                <div class="col-1">{{$noCatatans}}.</div>
                                 <div class="col-4">{{$catatan->tgl_kontak}}</div>
-                                <div class="col-4">{{$catatan->catatan}}</div>
+                                <div class="col-7">{{$catatan->catatan}}</div>
                               </div>
                               <hr class="text-muted">
                             @empty
                             @endforelse
                             <div class="row">
+                              <div class="col-1"></div>
                               <div class="col-4">
                                 <input type="date" class="form-control form-control-sm" name="tambahTgl_kontakCatatan">
-                                <input type="text" name="inputTambah" id="" value="inputCatatan">
-                                <input type="text" name="id_pesertaCatatan" id="" value="{{$peserta->id_peserta}}">
+                                <input type="text" name="inputTambah" id="" value="inputCatatan" hidden>
+                                <input type="text" name="id_pesertaCatatan" id="" value="{{$peserta->id_peserta}}" hidden>
                               </div>
-                              <div class="col-4">
+                              <div class="col-7">
                                 <textarea class="form-control form-control-sm" name="tambahCatatanPeserta" id="" cols="30" rows="3" placeholder="Tambah Catatan"></textarea>
                               </div>
                             </div>
