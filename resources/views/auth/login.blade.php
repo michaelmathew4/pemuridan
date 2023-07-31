@@ -25,9 +25,13 @@
   <link href="{{asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <!-- Template Main CSS File -->
   <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+  <style>
+    
+  </style>
 
 </head>
 
@@ -48,23 +52,46 @@
 
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Masuk</h5>
-                    <p class="text-center small">Gunakan ID & Kata Sandi Akun Anda.</p>
+                    <p class="text-center small">Gunakan ID atau Alamat Surel & Kata Sandi Akun Anda.</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form class="row g-3 needs-validation" novalidate action="{{ route('loginRequest') }}" method="post">
+                    @csrf
                     <div class="col-12">
-                      <label for="idLogin" class="form-label">ID</label>
+                      <label for="idLogin" class="form-label">ID atau Alamat Surel</label>
                       <div class="has-validation">
-                        <input type="text" name="id" class="form-control" id="idLogin" required>
-                        <div class="invalid-feedback">Masukkan ID Anda dengan benar!</div>
+                        <input type="text" name="idOrEmail" class="form-control {{ $errors->has('idOrEmail') ? ' is-invalid' : '' }}" id="idLogin" value="{{ old('idOrEmail') }}" required>
+                        @if ($errors->has('idOrEmail'))
+                            <!-- <span class="invalid-feedback">
+                                <strong>{{ $errors->first('idOrEmail') }}</strong>
+                            </span> -->
+                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2 mb-0" role="alert">
+                            <p class="" style="font-size: 10pt; p-1">
+                              <i class="bi bi-exclamation-triangle-fill"></i>
+                              {{ $errors->first('idOrEmail') }}
+                            </p>
+                          </div>
+                        @endif
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="kataSandi" class="form-label">Kata Sandi</label>
-                      <input type="password" name="kataSandi" class="form-control" id="kataSandi" required>
-                      <div class="invalid-feedback">Kata Sandi salah!</div>
+                        <label for="kataSandi" class="form-label">Kata Sandi</label>
+                      <div class="input-group">
+                        <input type="password" name="password" class="form-control border border-end-0 {{ $errors->has('password') ? ' is-invalid' : '' }}" id="kataSandi" value="{{ old('password') }}" required>
+                        <button class="btn btn-light border border-start-0 bg-transparent" type="button" id="togglePassword" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Kata Sandi"><i class="bi bi-eye-slash" id="togglePasswordOnOff"></i></button>
+                      </div>
+                      @if ($errors->has('password'))
+                            <!-- <span class="invalid-feedback">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span> -->
+                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2 mb-0" role="alert">
+                            <p class="" style="font-size: 10pt; p-1">
+                              <i class="bi bi-exclamation-triangle-fill"></i>
+                              {{ $errors->first('password') }}
+                            </p>
+                          </div>
+                        @endif
                     </div>
 
                     <div class="col-12">
@@ -76,10 +103,6 @@
                   </form>
 
                 </div>
-              </div>
-
-              <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
               </div>
 
             </div>
@@ -94,6 +117,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
   <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('assets/vendor/chart.js/chart.umd.js')}}"></script>
@@ -102,10 +126,26 @@
   <script src="{{asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
   <script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>
 
 </body>
+<script>
+        const togglePassword = document
+            .querySelector('#togglePassword');
+        const password = document.querySelector('#kataSandi');
+        togglePassword.addEventListener('click', () => {
+            // Toggle the type attribute using
+            // getAttribure() method
+            const type = password
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+            password.setAttribute('type', type);
+            // Toggle the eye and bi-eye icon
+            document.getElementById("togglePasswordOnOff").classList.toggle('bi-eye');
+        });
+    </script>
 
 </html>

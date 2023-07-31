@@ -217,20 +217,14 @@
                                       </p>
                                     </div>
                                   @enderror
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="nama_penggunaKL" class="col-sm-3 px-1 form-label">Nama Pengguna</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="nama_penggunaKL" class="form-control form-control-sm" id="nama_penggunaKL" placeholder="Nama Pengguna">
-                                  @error('nama_penggunaKL')
+                                  @if ($message = Session::get('error'))
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                       <p class="" style="font-size: 10pt;">
                                         <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                         {{ $message }}
                                       </p>
                                     </div>
-                                  @enderror
+                                  @endif
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -257,6 +251,24 @@
                                     @endforeach
                                   </select>
                                   @error('lokasiKL')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="institusiKL" class="col-sm-3 px-1 form-label">Naungan</label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiKL" id="institusiKL">
+                                    <option value="">-Naungan-</option>
+                                    <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                    <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
+                                  </select>
+                                  @error('institusiKL')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                       <p class="" style="font-size: 10pt;">
                                         <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -308,8 +320,6 @@
                   <th scope="col">No HP</th>
                   <th scope="col">Alamat Surel</th>
                   <th scope="col">Lokasi</th>
-                  <th scope="col">Nama Pengguna</th>
-                  <th scope="col">Kata Sandi</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
@@ -327,8 +337,6 @@
                     <td>{{$lokasi->nohpKL}}</td>
                     <td>{{$lokasi->alamat_surelKL}}</td>
                     <td>{{$lokasi->lokasiKL}}</td>
-                    <td>{{$lokasi->nama_penggunaKL}}</td>
-                    <td>{{$lokasi->kata_sandiKL}}</td>
                     <td>
                       <div class="icon-action">
                         <a href="#ubahData{{$lokasi->id}}" data-bs-toggle="modal" class="text-primary">

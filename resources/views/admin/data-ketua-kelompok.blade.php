@@ -468,6 +468,14 @@
                                 <label for="emailKetuaKelompok" class="col-sm-3 px-1">Email</label>
                                 <div class="col-sm-9">
                                   <input type="email" name="emailKetuaKelompoks" class="form-control form-control-sm" id="emailKetuaKelompok" placeholder="cth: email@gmail.com">
+                                  @if ($message = Session::get('error'))
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @endif
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -1502,6 +1510,33 @@
                                 <label for="konfirmasi_kata_sandiKetuaKelompok" class="col-sm-3 px-1">Konfirmasi Kata Sandi</label>
                                 <div class="col-sm-9">
                                   <input class="form-control form-control-sm" type="password" name="konfirmasi_kata_sandiKetuaKelompoks" id="konfirmasi_kata_sandiKetuaKelompok" rows="3" placeholder="********">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group-input">
+                          <div class="form-header-group mb-3">
+                            <h6>Naungan</h6>
+                          </div>
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="institusiKetuaKelompoks" class="col-sm-3 px-1 form-label">Naungan</label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiKetuaKelompoks" id="institusiKetuaKelompoks">
+                                    <option value="">-Naungan-</option>
+                                    <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                    <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
+                                  </select>
+                                  @error('institusiKetuaKelompoks')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
                             </div>

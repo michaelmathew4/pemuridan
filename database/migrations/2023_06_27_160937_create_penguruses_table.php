@@ -20,9 +20,8 @@ class CreatePengurusesTable extends Migration
             $table->text('alamatPRS');
             $table->string('nohpPRS', 15);
             $table->string('alamat_surelPRS');
-            $table->string('nama_penggunaPRS');
             $table->string('kata_sandiPRS');
-            $table->string('kepengurusanPRS');
+            $table->string('institusiPRS');
             $table->string('fotoPRS')->nullable();
             $table->timestamps();
         });

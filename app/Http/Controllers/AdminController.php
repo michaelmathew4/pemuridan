@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Image;
 use  File;
 use App\Models\Admin;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,8 +47,7 @@ class AdminController extends Controller
       'jkADM'   => 'required',
       'alamatADM'   => 'required',
       'nohpADM'   => 'required|numeric',
-      'alamat_surelADM'   => 'required|email|regex:/^.+@.+$/i',
-      'nama_penggunaADM'   => 'required',
+      'alamat_surelADM'   => 'required|email|regex:/^.+@.+$/i|unique:users,email',
       'kata_sandiADM'   => 'required',
       'tingkatADM'   => 'required',
       'fotoADM'     => 'image|mimes:png,jpg,jpeg'
@@ -58,9 +59,9 @@ class AdminController extends Controller
       'nohpADM.required' => 'No Hp tidak boleh kosong.',
       'nohpADM.numeric' => 'No Hp harus berupa angka.',
       'alamat_surelADM.required' => 'Alamat Surel tidak boleh kosong.',
-      'alamat_surelADM.required' => 'Alamat Surel harus berupa email.',
-      'alamat_surelADM.required' => 'Alamat Surel harus menggunakan @.',
-      'nama_penggunaADM.required' => 'Nama Pengguna tidak boleh kosong.',
+      'alamat_surelADM.email' => 'Alamat Surel harus berupa email.',
+      'alamat_surelADM.regex' => 'Alamat Surel harus menggunakan @.',
+      'alamat_surelADM.unique' => 'Alamat Surel sudah ada.',
       'kata_sandiADM.required' => 'Kata Sandi tidak boleh kosong.',
       'tingkatADM.required' => 'Tingkat tidak boleh kosong.',
       'fotoADM.image' => 'Berkas harus berupa Gambar.'
@@ -80,14 +81,33 @@ class AdminController extends Controller
     $upload->alamatADM = $request->alamatADM;
     $upload->nohpADM = $request->nohpADM;
     $upload->alamat_surelADM = $request->alamat_surelADM;
-    $upload->nama_penggunaADM = $request->nama_penggunaADM;
     $upload->kata_sandiADM = $request->kata_sandiADM;
     $upload->tingkatADM = $request->tingkatADM;
     $upload->fotoADM = $fotoADMUpload;
     $upload->save();
 
     if($upload){
-      return redirect()->route('data-admin.index')->with(['success' => 'Admin Berhasil Disimpan!']);
+      if ($request->tingkatADM == 'Admin Tingkat 1') {
+        $role = 'SuperAdmin';
+        $institusi = 'SuperAdmin';
+      } else {
+        $role = 'Admin';
+        $institusi = 'Admin';
+      }
+      $addUser = new User;
+      $addUser->name = $request->namaADM;
+      $addUser->email = $request->alamat_surelADM;
+      $addUser->password = bcrypt($request->kata_sandiADM);
+      $addUser->role = $role;
+      $addUser->institusi = $institusi;
+      $addUser->remember_token = Str::random(60);
+      $addUser->save();
+      
+      if ($addUser) {
+        return redirect()->route('data-admin.index')->with(['success' => 'Admin Berhasil Disimpan!']);
+      } else{
+        return redirect()->route('data-admin.index')->with(['error' => 'Admin Gagal Disimpan!']);
+      }
     } else{
       return redirect()->route('data-admin.index')->with(['error' => 'Admin Gagal Disimpan!']);
     }
@@ -133,7 +153,6 @@ class AdminController extends Controller
           'alamatADM'   => $request->editAlamatADM,
           'nohpADM'   => $request->editNohpADM,
           'alamat_surelADM'   => $request->editAlamat_surelADM,
-          'nama_penggunaADM'   => $request->editNama_penggunaADM,
           'kata_sandiADM'   => $request->editKata_sandiADM,
           'tingkatADM'   => $request->editTingkatADM,
           'fotoADM'     => ''
@@ -145,7 +164,6 @@ class AdminController extends Controller
           'alamatADM'   => $request->editAlamatADM,
           'nohpADM'   => $request->editNohpADM,
           'alamat_surelADM'   => $request->editAlamat_surelADM,
-          'nama_penggunaADM'   => $request->editNama_penggunaADM,
           'kata_sandiADM'   => $request->editKata_sandiADM,
           'tingkatADM'   => $request->editTingkatADM
         ]);
@@ -168,7 +186,6 @@ class AdminController extends Controller
           'alamatADM'   => $request->editAlamatADM,
           'nohpADM'   => $request->editNohpADM,
           'alamat_surelADM'   => $request->editAlamat_surelADM,
-          'nama_penggunaADM'   => $request->editNama_penggunaADM,
           'kata_sandiADM'   => $request->editKata_sandiADM,
           'tingkatADM'   => $request->editTingkatADM,
           'fotoADM'     => $filename->getClientOriginalName()
@@ -199,6 +216,8 @@ class AdminController extends Controller
         File::delete($destination);
       }
     }
+    $getUser = User::where('email', $deleteDataAdmin->alamat_surelADM);
+    $getUser->delete();
     $deleteDataAdmin->delete();
 
     if($deleteDataAdmin){

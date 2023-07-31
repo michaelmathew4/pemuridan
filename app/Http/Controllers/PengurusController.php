@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Image;
 use  File;
 use App\Models\Pengurus;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,8 +47,7 @@ class PengurusController extends Controller
       'jkPRS'   => 'required',
       'alamatPRS'   => 'required',
       'nohpPRS'   => 'required|numeric',
-      'alamat_surelPRS'   => 'required|email|regex:/^.+@.+$/i',
-      'nama_penggunaPRS'   => 'required',
+      'alamat_surelPRS'   => 'required|email|regex:/^.+@.+$/i|unique:users,email',
       'kata_sandiPRS'   => 'required',
       'kepengurusanPRS'   => 'required',
       'fotoPRS'     => 'image|mimes:png,jpg,jpeg'
@@ -58,11 +59,11 @@ class PengurusController extends Controller
       'nohpPRS.required' => 'No Hp tidak boleh kosong.',
       'nohpPRS.numeric' => 'No Hp harus berupa angka.',
       'alamat_surelPRS.required' => 'Alamat Surel tidak boleh kosong.',
-      'alamat_surelPRS.required' => 'Alamat Surel harus berupa email.',
-      'alamat_surelPRS.required' => 'Alamat Surel harus menggunakan @.',
-      'nama_penggunaPRS.required' => 'Nama Pengguna tidak boleh kosong.',
+      'alamat_surelPRS.email' => 'Alamat Surel harus berupa email.',
+      'alamat_surelPRS.regex' => 'Alamat Surel harus menggunakan @.',
+      'alamat_surelPRS.unique' => 'Alamat Surel sudah ada.',
       'kata_sandiPRS.required' => 'Kata Sandi tidak boleh kosong.',
-      'kepengurusanPRS.required' => 'Kepengurusan tidak boleh kosong.',
+      'kepengurusanPRS.required' => 'Naungan tidak boleh kosong.',
       'fotoPRS.image' => 'Berkas harus berupa Gambar.'
     ]);
 
@@ -80,14 +81,31 @@ class PengurusController extends Controller
     $upload->alamatPRS = $request->alamatPRS;
     $upload->nohpPRS = $request->nohpPRS;
     $upload->alamat_surelPRS = $request->alamat_surelPRS;
-    $upload->nama_penggunaPRS = $request->nama_penggunaPRS;
     $upload->kata_sandiPRS = $request->kata_sandiPRS;
-    $upload->kepengurusanPRS = $request->kepengurusanPRS;
+    $upload->institusiPRS = $request->kepengurusanPRS;
     $upload->fotoPRS = $fotoPRSUpload;
     $upload->save();
 
     if($upload){
-      return redirect()->route('data-pengurus.index')->with(['success' => 'Pengurus Berhasil Disimpan!']);
+      if ($request->kepengurusanPRS == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
+        $institusi = 'YMP';
+      } else {
+        $institusi = 'GKP';
+      }
+      $addUser = new User;
+      $addUser->name = $request->namaPRS;
+      $addUser->email = $request->alamat_surelPRS;
+      $addUser->password = bcrypt($request->kata_sandiPRS);
+      $addUser->role = 'Pengurus';
+      $addUser->institusi = $institusi;
+      $addUser->remember_token = Str::random(60);
+      $addUser->save();
+
+      if ($addUser) {
+        return redirect()->route('data-pengurus.index')->with(['success' => 'Pengurus Berhasil Disimpan!']);
+      } else{
+        return redirect()->route('data-pengurus.index')->with(['error' => 'Pengurus Gagal Disimpan!']);
+      }
     } else{
       return redirect()->route('data-pengurus.index')->with(['error' => 'Pengurus Gagal Disimpan!']);
     }
@@ -133,9 +151,8 @@ class PengurusController extends Controller
           'alamatPRS'   => $request->editAlamatPRS,
           'nohpPRS'   => $request->editNohpPRS,
           'alamat_surelPRS'   => $request->editAlamat_surelPRS,
-          'nama_penggunaPRS'   => $request->editNama_penggunaPRS,
           'kata_sandiPRS'   => $request->editKata_sandiPRS,
-          'kepengurusanPRS'   => $request->editKepengurusanPRS,
+          'institusiPRS'   => $request->editKepengurusanPRS,
           'fotoPRS'     => ''
         ]);
       } else {
@@ -145,9 +162,8 @@ class PengurusController extends Controller
           'alamatPRS'   => $request->editAlamatPRS,
           'nohpPRS'   => $request->editNohpPRS,
           'alamat_surelPRS'   => $request->editAlamat_surelPRS,
-          'nama_penggunaPRS'   => $request->editNama_penggunaPRS,
           'kata_sandiPRS'   => $request->editKata_sandiPRS,
-          'kepengurusanPRS'   => $request->editKepengurusanPRS
+          'institusiPRS'   => $request->editKepengurusanPRS
         ]);
       }
     } else {
@@ -168,9 +184,8 @@ class PengurusController extends Controller
           'alamatPRS'   => $request->editAlamatPRS,
           'nohpPRS'   => $request->editNohpPRS,
           'alamat_surelPRS'   => $request->editAlamat_surelPRS,
-          'nama_penggunaPRS'   => $request->editNama_penggunaPRS,
           'kata_sandiPRS'   => $request->editKata_sandiPRS,
-          'kepengurusanPRS'   => $request->editKepengurusanPRS,
+          'institusiPRS'   => $request->editKepengurusanPRS,
           'fotoPRS'     => $filename->getClientOriginalName()
         ]);
       }
@@ -199,6 +214,8 @@ class PengurusController extends Controller
         File::delete($destination);
       }
     }
+    $getUser = User::where('email', $deleteDataPengurus->alamat_surelPRS);
+    $getUser->delete();
     $deleteDataPengurus->delete();
 
     if($deleteDataPengurus){

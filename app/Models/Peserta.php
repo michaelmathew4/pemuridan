@@ -15,6 +15,7 @@ class Peserta extends Model
      * @var array
      */
     protected $fillable = [
-      'id', 'id_peserta', 'nama_peserta', 'jk_peserta', 'tempat_lahir_peserta', 'tgl_lahir_peserta', 'alamat_peserta', 'no_hp_peserta', 'pekerjaan_peserta', 'suku_peserta', 'status_peserta', 'lokasi_kontak', 'foto_peserta'
+      'id', 'id_peserta', 'nama_peserta', 'jk_peserta', 'tempat_lahir_peserta', 'tgl_lahir_peserta', 'alamat_peserta',
+      'no_hp_peserta', 'pekerjaan_peserta', 'suku_peserta', 'status_peserta', 'lokasi_peserta', 'institusi_peserta', 'foto_peserta'
     ];
 }

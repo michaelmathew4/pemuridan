@@ -145,6 +145,7 @@ class CreateKetuaKelompoksTable extends Migration
             $table->date('tgl_gabung_grupKK')->nullable();
             $table->text('catatan_masuk_grupKK')->nullable();
             $table->string('kata_sandiKK', 50);
+            $table->string('institusiKK', 100);
             $table->timestamps();
         });
     }

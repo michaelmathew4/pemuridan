@@ -15,6 +15,7 @@ class Pengurus extends Model
      * @var array
      */
     protected $fillable = [
-      'namaPRS', 'jkPRS', 'alamatPRS', 'nohpPRS', 'alamat_surelPRS', 'nama_penggunaPRS', 'kata_sandiPRS', 'kepengurusanPRS', 'fotoPRS'
+      'namaPRS', 'jkPRS', 'alamatPRS', 'nohpPRS', 'alamat_surelPRS', 'kata_sandiPRS', 
+      'institusiPRS', 'fotoPRS'
     ];
 }

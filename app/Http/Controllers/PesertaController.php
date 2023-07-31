@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Peserta;
 use App\Models\Skala;
 use App\Models\Lokasi;
+use App\Models\User;
+use Illuminate\Support\Str;
 use App\Models\Catatan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -19,18 +21,23 @@ class PesertaController extends Controller
    */
   public function index()
   {
-     $lastPost = Skala::select('skala')
-                  ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                  ->latest()
-                  ->limit(1)
-                  ->getQuery();
+    $pesertas = Peserta::addSelect(['skala' => Skala::select('skala')
+                ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                ->orderBy('created_at', 'desc')
+                ->limit(1),
+            'catatan' => Catatan::select('catatan')
+                ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                ->orderBy('created_at', 'desc')
+                ->limit(1)])->get();
 
-    $pesertas = Peserta::select('pesertas.*')
-                ->selectSub($lastPost, 'skala')
-                ->get();
+    $peserts = Peserta::all();
+    foreach ($peserts as $pesert) {
+      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
+      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
+    }
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('admin.data-peserta', compact(['pesertas', 'no', 'lokasis']));
+    return view('admin.data-peserta', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans']));
   }
 
   /**
@@ -74,6 +81,7 @@ class PesertaController extends Controller
         'pekerjaanPeserta'   => 'required',
         'sukuPeserta'   => 'required',
         'lokasiPeserta'   => 'required',
+        'institusiPeserta'   => 'required',
         'fotoPRS'     => 'image|mimes:png,jpg,jpeg'
       ],
       [
@@ -89,6 +97,7 @@ class PesertaController extends Controller
         'pekerjaanPeserta.required' => 'Pekerjaan tidak boleh kosong.',
         'sukuPeserta.required' => 'Suku tidak boleh kosong.',
         'lokasiPeserta.required' => 'Lokasi tidak boleh kosong.',
+        'institusiPeserta.required' => 'Naungan tidak boleh kosong.',
         'fotoPeserta.image' => 'Berkas harus berupa Gambar.'
       ]);
 
@@ -112,6 +121,7 @@ class PesertaController extends Controller
       $upload->suku_peserta = $request->sukuPeserta;
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $request->lokasiPeserta;
+      $upload->institusi_peserta = $request->institusiPeserta;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -152,9 +162,14 @@ class PesertaController extends Controller
       $newSkala->tgl_kontak = $request->tambahTgl_kontak;
       $newSkala->status = 'Aktif';
       $newSkala->save();
-      dd($request->inputTambah);
+      // dd($request->inputTambah);
 
       if ($newSkala) {
+        $newCatatans = new Catatan;
+        $newCatatans->catatan = $request->tambahKeteranganSkalaPeserta;
+        $newCatatans->id_peserta = $request->id_pesertaSkala;
+        $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
+        $newCatatans->save();
         return redirect()->route('data-peserta.index')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
         return redirect()->route('data-peserta.index')->with(['error' => 'Skala Gagal Disimpan!']);

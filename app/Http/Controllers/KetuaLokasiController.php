@@ -6,6 +6,8 @@ use Image;
 use  File;
 use App\Models\Ketua_lokasi;
 use App\Models\Lokasi;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,10 +49,10 @@ class KetuaLokasiController extends Controller
       'jkKL'   => 'required',
       'alamatKL'   => 'required',
       'nohpKL'   => 'required|numeric',
-      'alamat_surelKL'   => 'required|email|regex:/^.+@.+$/i',
-      'nama_penggunaKL'   => 'required',
+      'alamat_surelKL'   => 'required|email|regex:/^.+@.+$/i|unique:users,email',
       'kata_sandiKL'   => 'required',
       'lokasiKL'   => 'required',
+      'institusiKL'   => 'required',
       'fotoKL'     => 'image|mimes:png,jpg,jpeg'
     ],
     [
@@ -60,11 +62,12 @@ class KetuaLokasiController extends Controller
       'nohpKL.required' => 'No Hp tidak boleh kosong.',
       'nohpKL.numeric' => 'No Hp harus berupa angka.',
       'alamat_surelKL.required' => 'Alamat Surel tidak boleh kosong.',
-      'alamat_surelKL.required' => 'Alamat Surel harus berupa email.',
-      'alamat_surelKL.required' => 'Alamat Surel harus menggunakan @.',
-      'nama_penggunaKL.required' => 'Nama Pengguna tidak boleh kosong.',
+      'alamat_surelKL.email' => 'Alamat Surel harus berupa email.',
+      'alamat_surelKL.regex' => 'Alamat Surel harus menggunakan @.',
+      'alamat_surelKL.unique' => 'Alamat Surel sudah ada.',
       'kata_sandiKL.required' => 'Kata Sandi tidak boleh kosong.',
       'lokasiKL.required' => 'Kepengurusan tidak boleh kosong.',
+      'institusiKL.required' => 'Naungan tidak boleh kosong.',
       'fotoKL.image' => 'Berkas harus berupa Gambar.'
     ]);
 
@@ -82,14 +85,32 @@ class KetuaLokasiController extends Controller
     $upload->alamatKL = $request->alamatKL;
     $upload->nohpKL = $request->nohpKL;
     $upload->alamat_surelKL = $request->alamat_surelKL;
-    $upload->nama_penggunaKL = $request->nama_penggunaKL;
     $upload->kata_sandiKL = $request->kata_sandiKL;
     $upload->lokasiKL = $request->lokasiKL;
+    $upload->institusiKL = $request->institusiKL;
     $upload->fotoKL = $fotoKLUpload;
     $upload->save();
 
     if($upload){
-      return redirect()->route('data-ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
+      if ($request->institusiKL == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
+        $institusi = 'YMP';
+      } else {
+        $institusi = 'GKP';
+      }
+      $addUser = new User;
+      $addUser->name = $request->namaKL;
+      $addUser->email = $request->alamat_surelKL;
+      $addUser->password = bcrypt($request->kata_sandiKL);
+      $addUser->role = 'Lokasi';
+      $addUser->institusi = $institusi;
+      $addUser->remember_token = Str::random(60);
+      $addUser->save();
+      
+      if ($addUser) {
+        return redirect()->route('data-ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
+      } else{
+        return redirect()->route('data-ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
+      }
     } else{
       return redirect()->route('data-ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
     }
@@ -135,9 +156,9 @@ class KetuaLokasiController extends Controller
           'alamatKL'   => $request->editAlamatKL,
           'nohpKL'   => $request->editNohpKL,
           'alamat_surelKL'   => $request->editAlamat_surelKL,
-          'nama_penggunaKL'   => $request->editNama_penggunaKL,
           'kata_sandiKL'   => $request->editKata_sandiKL,
           'lokasiKL'   => $request->editLokasiKL,
+          'institusiKL'   => $request->editInstitusiKL,
           'fotoKL'     => ''
         ]);
       } else {
@@ -147,9 +168,9 @@ class KetuaLokasiController extends Controller
           'alamatKL'   => $request->editAlamatKL,
           'nohpKL'   => $request->editNohpKL,
           'alamat_surelKL'   => $request->editAlamat_surelKL,
-          'nama_penggunaKL'   => $request->editNama_penggunaKL,
           'kata_sandiKL'   => $request->editKata_sandiKL,
-          'lokasiKL'   => $request->editLokasiKL
+          'lokasiKL'   => $request->editLokasiKL,
+          'institusiKL'   => $request->editInstitusiiKL
         ]);
       }
     } else {
@@ -170,9 +191,9 @@ class KetuaLokasiController extends Controller
           'alamatKL'   => $request->editAlamatKL,
           'nohpKL'   => $request->editNohpKL,
           'alamat_surelKL'   => $request->editAlamat_surelKL,
-          'nama_penggunaKL'   => $request->editNama_penggunaKL,
           'kata_sandiKL'   => $request->editKata_sandiKL,
           'lokasiKL'   => $request->editLokasiKL,
+          'institusiKL'   => $request->editInstitusiKL,
           'fotoKL'     => $filename->getClientOriginalName()
         ]);
       }
@@ -201,6 +222,8 @@ class KetuaLokasiController extends Controller
         File::delete($destination);
       }
     }
+    $getUser = User::where('email', $deleteDataKetuaLokasi->alamat_surelKL);
+    $getUser->delete();
     $deleteDataKetuaLokasi->delete();
 
     if($deleteDataKetuaLokasi){

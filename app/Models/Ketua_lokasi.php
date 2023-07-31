@@ -15,6 +15,6 @@ class Ketua_lokasi extends Model
      * @var array
      */
     protected $fillable = [
-      'namaKL', 'jkKL', 'alamatKL', 'nohpKL', 'alamat_surelKL', 'nama_penggunaKL', 'kata_sandiKL', 'lokasiKL', 'fotoKL'
+      'namaKL', 'jkKL', 'alamatKL', 'nohpKL', 'alamat_surelKL', 'kata_sandiKL', 'lokasiKL', 'institusiKL', 'fotoKL'
     ];
 }

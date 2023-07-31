@@ -20,9 +20,9 @@ class CreateKetuaLokasisTable extends Migration
             $table->text('alamatKL');
             $table->string('nohpKL', 15);
             $table->string('alamat_surelKL');
-            $table->string('nama_penggunaKL');
             $table->string('kata_sandiKL');
             $table->string('lokasiKL');
+            $table->string('institusiKL');
             $table->string('fotoKL')->nullable();
             $table->timestamps();
         });

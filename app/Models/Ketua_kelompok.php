@@ -28,6 +28,6 @@ class Ketua_kelompok extends Model
       'menikah_tempatKK', 'menikah_fileKK', 'menikah_ketKK', 'bap_sudahKK', 'bap_tanggalKK','bap_tempatKK', 'bap_fileKK', 'bap_ketKK', 'md_sudahKK', 'md_tanggalKK',
       'md_tempatKK', 'md_fileKK', 'md_ketKK', 'pa_sudahKK', 'pa_tanggalKK', 'pa_tempatKK', 'pa_fileKK', 'pa_ketKK', 'ee_sudahKK', 'ee_tanggalKK', 'ee_tempatKK', 'ee_fileKK',
       'ee_ketKK', 'bid_sudahKK', 'bid_tanggalKK', 'bid_tempatKK', 'bid_fileKK', 'bid_ketKK', 'pdt_sudahKK', 'pdt_tanggalKK', 'pdt_tempatKK', 'pdt_fileKK', 'pdt_ketKK',
-      'nama_grupKK', 'jbt_grupKK', 'tgl_gabung_grupKK', 'catatan_masuk_grupKK', 'kata_sandiKK'
+      'nama_grupKK', 'jbt_grupKK', 'tgl_gabung_grupKK', 'catatan_masuk_grupKK', 'kata_sandiKK', 'institusiKK'
     ];
 }

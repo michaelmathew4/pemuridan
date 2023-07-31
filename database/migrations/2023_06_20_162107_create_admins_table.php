@@ -20,7 +20,6 @@ class CreateAdminsTable extends Migration
             $table->text('alamatADM');
             $table->string('nohpADM', 15)->nullable();
             $table->string('alamat_surelADM');
-            $table->string('nama_penggunaADM');
             $table->string('kata_sandiADM');
             $table->string('fotoADM')->nullable();
             $table->string('tingkatADM');

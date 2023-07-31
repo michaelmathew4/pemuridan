@@ -25,7 +25,8 @@ class CreatePesertasTable extends Migration
             $table->string('pekerjaan_peserta', 100);
             $table->string('suku_peserta', 50);
             $table->string('status_peserta', 25);
-            $table->string('lokasi_kontak', 50);
+            $table->string('lokasi_peserta', 50);
+            $table->string('institusi_peserta');
             $table->string('foto_peserta')->nullable();
             $table->timestamps();
         });

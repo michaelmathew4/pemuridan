@@ -15,6 +15,6 @@ class Admin extends Model
    * @var array
    */
   protected $fillable = [
-    'namaADM', 'jkADM', 'alamatADM', 'nohpADM', 'alamat_surelADM', 'nama_penggunaADM', 'kata_sandiADM', 'fotoADM', 'tingkatADM'
+    'namaADM', 'jkADM', 'alamatADM', 'nohpADM', 'alamat_surelADM', 'kata_sandiADM', 'fotoADM', 'tingkatADM'
   ];
 }

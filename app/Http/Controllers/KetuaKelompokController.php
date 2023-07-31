@@ -24,6 +24,8 @@ use App\Models\Kc_pilempat;
 use App\Models\Kc_pillima;
 use App\Models\Kc_pilenam;
 use App\Models\Kc_piltujuh;
+use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class KetuaKelompokController extends Controller
@@ -106,6 +108,8 @@ class KetuaKelompokController extends Controller
       'fileUploadEvangelismExplosionKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
       'fileUploadIkatanDinasKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
       'fileUploadPrktkDuaThnKetuaKelompoks'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+      'emailKetuaKelompoks'   => 'unique:users,email',
+      'institusiKetuaKelompoks'   => 'required',
       'kata_sandiKetuaKelompoks'  => 'required'
     ],
     [
@@ -121,6 +125,8 @@ class KetuaKelompokController extends Controller
       'fileUploadEvangelismExplosionKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadIkatanDinasKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadPrktkDuaThnKetuaKelompoks.file' => 'Berkas harus berupa Dokumen.',
+      'emailKetuaKelompoks.unique' => 'Alamat Surel sudah ada.',
+      'institusiKetuaKelompoks.required' => 'Naungan tidak boleh kosong.',
       'kata_sandiKetuaKelompoks.required' => 'Kata Sandi tidak boleh kosong.'
     ]);
 
@@ -334,10 +340,29 @@ class KetuaKelompokController extends Controller
     $storeData->tgl_gabung_grupKK = $request->tglGabungKetuaKelompoks;
     $storeData->catatan_masuk_grupKK = $request->cttnMasukKetuaKelompoks;
     $storeData->kata_sandiKK = $request->kata_sandiKetuaKelompoks;
+    $storeData->institusiKK = $request->institusiKetuaKelompoks;
     $storeData->save();
 
     if($storeData){
-      return redirect()->route('data-ketua-kelompok.index')->with(['success' => 'Ketua Kelompok Berhasil Disimpan!']);
+      if ($request->institusiKetuaKelompoks == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
+        $institusi = 'YMP';
+      } else {
+        $institusi = 'GKP';
+      }
+      $addUser = new User;
+      $addUser->name = $request->namaKetuaKelompoks;
+      $addUser->email = $request->emailKetuaKelompoks;
+      $addUser->password = bcrypt($request->kata_sandiKetuaKelompoks);
+      $addUser->role = 'Kelompok';
+      $addUser->institusi = $institusi;
+      $addUser->remember_token = Str::random(60);
+      $addUser->save();
+      
+      if ($addUser) {
+        return redirect()->route('data-ketua-kelompok.index')->with(['success' => 'Ketua Kelompok Berhasil Disimpan!']);
+      }else{
+        return redirect()->route('data-ketua-kelompok.index')->with(['error' => 'Ketua Kelompok Gagal Disimpan!']);
+      }
     }else{
       return redirect()->route('data-ketua-kelompok.index')->with(['error' => 'Ketua Kelompok Gagal Disimpan!']);
     }
@@ -446,6 +471,8 @@ class KetuaKelompokController extends Controller
         File::delete($destination);
       }
     }
+    $getUser = User::where('email', $deleteDataKetuaKelompok->alamat_surelKK);
+    $getUser->delete();
     $deleteDataKetuaKelompok->delete();
 
     if($deleteDataKetuaKelompok){

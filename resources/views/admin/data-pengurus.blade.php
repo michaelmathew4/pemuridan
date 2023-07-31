@@ -220,20 +220,6 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="nama_penggunaPRS" class="col-sm-3 px-1 form-label">Nama Pengguna</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="nama_penggunaPRS" class="form-control form-control-sm" id="nama_penggunaPRS" placeholder="Nama Pengguna">
-                                  @error('nama_penggunaPRS')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
-                                    </div>
-                                  @enderror
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
                                 <label for="kata_sandiPRS" class="col-sm-3 px-1 form-label">Kata Sandi</label>
                                 <div class="col-sm-9">
                                   <input type="password" name="kata_sandiPRS" class="form-control form-control-sm" id="kata_sandiPRS" placeholder="******">
@@ -248,10 +234,10 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="kepengurusanPRS" class="col-sm-3 px-1 form-label">Tingkat</label>
+                                <label for="kepengurusanPRS" class="col-sm-3 px-1 form-label">Kepengurusan</label>
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="kepengurusanPRS" id="kepengurusanPRS">
-                                    <option>Kepengurusan</option>
+                                    <option value="">-Kepengurusan-</option>
                                     <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
                                     <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                   </select>
@@ -307,8 +293,6 @@
                   <th scope="col">No HP</th>
                   <th scope="col">Alamat Surel</th>
                   <th scope="col">Kepengurusan</th>
-                  <th scope="col">Nama Pengguna</th>
-                  <th scope="col">Kata Sandi</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
@@ -325,9 +309,7 @@
                     <td>{{$pengurus->alamatPRS}}</td>
                     <td>{{$pengurus->nohpPRS}}</td>
                     <td>{{$pengurus->alamat_surelPRS}}</td>
-                    <td>{{$pengurus->kepengurusanPRS}}</td>
-                    <td>{{$pengurus->nama_penggunaPRS}}</td>
-                    <td>{{$pengurus->kata_sandiPRS}}</td>
+                    <td>{{$pengurus->institusiPRS}}</td>
                     <td>
                       <div class="icon-action">
                         <a href="#ubahData{{$pengurus->id}}" data-bs-toggle="modal" class="text-primary">
@@ -417,17 +399,6 @@
                               </div>
                               <div class="row mx-auto p-0 pt-1 border-bottom">
                                 <div class="col-4 pt-2">
-                                  <p class="">Nama Pengguna</p> 
-                                </div>
-                                <div class="col-1 pt-2">
-                                  <p class="text-center">:</p> 
-                                </div>
-                                <div class="col-4 pt-2">
-                                <p class="text-start">{{$pengurus->nama_penggunaPRS}}</p>
-                                </div>
-                              </div>
-                              <div class="row mx-auto p-0 pt-1 border-bottom">
-                                <div class="col-4 pt-2">
                                   <p class="">Kata Sandi</p> 
                                 </div>
                                 <div class="col-1 pt-2">
@@ -445,7 +416,7 @@
                                   <p class="text-center">:</p> 
                                 </div>
                                 <div class="col-4 pt-2">
-                                <p class="text-start">{{$pengurus->kepengurusanPRS}}</p>
+                                <p class="text-start">{{$pengurus->institusiPRS}}</p>
                                 </div>
                               </div>
                             </div>
@@ -551,20 +522,14 @@
                                           </p>
                                         </div>
                                       @enderror
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editNama_penggunaPRS" class="col-sm-3 px-1 form-label">Nama Pengguna</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNama_penggunaPRS" class="form-control form-control-sm" id="editNama_penggunaPRS" placeholder="Nama Pengguna" value="{{$pengurus->nama_penggunaPRS}}">
-                                      @error('editNama_penggunaPRS')
+                                      @if ($message = Session::get('error'))
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                             {{ $message }}
                                           </p>
                                         </div>
-                                      @enderror
+                                      @endif
                                     </div>
                                   </div>
                                   <div class="mb-3 row">

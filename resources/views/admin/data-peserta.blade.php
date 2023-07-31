@@ -368,6 +368,24 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
+                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
+                                  <option value="">-Naungan-</option>
+                                  <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                  <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
+                                </select>
+                                @error('institusiPeserta')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <div class="mb-3 row">
                               <label for="fotoPeserta" class="col-sm-3 px-1">Foto</label>
                               <div class="col-sm-9">
                                 <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
@@ -435,6 +453,7 @@
                       </a>
                     </td>
                     <td>{{$peserta->status_peserta}}</td>
+                    <td>{{$peserta->lokasi_peserta}}</td>
                     <td>
                       <div class="icon-action">
                         <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-primary">
@@ -817,10 +836,15 @@
                               <div class="col-4">Keterangan</div>
                             </div>
                             <hr>
-                            <div class="row">
-                              <div class="col-4">{{$peserta->skala}}</div>
-                            </div>
-                            <hr class="text-muted">
+                            @forelse ($skalas as $skala)
+                              <div class="row">
+                                <div class="col-4">{{$skala->tgl_kontak}}</div>
+                                <div class="col-4">{{$skala->skala}}</div>
+                                <div class="col-4">{{$skala->keterangan}}</div>
+                              </div>
+                              <hr class="text-muted">
+                            @empty
+                            @endforelse
                             <div class="row">
                               <div class="col-4">
                                 <input type="date" class="form-control form-control-sm" name="tambahTgl_kontak">
@@ -872,10 +896,14 @@
                               <div class="col-8">Catatan</div>
                             </div>
                             <hr>
-                            <div class="row">
-                              <div class="col-8">{{$peserta->catatan}}</div>
-                            </div>
-                            <hr class="text-muted">
+                            @forelse ($catatans as $catatan)
+                              <div class="row">
+                                <div class="col-4">{{$catatan->tgl_kontak}}</div>
+                                <div class="col-4">{{$catatan->catatan}}</div>
+                              </div>
+                              <hr class="text-muted">
+                            @empty
+                            @endforelse
                             <div class="row">
                               <div class="col-4">
                                 <input type="date" class="form-control form-control-sm" name="tambahTgl_kontakCatatan">
