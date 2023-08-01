@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Image;
+use  File;
 use App\Models\Peserta;
 use App\Models\Skala;
 use App\Models\Lokasi;
@@ -10,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Models\Catatan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class PesertaController extends Controller
@@ -32,13 +35,14 @@ class PesertaController extends Controller
             ])->get();
 
     $peserts = Peserta::all();
+    $skalas=[];
     foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
+      $skalas[] = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       // foreach ($skalas as $skala) {
         // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skala);
+      // dd($peserta);
       // }
     }
     $no = 1;
@@ -229,9 +233,75 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Peserta $peserta)
+  public function update(Request $request, $id)
   {
-      //
+    $pesertaUpdate = Peserta::find($id);
+    if($request->file('editFotoPeserta') == "") {
+      if ($request->editFotoTextPeserta == '') {
+        $pesertaUpdate->update([
+          'nama_peserta'     => $request->editNamaKontakPeserta,
+          'jk_peserta'   => $request->editJenisKelaminPeserta,
+          'alamat_peserta'   => $request->editAlamatPeserta,
+          'no_hp_peserta'   => $request->editNoHpPeserta,
+          'tempat_lahir_peserta'   => $request->editTempatLahirPeserta,
+          'tgl_lahir_peserta'   => $request->editTanggalLahirPeserta,
+          'pekerjaan_peserta'   => $request->editPekerjaanPeserta,
+          'suku_peserta'   => $request->editSukuPeserta,
+          'status_peserta'   => $request->editStatusPeserta,
+          'lokasi_peserta'   => $request->editLokasiPeserta,
+          'institusi_peserta'   => $request->editInstitusiPeserta,
+          'foto_peserta'     => ''
+        ]);
+      } else {
+        $pesertaUpdate->update([
+          'nama_peserta'     => $request->editNamaKontakPeserta,
+          'jk_peserta'   => $request->editJenisKelaminPeserta,
+          'alamat_peserta'   => $request->editAlamatPeserta,
+          'no_hp_peserta'   => $request->editNoHpPeserta,
+          'tempat_lahir_peserta'   => $request->editTempatLahirPeserta,
+          'tgl_lahir_peserta'   => $request->editTanggalLahirPeserta,
+          'pekerjaan_peserta'   => $request->editPekerjaanPeserta,
+          'suku_peserta'   => $request->editSukuPeserta,
+          'status_peserta'   => $request->editStatusPeserta,
+          'lokasi_peserta'   => $request->editLokasiPeserta,
+          'institusi_peserta'   => $request->editInstitusiPeserta,
+        ]);
+      }
+    } else {
+      //hapus old image
+      if ($pesertaUpdate->fotoPeserta != '') {
+        $destination = 'images/Peserta/'.$pesertaUpdate->fotoPeserta;
+        if (File::exists($destination)) {
+          File::delete($destination);
+        }
+      } else {
+        //upload new image
+        $destination = "images/Peserta";
+        $filename = $request->file('editFotoPeserta');
+        $filename->move($destination, $filename->getClientOriginalName());
+        $pesertaUpdate->update([
+          'nama_peserta'     => $request->editNamaKontakPeserta,
+          'jk_peserta'   => $request->editJenisKelaminPeserta,
+          'alamat_peserta'   => $request->editAlamatPeserta,
+          'no_hp_peserta'   => $request->editNoHpPeserta,
+          'tempat_lahir_peserta'   => $request->editTempatLahirPeserta,
+          'tgl_lahir_peserta'   => $request->editTanggalLahirPeserta,
+          'pekerjaan_peserta'   => $request->editPekerjaanPeserta,
+          'suku_peserta'   => $request->editSukuPeserta,
+          'status_peserta'   => $request->editStatusPeserta,
+          'lokasi_peserta'   => $request->editLokasiPeserta,
+          'institusi_peserta'   => $request->editInstitusiPeserta,
+          'foto_peserta'     => $filename->getClientOriginalName()
+        ]);
+      }
+    }
+    if($pesertaUpdate){
+      //redirect dengan pesan sukses
+      return redirect()->route('data-peserta.index')->with(['success' => 'Kontak Berhasil Diubah!']);
+    }else{
+      //redirect dengan pesan error
+      return redirect()->route('data-peserta.index')->with(['error' => 'Kontak Gagal Diubah!']);
+    }
   }
 
   /**
@@ -240,8 +310,21 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroy(Peserta $peserta)
+  public function destroy($id)
   {
-      //
+    $deleteDataPeserta = Peserta::find($id);
+    if ($deleteDataPeserta->foto_peserta != '') {
+      $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
+      if (File::exists($destination)) {
+        File::delete($destination);
+      }
+    }
+    $deleteDataPeserta->delete();
+
+    if($deleteDataPeserta){
+      return redirect()->route('data-peserta.index')->with(['success' => 'Peserta Berhasil Dihapus!']);
+    }else{
+      return redirect()->route('data-peserta.index')->with(['error' => 'Peserta Gagal Dihapus!']);
+    }
   }
 }

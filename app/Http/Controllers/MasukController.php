@@ -49,7 +49,7 @@ class MasukController extends Controller
                     return redirect('/ymp/ketua-kelompok')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
                     break;
             }
-            return redirect('/admin');
+            return redirect('/');
         }
     
         return redirect()->back()

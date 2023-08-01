@@ -68,7 +68,9 @@ Route::group(['middleware' => ['auth', 'cekRole:SuperAdmin,Admin']], function ()
 
   Route::resource('/admin/data-ketua-kelompok', KetuaKelompokController::class);
 
-  Route::resource('/admin/data-peserta', PesertaController::class);
+  Route::resource('/admin/data-peserta', PesertaController::class)->parameters([
+    'data-peserta' => 'id_peserta'
+  ]);
 });
 
 //YMP
