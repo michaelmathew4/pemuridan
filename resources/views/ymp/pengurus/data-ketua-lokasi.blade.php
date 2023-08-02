@@ -5,25 +5,25 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/ymp/pengurus')}}">
+    <a class="nav-link collapsed" href="{{route('berandaPengurusYMP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link " href="{{url('/ymp/pengurus/data-ketua-lokasi')}}">
+    <a class="nav-link " href="{{route('data-ketua-lokasi.indexPengurusYMP')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/ymp/pengurus/data-ketua-kelompok')}}">
+    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexPengurusYMP')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/ymp/pengurus/data-peserta')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusYMP')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>
@@ -41,7 +41,7 @@
     <h1>Data Ketua Lokasi</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('/admin')}}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaPengurusYMP')}}">Pengurus</a></li>
         <li class="breadcrumb-item active">Data Ketua Lokasi</li>
       </ol>
     </nav>
@@ -72,7 +72,7 @@
                       </h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('data-ketua-lokasi.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('data-ketua-lokasi.storePengurusYMP') }}" method="POST" enctype="multipart/form-data">
                       @csrf
                       <div class="modal-body">
                         <div class="form-group-input">
@@ -362,17 +362,6 @@
                               </div>
                               <div class="row mx-auto p-0 pt-1 border-bottom">
                                 <div class="col-4 pt-2">
-                                  <p class="">Nama Pengguna</p> 
-                                </div>
-                                <div class="col-1 pt-2">
-                                  <p class="text-center">:</p> 
-                                </div>
-                                <div class="col-4 pt-2">
-                                <p class="text-start">{{$lokasi->nama_penggunaKL}}</p>
-                                </div>
-                              </div>
-                              <div class="row mx-auto p-0 pt-1 border-bottom">
-                                <div class="col-4 pt-2">
                                   <p class="">Kata Sandi</p> 
                                 </div>
                                 <div class="col-1 pt-2">
@@ -414,7 +403,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-ketua-lokasi.update', $lokasi->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('data-ketua-lokasi.updatePengurusYMP', $lokasi->id) }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
                           <div class="modal-body">
@@ -598,7 +587,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-ketua-lokasi.destroy', $lokasi->id) }}" method="POST">
+                        <form action="{{ route('data-ketua-lokasi.destroyPengurusYMP', $lokasi->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">

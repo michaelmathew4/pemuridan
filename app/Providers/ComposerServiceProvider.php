@@ -11,7 +11,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         View::composer(
-            ['.ymp.pengurus.data-ketua-lokasi', '.admin.data-ketua-lokasi'], 'App\Http\ViewComposers\UserComposer'
+            ['.ymp.pengurus.data-ketua-lokasi'], 'App\Http\ViewComposers\UserComposer'
         );
     }
 

@@ -9,31 +9,25 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('berandaPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('berandaKetuaLokasiYMP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.indexPengurusYMP')}}">
-      <i class="bi bi-person-circle"></i>
-      <span>Data Ketua Lokasi</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link " href="{{route('data-ketua-kelompok.indexPengurusYMP')}}">
+    <a class="nav-link " href="{{route('data-ketua-kelompok.indexKetuaLokasiYMP')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexKetuaLokasiYMP')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-laporan')}}">
+    <a class="nav-link collapsed" href="{{url('/ketua-lokasi/data-laporan')}}">
       <i class="bi bi-bar-chart-line"></i>
       <span>Laporan</span>
     </a>
@@ -45,7 +39,7 @@
     <h1>Data Ketua Kelompok</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('berandaPengurusYMP')}}">Pengurus</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaKetuaLokasiYMP')}}">Ketua Lokasi</a></li>
         <li class="breadcrumb-item active">Data Ketua Kelompok</li>
       </ol>
     </nav>

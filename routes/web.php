@@ -79,20 +79,46 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:YMP,Admin,SuperAdmin']], fu
   Route::group(['middleware' => ['auth', 'cekRole:Pengurus']], function () {
     Route::get('/ymp/pengurus', function () {
       return view('/ymp/pengurus/index');
-    });
+    })->name('berandaPengurusYMP');
 
-    Route::resource('/ymp/pengurus/data-ketua-lokasi', KetuaLokasiController::class,
-        ['as' => 'ymp-pengurus']
-    );
+    //Ketua Lokasi
+    Route::get('/ymp/pengurus/data-ketua-lokasi', [KetuaLokasiController::class, 'indexPengurusYMP'])
+          ->name('data-ketua-lokasi.indexPengurusYMP');
 
-    Route::resource('/ymp/pengurus/data-ketua-kelompok', KetuaKelompokController::class,
-        ['as' => 'ymp-pengurus']
-    );
+    Route::post('/ymp/pengurus/data-ketua-lokasi', [KetuaLokasiController::class, 'storePengurusYMP'])
+          ->name('data-ketua-lokasi.storePengurusYMP');
+    
+    Route::put('/ymp/pengurus/data-ketua-lokasi/{data_ketua_lokasi}', [KetuaLokasiController::class, 'updatePengurusYMP'])
+          ->name('data-ketua-lokasi.updatePengurusYMP');
 
-    Route::resource('/ymp/pengurus/data-kontak', PesertaController::class,
-        ['as' => 'ymp-pengurus']
-    );
+    Route::delete('/ymp/pengurus/data-ketua-lokasi/{data_ketua_lokasi}', [KetuaLokasiController::class, 'destroyPengurusYMP'])
+          ->name('data-ketua-lokasi.destroyPengurusYMP');
+    
+    //Ketua Kelompok
+    Route::get('/ymp/pengurus/data-ketua-kelompok', [KetuaKelompokController::class, 'indexPengurusYMP'])
+          ->name('data-ketua-kelompok.indexPengurusYMP');
 
+    Route::post('/ymp/pengurus/data-ketua-kelompok', [KetuaKelompokController::class, 'storePengurusYMP'])
+          ->name('data-ketua-kelompok.storePengurusYMP');
+    
+    Route::put('/ymp/pengurus/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'updatePengurusYMP'])
+          ->name('data-ketua-kelompok.updatePengurusYMP');
+
+    Route::delete('/ymp/pengurus/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'destroyPengurusYMP'])
+          ->name('data-ketua-kelompok.destroyPengurusYMP');
+
+    //Data Kontak
+    Route::get('/ymp/pengurus/data-kontak', [PesertaController::class, 'indexPengurusYMP'])
+          ->name('data-kontak.indexPengurusYMP');
+
+    Route::post('/ymp/pengurus/data-kontak', [PesertaController::class, 'storePengurusYMP'])
+          ->name('data-kontak.storePengurusYMP');
+    
+    Route::put('/ymp/pengurus/data-kontak/{data_peserta}', [PesertaController::class, 'updatePengurusYMP'])
+          ->name('data-kontak.updatePengurusYMP');
+
+    Route::delete('/ymp/pengurus/data-kontak/{data_peserta}', [PesertaController::class, 'destroyPengurusYMP'])
+          ->name('data-kontak.destroyPengurusYMP');
   });
 
 
@@ -100,7 +126,33 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:YMP,Admin,SuperAdmin']], fu
   Route::group(['middleware' => ['auth', 'cekRole:Lokasi']], function () {
     Route::get('/ymp/ketua-lokasi', function () {
       return view('/ymp/ketua-lokasi/index');
-    });
+    })->name('berandaKetuaLokasiYMP');
+    
+    //Ketua Kelompok
+    Route::get('/ymp/ketua-lokasi/data-ketua-kelompok', [KetuaKelompokController::class, 'indexKetuaLokasiYMP'])
+          ->name('data-ketua-kelompok.indexKetuaLokasiYMP');
+
+    Route::post('/ymp/ketua-lokasi/data-ketua-kelompok', [KetuaKelompokController::class, 'storeKetuaLokasiYMP'])
+          ->name('data-ketua-kelompok.storeKetuaLokasiYMP');
+    
+    Route::put('/ymp/ketua-lokasi/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'updateKetuaLokasiYMP'])
+          ->name('data-ketua-kelompok.updateKetuaLokasiYMP');
+
+    Route::delete('/ymp/ketua-lokasi/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'destroyKetuaLokasiYMP'])
+          ->name('data-ketua-kelompok.destroyKetuaLokasiYMP');
+
+    //Data Kontak
+    Route::get('/ymp/ketua-lokasi/data-kontak', [PesertaController::class, 'indexKetuaLokasiYMP'])
+          ->name('data-kontak.indexKetuaLokasiYMP');
+
+    Route::post('/ymp/ketua-lokasi/data-kontak', [PesertaController::class, 'storeKetuaLokasiYMP'])
+          ->name('data-kontak.storeKetuaLokasiYMP');
+    
+    Route::put('/ymp/ketua-lokasi/data-kontak/{data_peserta}', [PesertaController::class, 'updateKetuaLokasiYMP'])
+          ->name('data-kontak.updateKetuaLokasiYMP');
+
+    Route::delete('/ymp/ketua-lokasi/data-kontak/{data_peserta}', [PesertaController::class, 'destroyKetuaLokasiYMP'])
+          ->name('data-kontak.destroyKetuaLokasiYMP');
   });
 
   //Ketua Kelompok
@@ -112,7 +164,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:YMP,Admin,SuperAdmin']], fu
 });
 
 
-//YMP
+//GKP
 Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], function () {
 });
 
