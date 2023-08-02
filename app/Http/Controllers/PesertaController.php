@@ -35,21 +35,21 @@ class PesertaController extends Controller
             ])->get();
 
     $peserts = Peserta::all();
-    $skalas=[];
+    $skalas;
     foreach ($peserts as $pesert) {
-      $skalas[] = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
+      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       // foreach ($skalas as $skala) {
         // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($peserta);
+      // dd($skalas);
       // }
     }
     $no = 1;
     $noSkalas = 1;
     $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('admin.data-peserta', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
   }
 
   /**
@@ -154,15 +154,15 @@ class PesertaController extends Controller
           $catatan->save();
 
           if ($catatan) {
-            return redirect()->route('data-peserta.index')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.index')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-peserta.index')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.index')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-peserta.index')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.index')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-peserta.index')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.index')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -182,9 +182,9 @@ class PesertaController extends Controller
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-peserta.index')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.index')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-peserta.index')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.index')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -196,9 +196,9 @@ class PesertaController extends Controller
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-peserta.index')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.index')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-peserta.index')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.index')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
@@ -297,10 +297,10 @@ class PesertaController extends Controller
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-peserta.index')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.index')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-peserta.index')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.index')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -322,9 +322,9 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-peserta.index')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      return redirect()->route('data-kontak.index')->with(['success' => 'Peserta Berhasil Dihapus!']);
     }else{
-      return redirect()->route('data-peserta.index')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.index')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
 }

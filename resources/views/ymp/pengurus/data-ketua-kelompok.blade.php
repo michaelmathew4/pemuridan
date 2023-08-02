@@ -9,95 +9,31 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('admin')}}">
+    <a class="nav-link " href="{{url('/pengurus')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#data-master" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-list"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="data-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="{{route('data-wilayah.index')}}">
-          <i class="bi bi-map"></i><span>Data Wilayah</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('data-lokasi.index')}}">
-          <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('artikel-modul.index')}}">
-          <i class="bi bi-journal-text"></i><span>Artikel/Modul</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('video.index')}}">
-          <i class="bi bi-play"></i><span>Video Youtube</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('pekerjaan.index')}}">
-          <i class="bi bi-person-workspace"></i><span>Pekerjaan</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('studi-minat.index')}}">
-          <i class="bi bi-book"></i><span>Studi & Minat</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('kolom-pilihan.index')}}">
-          <i class="bi bi-ui-checks-grid"></i><span>Kolom Cadangan (Pilihan)</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('kolom-pilihan-ganda.index')}}">
-          <i class="bi bi-ui-checks"></i><span>Kolom Cadangan (Pilihan Ganda)</span>
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-admin.index')}}">
-      <i class="bi bi-person-bounding-box"></i>
-      <span>Data Admin</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-pengurus.index')}}">
-      <i class="bi bi-person"></i>
-      <span>Data Pengurus</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.index')}}">
+    <a class="nav-link collapsed" href="{{url('/pengurus/data-ketua-lokasi')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{route('data-ketua-kelompok.index')}}" class="active">
+    <a class="nav-link collapsed" href="{{url('/pengurus/data-ketua-kelompok')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.index')}}">
+    <a class="nav-link collapsed" href="{{url('/pengurus/data-peserta')}}">
       <i class="bi bi-people"></i>
-      <span>Data Kontak</span>
+      <span>Data Peserta</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/admin/data-laporan')}}">
+    <a class="nav-link collapsed" href="{{url('/pengurus/data-laporan')}}">
       <i class="bi bi-bar-chart-line"></i>
       <span>Laporan</span>
     </a>

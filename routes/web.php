@@ -68,7 +68,7 @@ Route::group(['middleware' => ['auth', 'cekRole:SuperAdmin,Admin']], function ()
 
   Route::resource('/admin/data-ketua-kelompok', KetuaKelompokController::class);
 
-  Route::resource('/admin/data-peserta', PesertaController::class)->parameters([
+  Route::resource('/admin/data-kontak', PesertaController::class)->parameters([
     'data-peserta' => 'id_peserta'
   ]);
 });
@@ -80,6 +80,19 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:YMP,Admin,SuperAdmin']], fu
     Route::get('/ymp/pengurus', function () {
       return view('/ymp/pengurus/index');
     });
+
+    Route::resource('/ymp/pengurus/data-ketua-lokasi', KetuaLokasiController::class,
+        ['as' => 'ymp-pengurus']
+    );
+
+    Route::resource('/ymp/pengurus/data-ketua-kelompok', KetuaKelompokController::class,
+        ['as' => 'ymp-pengurus']
+    );
+
+    Route::resource('/ymp/pengurus/data-kontak', PesertaController::class,
+        ['as' => 'ymp-pengurus']
+    );
+
   });
 
 
