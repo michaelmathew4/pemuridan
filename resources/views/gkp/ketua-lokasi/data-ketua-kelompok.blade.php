@@ -9,31 +9,25 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('berandaPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('berandaKetuaLokasiGKP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.indexPengurusYMP')}}">
-      <i class="bi bi-person-circle"></i>
-      <span>Data Ketua Lokasi</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link " href="{{route('data-ketua-kelompok.indexPengurusYMP')}}">
+    <a class="nav-link " href="{{route('data-ketua-kelompok.indexKetuaLokasiGKP')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexKetuaLokasiGKP')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-laporan')}}">
+    <a class="nav-link collapsed" href="{{url('/ketua-lokasi/data-laporan')}}">
       <i class="bi bi-bar-chart-line"></i>
       <span>Laporan</span>
     </a>
@@ -45,7 +39,7 @@
     <h1>Data Ketua Kelompok</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('berandaPengurusYMP')}}">Pengurus</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaKetuaLokasiGKP')}}">Ketua Lokasi</a></li>
         <li class="breadcrumb-item active">Data Ketua Kelompok</li>
       </ol>
     </nav>
@@ -77,7 +71,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="{{ route('data-ketua-kelompok.storePengurusYMP') }}" method="post" enctype="multipart/form-data">
+                      <form action="{{ route('data-ketua-kelompok.storePengurusGKP') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group-input">
                           <div class="form-header-group mb-3">
@@ -2304,7 +2298,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-ketua-kelompok.updatePengurusYMP', $ketuaKelompok->id) }}" method="post" enctype="multipart/form-data">
+                          <form action="{{ route('data-ketua-kelompok.updatePengurusGKP', $ketuaKelompok->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -2558,6 +2552,17 @@
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" name="editAreaKetuaKelompok" id="editAreaKetuaKelompok" aria-label=".form-select-sm editAreaKetuaKelompok">
                                         <option value="{{$ketuaKelompok->areaKK}}"> {{$ketuaKelompok->areaKK}}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="editLokasiKK" class="col-sm-3 px-1">Lokasi</label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" name="editLokasiKKs" id="editLokasiKK" aria-label=".form-select-sm editLokasiKK">
+                                        <option value="{{$ketuaKelompok->lokasiKK}}">{{$ketuaKelompok->lokasiKK}}</option>
+                                        @foreach ($lokasis as $lokasi)
+                                          <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                        @endforeach
                                       </select>
                                     </div>
                                   </div>
@@ -3693,7 +3698,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-ketua-kelompok.destroyPengurusYMP', $ketuaKelompok->id_user) }}" method="POST">
+                        <form action="{{ route('data-ketua-kelompok.destroyPengurusGKP', $ketuaKelompok->id_user) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">

@@ -9,25 +9,19 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('berandaKetuaLokasiYMP')}}">
+    <a class="nav-link collapsed" href="{{route('berandaKetuaKelompokGKP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexKetuaLokasiYMP')}}">
-      <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link " href="{{route('data-kontak.indexKetuaLokasiYMP')}}">
+    <a class="nav-link " href="{{route('data-kontak.indexKetuaKelompokGKP')}}">
       <i class="bi bi-people"></i>
-      <span>Data Peserta</span>
+      <span>Data Kontak</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/ketua-lokasi/data-laporan')}}">
+    <a class="nav-link collapsed" href="{{url('/ketua-kelompok/data-laporan')}}">
       <i class="bi bi-bar-chart-line"></i>
       <span>Laporan</span>
     </a>
@@ -39,7 +33,7 @@
     <h1>Data Kontak</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('berandaKetuaLokasiYMP')}}">Ketua Lokasi</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaKetuaKelompokGKP')}}">Ketua Kelompok</a></li>
         <li class="breadcrumb-item active">Data Kontak</li>
       </ol>
     </nav>
@@ -71,7 +65,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form action="{{ route('data-kontak.storeKetuaLokasiYMP') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('data-kontak.storeKetuaKelompokGKP') }}" method="post" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group-input">
                         <div class="form-header-group mb-3">
@@ -279,6 +273,25 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
+                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
+                                  <option value="">-Lokasi Kontak-</option>
+                                  @foreach ($lokasis as $lokasi)
+                                    <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                  @endforeach
+                                </select>
+                                @error('lokasiPeserta')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <div class="mb-3 row">
                               <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
@@ -301,6 +314,40 @@
                               <div class="col-sm-9">
                                 <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
                                 @error('fotoPeserta')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <input type="text" name="inputTambah" id="" value="tambahData" hidden>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group-input">
+                        <div class="form-header-group mb-3">
+                          <h6>Kelompok</h6>
+                        </div>
+                        <div class="input-center ps-5">
+                          <div class="w-75">
+                            <div class="mb-3 row">
+                              <label for="ketuaKelompok" class="col-sm-3 px-1">Ketua Kelompok</label>
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" name="ketuaKelompok" id="ketuaKelompok" aria-label=".form-select-sm ketuaKelompok">
+                                  <option value="{{auth()->user()->id_user}}">Anda ({{auth()->user()->name}})</option>
+                                  <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                                  <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
+                                  <option value="Pegawai Swasta">Pegawai Swasta</option>
+                                  <option value="Guru / Dosen">Guru / Dosen</option>
+                                  <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                                  <option value="Petani / Peternak">Petani / Peternak</option>
+                                  <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                                  <option value="Lain-lain">Lain-lain</option>
+                                </select>
+                                @error('ketuaKelompok')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
                                       <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -455,7 +502,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-kontak.updateKetuaLokasiYMP', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
+                          <form action="{{ route('data-kontak.updateKetuaKelompokGKP', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -603,6 +650,25 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
+                                    <label for="editLokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" name="editLokasiPeserta" id="editLokasiPeserta" aria-label=".form-select-sm editLokasiPeserta">
+                                        <option value="{{$peserta->lokasi_peserta}}">{{$peserta->lokasi_peserta}}</option>
+                                        @foreach ($lokasis as $lokasi)
+                                          <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                        @endforeach
+                                      </select>
+                                      @error('editLokasiPeserta')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
                                     <label for="editInstitusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editInstitusiPeserta" id="editInstitusiPeserta">
@@ -659,7 +725,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.destroyKetuaLokasiYMP', $peserta->id) }}" method="POST">
+                        <form action="{{ route('data-kontak.destroyKetuaKelompokGKP', $peserta->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
@@ -685,7 +751,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeKetuaLokasiYMP') }}" method="post">
+                        <form action="{{ route('data-kontak.storeKetuaLokasiGKP') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">
@@ -751,7 +817,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeKetuaLokasiYMP') }}" method="post">
+                        <form action="{{ route('data-kontak.storeKetuaLokasiGKP') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">

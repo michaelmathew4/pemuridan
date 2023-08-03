@@ -5,21 +5,21 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link " href="{{url('/ketua-kelompok')}}">
+    <a class="nav-link " href="{{route('berandaKetuaKelompokGKP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/ketua-kelompok/data-ketua-kelompok')}}">
-      <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+    <a class="nav-link collapsed" href="{{route('kelompokKetuaKelompokGKP')}}">
+      <i class="bi bi-people"></i>
+      <span>Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/ketua-kelompok/data-peserta')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexKetuaKelompokGKP')}}">
       <i class="bi bi-people"></i>
-      <span>Data Peserta</span>
+      <span>Data Kontak</span>
     </a>
   </li>
   <li class="nav-item">
@@ -187,7 +187,7 @@
           <div class="card-body">
             <h5 class="card-title card-title-full">Beranda</h5>
             <hr>
-            Selamat Datang.
+            Selamat Datang, {{auth()->user()->name}}.
           </div>
         </div>
       </div>

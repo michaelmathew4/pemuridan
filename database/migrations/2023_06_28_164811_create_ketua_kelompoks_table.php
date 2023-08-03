@@ -47,6 +47,7 @@ class CreateKetuaKelompoksTable extends Migration
             $table->string('rtKK', 3)->nullable();
             $table->string('rwKK', 3)->nullable();
             $table->text('areaKK')->nullable();
+            $table->text('lokasiKK');
             $table->string('no_telpKK', 15)->nullable();
             $table->string('no_rumahKK', 3)->nullable();
             $table->string('no_hpsatuKK', 15)->nullable();

@@ -31,22 +31,49 @@ class MasukController extends Controller
             $selectUser = User::where('email', $request->input('idOrEmail'))
                                 ->orWhere('id_user', $request->input('idOrEmail'))
                                 ->first();
+            $institusi = $selectUser->institusi;
             $role = $selectUser->role;
-            switch ($role) {
-                case 'SuperAdmin':
-                    return redirect('/admin')->with(['success' => 'Super Admin berhasil Masuk!']);
+            switch ($institusi) {
+                case 'YMP':
+                    switch ($role) {
+                        case 'SuperAdmin':
+                            return redirect('/admin')->with(['success' => 'Super Admin berhasil Masuk!']);
+                            break;
+                        case 'Admin':
+                            return redirect('/admin')->with(['success' => 'Admin berhasil Masuk!']);
+                            break;
+                        case 'Pengurus':
+                            return redirect('/ymp/pengurus')->with(['success' => 'Pengurus berhasil Masuk!']);
+                            break;
+                        case 'Lokasi':
+                            return redirect('/ymp/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
+                            break;
+                        case 'Kelompok':
+                            return redirect('/ymp/ketua-kelompok')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
+                            break;
+                    }
+                    # code...
                     break;
-                case 'Admin':
-                    return redirect('/admin')->with(['success' => 'Admin berhasil Masuk!']);
-                    break;
-                case 'Pengurus':
-                    return redirect('/ymp/pengurus')->with(['success' => 'Pengurus berhasil Masuk!']);
-                    break;
-                case 'Lokasi':
-                    return redirect('/ymp/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
-                    break;
-                case 'Kelompok':
-                    return redirect('/ymp/ketua-kelompok')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
+                
+                default:
+                    switch ($role) {
+                        case 'SuperAdmin':
+                            return redirect('/admin')->with(['success' => 'Super Admin berhasil Masuk!']);
+                            break;
+                        case 'Admin':
+                            return redirect('/admin')->with(['success' => 'Admin berhasil Masuk!']);
+                            break;
+                        case 'Pengurus':
+                            return redirect('/gkp/pengurus')->with(['success' => 'Pengurus berhasil Masuk!']);
+                            break;
+                        case 'Lokasi':
+                            return redirect('/gkp/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
+                            break;
+                        case 'Kelompok':
+                            return redirect('/gkp/ketua-kelompok')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
+                            break;
+                    }
+                    # code...
                     break;
             }
             return redirect('/');

@@ -15,9 +15,9 @@ class Ketua_kelompok extends Model
      * @var array
      */
     protected $fillable = [
-      'tanggal_registKK', 'refrensiKK', 'sapaanKK', 'gelar_awalanKK', 'nama_lengkapKK', 'gelar_akhiranKK', 'nama_panggilanKK', 'peranKK', 'jenis_identitasKK', 'no_identitasKK',
+      'id_user', 'tanggal_registKK', 'refrensiKK', 'sapaanKK', 'gelar_awalanKK', 'nama_lengkapKK', 'gelar_akhiranKK', 'nama_panggilanKK', 'peranKK', 'jenis_identitasKK', 'no_identitasKK',
       'tempat_lahirKK', 'tanggal_lahirKK', 'jkKK', 'goldarKK', 'status_pernikahanKK', 'fotoKK', 'foto_bitmapKK', 'alamatKK','ket_arahKK', 'petaKK', 'negaraKK',
-      'provinsiKK', 'kotaKK', 'kecamatanKK', 'kelurahanKK', 'kode_posKK', 'dusunKK', 'rtKK', 'rwKK', 'areaKK', 'no_telpKK', 'no_rumahKK', 'no_hpsatuKK', 'bisa_smsKK', 'no_hpduaKK',
+      'provinsiKK', 'kotaKK', 'kecamatanKK', 'kelurahanKK', 'kode_posKK', 'dusunKK', 'rtKK', 'rwKK', 'areaKK', 'lokasiKK','no_telpKK', 'no_rumahKK', 'no_hpsatuKK', 'bisa_smsKK', 'no_hpduaKK',
       'no_lainnyaKK', 'fax_rumahKK', 'alamat_surelKK', 'bisa_emailKK', 'websiteKK', 'pekerjaanKK', 'jabatanKK', 'status_pekerjaanKK', 'nama_perusahaanKK', 'sektor_industriKK',
       'alamat_kantorKK', 'telp_kantorKK', 'extKK', 'tingkat_pendidikanKK', 'sekolah_univKK', 'bidang_ketertarikanKK', 'bidang_keterampilanKK', 'catatanKK', 'statusKK',
       'verif_emailKK', 'no_rekeningKK', 'periode_beasiswaKK', 'periode_kerja_praktikKK', 'riwayat_pelayananSatuKK', 'riwayat_pelayananDuaKK', 'riwayat_pelayananTigaKK',

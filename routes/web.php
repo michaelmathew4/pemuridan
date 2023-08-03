@@ -159,13 +159,133 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:YMP,Admin,SuperAdmin']], fu
   Route::group(['middleware' => ['auth', 'cekRole:Kelompok']], function () {
     Route::get('/ymp/ketua-kelompok', function () {
       return view('/ymp/ketua-kelompok/index');
-    });
+    })->name('berandaKetuaKelompokYMP');
+
+    Route::get('/ymp/ketua-kelompok/kelompok', function () {
+      return view('/ymp/ketua-kelompok/kelompok');
+    })->name('kelompokKetuaKelompokYMP');
+    
+    //Data Kontak
+    Route::get('/ymp/ketua-kelompok/data-kontak', [PesertaController::class, 'indexKetuaKelompokYMP'])
+          ->name('data-kontak.indexKetuaKelompokYMP');
+
+    Route::post('/ymp/ketua-kelompok/data-kontak', [PesertaController::class, 'storeKetuaKelompokYMP'])
+          ->name('data-kontak.storeKetuaKelompokYMP');
+    
+    Route::put('/ymp/ketua-kelompok/data-kontak/{data_peserta}', [PesertaController::class, 'updateKetuaKelompokYMP'])
+          ->name('data-kontak.updateKetuaKelompokYMP');
+
+    Route::delete('/ymp/ketua-kelompok/data-kontak/{data_peserta}', [PesertaController::class, 'destroyKetuaKelompokYMP'])
+          ->name('data-kontak.destroyKetuaKelompokYMP');
   });
 });
 
 
 //GKP
 Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], function () {
+  //Pengurus
+  Route::group(['middleware' => ['auth', 'cekRole:Pengurus']], function () {
+    Route::get('/gkp/pengurus', function () {
+      return view('/gkp/pengurus/index');
+    })->name('berandaPengurusGKP');
+
+    //Ketua Lokasi
+    Route::get('/gkp/pengurus/data-ketua-lokasi', [KetuaLokasiController::class, 'indexPengurusGKP'])
+          ->name('data-ketua-lokasi.indexPengurusGKP');
+
+    Route::post('/gkp/pengurus/data-ketua-lokasi', [KetuaLokasiController::class, 'storePengurusGKP'])
+          ->name('data-ketua-lokasi.storePengurusGKP');
+    
+    Route::put('/gkp/pengurus/data-ketua-lokasi/{data_ketua_lokasi}', [KetuaLokasiController::class, 'updatePengurusGKP'])
+          ->name('data-ketua-lokasi.updatePengurusGKP');
+
+    Route::delete('/gkp/pengurus/data-ketua-lokasi/{data_ketua_lokasi}', [KetuaLokasiController::class, 'destroyPengurusGKP'])
+          ->name('data-ketua-lokasi.destroyPengurusGKP');
+    
+    //Ketua Kelompok
+    Route::get('/gkp/pengurus/data-ketua-kelompok', [KetuaKelompokController::class, 'indexPengurusGKP'])
+          ->name('data-ketua-kelompok.indexPengurusGKP');
+
+    Route::post('/gkp/pengurus/data-ketua-kelompok', [KetuaKelompokController::class, 'storePengurusGKP'])
+          ->name('data-ketua-kelompok.storePengurusGKP');
+    
+    Route::put('/gkp/pengurus/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'updatePengurusGKP'])
+          ->name('data-ketua-kelompok.updatePengurusGKP');
+
+    Route::delete('/gkp/pengurus/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'destroyPengurusGKP'])
+          ->name('data-ketua-kelompok.destroyPengurusGKP');
+
+    //Data Kontak
+    Route::get('/gkp/pengurus/data-kontak', [PesertaController::class, 'indexPengurusGKP'])
+          ->name('data-kontak.indexPengurusGKP');
+
+    Route::post('/gkp/pengurus/data-kontak', [PesertaController::class, 'storePengurusGKP'])
+          ->name('data-kontak.storePengurusGKP');
+    
+    Route::put('/gkp/pengurus/data-kontak/{data_peserta}', [PesertaController::class, 'updatePengurusGKP'])
+          ->name('data-kontak.updatePengurusGKP');
+
+    Route::delete('/gkp/pengurus/data-kontak/{data_peserta}', [PesertaController::class, 'destroyPengurusGKP'])
+          ->name('data-kontak.destroyPengurusGKP');
+  });
+
+
+  //Ketua Lokasi
+  Route::group(['middleware' => ['auth', 'cekRole:Lokasi']], function () {
+    Route::get('/gkp/ketua-lokasi', function () {
+      return view('/gkp/ketua-lokasi/index');
+    })->name('berandaKetuaLokasiGKP');
+    
+    //Ketua Kelompok
+    Route::get('/gkp/ketua-lokasi/data-ketua-kelompok', [KetuaKelompokController::class, 'indexKetuaLokasiGKP'])
+          ->name('data-ketua-kelompok.indexKetuaLokasiGKP');
+
+    Route::post('/gkp/ketua-lokasi/data-ketua-kelompok', [KetuaKelompokController::class, 'storeKetuaLokasiGKP'])
+          ->name('data-ketua-kelompok.storeKetuaLokasiGKP');
+    
+    Route::put('/gkp/ketua-lokasi/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'updateKetuaLokasiGKP'])
+          ->name('data-ketua-kelompok.updateKetuaLokasiGKP');
+
+    Route::delete('/gkp/ketua-lokasi/data-ketua-kelompok/{data_ketua_kelompok}', [KetuaKelompokController::class, 'destroyKetuaLokasiGKP'])
+          ->name('data-ketua-kelompok.destroyKetuaLokasiGKP');
+
+    //Data Kontak
+    Route::get('/gkp/ketua-lokasi/data-kontak', [PesertaController::class, 'indexKetuaLokasiGKP'])
+          ->name('data-kontak.indexKetuaLokasiGKP');
+
+    Route::post('/gkp/ketua-lokasi/data-kontak', [PesertaController::class, 'storeKetuaLokasiGKP'])
+          ->name('data-kontak.storeKetuaLokasiGKP');
+    
+    Route::put('/gkp/ketua-lokasi/data-kontak/{data_peserta}', [PesertaController::class, 'updateKetuaLokasiGKP'])
+          ->name('data-kontak.updateKetuaLokasiGKP');
+
+    Route::delete('/gkp/ketua-lokasi/data-kontak/{data_peserta}', [PesertaController::class, 'destroyKetuaLokasiGKP'])
+          ->name('data-kontak.destroyKetuaLokasiGKP');
+  });
+
+  //Ketua Kelompok
+  Route::group(['middleware' => ['auth', 'cekRole:Kelompok']], function () {
+    Route::get('/gkp/ketua-kelompok', function () {
+      return view('/gkp/ketua-kelompok/index');
+    })->name('berandaKetuaKelompokGKP');
+
+    Route::get('/gkp/ketua-kelompok/kelompok', function () {
+      return view('/gkp/ketua-kelompok/kelompok');
+    })->name('kelompokKetuaKelompokGKP');
+    
+    //Data Kontak
+    Route::get('/gkp/ketua-kelompok/data-kontak', [PesertaController::class, 'indexKetuaKelompokGKP'])
+          ->name('data-kontak.indexKetuaKelompokGKP');
+
+    Route::post('/gkp/ketua-kelompok/data-kontak', [PesertaController::class, 'storeKetuaKelompokGKP'])
+          ->name('data-kontak.storeKetuaKelompokGKP');
+    
+    Route::put('/gkp/ketua-kelompok/data-kontak/{data_peserta}', [PesertaController::class, 'updateKetuaKelompokGKP'])
+          ->name('data-kontak.updateKetuaKelompokGKP');
+
+    Route::delete('/gkp/ketua-kelompok/data-kontak/{data_peserta}', [PesertaController::class, 'destroyKetuaKelompokGKP'])
+          ->name('data-kontak.destroyKetuaKelompokGKP');
+  });
 });
 
 

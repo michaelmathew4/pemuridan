@@ -185,7 +185,7 @@
               <tbody>
                 @forelse ($tingkatPendidikans as $tingkatPendidikan)
                   <tr>
-                    <th scope="row">{{$noTingkatPendidikans}}</th>
+                    <th scope="row">{{$noTingkatPendidikans++}}</th>
                     <td>{{$tingkatPendidikan->tingkat_pendidikan}}</td>
                     <td>{{$tingkatPendidikan->created_at}}</td>
                     <td>
@@ -522,7 +522,7 @@
               <tbody>
                 @forelse ($bidangKetertarikans as $bidangKetertarikan)
                   <tr>
-                    <th scope="row">{{$noBidangKetertarikans}}</th>
+                    <th scope="row">{{$noBidangKetertarikans++}}</th>
                     <td>{{$bidangKetertarikan->bidang_ketertarikan}}</td>
                     <td>{{$bidangKetertarikan->created_at}}</td>
                     <td>
@@ -690,7 +690,7 @@
               <tbody>
                 @forelse ($bidangKeterampilans as $bidangKeterampilan)
                   <tr>
-                    <th scope="row">{{$noBidangKeterampilans}}</th>
+                    <th scope="row">{{$noBidangKeterampilans++}}</th>
                     <td>{{$bidangKeterampilan->bidang_keterampilan}}</td>
                     <td>{{$bidangKeterampilan->created_at}}</td>
                     <td>

@@ -340,6 +340,17 @@
                                   </select>
                                 </div>
                               </div>
+                              <div class="mb-3 row">
+                                <label for="lokasiKK" class="col-sm-3 px-1">Lokasi</label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" name="lokasiKKs" id="lokasiKK" aria-label=".form-select-sm lokasiKK">
+                                    <option value="">-Lokasi-</option>
+                                    @foreach ($lokasis as $lokasi)
+                                      <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                    @endforeach
+                                  </select>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -1690,9 +1701,13 @@
                                     <div class="col-4">RT / RW</div>
                                     <div class="col-8">{{$ketuaKelompok->rtKK}} / {{$ketuaKelompok->rwKK}}</div>
                                   </div>
-                                  <div class="row p-2">
+                                  <div class="row p-2 border-bottom">
                                     <div class="col-4">Area</div>
                                     <div class="col-8">{{$ketuaKelompok->areaKK}}</div>
+                                  </div>
+                                  <div class="row p-2">
+                                    <div class="col-4">Lokasi</div>
+                                    <div class="col-8">{{$ketuaKelompok->LokasiKK}}</div>
                                   </div>
                                 </div>
                               </div>
@@ -2537,6 +2552,17 @@
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" name="editAreaKetuaKelompok" id="editAreaKetuaKelompok" aria-label=".form-select-sm editAreaKetuaKelompok">
                                         <option value="{{$ketuaKelompok->areaKK}}"> {{$ketuaKelompok->areaKK}}</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="editLokasiKK" class="col-sm-3 px-1">Lokasi</label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" name="editLokasiKKs" id="editLokasiKK" aria-label=".form-select-sm editLokasiKK">
+                                        <option value="{{$ketuaKelompok->lokasiKK}}">{{$ketuaKelompok->lokasiKK}}</option>
+                                        @foreach ($lokasis as $lokasi)
+                                          <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                        @endforeach
                                       </select>
                                     </div>
                                   </div>

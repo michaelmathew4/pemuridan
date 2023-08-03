@@ -265,7 +265,7 @@
                   </tr>
                   <!-- Modal Lihat Data -->
                   <div class="modal fade" id="lihatData{{$videoYoutube->id}}"tabindex="-1" aria-labelledby="lihatData{{$videoYoutube->id}}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-md">
+                    <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="lihatData{{$videoYoutube->id}}Label">
@@ -299,6 +299,17 @@
                                 </div>
                                 <div class="col-4">
                                 <p class="text-start">{{$videoYoutube->deskripsiVY}}</p>
+                                </div>
+                              </div>
+                              <div class="row mx-auto">
+                                <div class="col-4">
+                                  <p class="">Link Youtube</p> 
+                                </div>
+                                <div class="col-1">
+                                  <p class="text-center">:</p> 
+                                </div>
+                                <div class="col-4">
+                                <p class="text-start"><a href="http://youtube.com/watch?v={{$videoYoutube->linkVY}}" target="_blank" rel="noopener noreferrer"><i class="bi bi-youtube text-dark"></i> http://youtube.com/watch?v={{$videoYoutube->linkVY}}</a></p>
                                 </div>
                               </div>
                             </div>

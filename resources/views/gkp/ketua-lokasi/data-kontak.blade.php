@@ -9,19 +9,19 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('berandaKetuaLokasiYMP')}}">
+    <a class="nav-link collapsed" href="{{route('berandaKetuaLokasiGKP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexKetuaLokasiYMP')}}">
+    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexKetuaLokasiGKP')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link " href="{{route('data-kontak.indexKetuaLokasiYMP')}}">
+    <a class="nav-link " href="{{route('data-kontak.indexKetuaLokasiGKP')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>
@@ -39,7 +39,7 @@
     <h1>Data Kontak</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('berandaKetuaLokasiYMP')}}">Ketua Lokasi</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaKetuaLokasiGKP')}}">Ketua Lokasi</a></li>
         <li class="breadcrumb-item active">Data Kontak</li>
       </ol>
     </nav>
@@ -71,7 +71,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form action="{{ route('data-kontak.storeKetuaLokasiYMP') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('data-kontak.storeKetuaLokasiGKP') }}" method="post" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group-input">
                         <div class="form-header-group mb-3">
@@ -455,7 +455,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-kontak.updateKetuaLokasiYMP', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
+                          <form action="{{ route('data-kontak.updateKetuaLokasiGKP', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -659,7 +659,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.destroyKetuaLokasiYMP', $peserta->id) }}" method="POST">
+                        <form action="{{ route('data-kontak.destroyKetuaLokasiGKP', $peserta->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
@@ -685,7 +685,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeKetuaLokasiYMP') }}" method="post">
+                        <form action="{{ route('data-kontak.storeKetuaLokasiGKP') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">
@@ -751,7 +751,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeKetuaLokasiYMP') }}" method="post">
+                        <form action="{{ route('data-kontak.storeKetuaLokasiGKP') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">

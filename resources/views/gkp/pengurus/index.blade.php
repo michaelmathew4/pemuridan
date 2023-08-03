@@ -5,31 +5,25 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link " href="{{url('/pengurus')}}">
+    <a class="nav-link " href="{{route('berandaPengurusGKP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-pengurus')}}">
-      <i class="bi bi-person"></i>
-      <span>Data Pengurus</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-ketua-lokasi')}}">
+    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.indexPengurusGKP')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-ketua-kelompok')}}">
+    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexPengurusGKP')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/pengurus/data-peserta')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusGKP')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>
@@ -199,7 +193,7 @@
           <div class="card-body">
             <h5 class="card-title card-title-full">Beranda</h5>
             <hr>
-            Selamat Datang.
+            Selamat Datang, {{auth()->user()->name}}.
           </div>
         </div>
       </div>

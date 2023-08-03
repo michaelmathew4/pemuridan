@@ -200,7 +200,7 @@
               <tbody>
                 @forelse ($pekerjaans as $pekerjaan)
                   <tr>
-                    <th scope="row">{{$noPekerjaan++}}</th>
+                    <th scope="row">{{$noPekerjaans++}}</th>
                     <td>{{$pekerjaan->nama_pekerjaanPJ}}</td>
                     <td>{{$pekerjaan->deskripsi_pekerjaanPJ}}</td>
                     <td>{{$pekerjaan->created_at}}</td>
@@ -397,7 +397,7 @@
               <tbody>
                 @forelse ($status_pekerjaans as $status_pekerjaan)
                   <tr>
-                    <th scope="row">{{$noStatusPekerjaan}}</th>
+                    <th scope="row">{{$noStatusPekerjaan++}}</th>
                     <td>{{$status_pekerjaan->status_pekerjaanSPJ}}</td>
                     <td>{{$status_pekerjaan->deskripsiSPJ}}</td>
                     <td>{{$status_pekerjaan->created_at}}</td>
@@ -594,7 +594,7 @@
               <tbody>
                 @forelse ($sektor_industries as $sektor_industri)
                   <tr>
-                    <th scope="row">{{$noSektorIndustri}}</th>
+                    <th scope="row">{{$noSektorIndustri++}}</th>
                     <td>{{$sektor_industri->sektor_industriSI}}</td>
                     <td>{{$sektor_industri->deskripsiSI}}</td>
                     <td>{{$sektor_industri->created_at}}</td>

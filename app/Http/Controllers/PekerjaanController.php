@@ -17,12 +17,12 @@ class PekerjaanController extends Controller
   public function index()
   {
     $pekerjaans = Pekerjaan::all();
-    $noPekerjaan = 1;
+    $noPekerjaans = 1;
     $status_pekerjaans = Status_pekerjaan::all();
     $noStatusPekerjaan = 1;
     $sektor_industries = Sektor_industri::all();
     $noSektorIndustri = 1;
-    return view('admin.pekerjaan', compact(['pekerjaans', 'status_pekerjaans', 'sektor_industries', 'noPekerjaan', 'noStatusPekerjaan', 'noSektorIndustri']));
+    return view('admin.pekerjaan', compact(['pekerjaans', 'status_pekerjaans', 'sektor_industries', 'noPekerjaans', 'noStatusPekerjaan', 'noSektorIndustri']));
   }
 
   /**
