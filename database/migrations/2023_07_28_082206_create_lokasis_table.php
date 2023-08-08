@@ -17,7 +17,7 @@ class CreateLokasisTable extends Migration
             $table->id();
             $table->string('kode_lokasi', 20);
             $table->string('nama_lokasi', 50);
-            $table->string('kode_wilayah', 50);
+            $table->string('kode_wilayah', 50)->nullable();
             $table->string('peta')->nullable();
             $table->timestamps();
         });

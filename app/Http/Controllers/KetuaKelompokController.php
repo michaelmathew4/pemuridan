@@ -98,6 +98,7 @@ class KetuaKelompokController extends Controller
   public function store(Request $request)
   {
     $request->validate([
+      'idKetuaKelompoks'     => 'required',
       'tglRegistrasiKetuaKelompoks'     => 'required',
       'namaKetuaKelompoks'   => 'required',
       'fotoKetuaKelompoks'  => 'image|mimes:png,jpg,jpeg',
@@ -116,6 +117,7 @@ class KetuaKelompokController extends Controller
       'kata_sandiKetuaKelompoks'  => 'required'
     ],
     [
+      'idKetuaKelompoks.required' => 'ID tidak boleh kosong.',
       'tglRegistrasiKetuaKelompoks.required' => 'Tanggal Registrasi tidak boleh kosong.',
       'namaKetuaKelompoks.required' => 'Nama Lengkap tidak boleh kosong.',
       'fotoKetuaKelompoks.image' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
@@ -135,7 +137,7 @@ class KetuaKelompokController extends Controller
     ]);
 
     $storeData = new Ketua_kelompok;
-    $storeData->id_user = $this->randomCodes();
+    $storeData->id_user = $request->idKetuaKelompoks;
     $storeData->tanggal_registKK = $request->tglRegistrasiKetuaKelompoks;
     $storeData->refrensiKK = $request->referensiKetuaKelompoks;
     $storeData->sapaanKK = $request->sapaanKetuaKelompoks;
@@ -349,8 +351,8 @@ class KetuaKelompokController extends Controller
     $storeData->save();
 
     if($storeData){
-      if ($request->institusiKetuaKelompoks == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKetuaKelompoks == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }
@@ -805,8 +807,8 @@ class KetuaKelompokController extends Controller
     $storeData->save();
 
     if($storeData){
-      if ($request->institusiKetuaKelompoks == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKetuaKelompoks == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }
@@ -1220,8 +1222,8 @@ class KetuaKelompokController extends Controller
     $storeData->save();
 
     if($storeData){
-      if ($request->institusiKetuaKelompoks == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKetuaKelompoks == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }
@@ -1638,8 +1640,8 @@ class KetuaKelompokController extends Controller
     $storeData->save();
 
     if($storeData){
-      if ($request->institusiKetuaKelompoks == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKetuaKelompoks == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }
@@ -2053,8 +2055,8 @@ class KetuaKelompokController extends Controller
     $storeData->save();
 
     if($storeData){
-      if ($request->institusiKetuaKelompoks == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKetuaKelompoks == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }

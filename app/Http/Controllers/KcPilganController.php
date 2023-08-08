@@ -35,7 +35,7 @@ class KcPilganController extends Controller
     $noKemBahasas = 1;
     $penyakits = Penyakit::all();
     $noPenyakits = 1;
-    return view('admin.kolom-pilihan-ganda', compact(['pMbtis', 'noPMbtis', 'persHollands', 'noPersHollands', 'spiritGifts',
+    return view('admin.shape', compact(['pMbtis', 'noPMbtis', 'persHollands', 'noPersHollands', 'spiritGifts',
                 'noSpiritGifts', 'abilities', 'noAbilities', 'gandaLimas', 'noGandaLimas', 'kemBahasas', 'noKemBahasas', 'penyakits', 'noPenyakits']));
   }
 
@@ -71,9 +71,9 @@ class KcPilganController extends Controller
       $input->save();
   
       if($input){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Personality - MBTI Berhasil Disimpan!']);
+        return redirect()->route('shape.index')->with(['success' => 'Personality - MBTI Berhasil Disimpan!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Personality - MBTI Gagal Disimpan!']);
+        return redirect()->route('shape.index')->with(['error' => 'Personality - MBTI Gagal Disimpan!']);
       }
     }
 
@@ -91,9 +91,9 @@ class KcPilganController extends Controller
       $input->save();
   
       if($input){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Personality - Holland Berhasil Disimpan!']);
+        return redirect()->route('shape.index')->with(['success' => 'Personality - Holland Berhasil Disimpan!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Personality - Holland Gagal Disimpan!']);
+        return redirect()->route('shape.index')->with(['error' => 'Personality - Holland Gagal Disimpan!']);
       }
     }
 
@@ -111,9 +111,9 @@ class KcPilganController extends Controller
       $input->save();
   
       if($input){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Spiritual Gifts Berhasil Disimpan!']);
+        return redirect()->route('shape.index')->with(['success' => 'Spiritual Gifts Berhasil Disimpan!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Spiritual Gifts Gagal Disimpan!']);
+        return redirect()->route('shape.index')->with(['error' => 'Spiritual Gifts Gagal Disimpan!']);
       }
     }
 
@@ -131,9 +131,9 @@ class KcPilganController extends Controller
       $input->save();
   
       if($input){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Abilities Berhasil Disimpan!']);
+        return redirect()->route('shape.index')->with(['success' => 'Abilities Berhasil Disimpan!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Abilities Gagal Disimpan!']);
+        return redirect()->route('shape.index')->with(['error' => 'Abilities Gagal Disimpan!']);
       }
     }
 
@@ -151,9 +151,9 @@ class KcPilganController extends Controller
       $input->save();
   
       if($input){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Ganda Lima Berhasil Disimpan!']);
+        return redirect()->route('shape.index')->with(['success' => 'Ganda Lima Berhasil Disimpan!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Ganda Lima Gagal Disimpan!']);
+        return redirect()->route('shape.index')->with(['error' => 'Ganda Lima Gagal Disimpan!']);
       }
     }
 
@@ -171,9 +171,9 @@ class KcPilganController extends Controller
       $input->save();
   
       if($input){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Kemampuan Bahasa Berhasil Disimpan!']);
+        return redirect()->route('shape.index')->with(['success' => 'Kemampuan Bahasa Berhasil Disimpan!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Kemampuan Bahasa Gagal Disimpan!']);
+        return redirect()->route('shape.index')->with(['error' => 'Kemampuan Bahasa Gagal Disimpan!']);
       }
     }
 
@@ -191,9 +191,9 @@ class KcPilganController extends Controller
       $input->save();
   
       if($input){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Penyakit Berhasil Disimpan!']);
+        return redirect()->route('shape.index')->with(['success' => 'Penyakit Berhasil Disimpan!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Penyakit Gagal Disimpan!']);
+        return redirect()->route('shape.index')->with(['error' => 'Penyakit Gagal Disimpan!']);
       }
     }
   }
@@ -244,9 +244,9 @@ class KcPilganController extends Controller
       ]);
 
       if($mbtiEdit){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Personality - MBTI Berhasil Diubah!']);
+        return redirect()->route('shape.index')->with(['success' => 'Personality - MBTI Berhasil Diubah!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Personality - MBTI Gagal Diubah!']);
+        return redirect()->route('shape.index')->with(['error' => 'Personality - MBTI Gagal Diubah!']);
       }
     }
 
@@ -265,9 +265,9 @@ class KcPilganController extends Controller
       ]);
 
       if($hollandEdit){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Personality - Holland Berhasil Diubah!']);
+        return redirect()->route('shape.index')->with(['success' => 'Personality - Holland Berhasil Diubah!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Personality - Holland Gagal Diubah!']);
+        return redirect()->route('shape.index')->with(['error' => 'Personality - Holland Gagal Diubah!']);
       }
     }
 
@@ -286,9 +286,9 @@ class KcPilganController extends Controller
       ]);
 
       if($giftsEdit){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Spiritual Gifts Berhasil Diubah!']);
+        return redirect()->route('shape.index')->with(['success' => 'Spiritual Gifts Berhasil Diubah!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Spiritual Gifts Gagal Diubah!']);
+        return redirect()->route('shape.index')->with(['error' => 'Spiritual Gifts Gagal Diubah!']);
       }
     }
 
@@ -307,9 +307,9 @@ class KcPilganController extends Controller
       ]);
 
       if($abilitiesEdit){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Abilities Berhasil Diubah!']);
+        return redirect()->route('shape.index')->with(['success' => 'Abilities Berhasil Diubah!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Abilities Gagal Diubah!']);
+        return redirect()->route('shape.index')->with(['error' => 'Abilities Gagal Diubah!']);
       }
     }
 
@@ -328,9 +328,9 @@ class KcPilganController extends Controller
       ]);
 
       if($gandaLimaEdit){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Ganda Lima Berhasil Diubah!']);
+        return redirect()->route('shape.index')->with(['success' => 'Ganda Lima Berhasil Diubah!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Ganda Lima Gagal Diubah!']);
+        return redirect()->route('shape.index')->with(['error' => 'Ganda Lima Gagal Diubah!']);
       }
     }
 
@@ -349,9 +349,9 @@ class KcPilganController extends Controller
       ]);
 
       if($kemBahasaEdit){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Kemampuan Bahasa Berhasil Diubah!']);
+        return redirect()->route('shape.index')->with(['success' => 'Kemampuan Bahasa Berhasil Diubah!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Kemampuan Bahasa Gagal Diubah!']);
+        return redirect()->route('shape.index')->with(['error' => 'Kemampuan Bahasa Gagal Diubah!']);
       }
     }
 
@@ -370,9 +370,9 @@ class KcPilganController extends Controller
       ]);
 
       if($penyakitEdit){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Penyakit Berhasil Diubah!']);
+        return redirect()->route('shape.index')->with(['success' => 'Penyakit Berhasil Diubah!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Penyakit Bahasa Gagal Diubah!']);
+        return redirect()->route('shape.index')->with(['error' => 'Penyakit Bahasa Gagal Diubah!']);
       }
     }
   }
@@ -390,9 +390,9 @@ class KcPilganController extends Controller
       $deleteMbti->delete();
   
       if($deleteMbti){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Personality - MBTI Berhasil Dihapus!']);
+        return redirect()->route('shape.index')->with(['success' => 'Personality - MBTI Berhasil Dihapus!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Personality - MBTI Gagal Dihapus!']);
+        return redirect()->route('shape.index')->with(['error' => 'Personality - MBTI Gagal Dihapus!']);
       }
     }
 
@@ -401,9 +401,9 @@ class KcPilganController extends Controller
       $deleteHolland->delete();
   
       if($deleteHolland){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Personality - Holland Berhasil Dihapus!']);
+        return redirect()->route('shape.index')->with(['success' => 'Personality - Holland Berhasil Dihapus!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Personality - Holland Gagal Dihapus!']);
+        return redirect()->route('shape.index')->with(['error' => 'Personality - Holland Gagal Dihapus!']);
       }
     }
 
@@ -412,9 +412,9 @@ class KcPilganController extends Controller
       $deleteGifts->delete();
   
       if($deleteGifts){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Spiritual Gifts Berhasil Dihapus!']);
+        return redirect()->route('shape.index')->with(['success' => 'Spiritual Gifts Berhasil Dihapus!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Spiritual Gifts Gagal Dihapus!']);
+        return redirect()->route('shape.index')->with(['error' => 'Spiritual Gifts Gagal Dihapus!']);
       }
     }
 
@@ -423,9 +423,9 @@ class KcPilganController extends Controller
       $deleteAbilities->delete();
   
       if($deleteAbilities){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Abilities Berhasil Dihapus!']);
+        return redirect()->route('shape.index')->with(['success' => 'Abilities Berhasil Dihapus!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Abilities Gagal Dihapus!']);
+        return redirect()->route('shape.index')->with(['error' => 'Abilities Gagal Dihapus!']);
       }
     }
 
@@ -434,9 +434,9 @@ class KcPilganController extends Controller
       $deleteGandaLima->delete();
   
       if($deleteGandaLima){
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['success' => 'Ganda Lima Berhasil Dihapus!']);
+        return redirect()->route('shape.index')->with(['success' => 'Ganda Lima Berhasil Dihapus!']);
       }else{
-        return redirect()->route('kolom-pilihan-ganda.index')->with(['error' => 'Ganda Lima Gagal Dihapus!']);
+        return redirect()->route('shape.index')->with(['error' => 'Ganda Lima Gagal Dihapus!']);
       }
     }
   }

@@ -17,8 +17,7 @@ class LokasiController extends Controller
 	{
     $lokasis = Lokasi::all();
     $no = 1;
-		$wilayahs = Wilayah::all();
-    return view('admin.data-lokasi', compact(['lokasis', 'no', 'wilayahs']));
+    return view('admin.data-lokasi', compact(['lokasis', 'no']));
 	}
 
 	/**
@@ -42,19 +41,16 @@ class LokasiController extends Controller
     $request->validate([
       'kode_lokasi'     => 'required',
       'nama_lokasi'   => 'required',
-      'kode_wilayah'   => 'required',
     ],
     [
       'kode_lokasi.required' => 'Kode Lokasi tidak boleh kosong.',
       'nama_lokasi.required' => 'Nama Lokasi tidak boleh kosong.',
-      'kode_wilayah.required' => 'Provinsi tidak boleh kosong.',
     ]);
 
 
     $upload = new Lokasi;
     $upload->kode_lokasi = $request->kode_lokasi;
     $upload->nama_lokasi = $request->nama_lokasi;
-    $upload->kode_wilayah = $request->kode_wilayah;
     $upload->peta = $request->peta;
     $upload->save();
 
@@ -100,18 +96,15 @@ class LokasiController extends Controller
     $request->validate([
       'editKode_lokasi'     => 'required',
       'editNama_lokasi'   => 'required',
-      'editKode_wilayah'   => 'required',
     ],
     [
       'editKode_lokasi.required' => 'Kode Lokasi tidak boleh kosong.',
       'editNama_lokasi.required' => 'Nama Lokasi tidak boleh kosong.',
-      'editKode_wilayah.required' => 'Wilayah tidak boleh kosong.'
     ]);
 
     $lokasiEdit->update([
       'kode_lokasi'     => $request->editKode_lokasi,
       'nama_lokasi'     => $request->editNama_lokasi,
-      'kode_wilayah'     => $request->editKode_wilayah,
       'peta'     => $request->editPeta
     ]);
 

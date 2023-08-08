@@ -16,7 +16,12 @@
     </a>
     <ul id="data-master" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="{{route('data-lokasi.index')}}" class="active">
+        <a href="{{route('data-wilayah.index')}}">
+          <i class="bi bi-map"></i><span>Data Wilayah</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{route('data-lokasi.index')}}">
           <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
         </a>
       </li>
@@ -28,6 +33,11 @@
       <li>
         <a href="{{route('video.index')}}">
           <i class="bi bi-play"></i><span>Video Youtube</span>
+        </a>
+      </li>
+      <li>
+        <a href="{{route('shape.index')}}" class="active">
+          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
       <li>
@@ -46,8 +56,8 @@
         </a>
       </li>
       <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
+        <a href="{{route('kolom-pilihan-ganda.index')}}">
+          <i class="bi bi-ui-checks"></i><span>Kolom Cadangan (Pilihan Ganda)</span>
         </a>
       </li>
     </ul>
@@ -92,12 +102,11 @@
 
 @section('main')
   <div class="pagetitle">
-    <h1>Data Lokasi</h1>
+    <h1>SHAPE</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('/admin')}}">Admin</a></li>
-        <li class="breadcrumb-item active">Data Master</li>
-        <li class="breadcrumb-item active">Data Lokasi</li>
+        <li class="breadcrumb-item active">SHAPE</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -109,7 +118,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-9">
-                <h5 class="card-title card-title-full">Data Lokasi</h5>
+                <h5 class="card-title card-title-full">SHAPE</h5>
               </div>
               <div class="col-3 text-end">
                 <a href="#tambahData" class="icon-add-data text-success" data-bs-toggle="modal">
@@ -123,23 +132,23 @@
                     <div class="modal-header">
                       <h5 class="modal-title" id="tambahDataLabel">
                         <i class="bi bi-plus-circle text-success"></i>
-                        Tambah Data Lokasi
+                        Tambah SHAPE
                       </h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('data-lokasi.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('shape.store') }}" method="POST" enctype="multipart/form-data">
                       @csrf
                       <div class="modal-body">
                         <div class="form-group-input">
                           <div class="input-center ps-5">
                             <div class="w-75">
                               <div class="mb-3 row">
-                                <label for="kode_lokasi" class="col-sm-3 px-1 form-label">Kode Wilayah</label>
+                                <label for="shapeSP" class="col-sm-3 px-1 form-label">SHAPE</label>
                                 <div class="col-sm-9">
-                                  <input type="text" name="kode_lokasi" class="form-control form-control-sm" id="kode_lokasi" placeholder="Kode Wilayah">
-                                  @error('kode_lokasi')
+                                  <input type="text" name="shapeSP" class="form-control form-control-sm" id="shapeSP" placeholder="Judul">
+                                  @error('shapeSP')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                      <p class="" style="font-size: 10pt;">
                                         <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                         {{ $message }}
                                       </p>
@@ -148,12 +157,12 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="peta" class="col-sm-3 px-1 form-label">Peta</label>
+                                <label for="deskripsiSP" class="col-sm-3 px-1 form-label">Deskripsi</label>
                                 <div class="col-sm-9">
-                                  <input type="text" name="peta" class="form-control form-control-sm" id="peta" placeholder="Peta">
-                                  @error('peta')
+                                  <textarea class="form-control form-control-sm" name="deskripsiSP" id="deskripsiSP" rows="3" placeholder="Deskripsi"></textarea>
+                                  @error('deskripsiSP')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                      <p class="" style="font-size: 10pt;">
                                         <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                         {{ $message }}
                                       </p>
@@ -167,7 +176,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                        <button type="submit" name="" class="btn btn-success">Simpan</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                       </div>
                     </form>
                   </div>
@@ -180,43 +189,93 @@
               <thead>
                 <tr>
                   <th scope="col">No.</th>
-                  <th scope="col">Kode Lokasi</th>
-                  <th scope="col">Nama Lokasi</th>
-                  <th scope="col">Peta</th>
+                  <th scope="col">SHAPE</th>
+                  <th scope="col">Deskripsi</th>
+                  <th scope="col">Tanggal Input</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
               <tbody>
-                @forelse ($lokasis as $lokasi)
+                @forelse ($shapes as $shape)
                   <tr>
-                    <th scope="row">{{$no++}}</th>
-                    <td>{{$lokasi->kode_lokasi}}</td>
-                    <td>{{$lokasi->nama_lokasi}}</td>
-                    <td>{{$lokasi->peta}}</td>
+                    <th scope="row">1</th>
+                    <td>
+                      <a href="#lihatData{{$shape->id}}" data-bs-toggle="modal" class="text-info">
+                        {{$shape->shapeSP}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Data"></i>
+                      </a>
+                    </td>
+                    <td>{{$shape->deskripsiSP}}</td>
+                    <td>{{$shape->created_at}}</td>
                     <td>
                       <div class="icon-action">
-                        <a href="#ubahData{{$lokasi->kode_lokasi}}" data-bs-toggle="modal" class="text-primary">
+                        <a href="#ubahData{{$shape->id}}" data-bs-toggle="modal" class="text-primary">
                           <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
                         </a>
                         |
-                        <a href="#hapusData{{$lokasi->kode_lokasi}}" data-bs-toggle="modal" class="text-danger">
+                        <a href="#hapusData{{$shape->id}}" data-bs-toggle="modal" class="text-danger">
                           <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
                         </a>
                       </div>
                     </td>
                   </tr>
-                  <!-- Modal Ubah Data -->
-                  <div class="modal fade" id="ubahData{{$lokasi->kode_lokasi}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$lokasi->kode_lokasi}}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                  <!-- Modal Lihat Data -->
+                  <div class="modal fade" id="lihatData{{$shape->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatData{{$shape->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="ubahData{{$lokasi->kode_lokasi}}Label">
-                            <i class="bi bi-pencil-square text-primary"></i>
-                            Ubah Data Lokasi
+                          <h5 class="modal-title" id="lihatData{{$shape->id}}Label">
+                            <i class="bi bi-info-circle text-info"></i>
+                            Lihat SHAPE
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-lokasi.update', $lokasi->kode_lokasi) }}" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body">
+                          <div>
+                            <div class="mx-auto d-block" style="">
+                              <div class="row mx-auto">
+                                <div class="col-3" style="">
+                                  <p class="">SHAPE</p> 
+                                </div>
+                                <div class="col-1" style="">
+                                  <p class="text-center">:</p> 
+                                </div>
+                                <div class="col-8" style="">
+                                  <p class="text-start">{{$shape->shapeSP}}</p>
+                                </div>
+                              </div>
+                              <div class="row mx-auto">
+                                <div class="col-3">
+                                  <p class="">Deskripsi</p> 
+                                </div>
+                                <div class="col-1">
+                                  <p class="text-center">:</p> 
+                                </div>
+                                <div class="col-8">
+                                <p class="text-start">{{$shape->deskripsiSP}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Lihat Data -->
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahData{{$shape->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$shape->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahData{{$shape->id}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah SHAPE
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('shape.update', $shape->id) }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
                           <div class="modal-body">
@@ -224,12 +283,12 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editKode_lokasi" class="col-sm-3 px-1 form-label">Kode Wilayah</label>
+                                    <label for="editShapeSP" class="col-sm-3 px-1 form-label">SHAPE</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKode_lokasi" class="form-control form-control-sm" id="editKode_lokasi" placeholder="Kode Wilayah" value="{{$lokasi->kode_lokasi}}">
-                                      @error('editKode_lokasi')
+                                      <input type="text" name="editShapeSP" class="form-control form-control-sm" id="editShapeSP" placeholder="Judul" value="{{$shape->shapeSP}}">
+                                      @error('editShapeSP')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <p class="" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                             {{ $message }}
                                           </p>
@@ -238,26 +297,12 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editNama_lokasi" class="col-sm-3 px-1 form-label">Nama Wilayah</label>
+                                    <label for="editDeskripsiSP" class="col-sm-3 px-1 form-label">Deskripsi</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editNama_lokasi" class="form-control form-control-sm" id="editNama_lokasi" placeholder="Nama Wilayah" value="{{$lokasi->nama_lokasi}}">
-                                      @error('editNama_lokasi')
+                                      <textarea class="form-control form-control-sm" name="editDeskripsiSP" id="editDeskripsiSP" rows="3" placeholder="Deskripsi">{{$shape->deskripsiSP}}</textarea>
+                                      @error('editDeskripsiSP')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
-                                        </div>
-                                      @enderror
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPeta" class="col-sm-3 px-1 form-label">Peta</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editPeta" class="form-control form-control-sm" id="editPeta" placeholder="Peta" value="{{$lokasi->peta}}">
-                                      @error('editPeta')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <p class="" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                             {{ $message }}
                                           </p>
@@ -271,7 +316,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                            <button type="submit" name="" class="btn btn-success">Simpan</button>
+                            <button type="submit" class="btn btn-success">Simpan</button>
                           </div>
                         </form>
                       </div>
@@ -279,21 +324,21 @@
                   </div>
                   <!-- End Modal Ubah Data -->
                   <!-- Modal Hapus Data -->
-                  <div class="modal fade" id="hapusData{{$lokasi->kode_lokasi}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusData{{$lokasi->kode_lokasi}}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                  <div class="modal fade" id="hapusData{{$shape->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusData{{$shape->id}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="hapusData{{$lokasi->kode_lokasi}}Label">
+                          <h5 class="modal-title" id="hapusData{{$shape->id}}Label">
                             <i class="bi bi-trash text-danger"></i>
-                            Hapus Data Lokasi
+                            Hapus SHAPE
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-lokasi.destroy', $lokasi->kode_lokasi) }}" method="POST">
+                        <form action="{{ route('shape.destroy', $shape->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
-                            <p>Apa anda yakin ingin menghapus Lokasi {{$lokasi->nama_lokasi}} ini?</p>
+                            <p>Apa anda yakin ingin menghapus SHAPE {{$shape->shapeSP}} ini?</p>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>

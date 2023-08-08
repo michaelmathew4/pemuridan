@@ -20,11 +20,6 @@
     </a>
     <ul id="data-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="{{route('data-wilayah.index')}}">
-          <i class="bi bi-map"></i><span>Data Wilayah</span>
-        </a>
-      </li>
-      <li>
         <a href="{{route('data-lokasi.index')}}">
           <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
         </a>
@@ -37,11 +32,6 @@
       <li>
         <a href="{{route('video.index')}}">
           <i class="bi bi-play"></i><span>Video Youtube</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
       <li>
@@ -60,8 +50,8 @@
         </a>
       </li>
       <li>
-        <a href="{{route('kolom-pilihan-ganda.index')}}">
-          <i class="bi bi-ui-checks"></i><span>Kolom Cadangan (Pilihan Ganda)</span>
+        <a href="{{route('shape.index')}}">
+          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
     </ul>
@@ -804,15 +794,17 @@
                               <div class="col-3">Keterangan</div>
                             </div>
                             <hr>
-                            @forelse ($skalas as $skala)
-                              <div class="row">
-                                <div class="col-1">{{$noSkalas++}}.</div>
-                                <div class="col-3">{{$skala->tgl_kontak}}</div>
-                                <div class="col-2">{{$skala->skala}}</div>
-                                <div class="col-3">{{$skala->status}}</div>
-                                <div class="col-3">{{$skala->keterangan}}</div>
-                              </div>
-                              <hr class="text-muted">
+                            @forelse ($collect as $skala)
+                              @foreach ($skala as $skalas)
+                                <div class="row">
+                                  <div class="col-1">{{$noSkalas++}}.</div>
+                                  <div class="col-3">{{$skalas->tgl_kontak}}</div>
+                                  <div class="col-2">{{$skalas->skala}}</div>
+                                  <div class="col-3">{{$skalas->status}}</div>
+                                  <div class="col-3">{{$skalas->keterangan}}</div>
+                                </div>
+                                <hr class="text-muted">
+                              @endforeach
                             @empty
                             @endforelse
                             <div class="row">
@@ -834,6 +826,7 @@
                                   <option value="3">Skala 3</option>
                                 </select>
                               </div>
+                              <div class="col-3"></div>
                               <div class="col-3">
                                 <textarea class="form-control form-control-sm" name="tambahKeteranganSkalaPeserta" id="" cols="30" rows="3" placeholder="Tambah Keterangan"></textarea>
                               </div>
@@ -870,7 +863,7 @@
                             <hr>
                             @forelse ($catatans as $catatan)
                               <div class="row">
-                                <div class="col-1">{{$noCatatans}}.</div>
+                                <div class="col-1">{{$noCatatans++}}.</div>
                                 <div class="col-4">{{$catatan->tgl_kontak}}</div>
                                 <div class="col-7">{{$catatan->catatan}}</div>
                               </div>
