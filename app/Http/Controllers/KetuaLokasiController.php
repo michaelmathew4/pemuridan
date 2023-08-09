@@ -100,8 +100,8 @@ class KetuaLokasiController extends Controller
     $upload->save();
 
     if($upload){
-      if ($request->institusiKL == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKL == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }
@@ -320,8 +320,8 @@ class KetuaLokasiController extends Controller
     $upload->save();
 
     if($upload){
-      if ($request->institusiKL == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKL == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }
@@ -512,8 +512,8 @@ class KetuaLokasiController extends Controller
     $upload->save();
 
     if($upload){
-      if ($request->institusiKL == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
-        $institusi = 'YMP';
+      if ($request->institusiKL == 'PM (Parousia Ministry)') {
+        $institusi = 'PM';
       } else {
         $institusi = 'GKP';
       }

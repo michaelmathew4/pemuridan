@@ -16,11 +16,6 @@
     </a>
     <ul id="data-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="{{route('data-wilayah.index')}}">
-          <i class="bi bi-map"></i><span>Data Wilayah</span>
-        </a>
-      </li>
-      <li>
         <a href="{{route('data-lokasi.index')}}">
           <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
         </a>
@@ -33,11 +28,6 @@
       <li>
         <a href="{{route('video.index')}}">
           <i class="bi bi-play"></i><span>Video Youtube</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
       <li>
@@ -56,8 +46,8 @@
         </a>
       </li>
       <li>
-        <a href="{{route('kolom-pilihan-ganda.index')}}">
-          <i class="bi bi-ui-checks"></i><span>Kolom Cadangan (Pilihan Ganda)</span>
+        <a href="{{route('shape.index')}}">
+          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
     </ul>
@@ -261,11 +251,11 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="institusiKL" class="col-sm-3 px-1 form-label">Naungan</label>
+                                <label for="institusiKL" class="col-sm-3 px-1 form-label">Lembaga</label>
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiKL" id="institusiKL">
-                                    <option value="">-Naungan-</option>
-                                    <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                    <option value="">-Lembaga-</option>
+                                    <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                     <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                   </select>
                                   @error('institusiKL')
@@ -426,28 +416,6 @@
                               </div>
                               <div class="row mx-auto p-0 pt-1 border-bottom">
                                 <div class="col-4 pt-2">
-                                  <p class="">Nama Pengguna</p> 
-                                </div>
-                                <div class="col-1 pt-2">
-                                  <p class="text-center">:</p> 
-                                </div>
-                                <div class="col-4 pt-2">
-                                <p class="text-start">{{$lokasi->nama_penggunaKL}}</p>
-                                </div>
-                              </div>
-                              <div class="row mx-auto p-0 pt-1 border-bottom">
-                                <div class="col-4 pt-2">
-                                  <p class="">Kata Sandi</p> 
-                                </div>
-                                <div class="col-1 pt-2">
-                                  <p class="text-center">:</p> 
-                                </div>
-                                <div class="col-4 pt-2">
-                                <p class="text-start">{{$lokasi->kata_sandiKL}}</p>
-                                </div>
-                              </div>
-                              <div class="row mx-auto p-0 pt-1 border-bottom">
-                                <div class="col-4 pt-2">
                                   <p class="">Lokasi</p> 
                                 </div>
                                 <div class="col-1 pt-2">
@@ -553,20 +521,6 @@
                                     <div class="col-sm-9">
                                       <input type="email" name="editAlamat_surelKL" class="form-control form-control-sm" id="editAlamat_surelKL" placeholder="Alamat Surel" value="{{$lokasi->alamat_surelKL}}">
                                       @error('editAlamat_surelKL')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
-                                        </div>
-                                      @enderror
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editNama_penggunaKL" class="col-sm-3 px-1 form-label">Nama Pengguna</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNama_penggunaKL" class="form-control form-control-sm" id="editNama_penggunaKL" placeholder="Nama Pengguna" value="{{$lokasi->nama_penggunaKL}}">
-                                      @error('editNama_penggunaKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>

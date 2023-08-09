@@ -27,32 +27,21 @@ class PesertaController extends Controller
    */
   public function index()
   {
-    $pesertas = Peserta::addSelect(['skala' => Skala::select('skala')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1),
-            'catatan' => Catatan::select('catatan')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1)
-            ])->get();
-
-    $peserts = Peserta::all();
-    $skalas;
-    foreach ($pesertas as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', 119651953)->orderBy('created_at', 'desc')->get();
-      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // foreach ($skalas as $skala) {
-        // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd(compact(['skalas']));
-      // }
-    }
+    $pesertas = Peserta::addSelect([
+                  'skala' => Skala::select('skala')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'catatan' => Catatan::select('catatan')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1)
+                ])->get();
+    
+    
     $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
   /**
@@ -213,9 +202,18 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function show(Peserta $peserta)
+  public function show($id)
   {
-      //
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
   }
 
   /**

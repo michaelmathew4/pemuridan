@@ -20,11 +20,6 @@
     </a>
     <ul id="data-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="{{route('data-wilayah.index')}}">
-          <i class="bi bi-map"></i><span>Data Wilayah</span>
-        </a>
-      </li>
-      <li>
         <a href="{{route('data-lokasi.index')}}">
           <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
         </a>
@@ -37,11 +32,6 @@
       <li>
         <a href="{{route('video.index')}}">
           <i class="bi bi-play"></i><span>Video Youtube</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
       <li>
@@ -60,8 +50,8 @@
         </a>
       </li>
       <li>
-        <a href="{{route('kolom-pilihan-ganda.index')}}">
-          <i class="bi bi-ui-checks"></i><span>Kolom Cadangan (Pilihan Ganda)</span>
+        <a href="{{route('shape.index')}}">
+          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
     </ul>
@@ -443,12 +433,12 @@
                     <td>{{$peserta->jk_peserta}}</td>
                     <td>{{$peserta->alamat_peserta}}</td>
                     <td>
-                      <a href="#lihatSkala{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.show', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->skala}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Skala"></i>
                       </a>
                     </td>
                     <td>
-                      <a href="#lihatCatatan{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.show', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->catatan}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Catatan"></i>
                       </a>
                     </td>
@@ -783,11 +773,11 @@
                   </div>
                   <!-- End Modal Hapus Data -->
                   <!-- Modal Lihat Skala -->
-                  <div class="modal fade" id="lihatSkala{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkala{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkalaLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatSkala{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatSkalaLabel">
                             <i class="bi bi-graph-up text-info"></i>
                             Lihat Skala Kontak
                           </h5>
@@ -804,17 +794,8 @@
                               <div class="col-3">Keterangan</div>
                             </div>
                             <hr>
-                            @forelse ($skalas as $skala)
-                              <div class="row">
-                                <div class="col-1">{{$noSkalas++}}.</div>
-                                <div class="col-3">{{$skala['tgl_kontak']}}</div>
-                                <div class="col-2">{{$skala->skala}}</div>
-                                <div class="col-3">{{$skala->status}}</div>
-                                <div class="col-3">{{$skala->keterangan}}</div>
-                              </div>
-                              <hr class="text-muted">
-                            @empty
-                            @endforelse
+                            <div id="skalas">
+                            </div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-3">
@@ -834,6 +815,7 @@
                                   <option value="3">Skala 3</option>
                                 </select>
                               </div>
+                              <div class="col-3"></div>
                               <div class="col-3">
                                 <textarea class="form-control form-control-sm" name="tambahKeteranganSkalaPeserta" id="" cols="30" rows="3" placeholder="Tambah Keterangan"></textarea>
                               </div>
@@ -849,11 +831,11 @@
                   </div>
                   <!-- End Modal Lihat Skala -->
                   <!-- Modal Lihat Catatan -->
-                  <div class="modal fade" id="lihatCatatan{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatan{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatCatatan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatanLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatCatatan{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatCatatanLabel">
                             <i class="bi bi-journal-text text-info"></i>
                             Lihat Catatan Kontak
                           </h5>
@@ -868,15 +850,8 @@
                               <div class="col-7">Catatan</div>
                             </div>
                             <hr>
-                            @forelse ($catatans as $catatan)
-                              <div class="row">
-                                <div class="col-1">{{$noCatatans}}.</div>
-                                <div class="col-4">{{$catatan->tgl_kontak}}</div>
-                                <div class="col-7">{{$catatan->catatan}}</div>
-                              </div>
-                              <hr class="text-muted">
-                            @empty
-                            @endforelse
+                            <div id="catatans">
+                            </div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-4">
@@ -1012,6 +987,47 @@
 @section('javascript')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
 <script>
-
+  $(document).on('click', '#lihatSkalaButton', function(event) {
+    event.preventDefault();
+    var href = $(this).data('attr');
+    var id = $(this).data('id');
+    $.get(href, function(result) {
+      no = 1;
+      html = '';
+      $.each(result.skala, function(index, hasil) {
+        $('#lihatSkala').modal("show");
+        nos = no++;
+        html += '<div class="row">';
+        html += '<div class="col-1">'+nos+'</div>';
+        html += '<div class="col-3">'+hasil.tgl_kontak+'</div>';
+        html += '<div class="col-2">'+hasil.skala+'</div>';
+        html += '<div class="col-3">'+hasil.status+'</div>';
+        html += '<div class="col-3">'+hasil.keterangan+'</div>';
+        html += '</div>';
+        html += '<hr>';
+      });
+      $('#skalas').empty('').append(html);
+    });
+  });
+  $(document).on('click', '#lihatCatatanButton', function(event) {
+    event.preventDefault();
+    var href = $(this).data('attr');
+    var id = $(this).data('id');
+    $.get(href, function(result) {
+      no = 1;
+      html = '';
+      $.each(result.catatan, function(index, hasil) {
+        $('#lihatCatatan').modal("show");
+        nos = no++;
+        html += '<div class="row">';
+        html += '<div class="col-1">'+nos+'</div>';
+        html += '<div class="col-4">'+hasil.tgl_kontak+'</div>';
+        html += '<div class="col-7">'+hasil.catatan+'</div>';
+        html += '</div>';
+        html += '<hr>';
+      });
+      $('#catatans').empty('').append(html);
+    });
+  });
 </script>
 @endsection

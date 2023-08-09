@@ -20,11 +20,6 @@
     </a>
     <ul id="data-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="{{route('data-wilayah.index')}}">
-          <i class="bi bi-map"></i><span>Data Wilayah</span>
-        </a>
-      </li>
-      <li>
         <a href="{{route('data-lokasi.index')}}">
           <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
         </a>
@@ -37,11 +32,6 @@
       <li>
         <a href="{{route('video.index')}}">
           <i class="bi bi-play"></i><span>Video Youtube</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
       <li>
@@ -60,8 +50,8 @@
         </a>
       </li>
       <li>
-        <a href="{{route('kolom-pilihan-ganda.index')}}">
-          <i class="bi bi-ui-checks"></i><span>Kolom Cadangan (Pilihan Ganda)</span>
+        <a href="{{route('shape.index')}}">
+          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
     </ul>
@@ -149,6 +139,12 @@
                           </div>
                           <div class="input-center ps-5">
                             <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="idKetuaKelompok" class="col-sm-3 px-1">ID</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="idKetuaKelompoks" class="form-control form-control-sm" id="idKetuaKelompok" placeholder="ID">
+                                </div>
+                              </div>
                               <div class="mb-3 row">
                                 <label for="tglRegistrasiKetuaKelompok" class="col-sm-3 px-1">Tgl Registrasi <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
@@ -1528,16 +1524,16 @@
                         </div>
                         <div class="form-group-input">
                           <div class="form-header-group mb-3">
-                            <h6>Naungan</h6>
+                            <h6>Lembaga</h6>
                           </div>
                           <div class="input-center ps-5">
                             <div class="w-75">
                               <div class="mb-3 row">
-                                <label for="institusiKetuaKelompoks" class="col-sm-3 px-1 form-label">Naungan</label>
+                                <label for="institusiKetuaKelompoks" class="col-sm-3 px-1 form-label">Lembaga</label>
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiKetuaKelompoks" id="institusiKetuaKelompoks">
-                                    <option value="">-Naungan-</option>
-                                    <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                    <option value="">-Lembaga-</option>
+                                    <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                     <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                   </select>
                                   @error('institusiKetuaKelompoks')
@@ -3898,7 +3894,7 @@
     
       $(document).on('click', '#ubahData', function () {
         var idUser = $(this).attr('data-user');
-        console.log(idUser);
+        // console.log(idUser);
         $('#editBKetertarikanKetuaKelompok'+idUser).select2({
           placeholder: "Pilih Bidang Ketertarikan",
           allowClear: true,

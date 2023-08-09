@@ -12,7 +12,6 @@ use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\PesertaController;
-use App\Http\Controllers\ShapeController;
 use App\Http\Controllers\StudiMinatController;
 use App\Http\Controllers\VideoYoutubeController;
 use App\Http\Controllers\WilayahController;
@@ -50,15 +49,13 @@ Route::group(['middleware' => ['auth', 'cekRole:SuperAdmin,Admin']], function ()
 
   Route::resource('/admin/video', VideoYoutubeController::class);
 
-  Route::resource('/admin/shape', ShapeController::class);
+  Route::resource('/admin/shape', KcPilganController::class);
 
   Route::resource('/admin/pekerjaan', PekerjaanController::class);
 
   Route::resource('/admin/studi-minat', StudiMinatController::class);
 
   Route::resource('/admin/kolom-pilihan', KcPilihanController::class);
-
-  Route::resource('/admin/kolom-pilihan-ganda', KcPilganController::class);
 
   Route::resource('/admin/data-admin', AdminController::class);
 
@@ -74,7 +71,7 @@ Route::group(['middleware' => ['auth', 'cekRole:SuperAdmin,Admin']], function ()
 });
 
 //YMP
-Route::group(['middleware' => ['auth', 'cekInstitusi:YMP,Admin,SuperAdmin']], function () {
+Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], function () {
   //Pengurus
   Route::group(['middleware' => ['auth', 'cekRole:Pengurus']], function () {
     Route::get('/ymp/pengurus', function () {

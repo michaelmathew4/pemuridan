@@ -16,11 +16,6 @@
     </a>
     <ul id="data-master" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
       <li>
-        <a href="{{route('data-wilayah.index')}}">
-          <i class="bi bi-map"></i><span>Data Wilayah</span>
-        </a>
-      </li>
-      <li>
         <a href="{{route('data-lokasi.index')}}">
           <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
         </a>
@@ -33,11 +28,6 @@
       <li>
         <a href="{{route('video.index')}}" class="active">
           <i class="bi bi-play"></i><span>Video Youtube</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
       <li>
@@ -56,8 +46,8 @@
         </a>
       </li>
       <li>
-        <a href="{{route('kolom-pilihan-ganda.index')}}">
-          <i class="bi bi-ui-checks"></i><span>Kolom Cadangan (Pilihan Ganda)</span>
+        <a href="{{route('shape.index')}}">
+          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
         </a>
       </li>
     </ul>
