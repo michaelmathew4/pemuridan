@@ -39,13 +39,13 @@ class PesertaController extends Controller
 
     $peserts = Peserta::all();
     $skalas;
-    foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
+    foreach ($pesertas as $pesert) {
+      $skalas = Skala::where('id_peserta', '=', 119651953)->orderBy('created_at', 'desc')->get();
       $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
       // foreach ($skalas as $skala) {
         // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skalas);
+      // dd(compact(['skalas']));
       // }
     }
     $no = 1;

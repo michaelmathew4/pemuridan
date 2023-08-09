@@ -807,7 +807,7 @@
                             @forelse ($skalas as $skala)
                               <div class="row">
                                 <div class="col-1">{{$noSkalas++}}.</div>
-                                <div class="col-3">{{$skala->tgl_kontak}}</div>
+                                <div class="col-3">{{$skala['tgl_kontak']}}</div>
                                 <div class="col-2">{{$skala->skala}}</div>
                                 <div class="col-3">{{$skala->status}}</div>
                                 <div class="col-3">{{$skala->keterangan}}</div>
