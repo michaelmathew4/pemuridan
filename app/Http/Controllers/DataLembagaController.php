@@ -28,16 +28,17 @@ use App\Models\Kc_piltujuh;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class KetuaKelompokController extends Controller
+class DataLembagaController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function index()
-  {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
     $dataLembagas = Data_lembaga::all();
     $nodataLembagas = 1;
 
@@ -221,9 +222,8 @@ class KetuaKelompokController extends Controller
     $storeData->personality_holland = json_encode($request->pilihanGDDatas);
     $storeData->spiritual_gifts = json_encode($request->pilihanGTDatas);
     $storeData->abilities = json_encode($request->pilihanGEDatas);
-    $storeData->kolom_cadanganPGLima = json_encode($request->pilihanGLDatas);
+    $storeData->experience = json_encode($request->pilihanGLDatas);
     $storeData->kemampuan_bahasa = json_encode($request->pilihanGEnDatas);
-    $storeData->penyakit = json_encode($request->pilihanGTuDatas);
     $storeData->kolom_cadanganCBSatu = $request->checkSDatas;
     $storeData->kolom_cadanganCBDua = $request->checkDDatas;
     $storeData->kolom_cadanganCBTiga = $request->checkTDatas;
@@ -350,7 +350,7 @@ class KetuaKelompokController extends Controller
       $addUser->name = $request->namaDatas;
       $addUser->email = $request->emailDatas;
       $addUser->password = bcrypt($request->kata_sandiDatas);
-      $addUser->role = 'Kelompok';
+      $addUser->role = $request->untukPendataans;
       $addUser->institusi = $institusi;
       $addUser->remember_token = Str::random(60);
       $addUser->save();
@@ -477,5 +477,5 @@ class KetuaKelompokController extends Controller
     }else{
       return redirect()->route('data-lembaga.index')->with(['error' => 'Ketua Kelompok Gagal Dihapus!']);
     }
-  }  
+  } 
 }
