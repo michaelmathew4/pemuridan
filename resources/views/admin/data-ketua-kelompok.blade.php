@@ -3894,7 +3894,7 @@
     
       $(document).on('click', '#ubahData', function () {
         var idUser = $(this).attr('data-user');
-        console.log(idUser);
+        // console.log(idUser);
         $('#editBKetertarikanKetuaKelompok'+idUser).select2({
           placeholder: "Pilih Bidang Ketertarikan",
           allowClear: true,

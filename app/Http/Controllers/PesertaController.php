@@ -38,32 +38,10 @@ class PesertaController extends Controller
                       ->limit(1)
                 ])->get();
     
-    $collect = [];
-    foreach ($pesertas as $pe) {
-      $skalas = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
-                ->select('skalas.*')
-                ->where('skalas.id_peserta', $pe->id_peserta)
-                ->get();
-      
-      $collect[] = collect($skalas);
-      // $all = $collect->pluck('id_peserta');
-      // dd($);
-          // foreach ($collect as $collects) {
-            // dd($collects);
-            # code...
-          // }
-    }
-
-    $catatans = Catatan::select('tgl_kontak', 'catatan')
-        // ->orderBy('skalas.created_at', 'desc')
-        ->join('pesertas', 'pesertas.id_peserta', '=', 'catatans.id_peserta')
-        ->get();
     
     $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans', 'collect']));
+    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
   /**
@@ -224,9 +202,18 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function show(Peserta $peserta)
+  public function show($id)
   {
-      //
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
   }
 
   /**

@@ -1,0 +1,12 @@
+Revisian
+1. Combo box pilihan: 1. Pengurus
+                      2. Utusan
+                      3. Beasiswa (Isian seperti Google Form)
+                      4. Ketua Kelompok (Isian seperti Google Form)
+2. Tampilan form Data Kontak sama seperti Ketua kelompok, tapi yang diisi hanya kayak yang di Google form.
+3. Input nominal Beasiswa dan Utusan (Append "Bisa tambah keterangan dan nominal sendiri").
+4. ID User di Ketua Kelompok jadiin 2, yang 1 untuk random, yang 1 untuk input login.
+5. Ketika Admin isi Data Kontak, ada pilihan Semua Data Pengurus, Ketua Kelompok, Beasiswa dan Utusan (Masuk ke Table Kelompok).
+   Ketika Ketua Kelompok yang isi, Field Ketua Kelompok di Tb Kelompok otomatis Ketua Kelompok yang input (Masuk ke Table Kelompok).
+
+SEMUA BARU DI TAMPILAN ADMIN
