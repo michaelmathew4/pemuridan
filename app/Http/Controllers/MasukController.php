@@ -34,7 +34,7 @@ class MasukController extends Controller
             $institusi = $selectUser->institusi;
             $role = $selectUser->role;
             switch ($institusi) {
-                case 'YMP':
+                case 'PM':
                     switch ($role) {
                         case 'SuperAdmin':
                             return redirect('/admin')->with(['success' => 'Super Admin berhasil Masuk!']);
@@ -48,8 +48,8 @@ class MasukController extends Controller
                         case 'Lokasi':
                             return redirect('/ymp/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
                             break;
-                        case 'Kelompok':
-                            return redirect('/ymp/ketua-kelompok')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
+                        case 'Ketua Kelompok':
+                            return redirect('/ymp/lembaga')->with(['success' => $role.' berhasil Masuk!']);
                             break;
                     }
                     # code...

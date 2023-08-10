@@ -5,19 +5,19 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link " href="{{route('berandaKetuaKelompokYMP')}}">
+    <a class="nav-link " href="{{route('berandaDataLembagaPM')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('kelompokKetuaKelompokYMP')}}">
+    <a class="nav-link collapsed" href="{{route('kelompokDataLembagaPM')}}">
       <i class="bi bi-people"></i>
       <span>Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.indexKetuaKelompokYMP')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexDataLembagaPM')}}">
       <i class="bi bi-people"></i>
       <span>Data Kontak</span>
     </a>

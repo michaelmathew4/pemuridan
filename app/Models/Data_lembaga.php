@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class data_lembaga extends Model
+class Data_lembaga extends Model
 {
     use HasFactory;
     /**
@@ -14,8 +14,8 @@ class data_lembaga extends Model
      * @var array
      */
     protected $fillable = [
-      'data_lembaga', 'id_user', 'tanggal_regist', 'refrensi', 'sapaan', 'gelar_awalan', 'nama_lengkap', 'gelar_akhiran', 'nama_panggilan', 'peran', 'jenis_identitas', 'no_identitas',
-      'tempat_lahir', 'tanggal_lahir', 'jK', 'goldar', 'status_pernikahan', 'suku', 'foto', 'foto_bitmap', 'alamat','ket_arah', 'peta', 'negara',
+      'data_lembaga', 'id_user', 'tanggal_regist', 'refrensi', 'sapaan', 'gelar_awalan', 'nama_lengkap', 'gelar_akhiran', 'nama_panggilan', 'peran', 'jenis_identitas',
+      'no_identitas', 'tempat_lahir', 'tanggal_lahir', 'jK', 'goldar', 'status_pernikahan', 'suku', 'foto', 'foto_bitmap', 'alamat','ket_arah', 'peta', 'negara',
       'provinsi', 'kota', 'kecamatan', 'kelurahan', 'kode_pos', 'dusun', 'rt', 'rw', 'area', 'lokasi','no_telp', 'no_rumah', 'no_hpsatu', 'bisa_sms', 'no_hpdua',
       'no_lainnya', 'fax_rumah', 'alamat_surel', 'bisa_email', 'website', 'pekerjaan', 'jabatan', 'status_pekerjaan', 'nama_perusahaan', 'sektor_industri',
       'alamat_kantor', 'telp_kantor', 'ext', 'tingkat_pendidikan', 'sekolah_univ', 'bidang_ketertarikan', 'bidang_keterampilan', 'catatan', 'status',

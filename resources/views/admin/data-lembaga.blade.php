@@ -136,7 +136,7 @@
                               <div class="mb-3 row">
                                 <label for="untukPendataan" class="col-sm-3 px-1">Untuk <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="untukPendataans" id="untukPendataan" aria-label=".form-select-sm sapaandataLembaga">
+                                  <select class="form-select form-select-sm" name="untukPendataans" id="untukPendataan" aria-label=".form-select-sm untukPendataan">
                                     <option value="">-Untuk-</option>
                                     <option value="Pengurus">Pengurus</option>
                                     <option value="Utusan">Utusan</option>
@@ -181,26 +181,28 @@
                                   @enderror
                                 </div>
                               </div>
-                              <div class="mb-3 row">
-                                <label for="referensiData" class="col-sm-3 px-1">Referensi Dari</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="referensiDatas" class="form-control form-control-sm" id="referensiData" placeholder="Referensi Dari">
+                              <div id="sembunyiData" class="divTampil">
+                                <div class="mb-3 row">
+                                  <label for="referensiData" class="col-sm-3 px-1">Referensi Dari</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="referensiDatas" class="form-control form-control-sm" id="referensiData" placeholder="Referensi Dari">
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="sapaanData" class="col-sm-3 px-1">Sapaan</label>
-                                <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="sapaanDatas" id="sapaanData" aria-label=".form-select-sm sapaanData">
-                                    <option value="">-Sapaan-</option>
-                                    <option value="Bapak">Bapak</option>
-                                    <option value="Ibu">Ibu</option>
-                                  </select>
+                                <div class="mb-3 row">
+                                  <label for="sapaanData" class="col-sm-3 px-1">Sapaan</label>
+                                  <div class="col-sm-9">
+                                    <select class="form-select form-select-sm" name="sapaanDatas" id="sapaanData" aria-label=".form-select-sm sapaanData">
+                                      <option value="">-Sapaan-</option>
+                                      <option value="Bapak">Bapak</option>
+                                      <option value="Ibu">Ibu</option>
+                                    </select>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="gelarAwalanData" class="col-sm-3 px-1">Gelar Awalan</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="gelarAwalanDatas" class="form-control form-control-sm" id="gelarAwalanData" placeholder="Gelar Awalan">
+                                <div class="mb-3 row">
+                                  <label for="gelarAwalanData" class="col-sm-3 px-1">Gelar Awalan</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="gelarAwalanDatas" class="form-control form-control-sm" id="gelarAwalanData" placeholder="Gelar Awalan">
+                                  </div>
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -437,6 +439,14 @@
                                       <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
                                     @endforeach
                                   </select>
+                                  @error('lokasiDatas')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
                             </div>
@@ -497,14 +507,14 @@
                                 <label for="emailData" class="col-sm-3 px-1">Email</label>
                                 <div class="col-sm-9">
                                   <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData" placeholder="cth: email@gmail.com">
-                                  @if ($message = Session::get('error'))
+                                  @error('emailDatas')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="" style="font-size: 10pt;">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
                                         <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                                         {{ $message }}
                                       </p>
                                     </div>
-                                  @endif
+                                  @enderror
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -584,7 +594,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select form-select-sm" name="sektorIndustriDatas" id="sektorIndustriData" aria-label=".form-select-sm sektorIndustriData">
-                                      <option>-Sektor Industri-</option>
+                                      <option value="">-Sektor Industri-</option>
                                       @foreach ($sektorIndustris as $sektorIndustri)
                                         <option value="{{$sektorIndustri->sektor_industriSI}}">{{$sektorIndustri->sektor_industriSI}}</option>
                                       @endforeach
@@ -1470,7 +1480,7 @@
                           <div class="input-center ps-5">
                             <div class="w-75">
                               <div class="mb-3 row">
-                                <label for="kata_sandiData" class="col-sm-3 px-1">Kata Sandi</label>
+                                <label for="kata_sandiData" class="col-sm-3 px-1">Kata Sandi <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
                                   <input class="form-control form-control-sm" type="password" name="kata_sandiDatas" id="kata_sandiData" rows="3" placeholder="********">
                                   @error('kata_sandiDatas')
@@ -1484,7 +1494,7 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="konfirmasi_kata_sandiData" class="col-sm-3 px-1">Konfirmasi Kata Sandi</label>
+                                <label for="konfirmasi_kata_sandiData" class="col-sm-3 px-1">Konfirmasi Kata Sandi <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
                                   <input class="form-control form-control-sm" type="password" name="konfirmasi_kata_sandiDatas" id="konfirmasi_kata_sandiData" rows="3" placeholder="********">
                                 </div>
@@ -1499,9 +1509,9 @@
                           <div class="input-center ps-5">
                             <div class="w-75">
                               <div class="mb-3 row">
-                                <label for="institusiDatas" class="col-sm-3 px-1 form-label">Lembaga</label>
+                                <label for="institusiData" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiDatas" id="institusiDatas">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiDatas" id="institusiData">
                                     <option value="">-Lembaga-</option>
                                     <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                     <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
@@ -1682,7 +1692,7 @@
                                   </div>
                                   <div class="row p-2">
                                     <div class="col-4">Foto Bitmap</div>
-                                    <div class="col-8"><img src="{{ asset('images/Data Lembaga/Foto Bitmap/'.$dataLembaga->foto_bitmap) }}" class="img-fluid rounded" alt="..."></div>
+                                    <div class="col-8"><img src="{{ $dataLembaga->foto_bitmap != '' ? asset('images/Data Lembaga/Foto Bitmap/'.$dataLembaga->foto_bitmap) : asset('images/no-user.png') }}" class="img-fluid rounded w-25" alt="..."></div>
                                   </div>
                                 </div>
                               </div>
@@ -3784,83 +3794,93 @@
       });
 
     });
-      // Edit
 
+    // Edit
+    $(document).on('click', '#ubahData', function () {
+      var idUser = $(this).attr('data-user');
+      // console.log(idUser);
+      $('#editBKetertarikanData'+idUser).select2({
+        placeholder: "Pilih Bidang Ketertarikan",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
 
+      
+      $('#editBKeterampilanData'+idUser).select2({
+        placeholder: "Pilih Bidang Keterampilan",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGSData'+idUser).select2({
+        placeholder: "Personality - MBTI",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGDData'+idUser).select2({
+        placeholder: "Personality - Holland",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGTData'+idUser).select2({
+        placeholder: "Spiritual Gifts",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGEData'+idUser).select2({
+        placeholder: "Abilities",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editExperienceData'+idUser).select2({
+        placeholder: "Pilihan Ganda Lima",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGEnData'+idUser).select2({
+        placeholder: "Kemampuan Bahasa",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGTuData'+idUser).select2({
+        placeholder: "Pernah Menderita Penyakit",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+    });
     
-      $(document).on('click', '#ubahData', function () {
-        var idUser = $(this).attr('data-user');
-        // console.log(idUser);
-        $('#editBKetertarikanData'+idUser).select2({
-          placeholder: "Pilih Bidang Ketertarikan",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editBKeterampilanData'+idUser).select2({
-          placeholder: "Pilih Bidang Keterampilan",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGSData'+idUser).select2({
-          placeholder: "Personality - MBTI",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGDData'+idUser).select2({
-          placeholder: "Personality - Holland",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGTData'+idUser).select2({
-          placeholder: "Spiritual Gifts",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGEData'+idUser).select2({
-          placeholder: "Abilities",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editExperienceData'+idUser).select2({
-          placeholder: "Pilihan Ganda Lima",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGEnData'+idUser).select2({
-          placeholder: "Kemampuan Bahasa",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGTuData'+idUser).select2({
-          placeholder: "Pernah Menderita Penyakit",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-        });
+    $(document).ready(function(){
+      $('#untukPendataan').on('change', function(){
+        var isiData = $(this).val(); 
+        if (isiData == "Beasiswa" || isiData == "Utusan") {
+          $("div.divTampil").show();
+          $("#sembunyiData").hide();
+        } else {
+          $("div.divTampil").show();
+        }
+      });
+    });
   </script>
 @endsection

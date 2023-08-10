@@ -28,7 +28,6 @@ use App\Models\Kc_piltujuh;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class DataLembagaController extends Controller
 {
@@ -89,21 +88,21 @@ class DataLembagaController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'untukPendataans'     => 'required',
-      'idDatas'     => 'required',
+      'untukPendataans' => 'required',
+      'idDatas' => 'required|unique:users,id_user',
       'tglRegistrasiDatas'     => 'required',
-      'namaDatas'   => 'required',
-      'fotoDatas'  => 'image|mimes:png,jpg,jpeg',
+      'namaDatas' => 'required',
+      'fotoDatas' => 'image|mimes:png,jpg,jpeg',
       'fotoBitmapDatas'  => 'image|mimes:png,jpg,jpeg',
-      'fileUploadBaptisAnakDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadMenikahDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadBaptisDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadMeninggalDuniaDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadPenyerahanAnakDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadEvangelismExplosionDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadIkatanDinasDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'fileUploadPrktkDuaThnDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
-      'emailDatas'   => 'unique:users,email',
+      'fileUploadBaptisAnakDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'fileUploadMenikahDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'fileUploadBaptisDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'fileUploadMeninggalDuniaDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'fileUploadPenyerahanAnakDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'fileUploadEvangelismExplosionDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'fileUploadIkatanDinasDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'fileUploadPrktkDuaThnDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+      'emailDatas'   => 'email:rfc,dns|unique:users,email',
       'lokasiDatas'  => 'required',
       'institusiDatas'   => 'required',
       'kata_sandiDatas'  => 'required'
@@ -111,21 +110,32 @@ class DataLembagaController extends Controller
     [
       'untukPendataans.required' => 'Untuk Pendataan tidak boleh kosong.',
       'idDatas.required' => 'ID tidak boleh kosong.',
+      'idDatas.unique' => 'ID sudah terdaftar.',
       'tglRegistrasiDatas.required' => 'Tanggal Registrasi tidak boleh kosong.',
       'namaDatas.required' => 'Nama Lengkap tidak boleh kosong.',
       'fotoDatas.image' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
+      'fotoDatas.mimes' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
       'fotoBitmapDatas.image' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
+      'fotoBitmapDatas.mimes' => 'Berkas harus berupa Gambar (.jpg, .png, .jpeg).',
       'fileUploadBaptisAnakDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadBaptisAnakDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadMenikahDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadMenikahDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadBaptisDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadBaptisDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadMeninggalDuniaDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadMeninggalDuniaDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadPenyerahanAnakDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadPenyerahanAnakDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadEvangelismExplosionDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadEvangelismExplosionDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadIkatanDinasDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadIkatanDinasDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadPrktkDuaThnDatas.file' => 'Berkas harus berupa Dokumen.',
+      'fileUploadPrktkDuaThnDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'emailDatas.unique' => 'Alamat Surel sudah ada.',
       'lokasiDatas.required' => 'Lokasi tidak boleh kosong.',
-      'institusiDatas.required' => 'Naungan tidak boleh kosong.',
+      'institusiDatas.required' => 'Lembaga tidak boleh kosong.',
       'kata_sandiDatas.required' => 'Kata Sandi tidak boleh kosong.'
     ]);
 
@@ -338,6 +348,7 @@ class DataLembagaController extends Controller
     $storeData->kata_sandi = $request->kata_sandiDatas;
     $storeData->institusi = $request->institusiDatas;
     $storeData->save();
+    // dd($storeData);
 
     if($storeData){
       if ($request->institusiDatas == 'PM (Parousia Ministry)') {
@@ -346,7 +357,7 @@ class DataLembagaController extends Controller
         $institusi = 'GKP';
       }
       $addUser = new User;
-      $addUser->id_user = $storeData->id_user;
+      $addUser->id_user = $request->idDatas;
       $addUser->name = $request->namaDatas;
       $addUser->email = $request->emailDatas;
       $addUser->password = bcrypt($request->kata_sandiDatas);
@@ -356,12 +367,12 @@ class DataLembagaController extends Controller
       $addUser->save();
       
       if ($addUser) {
-        return redirect()->route('data-lembaga.index')->with(['success' => 'Ketua Kelompok Berhasil Disimpan!']);
+        return redirect()->route('data-lembaga.index')->with(['success' => 'Data Berhasil Disimpan!']);
       }else{
-        return redirect()->route('data-lembaga.index')->with(['error' => 'Ketua Kelompok Gagal Disimpan!']);
+        return redirect()->route('data-lembaga.index')->with(['error' => 'Data Gagal Disimpan!']);
       }
     }else{
-      return redirect()->route('data-lembaga.index')->with(['error' => 'Ketua Kelompok Gagal Disimpan!']);
+      return redirect()->route('data-lembaga.index')->with(['error' => 'Data Gagal Disimpan!']);
     }
   }
 
@@ -473,9 +484,9 @@ class DataLembagaController extends Controller
     $deleteData->delete();
 
     if($deleteData){
-      return redirect()->route('data-lembaga.index')->with(['success' => 'Ketua Kelompok Berhasil Dihapus!']);
+      return redirect()->route('data-lembaga.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }else{
-      return redirect()->route('data-lembaga.index')->with(['error' => 'Ketua Kelompok Gagal Dihapus!']);
+      return redirect()->route('data-lembaga.index')->with(['error' => 'Data Gagal Dihapus!']);
     }
   } 
 }

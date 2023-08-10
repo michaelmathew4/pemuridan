@@ -62,9 +62,9 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-pengurus.index')}}">
-      <i class="bi bi-person"></i>
-      <span>Data Pengurus</span>
+    <a class="nav-link collapsed" href="{{route('data-admin.index')}}">
+      <i class="bi bi-person-bounding-box"></i>
+      <span>Data Admin</span>
     </a>
   </li>
   <li class="nav-item">
@@ -74,9 +74,9 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.index')}}">
+    <a class="nav-link collapsed" href="{{route('data-lembaga.index')}}">
       <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+      <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">

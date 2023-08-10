@@ -59,21 +59,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-pengurus.index')}}">
-      <i class="bi bi-person"></i>
-      <span>Data Pengurus</span>
-    </a>
-  </li>
-  <li class="nav-item">
     <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.index')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.index')}}">
+    <a class="nav-link collapsed" href="{{route('data-lembaga.index')}}">
       <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+      <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">

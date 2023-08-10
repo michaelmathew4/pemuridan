@@ -339,38 +339,27 @@ class PesertaController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function indexPengurusYMP()
+  public function indexPengurusPM()
   {
-    $pesertas = Peserta::addSelect(['skala' => Skala::select('skala')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1),
-            'catatan' => Catatan::select('catatan')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1)
-            ])->get();
-
-    $peserts = Peserta::all();
-    $skalas;
-    foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // foreach ($skalas as $skala) {
-        // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skalas);
-      // }
-    }
+    $pesertas = Peserta::addSelect([
+                  'skala' => Skala::select('skala')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'catatan' => Catatan::select('catatan')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1)
+                ])->get();
+    
+    
     $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
     $lokasis = Lokasi::all();
     return view('ymp.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
   }
 
   
-  function randomCodesPengurusYMP()
+  function randomCodesPengurusPM()
   {
     do {
       $kode = random_int(100000000, 999999999);
@@ -430,7 +419,7 @@ class PesertaController extends Controller
       }
 
       $upload = new Peserta;
-      $upload->id_peserta = $this->randomCodesPengurusYMP();
+      $upload->id_peserta = $this->randomCodesPengurusPM();
       $upload->nama_peserta = $request->namaKontakPeserta;
       $upload->jk_peserta = $request->jenisKelaminPeserta;
       $upload->alamat_peserta = $request->alamatPeserta;
@@ -621,7 +610,7 @@ class PesertaController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function indexKetuaLokasiYMP()
+  public function indexKetuaLokasiPM()
   {
     $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
     $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
@@ -657,7 +646,7 @@ class PesertaController extends Controller
   }
 
 
-  function randomCodesKetuaLokasiYMP()
+  function randomCodesKetuaLokasiPM()
   {
     do {
       $kode = random_int(100000000, 999999999);
@@ -719,7 +708,7 @@ class PesertaController extends Controller
       }
 
       $upload = new Peserta;
-      $upload->id_peserta = $this->randomCodesKetuaLokasiYMP();
+      $upload->id_peserta = $this->randomCodesKetuaLokasiPM();
       $upload->nama_peserta = $request->namaKontakPeserta;
       $upload->jk_peserta = $request->jenisKelaminPeserta;
       $upload->alamat_peserta = $request->alamatPeserta;
@@ -907,40 +896,28 @@ class PesertaController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function indexKetuaKelompokYMP()
+  public function indexDataLembagaPM()
   {
-    $pesertas = Peserta::addSelect(['skala' => Skala::select('skala')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1),
-            'catatan' => Catatan::select('catatan')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1)
-            ])->get();
+    $pesertas = Peserta::join('kelompoks', 'kelompoks.id_peserta', '=', 'pesertas.id_peserta')
+                      ->addSelect([
+                  'skala' => Skala::select('skala')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'catatan' => Catatan::select('catatan')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1)
+                ])->get();
     
-    // dd($cekLokasi);
     
-    $peserts = Peserta::all();
-    $skalas;
-    foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // foreach ($skalas as $skala) {
-        // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skalas);
-      // }
-    }
     $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('ymp.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('ymp.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
 
-  function randomCodesKetuaKelompokYMP()
+  function randomCodesDataLembagaPM()
   {
     do {
       $kode = random_int(100000000, 999999999);
@@ -949,7 +926,7 @@ class PesertaController extends Controller
     return $kode;
   }
 
-  function randomCodesIDKelompokKetuaKelompokYMP()
+  function randomCodesIDKelompokDataLembagaPM()
   {
     do {
       $kode = random_int(100000000, 999999999);
@@ -963,7 +940,7 @@ class PesertaController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storeKetuaKelompokYMP(Request $request)
+  public function storeDataLembagaYMP(Request $request)
   {
     if ($request->inputTambah == "tambahData") {
       $request->validate([
@@ -1008,7 +985,7 @@ class PesertaController extends Controller
       }
 
       $upload = new Peserta;
-      $upload->id_peserta = $this->randomCodesKetuaKelompokYMP();
+      $upload->id_peserta = $this->randomCodesDataLembagaPM();
       $upload->nama_peserta = $request->namaKontakPeserta;
       $upload->jk_peserta = $request->jenisKelaminPeserta;
       $upload->alamat_peserta = $request->alamatPeserta;
@@ -1041,19 +1018,19 @@ class PesertaController extends Controller
 
           if ($catatan) {
             // $kelompok = new Kelompok;
-            // $kelompok->id_kelompok = $this->randomCodesIDKelompokKetuaKelompokYMP();
+            // $kelompok->id_kelompok = $this->randomCodesIDKelompokDataLembagaPM();
             // $kelompok->id_ketua_kelompok = auth()->user()->id_user;
             // $kelompok->id_peserta = $upload->id_peserta;
             // $kelompok->generasi = 
-            return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -1073,9 +1050,9 @@ class PesertaController extends Controller
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -1087,12 +1064,32 @@ class PesertaController extends Controller
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Peserta  $peserta
+   * @return \Illuminate\Http\Response
+   */
+  public function showDataLembagaPM($id)
+  {
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
   }
 
   /**
@@ -1102,7 +1099,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function updateKetuaKelompokYMP(Request $request, $id)
+  public function updateDataLembagaYMP(Request $request, $id)
   {
     $pesertaUpdate = Peserta::find($id);
     if($request->file('editFotoPeserta') == "") {
@@ -1163,10 +1160,10 @@ class PesertaController extends Controller
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -1176,7 +1173,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroyKetuaKelompokYMP($id)
+  public function destroyDataLembagaYMP($id)
   {
     $deleteDataPeserta = Peserta::find($id);
     if ($deleteDataPeserta->foto_peserta != '') {
@@ -1188,9 +1185,9 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Peserta Berhasil Dihapus!']);
     }else{
-      return redirect()->route('data-kontak.indexKetuaKelompokYMP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
 
@@ -1802,7 +1799,7 @@ class PesertaController extends Controller
     $noSkalas = 1;
     $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('gkp.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('gkp.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
   }
 
 
