@@ -1,14 +1,21 @@
 Revisian
-1. Combo box pilihan (DONE):  1. Pengurus
-                              2. Utusan
-                              3. Beasiswa (Isian seperti Google Form) => Hide Input yang belum diperlukan.
-                              4. Ketua Kelompok (Isian seperti Google Form) => Hide Input yang belum diperlukan.
-2. Tampilan form Data Kontak sama seperti Ketua kelompok, tapi yang diisi hanya kayak yang di Google form.
+1. Combo box pilihan (DONE):  1. Pengurus (DONE)
+                              2. Utusan (DONE)
+                              3. Beasiswa (Isian seperti Google Form) => Hide Input yang belum diperlukan. (DONE)
+                              4. Ketua Kelompok (Isian seperti Google Form) => Hide Input yang belum diperlukan. (DONE)
+2. Tampilan form Data Kontak sama seperti Data Lembaga, tapi yang diisi hanya kayak yang di Google form.
 3. Input nominal Beasiswa dan Utusan (Append "Bisa tambah keterangan dan nominal sendiri").
-4. ID User di Ketua Kelompok jadiin input biasa untuk login.
+4. ID User di Data Lembaga jadiin input biasa untuk login. (DONE)
 5. Ketika Admin isi Data Kontak, ada pilihan Semua Data Pengurus, Ketua Kelompok, Beasiswa dan Utusan (Masuk ke Table Kelompok).
    Ketika Ketua Kelompok yang isi, Field Ketua Kelompok di Tb Kelompok otomatis Ketua Kelompok yang input (Masuk ke Table Kelompok).
 6. Kalo Pilihannya Semua data, langsung masukin ke tb Kelompok.
    Kalo Pilihannya Nama Kelompok, get data dari tb Kelompok berdasarkan nama kelompok, terus di input ulang ke tb Kelompok dengan ID Data Kontak.
+7.
 
 SEMUA BARU DI TAMPILAN ADMIN
+
+
+Ketua Kelompok
+Di tampilan data Kelompok, Tampilin nama kelompok nya
+Kalo si kontak jadi ketua kelompok, tampilin detail kelompoknya dengan icon di action
+Atau bikin pohon pengetahuan

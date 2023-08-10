@@ -181,7 +181,7 @@
                                   @enderror
                                 </div>
                               </div>
-                              <div id="sembunyiData" class="divTampil">
+                              <div id="sembunyiData1" class="divTampil1">
                                 <div class="mb-3 row">
                                   <label for="referensiData" class="col-sm-3 px-1">Referensi Dari</label>
                                   <div class="col-sm-9">
@@ -219,26 +219,28 @@
                                   @enderror
                                 </div>
                               </div>
-                              <div class="mb-3 row">
-                                <label for="gelarAkhiranData" class="col-sm-3 px-1">Gelar Akhiran</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="gelarAkhiranDatas" class="form-control form-control-sm" id="gelarAkhiranData" placeholder="Gelar Akhiran">
+                              <div id="sembunyiData2" class="divTampil2">
+                                <div class="mb-3 row">
+                                  <label for="gelarAkhiranData" class="col-sm-3 px-1">Gelar Akhiran</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="gelarAkhiranDatas" class="form-control form-control-sm" id="gelarAkhiranData" placeholder="Gelar Akhiran">
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="namaPanggilanData" class="col-sm-3 px-1">Nama Panggilan</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="namaPanggilanDatas" class="form-control form-control-sm" id="namaPanggilanData" placeholder="cth: Angel">
+                                <div class="mb-3 row">
+                                  <label for="namaPanggilanData" class="col-sm-3 px-1">Nama Panggilan</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="namaPanggilanDatas" class="form-control form-control-sm" id="namaPanggilanData" placeholder="cth: Angel">
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="peranData" class="col-sm-3 px-1">Peran dalam Keluarga</label>
-                                <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="peranDatas" id="peranData" aria-label=".form-select-sm peranData">
-                                    <option value="">-Peran dalam Keluarga-</option>
-                                    <option value="Kepala Keluarga">Kepala Keluarga</option>
-                                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
-                                  </select>
+                                <div class="mb-3 row">
+                                  <label for="peranData" class="col-sm-3 px-1">Peran dalam Keluarga</label>
+                                  <div class="col-sm-9">
+                                    <select class="form-select form-select-sm" name="peranDatas" id="peranData" aria-label=".form-select-sm peranData">
+                                      <option value="">-Peran dalam Keluarga-</option>
+                                      <option value="Kepala Keluarga">Kepala Keluarga</option>
+                                      <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                                    </select>
+                                  </div>
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -304,32 +306,34 @@
                                   </select>
                                 </div>
                               </div>
-                              <div class="mb-3 row">
-                                <label for="fotoData" class="col-sm-3 px-1">Foto</label>
-                                <div class="col-sm-9">
-                                  <input type="file" name="fotoDatas" class="form-control form-control-sm" id="fotoData">
-                                  @error('fotoDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
-                                    </div>
-                                  @enderror
+                              <div id="sembunyiData3" class="divTampil3">
+                                <div class="mb-3 row">
+                                  <label for="fotoData" class="col-sm-3 px-1">Foto</label>
+                                  <div class="col-sm-9">
+                                    <input type="file" name="fotoDatas" class="form-control form-control-sm" id="fotoData">
+                                    @error('fotoDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="fotoBitmapData" class="col-sm-3 px-1">Foto Bitmap</label>
-                                <div class="col-sm-9">
-                                  <input type="file" name="fotoBitmapDatas" class="form-control form-control-sm" id="fotoBitmapData">
-                                  @error('fotoBitmapDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
-                                    </div>
-                                  @enderror
+                                <div class="mb-3 row">
+                                  <label for="fotoBitmapData" class="col-sm-3 px-1">Foto Bitmap</label>
+                                  <div class="col-sm-9">
+                                    <input type="file" name="fotoBitmapDatas" class="form-control form-control-sm" id="fotoBitmapData">
+                                    @error('fotoBitmapDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -464,72 +468,78 @@
                                   <input type="text" name="noTelpSDatas" class="form-control form-control-sm" id="noTelpSData" placeholder="cth: +62">
                                 </div>
                               </div>
-                              <div class="mb-3 row">
-                                <label for="telpRumahData" class="col-sm-3 px-1">Telp. Rumah 2</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="telpRumahDatas" class="form-control form-control-sm" id="telpRumahData" placeholder="cth: +622174130258">
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="noHpSData" class="col-sm-3 px-1">No HP 1</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="noHpSDatas" class="form-control form-control-sm" id="noHpSData" placeholder="cth: +62">
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="terimaSMSData" class="col-sm-3 px-1">Bisa Terima SMS?</label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="terimaSMSDatas" type="checkbox" id="terimaSMSData" value="Ya">
-                                    <label class="form-check-label" for="terimaSMSData">Ya</label>
+                              <div id="sembunyiData4" class="divTampil4">
+                                <div class="mb-3 row">
+                                  <label for="telpRumahData" class="col-sm-3 px-1">Telp. Rumah 2</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="telpRumahDatas" class="form-control form-control-sm" id="telpRumahData" placeholder="cth: +622174130258">
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="noHpDData" class="col-sm-3 px-1">No HP 2</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="noHpDDatas" class="form-control form-control-sm" id="noHpDData" placeholder="cth: +62856789456">
+                                <div class="mb-3 row">
+                                  <label for="noHpSData" class="col-sm-3 px-1">No HP 1</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="noHpSDatas" class="form-control form-control-sm" id="noHpSData" placeholder="cth: +62">
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="noLainData" class="col-sm-3 px-1">No Lainnya</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="noLainDatas" class="form-control form-control-sm" id="noLainData" placeholder="mis: Pin BB">
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="faxData" class="col-sm-3 px-1">Fax. Rumah</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="faxDatas" class="form-control form-control-sm" id="faxData" placeholder="FAX">
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="emailData" class="col-sm-3 px-1">Email</label>
-                                <div class="col-sm-9">
-                                  <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData" placeholder="cth: email@gmail.com">
-                                  @error('emailDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
+                                <div class="mb-3 row">
+                                  <label for="terimaSMSData" class="col-sm-3 px-1">Bisa Terima SMS?</label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="terimaSMSDatas" type="checkbox" id="terimaSMSData" value="Ya">
+                                      <label class="form-check-label" for="terimaSMSData">Ya</label>
                                     </div>
-                                  @enderror
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="terimaEmailData" class="col-sm-3 px-1">Bisa Terima Email?</label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="terimaEmailDatas" type="checkbox" id="terimaEmailData" value="Ya">
-                                    <label class="form-check-label" for="terimaEmailData">Ya</label>
+                                <div class="mb-3 row">
+                                  <label for="noHpDData" class="col-sm-3 px-1">No HP 2</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="noHpDDatas" class="form-control form-control-sm" id="noHpDData" placeholder="cth: +62856789456">
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="noLainData" class="col-sm-3 px-1">No Lainnya</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="noLainDatas" class="form-control form-control-sm" id="noLainData" placeholder="mis: Pin BB">
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="faxData" class="col-sm-3 px-1">Fax. Rumah</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="faxDatas" class="form-control form-control-sm" id="faxData" placeholder="FAX">
                                   </div>
                                 </div>
                               </div>
-                              <div class="mb-3 row">
-                                <label for="websiteData" class="col-sm-3 px-1">Website</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="websiteDatas" class="form-control form-control-sm" id="websiteData" placeholder="cth: Facebook, Twitter, etc">
+                              <div id="sembunyiData5" class="divTampil5">
+                                <div class="mb-3 row">
+                                  <label for="emailData" class="col-sm-3 px-1">Email</label>
+                                  <div class="col-sm-9">
+                                    <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData" placeholder="cth: email@gmail.com">
+                                    @error('emailDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="terimaEmailData" class="col-sm-3 px-1">Bisa Terima Email?</label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="terimaEmailDatas" type="checkbox" id="terimaEmailData" value="Ya">
+                                      <label class="form-check-label" for="terimaEmailData">Ya</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div id="sembunyiData6" class="divTampil6">
+                                <div class="mb-3 row">
+                                  <label for="websiteData" class="col-sm-3 px-1">Website</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" name="websiteDatas" class="form-control form-control-sm" id="websiteData" placeholder="cth: Facebook, Twitter, etc">
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -734,11 +744,13 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="mb-3 row">
-                                <label for="verifEmailData" class="col-sm-3 px-1">Email Sudah Verifikasi?</label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="verifEmailDatas" type="checkbox" id="verifEmailData" value="Ya">
+                              <div id="sembunyiData7" class="divTampil7">
+                                <div class="mb-3 row">
+                                  <label for="verifEmailData" class="col-sm-3 px-1">Email Sudah Verifikasi?</label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="verifEmailDatas" type="checkbox" id="verifEmailData" value="Ya">
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -796,135 +808,137 @@
                             </div>
                           </div>
                         </div>
-                        <div class="form-group-input">
-                          <div class="form-header-group mb-3">
-                            <h6>KOLOM CADANGAN (PILIHAN)</h6>
-                          </div>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="pilihanSData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 row">
-                                  <div class="col-11">
-                                    <select class="form-select form-select-sm" name="pilihanSDatas" id="pilihanSData" aria-label=".form-select-sm pilihanSData">
-                                      <option value="">-Kolom Cadangan (Pilihan) 1</option>
-                                      @foreach ($kc_pilsatus as $kc_pilsatu)
-                                        <option value="{{$kc_pilsatu->kc_pilsatu}}">{{$kc_pilsatu->kc_pilsatu}}</option>
-                                      @endforeach
-                                    </select>
-                                  </div>
-                                  <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Satu" class="fs-5">
-                                      <i class="bi bi-plus-lg text-success text-center"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="pilihanDData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 row">
-                                  <div class="col-11">
-                                    <select class="form-select form-select-sm" name="pilihanDDatas" id="pilihanDData" aria-label=".form-select-sm pilihanDData">
-                                      <option value="">-Kolom Cadangan (Pilihan) 2</option>
-                                      @foreach ($kc_pilduas as $kc_pildua)
-                                        <option value="{{$kc_pildua->kc_pildua}}">{{$kc_pildua->kc_pildua}}</option>
-                                      @endforeach
-                                    </select>
-                                  </div>
-                                  <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Dua" class="fs-5">
-                                      <i class="bi bi-plus-lg text-success text-center"></i>
-                                    </a>
+                        <div id="sembunyiData8" class="divTampil8">
+                          <div class="form-group-input">
+                            <div class="form-header-group mb-3">
+                              <h6>KOLOM CADANGAN (PILIHAN)</h6>
+                            </div>
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="pilihanSData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 row">
+                                    <div class="col-11">
+                                      <select class="form-select form-select-sm" name="pilihanSDatas" id="pilihanSData" aria-label=".form-select-sm pilihanSData">
+                                        <option value="">-Kolom Cadangan (Pilihan) 1</option>
+                                        @foreach ($kc_pilsatus as $kc_pilsatu)
+                                          <option value="{{$kc_pilsatu->kc_pilsatu}}">{{$kc_pilsatu->kc_pilsatu}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+                                      <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Satu" class="fs-5">
+                                        <i class="bi bi-plus-lg text-success text-center"></i>
+                                      </a>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="pilihanTData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 row">
-                                  <div class="col-11">
-                                    <select class="form-select form-select-sm" name="pilihanTDatas" id="pilihanTData" aria-label=".form-select-sm pilihanTData">
-                                      <option value="">-Kolom Cadangan (Pilihan) 3</option>
-                                      @foreach ($kc_piltigas as $kc_piltiga)
-                                        <option value="{{$kc_piltiga->kc_piltiga}}">{{$kc_piltiga->kc_piltiga}}</option>
-                                      @endforeach
-                                    </select>
-                                  </div>
-                                  <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tiga" class="fs-5">
-                                      <i class="bi bi-plus-lg text-success text-center"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="pilihanEData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 row">
-                                  <div class="col-11">
-                                    <select class="form-select form-select-sm" name="pilihanEDatas" id="pilihanEData" aria-label=".form-select-sm pilihanEData">
-                                      <option value="">-Kolom Cadangan (Pilihan) 4</option>
-                                      @foreach ($kc_pilempats as $kc_pilempat)
-                                        <option value="{{$kc_pilempat->kc_pilempat}}">{{$kc_pilempat->kc_pilempat}}</option>
-                                      @endforeach
-                                    </select>
-                                  </div>
-                                  <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Empat" class="fs-5">
-                                      <i class="bi bi-plus-lg text-success text-center"></i>
-                                    </a>
+                                <div class="mb-3 row">
+                                  <label for="pilihanDData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 row">
+                                    <div class="col-11">
+                                      <select class="form-select form-select-sm" name="pilihanDDatas" id="pilihanDData" aria-label=".form-select-sm pilihanDData">
+                                        <option value="">-Kolom Cadangan (Pilihan) 2</option>
+                                        @foreach ($kc_pilduas as $kc_pildua)
+                                          <option value="{{$kc_pildua->kc_pildua}}">{{$kc_pildua->kc_pildua}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+                                      <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Dua" class="fs-5">
+                                        <i class="bi bi-plus-lg text-success text-center"></i>
+                                      </a>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="pilihanLData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 row">
-                                  <div class="col-11">
-                                    <select class="form-select form-select-sm" name="pilihanLDatas" id="pilihanLData" aria-label=".form-select-sm pilihanLData">
-                                      <option value="">-Kolom Cadangan (Pilihan) 5</option>
-                                      @foreach ($kc_pillimas as $kc_pillima)
-                                        <option value="{{$kc_pillima->kc_pillima}}">{{$kc_pillima->kc_pillima}}</option>
-                                      @endforeach
-                                    </select>
-                                  </div>
-                                  <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Lima" class="fs-5">
-                                      <i class="bi bi-plus-lg text-success text-center"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="pilihanEnData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 row">
-                                  <div class="col-11">
-                                    <select class="form-select form-select-sm" name="pilihanEnDatas" id="pilihanEnData" aria-label=".form-select-sm pilihanEnData">
-                                      <option value="">-Kolom Cadangan (Pilihan) 6</option>
-                                      @foreach ($kc_pilenams as $kc_pilenam)
-                                        <option value="{{$kc_pilenam->kc_pilenam}}">{{$kc_pilenam->kc_pilenam}}</option>
-                                      @endforeach
-                                    </select>
-                                  </div>
-                                  <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Enam" class="fs-5">
-                                      <i class="bi bi-plus-lg text-success text-center"></i>
-                                    </a>
+                                <div class="mb-3 row">
+                                  <label for="pilihanTData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 row">
+                                    <div class="col-11">
+                                      <select class="form-select form-select-sm" name="pilihanTDatas" id="pilihanTData" aria-label=".form-select-sm pilihanTData">
+                                        <option value="">-Kolom Cadangan (Pilihan) 3</option>
+                                        @foreach ($kc_piltigas as $kc_piltiga)
+                                          <option value="{{$kc_piltiga->kc_piltiga}}">{{$kc_piltiga->kc_piltiga}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+                                      <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tiga" class="fs-5">
+                                        <i class="bi bi-plus-lg text-success text-center"></i>
+                                      </a>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="pilihanTuData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 row">
-                                  <div class="col-11">
-                                    <select class="form-select form-select-sm" name="pilihanTuDatas" id="pilihanTuData" aria-label=".form-select-sm pilihanTuData">
-                                      <option value="">-Kolom Cadangan (Pilihan) 7</option>
-                                      @foreach ($kc_piltujuhs as $kc_piltujuh)
-                                        <option value="{{$kc_piltujuh->kc_piltujuh}}">{{$kc_piltujuh->kc_piltujuh}}</option>
-                                      @endforeach
-                                    </select>
+                                <div class="mb-3 row">
+                                  <label for="pilihanEData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 row">
+                                    <div class="col-11">
+                                      <select class="form-select form-select-sm" name="pilihanEDatas" id="pilihanEData" aria-label=".form-select-sm pilihanEData">
+                                        <option value="">-Kolom Cadangan (Pilihan) 4</option>
+                                        @foreach ($kc_pilempats as $kc_pilempat)
+                                          <option value="{{$kc_pilempat->kc_pilempat}}">{{$kc_pilempat->kc_pilempat}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+                                      <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Empat" class="fs-5">
+                                        <i class="bi bi-plus-lg text-success text-center"></i>
+                                      </a>
+                                    </div>
                                   </div>
-                                  <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tujuh" class="fs-5">
-                                      <i class="bi bi-plus-lg text-success text-center"></i>
-                                    </a>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="pilihanLData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 row">
+                                    <div class="col-11">
+                                      <select class="form-select form-select-sm" name="pilihanLDatas" id="pilihanLData" aria-label=".form-select-sm pilihanLData">
+                                        <option value="">-Kolom Cadangan (Pilihan) 5</option>
+                                        @foreach ($kc_pillimas as $kc_pillima)
+                                          <option value="{{$kc_pillima->kc_pillima}}">{{$kc_pillima->kc_pillima}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+                                      <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Lima" class="fs-5">
+                                        <i class="bi bi-plus-lg text-success text-center"></i>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="pilihanEnData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 row">
+                                    <div class="col-11">
+                                      <select class="form-select form-select-sm" name="pilihanEnDatas" id="pilihanEnData" aria-label=".form-select-sm pilihanEnData">
+                                        <option value="">-Kolom Cadangan (Pilihan) 6</option>
+                                        @foreach ($kc_pilenams as $kc_pilenam)
+                                          <option value="{{$kc_pilenam->kc_pilenam}}">{{$kc_pilenam->kc_pilenam}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+                                      <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Enam" class="fs-5">
+                                        <i class="bi bi-plus-lg text-success text-center"></i>
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3 row">
+                                  <label for="pilihanTuData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 row">
+                                    <div class="col-11">
+                                      <select class="form-select form-select-sm" name="pilihanTuDatas" id="pilihanTuData" aria-label=".form-select-sm pilihanTuData">
+                                        <option value="">-Kolom Cadangan (Pilihan) 7</option>
+                                        @foreach ($kc_piltujuhs as $kc_piltujuh)
+                                          <option value="{{$kc_piltujuh->kc_piltujuh}}">{{$kc_piltujuh->kc_piltujuh}}</option>
+                                        @endforeach
+                                      </select>
+                                    </div>
+                                    <div class="col-1">
+                                      <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tujuh" class="fs-5">
+                                        <i class="bi bi-plus-lg text-success text-center"></i>
+                                      </a>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1045,72 +1059,74 @@
                             </div>
                           </div>
                         </div>
-                        <div class="form-group-input">
-                          <div class="form-header-group mb-3">
-                            <h6>KOLOM CADANGAN (CHECK BOX)</h6>
-                          </div>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="checkSData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="checkSDatas" type="checkbox" id="checkSData" value="Ya">
-                                    <label class="form-check-label" for="checkSData">Ya</label>
+                        <div id="sembunyiData9" class="divTampil9">
+                          <div class="form-group-input">
+                            <div class="form-header-group mb-3">
+                              <h6>KOLOM CADANGAN (CHECK BOX)</h6>
+                            </div>
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="checkSData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="checkSDatas" type="checkbox" id="checkSData" value="Ya">
+                                      <label class="form-check-label" for="checkSData">Ya</label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="checkDData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="checkDDatas" type="checkbox" id="checkDData" value="Ya">
-                                    <label class="form-check-label" for="checkDData">Ya</label>
+                                <div class="mb-3 row">
+                                  <label for="checkDData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="checkDDatas" type="checkbox" id="checkDData" value="Ya">
+                                      <label class="form-check-label" for="checkDData">Ya</label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="checkTData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="checkTDatas" type="checkbox" id="checkTData" value="Ya">
-                                    <label class="form-check-label" for="checkTData">Ya</label>
+                                <div class="mb-3 row">
+                                  <label for="checkTData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="checkTDatas" type="checkbox" id="checkTData" value="Ya">
+                                      <label class="form-check-label" for="checkTData">Ya</label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="checkEData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="checkEDatas" type="checkbox" id="checkEData" value="Ya">
-                                    <label class="form-check-label" for="checkEData">Ya</label>
+                                <div class="mb-3 row">
+                                  <label for="checkEData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="checkEDatas" type="checkbox" id="checkEData" value="Ya">
+                                      <label class="form-check-label" for="checkEData">Ya</label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="checkLData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="checkLDatas" type="checkbox" id="checkLData" value="Ya">
-                                    <label class="form-check-label" for="checkLData">Ya</label>
+                                <div class="mb-3 row">
+                                  <label for="checkLData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="checkLDatas" type="checkbox" id="checkLData" value="Ya">
+                                      <label class="form-check-label" for="checkLData">Ya</label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="checkEnData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="checkEnDatas" type="checkbox" id="checkEnData" value="Ya">
-                                    <label class="form-check-label" for="checkEnData">Ya</label>
+                                <div class="mb-3 row">
+                                  <label for="checkEnData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="checkEnDatas" type="checkbox" id="checkEnData" value="Ya">
+                                      <label class="form-check-label" for="checkEnData">Ya</label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="checkTuData" class="col-sm-3 px-1"></label>
-                                <div class="col-sm-9 pt-1">
-                                  <div class="form-check form-switch">
-                                    <input class="form-check-input" name="checkTuDatas" type="checkbox" id="checkTuData" value="Ya">
-                                    <label class="form-check-label" for="checkTuData">Ya</label>
+                                <div class="mb-3 row">
+                                  <label for="checkTuData" class="col-sm-3 px-1"></label>
+                                  <div class="col-sm-9 pt-1">
+                                    <div class="form-check form-switch">
+                                      <input class="form-check-input" name="checkTuDatas" type="checkbox" id="checkTuData" value="Ya">
+                                      <label class="form-check-label" for="checkTuData">Ya</label>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1121,45 +1137,47 @@
                           <div class="form-header-group mb-3">
                             <h6>DOKUMEN PENTING</h6>
                           </div>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="" class="col-sm-3 px-1">Baptis Anak</label>
-                                <div class="col-sm-9">
-                                  <label for="" class="">Sudah?</label>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="sudahBaptisAnakDatas" type="checkbox" value="Sudah" id="sudahBaptisAnakData">
-                                    <label class="form-check-label" for="sudahBaptisAnakData">
-                                      Sudah
-                                    </label>
-                                  </div>
-                                  <hr>
-                                  <label for="tglBaptisAnakData" class="">Tanggal</label>
-                                  <input type="date" name="tglBaptisAnakDatas" class="form-control form-control-sm" id="tglBaptisAnakData">
-                                  <hr>
-                                  <label for="" class="">Tempat</label><br>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatBaptisAnakDatas" id="tempatBaptisAnakData" value="Gereja Lokal">
-                                    <label class="form-check-label" for="tempatBaptisAnakData">Gereja Lokal</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatBaptisAnakDatas" id="tempatBaptisAnakLData" value="Gereja Lain">
-                                    <label class="form-check-label" for="tempatBaptisAnakLData">Gereja Lain</label>
-                                  </div>
-                                  <hr>
-                                  <label for="fileUploadBaptisAnakData" class="">File</label>
-                                  <input type="file" name="fileUploadBaptisAnakDatas" class="form-control form-control-sm" id="fileUploadBaptisAnakData">
-                                  @error('fileUploadBaptisAnakDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
+                          <div id="sembunyiData10" class="divTampil10">
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="" class="col-sm-3 px-1">Baptis Anak</label>
+                                  <div class="col-sm-9">
+                                    <label for="" class="">Sudah?</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="sudahBaptisAnakDatas" type="checkbox" value="Sudah" id="sudahBaptisAnakData">
+                                      <label class="form-check-label" for="sudahBaptisAnakData">
+                                        Sudah
+                                      </label>
                                     </div>
-                                  @enderror
-                                  <hr>
-                                  <label for="ketBaptisAnakData" class="">Keterangan</label>
-                                  <textarea class="form-control form-control-sm" name="ketBaptisAnakDatas" id="ketBaptisAnakData" rows="3" placeholder="Keterangan"></textarea>
+                                    <hr>
+                                    <label for="tglBaptisAnakData" class="">Tanggal</label>
+                                    <input type="date" name="tglBaptisAnakDatas" class="form-control form-control-sm" id="tglBaptisAnakData">
+                                    <hr>
+                                    <label for="" class="">Tempat</label><br>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatBaptisAnakDatas" id="tempatBaptisAnakData" value="Gereja Lokal">
+                                      <label class="form-check-label" for="tempatBaptisAnakData">Gereja Lokal</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatBaptisAnakDatas" id="tempatBaptisAnakLData" value="Gereja Lain">
+                                      <label class="form-check-label" for="tempatBaptisAnakLData">Gereja Lain</label>
+                                    </div>
+                                    <hr>
+                                    <label for="fileUploadBaptisAnakData" class="">File</label>
+                                    <input type="file" name="fileUploadBaptisAnakDatas" class="form-control form-control-sm" id="fileUploadBaptisAnakData">
+                                    @error('fileUploadBaptisAnakDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                    <hr>
+                                    <label for="ketBaptisAnakData" class="">Keterangan</label>
+                                    <textarea class="form-control form-control-sm" name="ketBaptisAnakDatas" id="ketBaptisAnakData" rows="3" placeholder="Keterangan"></textarea>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -1253,221 +1271,223 @@
                             </div>
                           </div>
                           <hr>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="" class="col-sm-3 px-1">Meninggal Dunia</label>
-                                <div class="col-sm-9">
-                                  <label for="" class="">Sudah?</label>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="sudahMeninggalDuniaDatas" type="checkbox" value="Sudah" id="sudahMeninggalDuniaData">
-                                    <label class="form-check-label" for="sudahMeninggalDuniaData">
-                                      Sudah
-                                    </label>
-                                  </div>
-                                  <hr>
-                                  <label for="tglMeninggalDuniaData" class="">Tanggal</label>
-                                  <input type="date" name="tglMeninggalDuniaDatas" class="form-control form-control-sm" id="tglMeninggalDuniaData">
-                                  <hr>
-                                  <label for="" class="">Tempat</label><br>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatMeninggalDuniaDatas" id="tempatMeninggalDuniaData" value="Gereja Lokal">
-                                    <label class="form-check-label" for="tempatMeninggalDuniaData">Gereja Lokal</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatMeninggalDuniaDatas" id="tempatMeninggalDuniaLData" value="Gereja Lain">
-                                    <label class="form-check-label" for="tempatMeninggalDuniaLData">Gereja Lain</label>
-                                  </div>
-                                  <hr>
-                                  <label for="fileUploadMeninggalDuniaData" class="">File</label>
-                                  <input type="file" name="fileUploadMeninggalDuniaDatas" class="form-control form-control-sm" id="fileUploadMeninggalDuniaData">
-                                  @error('fileUploadMeninggalDuniaDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
+                          <div id="sembunyiData11" class="divTampil11">
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="" class="col-sm-3 px-1">Meninggal Dunia</label>
+                                  <div class="col-sm-9">
+                                    <label for="" class="">Sudah?</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="sudahMeninggalDuniaDatas" type="checkbox" value="Sudah" id="sudahMeninggalDuniaData">
+                                      <label class="form-check-label" for="sudahMeninggalDuniaData">
+                                        Sudah
+                                      </label>
                                     </div>
-                                  @enderror
-                                  <hr>
-                                  <label for="ketMeninggalDuniaData" class="">Keterangan</label>
-                                  <textarea class="form-control form-control-sm" name="ketMeninggalDuniaDatas" id="ketMeninggalDuniaData" rows="3" placeholder="Keterangan"></textarea>
+                                    <hr>
+                                    <label for="tglMeninggalDuniaData" class="">Tanggal</label>
+                                    <input type="date" name="tglMeninggalDuniaDatas" class="form-control form-control-sm" id="tglMeninggalDuniaData">
+                                    <hr>
+                                    <label for="" class="">Tempat</label><br>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatMeninggalDuniaDatas" id="tempatMeninggalDuniaData" value="Gereja Lokal">
+                                      <label class="form-check-label" for="tempatMeninggalDuniaData">Gereja Lokal</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatMeninggalDuniaDatas" id="tempatMeninggalDuniaLData" value="Gereja Lain">
+                                      <label class="form-check-label" for="tempatMeninggalDuniaLData">Gereja Lain</label>
+                                    </div>
+                                    <hr>
+                                    <label for="fileUploadMeninggalDuniaData" class="">File</label>
+                                    <input type="file" name="fileUploadMeninggalDuniaDatas" class="form-control form-control-sm" id="fileUploadMeninggalDuniaData">
+                                    @error('fileUploadMeninggalDuniaDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                    <hr>
+                                    <label for="ketMeninggalDuniaData" class="">Keterangan</label>
+                                    <textarea class="form-control form-control-sm" name="ketMeninggalDuniaDatas" id="ketMeninggalDuniaData" rows="3" placeholder="Keterangan"></textarea>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <hr>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="" class="col-sm-3 px-1">Penyerahan Anak</label>
-                                <div class="col-sm-9">
-                                  <label for="" class="">Sudah?</label>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="sudahPenyerahanAnakDatas" type="checkbox" value="Sudah" id="sudahPenyerahanAnakData">
-                                    <label class="form-check-label" for="sudahPenyerahanAnakData">
-                                      Sudah
-                                    </label>
-                                  </div>
-                                  <hr>
-                                  <label for="tglPenyerahanAnakData" class="">Tanggal</label>
-                                  <input type="date" name="tglPenyerahanAnakDatas" class="form-control form-control-sm" id="tglPenyerahanAnakData">
-                                  <hr>
-                                  <label for="" class="">Tempat</label><br>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatPenyerahanAnakDatas" id="tempatPenyerahanAnakData" value="Gereja Lokal">
-                                    <label class="form-check-label" for="tempatPenyerahanAnakData">Gereja Lokal</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatPenyerahanAnakDatas" id="tempatPenyerahanAnakLData" value="Gereja Lain">
-                                    <label class="form-check-label" for="tempatPenyerahanAnakLData">Gereja Lain</label>
-                                  </div>
-                                  <hr>
-                                  <label for="fileUploadPenyerahanAnakData" class="">File</label>
-                                  <input type="file" name="fileUploadPenyerahanAnakDatas" class="form-control form-control-sm" id="fileUploadPenyerahanAnakData">
-                                  @error('fileUploadPenyerahanAnakDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
+                            <hr>
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="" class="col-sm-3 px-1">Penyerahan Anak</label>
+                                  <div class="col-sm-9">
+                                    <label for="" class="">Sudah?</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="sudahPenyerahanAnakDatas" type="checkbox" value="Sudah" id="sudahPenyerahanAnakData">
+                                      <label class="form-check-label" for="sudahPenyerahanAnakData">
+                                        Sudah
+                                      </label>
                                     </div>
-                                  @enderror
-                                  <hr>
-                                  <label for="ketPenyerahanAnakData" class="">Keterangan</label>
-                                  <textarea class="form-control form-control-sm" name="ketPenyerahanAnakDatas" id="ketPenyerahanAnakData" rows="3" placeholder="Keterangan"></textarea>
+                                    <hr>
+                                    <label for="tglPenyerahanAnakData" class="">Tanggal</label>
+                                    <input type="date" name="tglPenyerahanAnakDatas" class="form-control form-control-sm" id="tglPenyerahanAnakData">
+                                    <hr>
+                                    <label for="" class="">Tempat</label><br>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatPenyerahanAnakDatas" id="tempatPenyerahanAnakData" value="Gereja Lokal">
+                                      <label class="form-check-label" for="tempatPenyerahanAnakData">Gereja Lokal</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatPenyerahanAnakDatas" id="tempatPenyerahanAnakLData" value="Gereja Lain">
+                                      <label class="form-check-label" for="tempatPenyerahanAnakLData">Gereja Lain</label>
+                                    </div>
+                                    <hr>
+                                    <label for="fileUploadPenyerahanAnakData" class="">File</label>
+                                    <input type="file" name="fileUploadPenyerahanAnakDatas" class="form-control form-control-sm" id="fileUploadPenyerahanAnakData">
+                                    @error('fileUploadPenyerahanAnakDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                    <hr>
+                                    <label for="ketPenyerahanAnakData" class="">Keterangan</label>
+                                    <textarea class="form-control form-control-sm" name="ketPenyerahanAnakDatas" id="ketPenyerahanAnakData" rows="3" placeholder="Keterangan"></textarea>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <hr>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="" class="col-sm-3 px-1">Evangelism Explosion</label>
-                                <div class="col-sm-9">
-                                  <label for="" class="">Sudah?</label>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="sudahEvangelismExplosionDatas" type="checkbox" value="Sudah" id="sudahEvangelismExplosionData">
-                                    <label class="form-check-label" for="sudahEvangelismExplosionData">
-                                      Sudah
-                                    </label>
-                                  </div>
-                                  <hr>
-                                  <label for="tglEvangelismExplosionData" class="">Tanggal</label>
-                                  <input type="date" name="tglEvangelismExplosionDatas" class="form-control form-control-sm" id="tglEvangelismExplosionData">
-                                  <hr>
-                                  <label for="" class="">Tempat</label><br>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatEvangelismExplosionDatas" id="tempatEvangelismExplosionData" value="Gereja Lokal">
-                                    <label class="form-check-label" for="tempatEvangelismExplosionData">Gereja Lokal</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatEvangelismExplosionDatas" id="tempatEvangelismExplosionLData" value="Gereja Lain">
-                                    <label class="form-check-label" for="tempatEvangelismExplosionLData">Gereja Lain</label>
-                                  </div>
-                                  <hr>
-                                  <label for="fileUploadEvangelismExplosionData" class="">File</label>
-                                  <input type="file" name="fileUploadEvangelismExplosionDatas" class="form-control form-control-sm" id="fileUploadEvangelismExplosionData">
-                                  @error('fileUploadEvangelismExplosionDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
+                            <hr>
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="" class="col-sm-3 px-1">Evangelism Explosion</label>
+                                  <div class="col-sm-9">
+                                    <label for="" class="">Sudah?</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="sudahEvangelismExplosionDatas" type="checkbox" value="Sudah" id="sudahEvangelismExplosionData">
+                                      <label class="form-check-label" for="sudahEvangelismExplosionData">
+                                        Sudah
+                                      </label>
                                     </div>
-                                  @enderror
-                                  <hr>
-                                  <label for="ketEvangelismExplosionData" class="">Keterangan</label>
-                                  <textarea class="form-control form-control-sm" name="ketEvangelismExplosionDatas" id="ketEvangelismExplosionData" rows="3" placeholder="Keterangan"></textarea>
+                                    <hr>
+                                    <label for="tglEvangelismExplosionData" class="">Tanggal</label>
+                                    <input type="date" name="tglEvangelismExplosionDatas" class="form-control form-control-sm" id="tglEvangelismExplosionData">
+                                    <hr>
+                                    <label for="" class="">Tempat</label><br>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatEvangelismExplosionDatas" id="tempatEvangelismExplosionData" value="Gereja Lokal">
+                                      <label class="form-check-label" for="tempatEvangelismExplosionData">Gereja Lokal</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatEvangelismExplosionDatas" id="tempatEvangelismExplosionLData" value="Gereja Lain">
+                                      <label class="form-check-label" for="tempatEvangelismExplosionLData">Gereja Lain</label>
+                                    </div>
+                                    <hr>
+                                    <label for="fileUploadEvangelismExplosionData" class="">File</label>
+                                    <input type="file" name="fileUploadEvangelismExplosionDatas" class="form-control form-control-sm" id="fileUploadEvangelismExplosionData">
+                                    @error('fileUploadEvangelismExplosionDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                    <hr>
+                                    <label for="ketEvangelismExplosionData" class="">Keterangan</label>
+                                    <textarea class="form-control form-control-sm" name="ketEvangelismExplosionDatas" id="ketEvangelismExplosionData" rows="3" placeholder="Keterangan"></textarea>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <hr>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="" class="col-sm-3 px-1">Tgl Berakhir Ikatan Dinas</label>
-                                <div class="col-sm-9">
-                                  <label for="" class="">Sudah?</label>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="sudahIkatanDinasDatas" type="checkbox" value="Sudah" id="sudahIkatanDinasData">
-                                    <label class="form-check-label" for="sudahIkatanDinasData">
-                                      Sudah
-                                    </label>
-                                  </div>
-                                  <hr>
-                                  <label for="tglIkatanDinasData" class="">Tanggal</label>
-                                  <input type="date" name="tglIkatanDinasDatas" class="form-control form-control-sm" id="tglIkatanDinasData">
-                                  <hr>
-                                  <label for="" class="">Tempat</label><br>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatIkatanDinasDatas" id="tempatIkatanDinasData" value="Gereja Lokal">
-                                    <label class="form-check-label" for="tempatIkatanDinasData">Gereja Lokal</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatIkatanDinasDatas" id="tempatIkatanDinasLData" value="Gereja Lain">
-                                    <label class="form-check-label" for="tempatIkatanDinasLData">Gereja Lain</label>
-                                  </div>
-                                  <hr>
-                                  <label for="fileUploadIkatanDinasData" class="">File</label>
-                                  <input type="file" name="fileUploadIkatanDinasDatas" class="form-control form-control-sm" id="fileUploadIkatanDinasData">
-                                  @error('fileUploadIkatanDinasDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
+                            <hr>
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="" class="col-sm-3 px-1">Tgl Berakhir Ikatan Dinas</label>
+                                  <div class="col-sm-9">
+                                    <label for="" class="">Sudah?</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="sudahIkatanDinasDatas" type="checkbox" value="Sudah" id="sudahIkatanDinasData">
+                                      <label class="form-check-label" for="sudahIkatanDinasData">
+                                        Sudah
+                                      </label>
                                     </div>
-                                  @enderror
-                                  <hr>
-                                  <label for="ketIkatanDinasData" class="">Keterangan</label>
-                                  <textarea class="form-control form-control-sm" name="ketIkatanDinasDatas" id="ketIkatanDinasData" rows="3" placeholder="Keterangan"></textarea>
+                                    <hr>
+                                    <label for="tglIkatanDinasData" class="">Tanggal</label>
+                                    <input type="date" name="tglIkatanDinasDatas" class="form-control form-control-sm" id="tglIkatanDinasData">
+                                    <hr>
+                                    <label for="" class="">Tempat</label><br>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatIkatanDinasDatas" id="tempatIkatanDinasData" value="Gereja Lokal">
+                                      <label class="form-check-label" for="tempatIkatanDinasData">Gereja Lokal</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatIkatanDinasDatas" id="tempatIkatanDinasLData" value="Gereja Lain">
+                                      <label class="form-check-label" for="tempatIkatanDinasLData">Gereja Lain</label>
+                                    </div>
+                                    <hr>
+                                    <label for="fileUploadIkatanDinasData" class="">File</label>
+                                    <input type="file" name="fileUploadIkatanDinasDatas" class="form-control form-control-sm" id="fileUploadIkatanDinasData">
+                                    @error('fileUploadIkatanDinasDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                    <hr>
+                                    <label for="ketIkatanDinasData" class="">Keterangan</label>
+                                    <textarea class="form-control form-control-sm" name="ketIkatanDinasDatas" id="ketIkatanDinasData" rows="3" placeholder="Keterangan"></textarea>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                          <hr>
-                          <div class="input-center ps-5">
-                            <div class="w-75">
-                              <div class="mb-3 row">
-                                <label for="" class="col-sm-3 px-1">Praktek 2 Tahun</label>
-                                <div class="col-sm-9">
-                                  <label for="" class="">Sudah?</label>
-                                  <div class="form-check">
-                                    <input class="form-check-input" name="sudahPrktkDuaThnDatas" type="checkbox" value="Sudah" id="sudahPrktkDuaThnData">
-                                    <label class="form-check-label" for="sudahPrktkDuaThnData">
-                                      Sudah
-                                    </label>
-                                  </div>
-                                  <hr>
-                                  <label for="tglPrktkDuaThnData" class="">Tanggal</label>
-                                  <input type="date" name="tglPrktkDuaThnDatas" class="form-control form-control-sm" id="tglPrktkDuaThnData">
-                                  <hr>
-                                  <label for="" class="">Tempat</label><br>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatPrktkDuaThnDatas" id="tempatPrktkDuaThnData" value="Gereja Lokal">
-                                    <label class="form-check-label" for="tempatPrktkDuaThnData">Gereja Lokal</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="tempatPrktkDuaThnDatas" id="tempatPrktkDuaThnLData" value="Gereja Lain">
-                                    <label class="form-check-label" for="tempatPrktkDuaThnLData">Gereja Lain</label>
-                                  </div>
-                                  <hr>
-                                  <label for="fileUploadPrktkDuaThnData" class="">File</label>
-                                  <input type="file" name="fileUploadPrktkDuaThnDatas" class="form-control form-control-sm" id="fileUploadPrktkDuaThnData">
-                                  @error('fileUploadPrktkDuaThnDatas')
-                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                      <p class="p-1 pb-0" style="font-size: 10pt;">
-                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                        {{ $message }}
-                                      </p>
+                            <hr>
+                            <div class="input-center ps-5">
+                              <div class="w-75">
+                                <div class="mb-3 row">
+                                  <label for="" class="col-sm-3 px-1">Praktek 2 Tahun</label>
+                                  <div class="col-sm-9">
+                                    <label for="" class="">Sudah?</label>
+                                    <div class="form-check">
+                                      <input class="form-check-input" name="sudahPrktkDuaThnDatas" type="checkbox" value="Sudah" id="sudahPrktkDuaThnData">
+                                      <label class="form-check-label" for="sudahPrktkDuaThnData">
+                                        Sudah
+                                      </label>
                                     </div>
-                                  @enderror
-                                  <hr>
-                                  <label for="ketPrktkDuaThnData" class="">Keterangan</label>
-                                  <textarea class="form-control form-control-sm" name="ketPrktkDuaThnDatas" id="ketPrktk2ThnData" rows="3" placeholder="Keterangan"></textarea>
+                                    <hr>
+                                    <label for="tglPrktkDuaThnData" class="">Tanggal</label>
+                                    <input type="date" name="tglPrktkDuaThnDatas" class="form-control form-control-sm" id="tglPrktkDuaThnData">
+                                    <hr>
+                                    <label for="" class="">Tempat</label><br>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatPrktkDuaThnDatas" id="tempatPrktkDuaThnData" value="Gereja Lokal">
+                                      <label class="form-check-label" for="tempatPrktkDuaThnData">Gereja Lokal</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tempatPrktkDuaThnDatas" id="tempatPrktkDuaThnLData" value="Gereja Lain">
+                                      <label class="form-check-label" for="tempatPrktkDuaThnLData">Gereja Lain</label>
+                                    </div>
+                                    <hr>
+                                    <label for="fileUploadPrktkDuaThnData" class="">File</label>
+                                    <input type="file" name="fileUploadPrktkDuaThnDatas" class="form-control form-control-sm" id="fileUploadPrktkDuaThnData">
+                                    @error('fileUploadPrktkDuaThnDatas')
+                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                        <p class="p-1 pb-0" style="font-size: 10pt;">
+                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                          {{ $message }}
+                                        </p>
+                                      </div>
+                                    @enderror
+                                    <hr>
+                                    <label for="ketPrktkDuaThnData" class="">Keterangan</label>
+                                    <textarea class="form-control form-control-sm" name="ketPrktkDuaThnDatas" id="ketPrktk2ThnData" rows="3" placeholder="Keterangan"></textarea>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -3875,10 +3895,40 @@
       $('#untukPendataan').on('change', function(){
         var isiData = $(this).val(); 
         if (isiData == "Beasiswa" || isiData == "Utusan") {
-          $("div.divTampil").show();
-          $("#sembunyiData").hide();
+          $("div.divTampil1").show();
+          $("div.divTampil2").show();
+          $("div.divTampil3").show();
+          $("div.divTampil4").show();
+          $("div.divTampil5").show();
+          $("div.divTampil6").show();
+          $("div.divTampil7").show();
+          $("div.divTampil8").show();
+          $("div.divTampil9").show();
+          $("div.divTampil10").show();
+          $("div.divTampil11").show();
+          $("#sembunyiData1").hide();
+          $("#sembunyiData2").hide();
+          $("#sembunyiData3").hide();
+          $("#sembunyiData4").hide();
+          $("#sembunyiData5").hide();
+          $("#sembunyiData6").hide();
+          $("#sembunyiData7").hide();
+          $("#sembunyiData8").hide();
+          $("#sembunyiData9").hide();
+          $("#sembunyiData10").hide();
+          $("#sembunyiData11").hide();
         } else {
-          $("div.divTampil").show();
+          $("div.divTampil1").show();
+          $("div.divTampil2").show();
+          $("div.divTampil3").show();
+          $("div.divTampil4").show();
+          $("div.divTampil5").show();
+          $("div.divTampil6").show();
+          $("div.divTampil7").show();
+          $("div.divTampil8").show();
+          $("div.divTampil9").show();
+          $("div.divTampil10").show();
+          $("div.divTampil11").show();
         }
       });
     });
