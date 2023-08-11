@@ -509,21 +509,21 @@
                                   </div>
                                 </div>
                               </div>
-                              <div id="sembunyiData5" class="divTampil5">
-                                <div class="mb-3 row">
-                                  <label for="emailData" class="col-sm-3 px-1">Email</label>
-                                  <div class="col-sm-9">
-                                    <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData" placeholder="cth: email@gmail.com">
-                                    @error('emailDatas')
-                                      <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                        <p class="p-1 pb-0" style="font-size: 10pt;">
-                                          <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                          {{ $message }}
-                                        </p>
-                                      </div>
-                                    @enderror
-                                  </div>
+                              <div class="mb-3 row">
+                                <label for="emailData" class="col-sm-3 px-1">Email</label>
+                                <div class="col-sm-9">
+                                  <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData" placeholder="cth: email@gmail.com">
+                                  @error('emailDatas')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
+                              </div>
+                              <div id="sembunyiData5" class="divTampil5">
                                 <div class="mb-3 row">
                                   <label for="terimaEmailData" class="col-sm-3 px-1">Bisa Terima Email?</label>
                                   <div class="col-sm-9 pt-1">
@@ -773,6 +773,28 @@
                                 <label for="perBeasiswaData" class="col-sm-3 px-1">Periode Beasiswa</label>
                                 <div class="col-sm-9">
                                   <input type="text" name="perBeasiswaDatas" class="form-control form-control-sm" id="perBeasiswaData" placeholder="Periode Beasiswa">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="nominal" class="col-sm-3 px-1">Nominal</label>
+                                <div class="col-9">
+                                  <div id="inputNominal">
+                                    <div class="position-relative">
+                                      <div class="position-absolute top-50 start-100 ms-1 translate-middle-y">
+                                        <button type="button" class="btn btn-transparent p-0" id="tambahNominal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Input Nominal">
+                                          <i class="bi bi-plus-circle fs-5 text-success d-inline"></i>
+                                        </button>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-6">
+                                          <input type="text" name="tambahNominals[0][ket_nominal]" class="form-control form-control-sm" id="ketNominal" placeholder="Keterangan Nominal">
+                                        </div>
+                                        <div class="col-6">
+                                          <input type="text" name="tambahNominals[0][nominal]" class="form-control form-control-sm" id="nominal" placeholder="Nominal">
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -3931,6 +3953,17 @@
           $("div.divTampil11").show();
         }
       });
+    });
+
+    var i = 0;
+    $("#tambahNominal").click(function(){
+      ++i;
+      $("#inputNominal").append('<div class="position-relative mt-1" id="inputNominalTambah'+i+'"><div class="position-absolute top-50 start-100 ms-1 translate-middle-y"><button type="button" class="btn btn-transparent p-0 hapusNominal" id="'+i+'"><i class="bi bi-x-circle fs-5 text-danger d-inline"></i></button></div><div class="row"><div class="col-6"><input type="text" name="tambahNominals['+i+'][ket_nominal]" class="form-control form-control-sm" id="ketNominal" placeholder="Keterangan Nominal"></div><div class="col-6"><input type="text" name="tambahNominals['+i+'][nominal]" class="form-control form-control-sm" id="nominal" placeholder="Nominal"></div></div></div>');
+    });
+   
+    $(document).on('click', '.hapusNominal', function(){   
+      var button_id = $(this).attr("id");   
+      $('#inputNominalTambah'+button_id+'').remove(); 
     });
   </script>
 @endsection

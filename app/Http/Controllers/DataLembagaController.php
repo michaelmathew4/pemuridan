@@ -26,6 +26,7 @@ use App\Models\Kc_pillima;
 use App\Models\Kc_pilenam;
 use App\Models\Kc_piltujuh;
 use App\Models\User;
+use App\Models\Nominal;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -77,6 +78,14 @@ class DataLembagaController extends Controller
   public function create()
   {
       //
+  }
+  function randomCodes()
+  {
+    do {
+      $kode = random_int(100000000, 999999999);
+    } while (Nominal::where("id_nominal", "=", $kode)->first());
+
+    return $kode;
   }
 
   /**
@@ -347,10 +356,23 @@ class DataLembagaController extends Controller
     $storeData->pdt_ket = $request->ketPrktkDuaThnDatas;
     $storeData->kata_sandi = $request->kata_sandiDatas;
     $storeData->institusi = $request->institusiDatas;
-    $storeData->save();
-    // dd($storeData);
+    $storeDataSave = false;
+      if ($request->tambahNominals != '') {
+        foreach ($request->tambahNominals as $key => $isiTambahNominal) {
+          foreach ($isiTambahNominal as $tambahNoma) {
+            $storeNominals = new Nominal;
+            $storeNominals->id_nominal = $this->randomCodes();
+            $storeNominals->id_user = $request->idDatas;
+            $storeNominals->keterangan_nominal = $isiTambahNominal['ket_nominal'];
+            $storeNominals->nominal = $isiTambahNominal['nominal'];
+            // $storeNominals->save();
+      dd($tambahNoma->nominal);
+            # code...
+          }
+        }
+      }
 
-    if($storeData){
+    if($storeDataSave){
       if ($request->institusiDatas == 'PM (Parousia Ministry)') {
         $institusi = 'PM';
       } else {
