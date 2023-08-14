@@ -64,10 +64,11 @@ class DataLembagaController extends Controller
     $kc_pillimas = Kc_pillima::all();
     $kc_pilenams = Kc_pilenam::all();
     $kc_piltujuhs = Kc_piltujuh::all();
+    $nominals = Nominal::all();
 
     return view('admin.data-lembaga', compact(['dataLembagas', 'nodataLembagas', 'pekerjaans', 'statusPekerjaans', 'lokasis', 'sektorIndustris', 'tingkatPendidikans', 'sekolahUnivs',
                                                       'bidKeterampilans', 'bidKetertarikans', 'persMbtis', 'persHollands', 'spiritGifts', 'abilities', 'gandaLimas', 'kemBahasas',
-                                                      'kc_pilsatus', 'kc_pilduas', 'kc_piltigas', 'kc_pilempats', 'kc_pillimas', 'kc_pilenams', 'kc_piltujuhs']));
+                                                      'kc_pilsatus', 'kc_pilduas', 'kc_piltigas', 'kc_pilempats', 'kc_pillimas', 'kc_pilenams', 'kc_piltujuhs', 'nominals']));
   }
 
   /**
@@ -356,23 +357,19 @@ class DataLembagaController extends Controller
     $storeData->pdt_ket = $request->ketPrktkDuaThnDatas;
     $storeData->kata_sandi = $request->kata_sandiDatas;
     $storeData->institusi = $request->institusiDatas;
-    $storeDataSave = false;
-      if ($request->tambahNominals != '') {
-        foreach ($request->tambahNominals as $key => $isiTambahNominal) {
-          foreach ($isiTambahNominal as $tambahNoma) {
-            $storeNominals = new Nominal;
-            $storeNominals->id_nominal = $this->randomCodes();
-            $storeNominals->id_user = $request->idDatas;
-            $storeNominals->keterangan_nominal = $isiTambahNominal['ket_nominal'];
-            $storeNominals->nominal = $isiTambahNominal['nominal'];
-            // $storeNominals->save();
-      dd($tambahNoma->nominal);
-            # code...
-          }
-        }
-      }
+    $storeDataSave = $storeData->save();
 
     if($storeDataSave){
+      if ($request->tambahNominals != '') {
+        foreach ($request->tambahNominals as $key => $isiTambahNominal) {
+          $storeNominals = new Nominal;
+          $storeNominals->id_nominal = $this->randomCodes();
+          $storeNominals->id_user = $request->idDatas;
+          $storeNominals->keterangan_nominal = $isiTambahNominal['ket_nominal'];
+          $storeNominals->nominal = $isiTambahNominal['nominal'];
+          $storeNominals->save();
+        }
+      }
       if ($request->institusiDatas == 'PM (Parousia Ministry)') {
         $institusi = 'PM';
       } else {

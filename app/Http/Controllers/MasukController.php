@@ -43,13 +43,13 @@ class MasukController extends Controller
                             return redirect('/admin')->with(['success' => 'Admin berhasil Masuk!']);
                             break;
                         case 'Pengurus':
-                            return redirect('/ymp/pengurus')->with(['success' => 'Pengurus berhasil Masuk!']);
+                            return redirect('/parousia-ministry/pengurus')->with(['success' => 'Pengurus berhasil Masuk!']);
                             break;
                         case 'Lokasi':
-                            return redirect('/ymp/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
+                            return redirect('/parousia-ministry/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
                             break;
                         case 'Ketua Kelompok':
-                            return redirect('/ymp/lembaga')->with(['success' => $role.' berhasil Masuk!']);
+                            return redirect('/parousia-ministry/lembaga')->with(['success' => $role.' berhasil Masuk!']);
                             break;
                     }
                     # code...
@@ -64,13 +64,13 @@ class MasukController extends Controller
                             return redirect('/admin')->with(['success' => 'Admin berhasil Masuk!']);
                             break;
                         case 'Pengurus':
-                            return redirect('/gkp/pengurus')->with(['success' => 'Pengurus berhasil Masuk!']);
+                            return redirect('/gereja-kristen-parousia/pengurus')->with(['success' => 'Pengurus berhasil Masuk!']);
                             break;
                         case 'Lokasi':
-                            return redirect('/gkp/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
+                            return redirect('/gereja-kristen-parousia/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
                             break;
-                        case 'Kelompok':
-                            return redirect('/gkp/ketua-kelompok')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
+                        case 'Ketua Kelompok':
+                            return redirect('/gereja-kristen-parousia/lembaga')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
                             break;
                     }
                     # code...

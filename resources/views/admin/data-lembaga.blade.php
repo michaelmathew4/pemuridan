@@ -775,22 +775,24 @@
                                   <input type="text" name="perBeasiswaDatas" class="form-control form-control-sm" id="perBeasiswaData" placeholder="Periode Beasiswa">
                                 </div>
                               </div>
-                              <div class="mb-3 row">
-                                <label for="nominal" class="col-sm-3 px-1">Nominal</label>
-                                <div class="col-9">
-                                  <div id="inputNominal">
-                                    <div class="position-relative">
-                                      <div class="position-absolute top-50 start-100 ms-1 translate-middle-y">
-                                        <button type="button" class="btn btn-transparent p-0" id="tambahNominal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Input Nominal">
-                                          <i class="bi bi-plus-circle fs-5 text-success d-inline"></i>
-                                        </button>
-                                      </div>
-                                      <div class="row">
-                                        <div class="col-6">
-                                          <input type="text" name="tambahNominals[0][ket_nominal]" class="form-control form-control-sm" id="ketNominal" placeholder="Keterangan Nominal">
+                              <div id="sembunyiData12" class="divTampil12">
+                                <div class="mb-3 row nominalTampil" id="nominalHide">
+                                  <label for="nominal" class="col-sm-3 px-1">Nominal</label>
+                                  <div class="col-9">
+                                    <div id="inputNominal">
+                                      <div class="position-relative">
+                                        <div class="position-absolute top-50 start-100 ms-1 translate-middle-y">
+                                          <button type="button" class="btn btn-transparent p-0" id="tambahNominal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Input Nominal">
+                                            <i class="bi bi-plus-circle fs-5 text-success d-inline"></i>
+                                          </button>
                                         </div>
-                                        <div class="col-6">
-                                          <input type="text" name="tambahNominals[0][nominal]" class="form-control form-control-sm" id="nominal" placeholder="Nominal">
+                                        <div class="row">
+                                          <div class="col-6">
+                                            <input type="text" name="tambahNominals[0][ket_nominal]" class="form-control form-control-sm" id="ketNominal" placeholder="Keterangan Nominal">
+                                          </div>
+                                          <div class="col-6">
+                                            <input type="text" name="tambahNominals[0][nominal]" class="form-control form-control-sm" id="nominal" placeholder="Nominal">
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
@@ -3928,6 +3930,7 @@
           $("div.divTampil9").show();
           $("div.divTampil10").show();
           $("div.divTampil11").show();
+          $("div.divTampil12").show();
           $("#sembunyiData1").hide();
           $("#sembunyiData2").hide();
           $("#sembunyiData3").hide();
@@ -3951,6 +3954,7 @@
           $("div.divTampil9").show();
           $("div.divTampil10").show();
           $("div.divTampil11").show();
+          $("#sembunyiData12").hide();
         }
       });
     });

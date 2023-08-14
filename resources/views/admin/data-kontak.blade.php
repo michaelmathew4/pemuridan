@@ -806,8 +806,7 @@
                               <div class="col-3">Keterangan</div>
                             </div>
                             <hr>
-                            <div id="skalas">
-                            </div>
+                            <div id="skalas"></div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-3">
@@ -862,8 +861,7 @@
                               <div class="col-7">Catatan</div>
                             </div>
                             <hr>
-                            <div id="catatans">
-                            </div>
+                            <div id="catatans"></div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-4">

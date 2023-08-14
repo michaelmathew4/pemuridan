@@ -38,7 +38,6 @@ class PesertaController extends Controller
                       ->limit(1)
                 ])->get();
     
-    
     $no = 1;
     $lokasis = Lokasi::all();
     return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis']));
@@ -114,7 +113,7 @@ class PesertaController extends Controller
       }
 
       $upload = new Peserta;
-      $upload->id_peserta = $this->randomCodes();
+      $upload->id_peserta = $this->randomCodesPengurusPM();
       $upload->nama_peserta = $request->namaKontakPeserta;
       $upload->jk_peserta = $request->jenisKelaminPeserta;
       $upload->alamat_peserta = $request->alamatPeserta;
@@ -193,7 +192,6 @@ class PesertaController extends Controller
         return redirect()->route('data-kontak.index')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
-    
   }
 
   /**
@@ -323,7 +321,19 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.index')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      $deleteSkalaPeserta = Skala::where('id_peserta', $id);
+      $deleteSkalaPeserta->delete();
+      if($deleteSkalaPeserta) {
+        $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
+        $deleteCatatanPeserta->delete();
+        if ($deleteCatatanPeserta) {
+          return redirect()->route('data-kontak.index')->with(['success' => 'Peserta Berhasil Dihapus!']);
+        }else{
+          return redirect()->route('data-kontak.index')->with(['error' => 'Peserta Gagal Dihapus!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.index')->with(['error' => 'Peserta Gagal Dihapus!']);
+      }
     }else{
       return redirect()->route('data-kontak.index')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
@@ -333,7 +343,7 @@ class PesertaController extends Controller
 
 
 
-  //Pengurus YMP
+  //Pengurus PM
   /**
    * Display a listing of the resource.
    *
@@ -355,7 +365,7 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('ymp.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('parousia-ministry.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
   
@@ -374,7 +384,7 @@ class PesertaController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storePengurusYMP(Request $request)
+  public function storePengurusPM(Request $request)
   {
     if ($request->inputTambah == "tambahData") {
       $request->validate([
@@ -451,15 +461,15 @@ class PesertaController extends Controller
           $catatan->save();
 
           if ($catatan) {
-            return redirect()->route('data-kontak.indexPengurusYMP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.indexPengurusPM')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-kontak.indexPengurusYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-kontak.indexPengurusYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-kontak.indexPengurusYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -479,9 +489,9 @@ class PesertaController extends Controller
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-kontak.indexPengurusYMP')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexPengurusPM')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexPengurusYMP')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -493,12 +503,32 @@ class PesertaController extends Controller
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-kontak.indexPengurusYMP')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexPengurusPM')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexPengurusYMP')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Peserta  $peserta
+   * @return \Illuminate\Http\Response
+   */
+  public function showPengurusPM($id)
+  {
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
   }
 
   /**
@@ -508,7 +538,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function updatePengurusYMP(Request $request, $id)
+  public function updatePengurusPM(Request $request, $id)
   {
     $pesertaUpdate = Peserta::find($id);
     if($request->file('editFotoPeserta') == "") {
@@ -572,10 +602,10 @@ class PesertaController extends Controller
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-kontak.indexPengurusYMP')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.indexPengurusPM')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-kontak.indexPengurusYMP')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -585,7 +615,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroyPengurusYMP($id)
+  public function destroyPengurusPM($id)
   {
     $deleteDataPeserta = Peserta::find($id);
     if ($deleteDataPeserta->foto_peserta != '') {
@@ -597,11 +627,24 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.indexPengurusYMP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      $deleteSkalaPeserta = Skala::where('id_peserta', $id);
+      $deleteSkalaPeserta->delete();
+      if($deleteSkalaPeserta) {
+        $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
+        $deleteCatatanPeserta->delete();
+        if ($deleteCatatanPeserta) {
+          return redirect()->route('data-kontak.indexPengurusPM')->with(['success' => 'Peserta Berhasil Dihapus!']);
+        }else{
+          return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+      }
     }else{
-      return redirect()->route('data-kontak.indexPengurusYMP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.indexPengurusPM')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
+  //End Pengurus PM
 
   
   //Ketua Lokasi YMP
@@ -625,24 +668,9 @@ class PesertaController extends Controller
                 ->limit(1)
             ])->get();
     
-    // dd($cekLokasi);
-
-    $peserts = Peserta::all();
-    $skalas;
-    foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // foreach ($skalas as $skala) {
-        // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skalas);
-      // }
-    }
     $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('ymp.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('parousia-ministry.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
 
@@ -661,7 +689,7 @@ class PesertaController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storeKetuaLokasiYMP(Request $request)
+  public function storeKetuaLokasiPM(Request $request)
   {
     $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
     $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
@@ -740,15 +768,15 @@ class PesertaController extends Controller
           $catatan->save();
 
           if ($catatan) {
-            return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -768,9 +796,9 @@ class PesertaController extends Controller
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -782,12 +810,32 @@ class PesertaController extends Controller
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Peserta  $peserta
+   * @return \Illuminate\Http\Response
+   */
+  public function showKetuaLokasiPM($id)
+  {
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
   }
 
   /**
@@ -797,7 +845,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function updateKetuaLokasiYMP(Request $request, $id)
+  public function updateKetuaLokasiPM(Request $request, $id)
   {
     $pesertaUpdate = Peserta::find($id);
     if($request->file('editFotoPeserta') == "") {
@@ -858,10 +906,10 @@ class PesertaController extends Controller
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -871,7 +919,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroyKetuaLokasiYMP($id)
+  public function destroyKetuaLokasiPM($id)
   {
     $deleteDataPeserta = Peserta::find($id);
     if ($deleteDataPeserta->foto_peserta != '') {
@@ -883,14 +931,26 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      $deleteSkalaPeserta = Skala::where('id_peserta', $id);
+      $deleteSkalaPeserta->delete();
+      if($deleteSkalaPeserta) {
+        $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
+        $deleteCatatanPeserta->delete();
+        if ($deleteCatatanPeserta) {
+          return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['success' => 'Peserta Berhasil Dihapus!']);
+        }else{
+          return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+      }
     }else{
-      return redirect()->route('data-kontak.indexKetuaLokasiYMP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.indexKetuaLokasiPM')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
   
 
-  //Ketua Kelompok YMP
+  //Ketua Kelompok PM
   /**
    * Display a listing of the resource.
    *
@@ -913,7 +973,7 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('ymp.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    return view('parousia-ministry.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
 
@@ -940,7 +1000,7 @@ class PesertaController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storeDataLembagaYMP(Request $request)
+  public function storeDataLembagaPM(Request $request)
   {
     if ($request->inputTambah == "tambahData") {
       $request->validate([
@@ -1022,15 +1082,15 @@ class PesertaController extends Controller
             // $kelompok->id_ketua_kelompok = auth()->user()->id_user;
             // $kelompok->id_peserta = $upload->id_peserta;
             // $kelompok->generasi = 
-            return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -1050,9 +1110,9 @@ class PesertaController extends Controller
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -1064,9 +1124,9 @@ class PesertaController extends Controller
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
@@ -1099,7 +1159,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function updateDataLembagaYMP(Request $request, $id)
+  public function updateDataLembagaPM(Request $request, $id)
   {
     $pesertaUpdate = Peserta::find($id);
     if($request->file('editFotoPeserta') == "") {
@@ -1160,10 +1220,10 @@ class PesertaController extends Controller
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -1173,7 +1233,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroyDataLembagaYMP($id)
+  public function destroyDataLembagaPM($id)
   {
     $deleteDataPeserta = Peserta::find($id);
     if ($deleteDataPeserta->foto_peserta != '') {
@@ -1185,9 +1245,21 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      $deleteSkalaPeserta = Skala::where('id_peserta', $id);
+      $deleteSkalaPeserta->delete();
+      if($deleteSkalaPeserta) {
+        $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
+        $deleteCatatanPeserta->delete();
+        if ($deleteCatatanPeserta) {
+          return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Peserta Berhasil Dihapus!']);
+        }else{
+          return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+      }
     }else{
-      return redirect()->route('data-kontak.indexDataLembagaYMP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
 
@@ -1212,24 +1284,12 @@ class PesertaController extends Controller
                 ->whereColumn('id_peserta', 'pesertas.id_peserta')
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
-            ])->get();
+          ])->get();
 
-    $peserts = Peserta::all();
-    $skalas;
-    foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // foreach ($skalas as $skala) {
-        // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skalas);
-      // }
-    }
-    $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
-    $lokasis = Lokasi::all();
-    return view('gkp.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+
+$no = 1;
+$lokasis = Lokasi::all();
+    return view('gereja-kristen-parousia.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
   
@@ -1376,6 +1436,26 @@ class PesertaController extends Controller
   }
 
   /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Peserta  $peserta
+   * @return \Illuminate\Http\Response
+   */
+  public function showPengurusGKP($id)
+  {
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
+  }
+
+  /**
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
@@ -1471,7 +1551,19 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.indexPengurusGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      $deleteSkalaPeserta = Skala::where('id_peserta', $id);
+      $deleteSkalaPeserta->delete();
+      if($deleteSkalaPeserta) {
+        $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
+        $deleteCatatanPeserta->delete();
+        if ($deleteCatatanPeserta) {
+          return redirect()->route('data-kontak.indexPengurusGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+        }else{
+          return redirect()->route('data-kontak.indexPengurusGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.indexPengurusGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      }
     }else{
       return redirect()->route('data-kontak.indexPengurusGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
@@ -1499,24 +1591,9 @@ class PesertaController extends Controller
                 ->limit(1)
             ])->get();
     
-    // dd($cekLokasi);
-
-    $peserts = Peserta::all();
-    $skalas;
-    foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // foreach ($skalas as $skala) {
-        // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skalas);
-      // }
-    }
     $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('gkp.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('gereja-kristen-parousia.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
 
@@ -1665,6 +1742,26 @@ class PesertaController extends Controller
   }
 
   /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Peserta  $peserta
+   * @return \Illuminate\Http\Response
+   */
+  public function showKetuaLokasiGKP($id)
+  {
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
+  }
+
+  /**
    * Update the specified resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
@@ -1757,7 +1854,19 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.indexKetuaLokasiGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      $deleteSkalaPeserta = Skala::where('id_peserta', $id);
+      $deleteSkalaPeserta->delete();
+      if($deleteSkalaPeserta) {
+        $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
+        $deleteCatatanPeserta->delete();
+        if ($deleteCatatanPeserta) {
+          return redirect()->route('data-kontak.indexKetuaLokasiGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+        }else{
+          return redirect()->route('data-kontak.indexKetuaLokasiGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.indexKetuaLokasiGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      }
     }else{
       return redirect()->route('data-kontak.indexKetuaLokasiGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
@@ -1770,7 +1879,7 @@ class PesertaController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function indexKetuaKelompokGKP()
+  public function indexDataLembagaGKP()
   {
     $pesertas = Peserta::addSelect(['skala' => Skala::select('skala')
                 ->whereColumn('id_peserta', 'pesertas.id_peserta')
@@ -1781,29 +1890,14 @@ class PesertaController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->limit(1)
             ])->get();
-    
-    // dd($cekLokasi);
-    
-    $peserts = Peserta::all();
-    $skalas;
-    foreach ($peserts as $pesert) {
-      $skalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      $catatans = Catatan::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // $getDataSkalas = Skala::where('id_peserta', '=', $pesert->id_peserta)->orderBy('created_at', 'desc')->get();
-      // foreach ($skalas as $skala) {
-        // $dataSkalas = $getDataSkala->tgl_kontak;
-      // dd($skalas);
-      // }
-    }
+  
     $no = 1;
-    $noSkalas = 1;
-    $noCatatans = 1;
     $lokasis = Lokasi::all();
-    return view('gkp.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis', 'skalas', 'catatans', 'noSkalas', 'noCatatans']));
+    return view('gereja-kristen-parousia.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
 
-  function randomCodesKetuaKelompokGKP()
+  function randomCodesDataLembagaGKP()
   {
     do {
       $kode = random_int(100000000, 999999999);
@@ -1812,7 +1906,7 @@ class PesertaController extends Controller
     return $kode;
   }
 
-  function randomCodesIDKelompokKetuaKelompokGKP()
+  function randomCodesIDKelompokDataLembagaGKP()
   {
     do {
       $kode = random_int(100000000, 999999999);
@@ -1826,7 +1920,7 @@ class PesertaController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storeKetuaKelompokGKP(Request $request)
+  public function storeDataLembagaGKP(Request $request)
   {
     if ($request->inputTambah == "tambahData") {
       $request->validate([
@@ -1871,7 +1965,7 @@ class PesertaController extends Controller
       }
 
       $upload = new Peserta;
-      $upload->id_peserta = $this->randomCodesKetuaKelompokGKP();
+      $upload->id_peserta = $this->randomCodesDataLembagaGKP();
       $upload->nama_peserta = $request->namaKontakPeserta;
       $upload->jk_peserta = $request->jenisKelaminPeserta;
       $upload->alamat_peserta = $request->alamatPeserta;
@@ -1904,19 +1998,19 @@ class PesertaController extends Controller
 
           if ($catatan) {
             // $kelompok = new Kelompok;
-            // $kelompok->id_kelompok = $this->randomCodesIDKelompokKetuaKelompokGKP();
+            // $kelompok->id_kelompok = $this->randomCodesIDKelompokDataLembagaGKP();
             // $kelompok->id_ketua_kelompok = auth()->user()->id_user;
             // $kelompok->id_peserta = $upload->id_peserta;
             // $kelompok->generasi = 
-            return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -1936,9 +2030,9 @@ class PesertaController extends Controller
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -1950,12 +2044,32 @@ class PesertaController extends Controller
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\Peserta  $peserta
+   * @return \Illuminate\Http\Response
+   */
+  public function showDataLembagaGKP($id)
+  {
+    $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('skalas.*')
+                ->where('skalas.id_peserta', $id)
+                ->get();
+
+    $catatan = Catatan::join('pesertas', 'catatans.id_peserta', '=', 'pesertas.id_peserta')
+                ->select('catatans.*')
+                ->where('catatans.id_peserta', $id)
+                ->get();
+    return response()->json(["skala" => $skala, "catatan" => $catatan]);
   }
 
   /**
@@ -1965,7 +2079,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function updateKetuaKelompokGKP(Request $request, $id)
+  public function updateDataLembagaGKP(Request $request, $id)
   {
     $pesertaUpdate = Peserta::find($id);
     if($request->file('editFotoPeserta') == "") {
@@ -2026,10 +2140,10 @@ class PesertaController extends Controller
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -2039,7 +2153,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroyKetuaKelompokGKP($id)
+  public function destroyDataLembagaGKP($id)
   {
     $deleteDataPeserta = Peserta::find($id);
     if ($deleteDataPeserta->foto_peserta != '') {
@@ -2051,9 +2165,21 @@ class PesertaController extends Controller
     $deleteDataPeserta->delete();
 
     if($deleteDataPeserta){
-      return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+      $deleteSkalaPeserta = Skala::where('id_peserta', $id);
+      $deleteSkalaPeserta->delete();
+      if($deleteSkalaPeserta) {
+        $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
+        $deleteCatatanPeserta->delete();
+        if ($deleteCatatanPeserta) {
+          return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+        }else{
+          return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      }
     }else{
-      return redirect()->route('data-kontak.indexKetuaKelompokGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
 }
