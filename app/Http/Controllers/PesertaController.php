@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Image;
 use  File;
 use App\Models\Peserta;
+use App\Models\Data_lembaga;
 use App\Models\Skala;
 use App\Models\Lokasi;
 use App\Models\User;
@@ -40,7 +41,10 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    $kelompoks = Kelompok::all();
+    
+    // $kelompoks = Kelompok::join('data_lembagas', 'kelompok.id_ketua_kelompok', '=', 'data_lembagas.id_user');
+    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis', 'kelompoks']));
   }
 
   /**
@@ -85,7 +89,8 @@ class PesertaController extends Controller
         'sukuPeserta'   => 'required',
         'lokasiPeserta'   => 'required',
         'institusiPeserta'   => 'required',
-        'fotoPRS'     => 'image|mimes:png,jpg,jpeg'
+        'fotoPRS'     => 'image|mimes:png,jpg,jpeg',
+        'kelompok'     => 'required'
       ],
       [
         'namaKontakPeserta.required' => 'Nama tidak boleh kosong.',
@@ -101,7 +106,8 @@ class PesertaController extends Controller
         'sukuPeserta.required' => 'Suku tidak boleh kosong.',
         'lokasiPeserta.required' => 'Lokasi tidak boleh kosong.',
         'institusiPeserta.required' => 'Naungan tidak boleh kosong.',
-        'fotoPeserta.image' => 'Berkas harus berupa Gambar.'
+        'fotoPeserta.image' => 'Berkas harus berupa Gambar.',
+        'kelompok.required' => 'Kelompok tidak boleh kosong.'
       ]);
 
       $fotoPesertaUpload = '';

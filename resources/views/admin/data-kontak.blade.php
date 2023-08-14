@@ -113,308 +113,309 @@
                   <i class="bi bi-person-add" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Data"></i>
                 </a>
               </div>
-            <!-- Modal Tambah Data -->
-            <div class="modal fade" id="tambahData" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahDataLabel" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="tambahDataLabel">
-                      <i class="bi bi-person-add text-success"></i>
-                      Tambah Data Kontak
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <form action="{{ route('data-kontak.store') }}" method="post" enctype="multipart/form-data">
-                      @csrf
-                      <div class="form-group-input">
-                        <div class="form-header-group mb-3">
-                          <h6>PERSONAL</h6>
-                        </div>
-                        <div class="input-center ps-5">
-                          <div class="w-75">
-                            <div class="mb-3 row">
-                              <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
-                              <div class="col-sm-9">
-                                <input type="date" required name="tglKontakPeserta" class="form-control form-control-sm" id="tglKontakPeserta">
-                                @error('tglKontakPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="namaKontakPeserta" class="col-sm-3 px-1">Nama Kontak <span class="required-input">(*)</span></label>
-                              <div class="col-sm-9">
-                                <input type="text" name="namaKontakPeserta" required class="form-control form-control-sm" id="namaKontakPeserta" placeholder="cth: Angelica Gabriel">
-                                @error('namaKontakPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="jenisKelaminPeserta" class="col-sm-3 px-1">Jenis Kelamin <span class="required-input">(*)</span></label>
-                              <div class="col-sm-9">
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminPPeserta" value="Pria">
-                                  <label class="form-check-label" for="jenisKelaminPPeserta">Pria</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminWPeserta" value="Wanita">
-                                  <label class="form-check-label" for="jenisKelaminWPeserta">Wanita</label>
+              <!-- Modal Tambah Data -->
+              <div class="modal fade" id="tambahData" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahDataLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="tambahDataLabel">
+                        <i class="bi bi-person-add text-success"></i>
+                        Tambah Data Kontak
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ route('data-kontak.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group-input">
+                          <div class="form-header-group mb-3">
+                            <h6>PERSONAL</h6>
+                          </div>
+                          <div class="input-center ps-5">
+                            <div class="w-75">
+                              <div class="mb-3 row">
+                                <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <input type="date" required name="tglKontakPeserta" class="form-control form-control-sm" id="tglKontakPeserta">
+                                  @error('tglKontakPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
                               </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span></label>
-                              <div class="col-sm-9">
-                                <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
-                                  <option value="">-Skala-</option>
-                                  <option value="-3">Skala -3</option>
-                                  <option value="-2">Skala -2</option>
-                                  <option value="-1">Skala -1</option>
-                                  <option value="0">Skala 0</option>
-                                  <option value="1">Skala 1</option>
-                                  <option value="2">Skala 2</option>
-                                  <option value="3">Skala 3</option>
-                                </select>
-                                <!-- <input type="range" name="skalaPeserta"
-                                  data-provide="slider"
-                                  data-slider-ticks="[-3, -2, -1, 0, 1, 2, 3]"
-                                  data-slider-ticks-labels='["-3", "-2", "-1", "0", "1", "2", "3"]'
-                                  data-slider-ticks-positions="[0,16.6,33.2,49.8,66.4,83,100]"
-                                  data-slider-min="-3"
-                                  data-slider-max="3"
-                                  data-slider-step="1"
-                                  data-slider-value="-3"
-                                  data-slider-tooltip="hide"> -->
-                                @error('skalaPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="catatanPeserta" class="col-sm-3 px-1">Catatan</label>
-                              <div class="col-sm-9">
-                                <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
-                                @error('catatanPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP</label>
-                              <div class="col-sm-9">
-                                <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999">
-                                @error('noHpPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="alamatPeserta" class="col-sm-3 px-1">Alamat</label>
-                              <div class="col-sm-9">
-                                <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
-                                @error('alamatPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
-                              <div class="col-sm-5">
-                                <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung">
-                                @error('tempatLahirPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                              <div class="col-sm-1">
-                                <p>/</p>
-                              </div>
-                              <div class="col-sm-3">
-                                <input type="date" name="tanggalLahirPeserta" class="form-control form-control-sm" id="tanggalLahirPeserta">
-                                @error('tanggalLahirPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
-                              <div class="col-sm-9">
-                                <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
-                                  <option value="">-Pekerjaan-</option>
-                                  <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
-                                  <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
-                                  <option value="Pegawai Swasta">Pegawai Swasta</option>
-                                  <option value="Guru / Dosen">Guru / Dosen</option>
-                                  <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
-                                  <option value="Petani / Peternak">Petani / Peternak</option>
-                                  <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
-                                  <option value="Lain-lain">Lain-lain</option>
-                                </select>
-                                @error('pekerjaanPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku</label>
-                              <div class="col-sm-9">
-                                <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda">
-                                @error('sukuPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="statusPeserta" class="col-sm-3 px-1">Status</label>
-                              <div class="col-sm-9">
-                                <div class="form-check form-switch">
-                                  <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" value="Aktif">
-                                  <label class="form-check-label" for="aktif">Aktif</label>
+                              <div class="mb-3 row">
+                                <label for="namaKontakPeserta" class="col-sm-3 px-1">Nama Kontak <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="namaKontakPeserta" required class="form-control form-control-sm" id="namaKontakPeserta" placeholder="cth: Angelica Gabriel">
+                                  @error('namaKontakPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
                                 </div>
-                                @error('statusPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
                               </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
-                              <div class="col-sm-9">
-                                <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
-                                  <option value="">-Lokasi Kontak-</option>
-                                  @foreach ($lokasis as $lokasi)
-                                    <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
-                                  @endforeach
-                                </select>
-                                @error('lokasiPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
+                              <div class="mb-3 row">
+                                <label for="jenisKelaminPeserta" class="col-sm-3 px-1">Jenis Kelamin <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminPPeserta" value="Pria">
+                                    <label class="form-check-label" for="jenisKelaminPPeserta">Pria</label>
                                   </div>
-                                @enderror
-                              </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga</label>
-                              <div class="col-sm-9">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
-                                  <option value="">-Lembaga-</option>
-                                  <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
-                                  <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
-                                </select>
-                                @error('institusiPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="jenisKelaminPeserta" id="jenisKelaminWPeserta" value="Wanita">
+                                    <label class="form-check-label" for="jenisKelaminWPeserta">Wanita</label>
                                   </div>
-                                @enderror
+                                </div>
                               </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="fotoPeserta" class="col-sm-3 px-1">Foto</label>
-                              <div class="col-sm-9">
-                                <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
-                                @error('fotoPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
+                              <div class="mb-3 row">
+                                <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span> <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
+                                    <option value="">-Skala-</option>
+                                    <option value="-3">Skala -3</option>
+                                    <option value="-2">Skala -2</option>
+                                    <option value="-1">Skala -1</option>
+                                    <option value="0">Skala 0</option>
+                                    <option value="1">Skala 1</option>
+                                    <option value="2">Skala 2</option>
+                                    <option value="3">Skala 3</option>
+                                  </select>
+                                  <!-- <input type="range" name="skalaPeserta"
+                                    data-provide="slider"
+                                    data-slider-ticks="[-3, -2, -1, 0, 1, 2, 3]"
+                                    data-slider-ticks-labels='["-3", "-2", "-1", "0", "1", "2", "3"]'
+                                    data-slider-ticks-positions="[0,16.6,33.2,49.8,66.4,83,100]"
+                                    data-slider-min="-3"
+                                    data-slider-max="3"
+                                    data-slider-step="1"
+                                    data-slider-value="-3"
+                                    data-slider-tooltip="hide"> -->
+                                  @error('skalaPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="catatanPeserta" class="col-sm-3 px-1">Catatan <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
+                                  @error('catatanPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999">
+                                  @error('noHpPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="alamatPeserta" class="col-sm-3 px-1">Alamat <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
+                                  @error('alamatPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir <span class="required-input">(*)</span></label>
+                                <div class="col-sm-5">
+                                  <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung">
+                                  @error('tempatLahirPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                                <div class="col-sm-1">
+                                  <p>/</p>
+                                </div>
+                                <div class="col-sm-3">
+                                  <input type="date" name="tanggalLahirPeserta" class="form-control form-control-sm" id="tanggalLahirPeserta">
+                                  @error('tanggalLahirPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
+                                    <option value="">-Pekerjaan-</option>
+                                    <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                                    <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
+                                    <option value="Pegawai Swasta">Pegawai Swasta</option>
+                                    <option value="Guru / Dosen">Guru / Dosen</option>
+                                    <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
+                                    <option value="Petani / Peternak">Petani / Peternak</option>
+                                    <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
+                                    <option value="Lain-lain">Lain-lain</option>
+                                  </select>
+                                  @error('pekerjaanPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda">
+                                  @error('sukuPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="statusPeserta" class="col-sm-3 px-1">Status <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <div class="form-check form-switch">
+                                    <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" value="Aktif">
+                                    <label class="form-check-label" for="aktif">Aktif</label>
                                   </div>
-                                @enderror
+                                  @error('statusPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
                               </div>
-                            </div>
-                            <div class="mb-3 row">
-                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Ketua Kelompok</label>
-                              <div class="col-sm-9">
-                                <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
-                                  <option value="">-Lembaga-</option>
-                                  <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
-                                  <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
-                                </select>
-                                @error('institusiPeserta')
-                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                    <p class="" style="font-size: 10pt;">
-                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                      {{ $message }}
-                                    </p>
-                                  </div>
-                                @enderror
+                              <div class="mb-3 row">
+                                <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
+                                    <option value="">-Lokasi Kontak-</option>
+                                    @foreach ($lokasis as $lokasi)
+                                      <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                    @endforeach
+                                  </select>
+                                  @error('lokasiPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
                               </div>
+                              <div class="mb-3 row">
+                                <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
+                                    <option value="">-Lembaga-</option>
+                                    <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                    <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
+                                  </select>
+                                  @error('institusiPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="fotoPeserta" class="col-sm-3 px-1">Foto</label>
+                                <div class="col-sm-9">
+                                  <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
+                                  @error('fotoPeserta')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="kelompok" class="col-sm-3 px-1">Kelompok <span class="required-input">(*)</span></label>
+                                <div class="col-sm-9">
+                                  <select class="form-select form-select-sm" name="kelompok" id="kelompok" aria-label=".form-select-sm kelompok">
+                                    <option value="">-Kelompok-</option>
+                                    @foreach ($kelompoks as $kelompok)
+                                      <option value="{{$kelompok->nama_kelompok}}">{{$kelompok->nama_kelompok}} ({{$kelompok->nama_lengkap}})</option>
+                                    @endforeach
+                                  </select>
+                                  @error('kelompok')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <input type="text" name="inputTambah" id="" value="tambahData" hidden>
                             </div>
-                            <input type="text" name="inputTambah" id="" value="tambahData" hidden>
                           </div>
                         </div>
-                      </div>
-                      <div class="modal-footer mt-2">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                      </div>
-                    </form>
+                        <div class="modal-footer mt-2">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                          <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- End Modal Tambah Data -->
+              <!-- End Modal Tambah Data -->
             </div>
             <hr>
             <table class="table table-hover">
