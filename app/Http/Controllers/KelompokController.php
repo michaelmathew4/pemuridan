@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelompok;
+use App\Models\Nama_kelompok;
+use App\Models\Peserta;
 use Illuminate\Http\Request;
 
 class KelompokController extends Controller
@@ -14,7 +16,9 @@ class KelompokController extends Controller
      */
     public function index()
     {
-        //
+        $no = 1;
+        $nama_kelompoks = Nama_kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
+        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks']));
     }
 
     /**
@@ -35,7 +39,23 @@ class KelompokController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'mbti'     => 'required'
+        ],
+        [
+          'mbti.required' => 'MBTI tidak boleh kosong.'
+        ]);
+    
+        $input = new P_mbti;
+        $input->mbti = $request->mbti;
+        $input->deskripsiMBTI = $request->deskripsiMBTI;
+        $input->save();
+    
+        if($input){
+          return redirect()->route('shape.index')->with(['success' => 'Personality - MBTI Berhasil Disimpan!']);
+        }else{
+          return redirect()->route('shape.index')->with(['error' => 'Personality - MBTI Gagal Disimpan!']);
+        }
     }
 
     /**

@@ -1,5 +1,8 @@
 @extends('layout.app')
 
+@section('css')
+@endsection
+
 @section('nav')
 @endsection
 
@@ -11,7 +14,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('kelompokDataLembagaPM')}}">
+    <a class="nav-link collapsed" href="{{route('kelompok.index')}}">
       <i class="bi bi-people"></i>
       <span>Kelompok</span>
     </a>
@@ -66,7 +69,7 @@
                       </h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('kelompok.store')}}" method="POST" enctype="multipart/form-data">
                       @csrf
                       <div class="modal-body">
                         <div class="form-group-input">
@@ -75,7 +78,7 @@
                               <div class="mb-3 row">
                                 <label for="namaKelompok" class="col-sm-3 px-1 form-label">Nama Kelompok</label>
                                 <div class="col-sm-9">
-                                  <input type="text" name="namaKelompok" class="form-control form-control-sm" id="namaKelompok" placeholder="Judul">
+                                  <input type="text" name="namaKelompok" class="form-control form-control-sm" id="namaKelompok" placeholder="Nama Kelompok">
                                   @error('namaKelompok')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                       <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -87,10 +90,12 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="deskripsiAM" class="col-sm-3 px-1 form-label">Kontak</label>
+                                <label for="kontak" class="col-sm-3 px-1 form-label">Kontak</label>
                                 <div class="col-sm-9">
-                                  <textarea class="form-control form-control-sm" name="deskripsiAM" id="deskripsiAM" rows="3" placeholder="Deskripsi"></textarea>
-                                  @error('deskripsiAM')
+                                  <select class="form-control" name="kontaks[]" style="width: 100%;" id="kontak" aria-label="multiple select kontak" multiple>
+                                    <option>-Kontak-</option>
+                                  </select>
+                                  @error('kontak')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                       <p class="p-1 pb-0" style="font-size: 10pt;">
                                         <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -118,13 +123,40 @@
             <table class="table table-responsive">
               <thead>
                 <th>No.</th>
-                <th>Nama Kontak</th>
-                <th>Generasi</th>
+                <th>ID Kelompok</th>
+                <th>Nama Kelompok</th>
+                <th>Tanggal Pembuatan</th>
               </thead>
+              <tbody>
+                @forelse ($nama_kelompoks as $nama_kelompok)
+                  <tr>
+                    <td>{{$no++}}</td>
+                    <td>{{$nama_kelompok->id_kelompok}}</td>
+                    <td>{{$nama_kelompok->nama_kelompok}}</td>
+                    <td>{{$nama_kelompok->created_at}}</td>
+                  </tr>
+                @empty
+                  <div class="alert alert-danger">
+                    Data Tidak Ada
+                  </div>
+                @endforelse
+              </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
   </section>
+@endsection
+@section('javascript')
+  <script>
+    $(document).ready(function() {
+      $('#kontak').select2({
+        placeholder: "Kontak",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#tambahData")
+      });
+    });
+  </script>
 @endsection

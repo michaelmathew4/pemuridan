@@ -15,7 +15,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('kelompokDataLembagaPM')}}">
+    <a class="nav-link collapsed" href="{{route('kelompok.index')}}">
       <i class="bi bi-people"></i>
       <span>Kelompok</span>
     </a>

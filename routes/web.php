@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelModulController;
 use App\Http\Controllers\KcPilihanController;
 use App\Http\Controllers\KcPilganController;
+use App\Http\Controllers\KelompokController;
 use App\Http\Controllers\DataLembagaController;
 use App\Http\Controllers\KetuaLokasiController;
 use App\Http\Controllers\LokasiController;
@@ -156,9 +157,8 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
       return view('/parousia-ministry/lembaga/index');
     })->name('berandaDataLembagaPM');
 
-    Route::get('/parousia-ministry/lembaga/kelompok', function () {
-      return view('/parousia-ministry/lembaga/kelompok');
-    })->name('kelompokDataLembagaPM');
+    //Kelompok
+    Route::resource('/parousia-ministry/lembaga/kelompok', KelompokController::class);
     
     //Data Kontak
     Route::get('/parousia-ministry/lembaga/data-kontak', [PesertaController::class, 'indexDataLembagaPM'])
