@@ -28,6 +28,7 @@ class CreatePesertasTable extends Migration
             $table->string('lokasi_peserta', 50);
             $table->string('institusi_peserta');
             $table->string('foto_peserta')->nullable();
+            $table->string('peminta', 20);
             $table->timestamps();
         });
     }

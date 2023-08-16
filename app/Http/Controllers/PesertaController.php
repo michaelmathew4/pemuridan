@@ -12,10 +12,31 @@ use App\Models\User;
 use App\Models\Ketua_lokasi;
 use App\Models\Ketua_kelompok;
 use App\Models\Kelompok;
-use Illuminate\Support\Str;
 use App\Models\Catatan;
+use App\Models\Pekerjaan;
+use App\Models\Sektor_industri;
+use App\Models\Status_pekerjaan;
+use App\Models\Tingkat_pendidikan;
+use App\Models\Sekolah_univ;
+use App\Models\Bidang_keterampilan;
+use App\Models\Bidang_ketertarikan;
+use App\Models\P_mbti;
+use App\Models\Pers_holland;
+use App\Models\Spirit_gifts;
+use App\Models\Abilities;
+use App\Models\Ganda_lima;
+use App\Models\Kem_bahasa;
+use App\Models\Penyakit;
+use App\Models\Kc_pilsatu;
+use App\Models\Kc_pildua;
+use App\Models\Kc_piltiga;
+use App\Models\Kc_pilempat;
+use App\Models\Kc_pillima;
+use App\Models\Kc_pilenam;
+use App\Models\Kc_piltujuh;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +49,9 @@ class PesertaController extends Controller
    */
   public function index()
   {
-    $pesertas = Peserta::addSelect([
+    $pesertas = Peserta::join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
+                ->select('data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
+                ->addSelect([
                   'skala' => Skala::select('skala')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')
                       ->orderBy('created_at', 'desc')
@@ -42,9 +65,33 @@ class PesertaController extends Controller
     $no = 1;
     $lokasis = Lokasi::all();
     $kelompoks = Kelompok::all();
+    $dataLembagas = Data_lembaga::all();
+    $pekerjaans = Pekerjaan::all();
+    $statusPekerjaans = Status_pekerjaan::all();
+    $sektorIndustris = Sektor_industri::all();
+    $tingkatPendidikans = Tingkat_pendidikan::all();
+    $sekolahUnivs = Sekolah_univ::all();
+    $bidKeterampilans = Bidang_keterampilan::all();
+    $bidKetertarikans = Bidang_ketertarikan::all();
+    $persMbtis = P_mbti::all();
+    $persHollands = Pers_holland::all();
+    $spiritGifts = Spirit_gifts::all();
+    $abilities = Abilities::all();
+    $gandaLimas = Ganda_lima::all();
+    $kemBahasas = Kem_bahasa::all();
+    $kc_pilsatus = Kc_pilsatu::all();
+    $kc_pilduas = Kc_pildua::all();
+    $kc_piltigas = Kc_piltiga::all();
+    $kc_pilempats = Kc_pilempat::all();
+    $kc_pillimas = Kc_pillima::all();
+    $kc_pilenams = Kc_pilenam::all();
+    $kc_piltujuhs = Kc_piltujuh::all();
     
     // $kelompoks = Kelompok::join('data_lembagas', 'kelompok.id_ketua_kelompok', '=', 'data_lembagas.id_user');
-    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis', 'kelompoks']));
+    return view('admin.data-kontak', compact(['pesertas', 'no', 'lokasis', 'kelompoks', 'dataLembagas', 'pekerjaans', 'statusPekerjaans',
+                                              'sektorIndustris', 'tingkatPendidikans', 'sekolahUnivs', 'bidKeterampilans', 'bidKetertarikans',
+                                              'persMbtis', 'persHollands', 'spiritGifts', 'abilities', 'gandaLimas', 'kemBahasas', 'kc_pilsatus',
+                                              'kc_pilduas', 'kc_piltigas', 'kc_pilempats', 'kc_pillimas', 'kc_pilenams', 'kc_piltujuhs']));
   }
 
   /**
@@ -90,7 +137,7 @@ class PesertaController extends Controller
         'lokasiPeserta'   => 'required',
         'institusiPeserta'   => 'required',
         'fotoPRS'     => 'image|mimes:png,jpg,jpeg',
-        'kelompok'     => 'required'
+        'pemintaInput'     => 'required'
       ],
       [
         'namaKontakPeserta.required' => 'Nama tidak boleh kosong.',
@@ -107,7 +154,7 @@ class PesertaController extends Controller
         'lokasiPeserta.required' => 'Lokasi tidak boleh kosong.',
         'institusiPeserta.required' => 'Naungan tidak boleh kosong.',
         'fotoPeserta.image' => 'Berkas harus berupa Gambar.',
-        'kelompok.required' => 'Kelompok tidak boleh kosong.'
+        'pemintaInput.required' => 'Peminta Input tidak boleh kosong.'
       ]);
 
       $fotoPesertaUpload = '';
@@ -131,6 +178,7 @@ class PesertaController extends Controller
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $request->lokasiPeserta;
       $upload->institusi_peserta = $request->institusiPeserta;
+      $upload->peminta = $request->pemintaInput;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -964,8 +1012,8 @@ class PesertaController extends Controller
    */
   public function indexDataLembagaPM()
   {
-    $pesertas = Peserta::join('kelompoks', 'kelompoks.id_peserta', '=', 'pesertas.id_peserta')
-                      ->addSelect([
+    $pesertas = Peserta::where('peminta', '=', auth()->user()->id_user)
+                ->addSelect([
                   'skala' => Skala::select('skala')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')
                       ->orderBy('created_at', 'desc')

@@ -1595,6 +1595,8 @@
                   <th scope="col">Tempat, Tanggal Lahir</th>
                   <th scope="col">Jenis Kelamin</th>
                   <th scope="col">Alamat</th>
+                  <th scope="col">Divisi</th>
+                  <th scope="col">Lembaga</th>
                   <th scope="col">Ubah | Hapus</th>
                   <th scope="col">Kelompok</th>
                 </tr>
@@ -1613,6 +1615,8 @@
                     <td>{{$dataLembaga->tempat_lahir}}, {{$dataLembaga->tanggal_lahir}}</td>
                     <td>{{$dataLembaga->jK}}</td>
                     <td>{{$dataLembaga->alamat}}</td>
+                    <td>{{$dataLembaga->data_lembaga}}</td>
+                    <td>{{$dataLembaga->institusi}}</td>
                     <td>
                       <div class="icon-action">
                         <a data-bs-target="#ubahData{{$dataLembaga->id_user}}" id="ubahData" data-bs-toggle="modal" class="text-primary" data-user="{{$dataLembaga->id}}">

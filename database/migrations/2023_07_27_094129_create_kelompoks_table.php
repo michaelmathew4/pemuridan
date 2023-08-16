@@ -18,7 +18,7 @@ class CreateKelompoksTable extends Migration
             $table->string('id_kelompok', 50);
             $table->string('nama_kelompok', 100);
             $table->string('id_peserta', 10);
-            $table->string('generasi', 10);
+            $table->string('generasi', 10)->nullable();
             $table->timestamps();
         });
     }

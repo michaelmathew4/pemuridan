@@ -330,9 +330,9 @@
                         <div class="input-center ps-5">
                           <div class="w-75">
                             <div class="mb-3 row">
-                              <label for="ketuaKelompok" class="col-sm-3 px-1">Ketua Kelompok</label>
+                              <label for="kelompok" class="col-sm-3 px-1">Kelompok</label>
                               <div class="col-sm-9">
-                                <select class="form-select form-select-sm" name="ketuaKelompok" id="ketuaKelompok" aria-label=".form-select-sm ketuaKelompok">
+                                <select class="form-select form-select-sm" name="kelompok" id="kelompok" aria-label=".form-select-sm kelompok">
                                   <option value="{{auth()->user()->id_user}}">Anda ({{auth()->user()->name}})</option>
                                   <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
                                   <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
@@ -343,7 +343,7 @@
                                   <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
                                   <option value="Lain-lain">Lain-lain</option>
                                 </select>
-                                @error('ketuaKelompok')
+                                @error('kelompok')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
                                       <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>

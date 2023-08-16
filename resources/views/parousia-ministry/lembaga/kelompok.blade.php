@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('css')
+  <link href="{{asset('assets/css/family-tree.css')}}" rel="stylesheet">
 @endsection
 
 @section('nav')
@@ -93,7 +94,9 @@
                                 <label for="kontak" class="col-sm-3 px-1 form-label">Kontak</label>
                                 <div class="col-sm-9">
                                   <select class="form-control" name="kontaks[]" style="width: 100%;" id="kontak" aria-label="multiple select kontak" multiple>
-                                    <option>-Kontak-</option>
+                                    @foreach ($pesertas as $peserta)
+                                      <option value="{{$peserta->id_peserta}}">{{$peserta->nama_peserta}}</option>
+                                    @endforeach
                                   </select>
                                   @error('kontak')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -126,15 +129,62 @@
                 <th>ID Kelompok</th>
                 <th>Nama Kelompok</th>
                 <th>Tanggal Pembuatan</th>
+                <th>Ubah | Hapus</th>
               </thead>
               <tbody>
                 @forelse ($nama_kelompoks as $nama_kelompok)
                   <tr>
                     <td>{{$no++}}</td>
                     <td>{{$nama_kelompok->id_kelompok}}</td>
-                    <td>{{$nama_kelompok->nama_kelompok}}</td>
+                    <td>
+                      <a href="#lihatKelompok{{$nama_kelompok->id_kelompok}}" data-bs-toggle="modal" class="text-info">
+                        {{$nama_kelompok->nama_kelompok}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Kelompok"></i>
+                      </a>
+                    </td>
                     <td>{{$nama_kelompok->created_at}}</td>
+                    <td>
+                      <div class="icon-action">
+                        <a href="#ubahKelompok{{$nama_kelompok->id_kelompok}}" data-bs-toggle="modal" class="text-primary">
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                        </a>
+                        |
+                        <a href="#hapusKelompok{{$nama_kelompok->id_kelompok}}" data-bs-toggle="modal" class="text-danger">
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                        </a>
+                      </div>
+                    </td>
                   </tr>
+                  <!-- Modal Lihat Data -->
+                  <div class="modal fade" id="lihatKelompok{{$nama_kelompok->id_kelompok}}" tabindex="-1" aria-labelledby="lihatKelompok{{$nama_kelompok->id_kelompok}}Label" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="lihatKelompok{{$nama_kelompok->id_kelompok}}Label">
+                            <i class="bi bi-info-circle text-info"></i>
+                            Lihat Kelompok
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <div id="wraps">
+                            <span class="label">{{auth()->user()->name}}</span>
+                            <div class="branch lv1">
+                              @foreach ($kelompoks as $kelompok)
+                                <div class="entry">
+                                  <span class="label">{{$kelompok->id_peserta}}</span>
+                                  
+                                </div>
+                              @endforeach
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Kembali</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Lihat Data -->
                 @empty
                   <div class="alert alert-danger">
                     Data Tidak Ada

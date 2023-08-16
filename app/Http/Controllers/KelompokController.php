@@ -18,7 +18,9 @@ class KelompokController extends Controller
     {
         $no = 1;
         $nama_kelompoks = Nama_kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
-        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks']));
+        $pesertas = Peserta::where('peminta', auth()->user()->id_user)->get();
+        $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
+        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks']));
     }
 
     /**
@@ -31,6 +33,15 @@ class KelompokController extends Controller
         //
     }
 
+    function randomCodes()
+    {
+      do {
+        $kode = random_int(100000000, 999999999);
+      } while (Nama_kelompok::where("id_kelompok", "=", $kode)->first());
+  
+      return $kode;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -40,21 +51,35 @@ class KelompokController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-          'mbti'     => 'required'
+          'namaKelompok'     => 'required',
+          'kontaks'     => 'required',
         ],
         [
-          'mbti.required' => 'MBTI tidak boleh kosong.'
+          'namaKelompok.required' => 'Nama Kelompok tidak boleh kosong.',
+          'kontaks.required' => 'Data Kontak tidak boleh kosong.'
         ]);
-    
-        $input = new P_mbti;
-        $input->mbti = $request->mbti;
-        $input->deskripsiMBTI = $request->deskripsiMBTI;
-        $input->save();
+
+        
+        $inputNamaKelompok = new Nama_kelompok;
+        $inputNamaKelompok->id_kelompok = $this->randomCodes();
+        $inputNamaKelompok->id_ketua_kelompok = auth()->user()->id_user;
+        $inputNamaKelompok->nama_kelompok = $request->namaKelompok;
+        $inputNamaKelompok->save();
+
+        
+        foreach ($request->kontaks as $kontak) {
+          $input = new Kelompok;
+          $input->id_kelompok = $inputNamaKelompok->id_kelompok;
+          $input->nama_kelompok = $request->namaKelompok;
+          $input->id_ketua_kelompok = auth()->user()->id_user;
+          $input->id_peserta = $kontak;
+          $input->save();
+        }
     
         if($input){
-          return redirect()->route('shape.index')->with(['success' => 'Personality - MBTI Berhasil Disimpan!']);
+          return redirect()->route('kelompok.index')->with(['success' => 'Kelompok Berhasil Disimpan!']);
         }else{
-          return redirect()->route('shape.index')->with(['error' => 'Personality - MBTI Gagal Disimpan!']);
+          return redirect()->route('kelompok.index')->with(['error' => 'Kelompok Gagal Disimpan!']);
         }
     }
 

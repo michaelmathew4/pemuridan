@@ -24,8 +24,11 @@ Tambah Nama Kelompok => isinya ada data peserta yang dia tambah
 Nanti saat Admin tambah Data Kontak, ada Pilihan Nama Kelompok (Nama Ketua Kelompok)
 
 
-Delete Peserta = Delete kelompok(?)
+Delete Peserta = Delete di kelompok(?)
 Delete Data Lembaga yang menjadi ketua kelompok = Delete kelompok(?)
 
 Ganti dari peserta menjadi ketua kelompok pake button menjadi ketua kelompok (jika, peserta tersebut sudah berskala +3, button otomatis muncul)
 Nanti suruh lengkapi data yang belum lengkap (data ketua kelompok)
+
+
+LAGI NGERJAIN PESERTA -> KETUA KELOMPOK (DATA FORM)
