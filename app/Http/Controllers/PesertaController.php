@@ -121,7 +121,7 @@ class PesertaController extends Controller
    */
   public function store(Request $request)
   {
-    if ($request->inputTambah == "tambahData") {
+    if ($request->inputTambah == "tambahData" && $request->inputMethod == "tambahDataBaru") {
       $request->validate([
         'tglKontakPeserta'     => 'required',
         'namaKontakPeserta'     => 'required',
@@ -211,7 +211,7 @@ class PesertaController extends Controller
       }
     }
 
-    if ($request->inputTambah == "inputSkala") {
+    if ($request->inputTambah == "inputSkala" && $request->inputMethod == "tambahDataBaru") {
       $newSkala = new Skala;
       $newSkala->skala = $request->tambahSkalaPeserta;
       $newSkala->keterangan = $request->tambahKeteranganSkalaPeserta;
@@ -233,7 +233,7 @@ class PesertaController extends Controller
       }
     }
 
-    if ($request->inputTambah == "inputCatatan") {
+    if ($request->inputTambah == "inputCatatan" && $request->inputMethod == "tambahDataBaru") {
       $newCatatan = new Catatan;
       $newCatatan->catatan = $request->tambahCatatanPeserta;
       $newCatatan->id_peserta = $request->id_pesertaCatatan;
@@ -244,6 +244,168 @@ class PesertaController extends Controller
         return redirect()->route('data-kontak.index')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
         return redirect()->route('data-kontak.index')->with(['error' => 'Catatan Gagal Disimpan!']);
+      }
+    }
+
+    if ($request->inputMethod = "rubahJadiKK") {
+      $request->validate([
+        'idDatas' => 'required|unique:users,id_user',
+        'tglRegistrasiDatas'     => 'required',
+        'namaDatas' => 'required',
+        'fileUploadMenikahDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+        'fileUploadBaptisDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
+        'emailDatas'   => 'email:rfc,dns|unique:users,email',
+        'lokasiDatas'  => 'required',
+        'institusiDatas'   => 'required',
+        'kata_sandiDatas'  => 'required'
+      ],
+      [
+        'idDatas.required' => 'ID tidak boleh kosong.',
+        'idDatas.unique' => 'ID sudah terdaftar.',
+        'tglRegistrasiDatas.required' => 'Tanggal Registrasi tidak boleh kosong.',
+        'namaDatas.required' => 'Nama Lengkap tidak boleh kosong.',
+        'fileUploadMenikahDatas.file' => 'Berkas harus berupa Dokumen.',
+        'fileUploadMenikahDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
+        'fileUploadBaptisDatas.file' => 'Berkas harus berupa Dokumen.',
+        'fileUploadBaptisDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
+        'emailDatas.unique' => 'Alamat Surel sudah ada.',
+        'lokasiDatas.required' => 'Lokasi tidak boleh kosong.',
+        'institusiDatas.required' => 'Lembaga tidak boleh kosong.',
+        'kata_sandiDatas.required' => 'Kata Sandi tidak boleh kosong.'
+      ]);
+  
+      $storeData = new Data_lembaga;
+      $storeData->data_lembaga = "Ketua Kelompok";
+      $storeData->id_user = $request->idDatas;
+      $storeData->tanggal_regist = $request->tglRegistrasiDatas;
+      $storeData->nama_lengkap = $request->namaDatas;
+      $storeData->jenis_identitas = $request->jenisIdentitasDatas;
+      $storeData->no_identitas = $request->noIdentitasDatas;
+      $storeData->tempat_lahir = $request->tempatLahirDatas;
+      $storeData->tanggal_lahir = $request->tglLahirDatas;
+      $storeData->jK = $request->jenisKelaminDatas;
+      $storeData->goldar = $request->golonganDarahDatas;
+      $storeData->status_pernikahan = $request->statusPernikahanDatas;
+      $storeData->suku = $request->sukus;
+      $storeData->alamat = $request->alamatDatas;
+      $storeData->ket_arah = $request->keteranganArahDatas;
+      $storeData->peta = $request->petaDatas;
+      $storeData->negara = $request->negaraDatas;
+      $storeData->provinsi = $request->provinsiDatas;
+      $storeData->kota = $request->kotaDatas;
+      $storeData->kecamatan = $request->kecamatanDatas;
+      $storeData->kelurahan = $request->kelurahanDatas;
+      $storeData->kode_pos = $request->kodePosDatas;
+      $storeData->dusun = $request->dusunDatas;
+      $storeData->rt = $request->rtDatas;
+      $storeData->rw = $request->rwDatas;
+      $storeData->area = $request->areaDatas;
+      $storeData->lokasi = $request->lokasiDatas;
+      $storeData->no_telp = $request->noTelpSDatas;
+      $storeData->alamat_surel = $request->emailDatas;
+      $storeData->pekerjaan = $request->pekerjaanDatas;
+      $storeData->jabatan = $request->jabatanDatas;
+      $storeData->status_pekerjaan = $request->statusPekerjaanDatas;
+      $storeData->nama_perusahaan = $request->namaPerusahaanDatas;
+      $storeData->sektor_industri = $request->sektorIndustriDatas;
+      $storeData->alamat_kantor = $request->alamatKantorDatas;
+      $storeData->telp_kantor = $request->telpKantorDatas;
+      $storeData->ext = $request->extDatas;
+      $storeData->tingkat_pendidikan = $request->tingkatPendidikanDatas;
+      $storeData->sekolah_univ = $request->sekolahDatas;
+      $storeData->bidang_ketertarikan = json_encode($request->bKetertarikanDatas);
+      $storeData->bidang_keterampilan = json_encode($request->bKeterampilanDatas);
+      $storeData->catatan = $request->catatanDatas;
+      $storeData->status = $request->statusDatas;
+      $storeData->no_rekening = $request->noRekDatas;
+      $storeData->periode_beasiswa = $request->perBeasiswaDatas;
+      $storeData->periode_kerja_praktiK = $request->perKerjaPDatas;
+      $storeData->riwayat_pelayananSatu = $request->riwayatPelSDatas;
+      $storeData->riwayat_pelayananDua = $request->riwayatPelDDatas;
+      $storeData->riwayat_pelayananTiga = $request->riwayatPelTDatas;
+      $storeData->riwayat_pelayananEmpat = $request->riwayatPelEDatas;
+      $storeData->personality_mbti = json_encode($request->pilihanGSDatas);
+      $storeData->personality_holland = json_encode($request->pilihanGDDatas);
+      $storeData->spiritual_gifts = json_encode($request->pilihanGTDatas);
+      $storeData->abilities = json_encode($request->pilihanGEDatas);
+      $storeData->experience = json_encode($request->pilihanGLDatas);
+      $storeData->kemampuan_bahasa = json_encode($request->pilihanGEnDatas);
+      $storeData->menikah_sudah = $request->sudahMenikahDatas;
+      $storeData->menikah_tanggal = $request->tglMenikahDatas;
+      $storeData->menikah_tempat = $request->tempatMenikahDatas;
+      if ($request->hasfile('fileUploadMenikahDatas')) {
+        $destination = "images/Data Lembaga/Dokumen Menikah";
+        $filenameMenikah = $request->file('fileUploadMenikahDatas');
+        $filenameMenikah->move($destination, $filenameMenikah->getClientOriginalName());
+        $fileMenikah = $filenameMenikah->getClientOriginalName();
+      } else {
+        $fileMenikah = '';
+      }
+      $storeData->menikah_file = $fileMenikah;
+      $storeData->menikah_ket = $request->ketMenikahDatas;
+      $storeData->bap_sudah = $request->sudahBaptisDatas;
+      $storeData->bap_tanggal = $request->tglBaptisDatas;
+      $storeData->bap_tempat = $request->tempatBaptisDatas;
+      if ($request->hasfile('fileUploadBaptisDatas')) {
+        $destination = "images/Data Lembaga/Dokumen Baptis";
+        $filenameBaptis = $request->file('fileUploadBaptisDatas');
+        $filenameBaptis->move($destination, $filenameBaptis->getClientOriginalName());
+        $fileBaptis = $filenameBaptis->getClientOriginalName();
+      } else {
+        $fileBaptis = '';
+      }
+      $storeData->bap_file = $fileBaptis;
+      $storeData->bap_ket = $request->ketBaptisDatas;
+      $storeData->kata_sandi = $request->kata_sandiDatas;
+      $storeData->institusi = $request->institusiDatas;
+      $storeDataSave = $storeData->save();
+      
+      // $idKelompok = Kelompok::where('id_peserta', $request->idForGet)->firstOrFail();
+      // dd($idKelompok);
+  
+      if ($storeDataSave) {
+        if ($request->institusiDatas == 'PM (Parousia Ministry)') {
+          $institusi = 'PM';
+        } else {
+          $institusi = 'GKP';
+        }
+        $addUser = new User;
+        $addUser->id_user = $request->idDatas;
+        $addUser->name = $request->namaDatas;
+        $addUser->email = $request->emailDatas;
+        $addUser->password = bcrypt($request->kata_sandiDatas);
+        $addUser->role = "Ketua Kelompok";
+        $addUser->institusi = $institusi;
+        $addUser->remember_token = Str::random(60);
+        $addUser->save();
+  
+        $idSkala = Skala::where('id_peserta', $request->idForGet)->get();
+        foreach ($idSkala as $idSkalas) {
+          $idSkalas->update([
+            'id_peserta'     => $request->idDatas
+          ]);
+        }
+        
+        $idCatatan = Catatan::where('id_peserta', $request->idForGet)->get();
+        foreach ($idCatatan as $idCatatans) {
+          $idCatatans->update([
+            'id_peserta'     => $request->idDatas
+          ]);
+        }
+        
+        $idKelompok = Kelompok::where('id_peserta', $request->idForGet)->firstOrFail();
+        $idKelompok->update([
+          'id_peserta'     => $request->idDatas
+        ]);
+  
+        
+        if ($addUser) {
+          return redirect()->route('data-kontak.index')->with(['success' => 'Data Berhasil Dirubah Menjadi Ketua Kelompok!']);
+        }else{
+          return redirect()->route('data-kontak.index')->with(['error' => 'Data Gagal Dirubah Menjadi Ketua Kelompok!']);
+        }
+      }else{
+        return redirect()->route('data-kontak.index')->with(['error' => 'Data Gagal Dirubah Menjadi Ketua Kelompoks!']);
       }
     }
   }
@@ -392,7 +554,7 @@ class PesertaController extends Controller
       return redirect()->route('data-kontak.index')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
-
+  
 
 
 

@@ -167,6 +167,7 @@ class DataLembagaController extends Controller
     $storeData->jK = $request->jenisKelaminDatas;
     $storeData->goldar = $request->golonganDarahDatas;
     $storeData->status_pernikahan = $request->statusPernikahanDatas;
+    $storeData->suku = $request->sukus;
     if ($request->hasfile('fotoDatas')) {
       $destination = "images/Data Lembaga/Foto";
       $filenameFoto = $request->file('fotoDatas');

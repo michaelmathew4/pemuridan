@@ -288,11 +288,11 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
+                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga</label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
-                                  <option value="">-Naungan-</option>
-                                  <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                  <option value="">-Lembaga-</option>
+                                  <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                   <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                 </select>
                                 @error('institusiPeserta')

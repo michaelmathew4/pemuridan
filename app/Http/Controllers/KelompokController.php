@@ -76,7 +76,7 @@ class KelompokController extends Controller
           $input->save();
         }
     
-        if($input){
+        if($inputNamaKelompok){
           return redirect()->route('kelompok.index')->with(['success' => 'Kelompok Berhasil Disimpan!']);
         }else{
           return redirect()->route('kelompok.index')->with(['error' => 'Kelompok Gagal Disimpan!']);

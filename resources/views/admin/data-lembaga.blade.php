@@ -306,6 +306,12 @@
                                   </select>
                                 </div>
                               </div>
+                              <div class="mb-3 row">
+                                <label for="suku" class="col-sm-3 px-1">Suku</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="sukus" class="form-control form-control-sm" id="suku" placeholder="Sunda">
+                                </div>
+                              </div>
                               <div id="sembunyiData3" class="divTampil3">
                                 <div class="mb-3 row">
                                   <label for="fotoData" class="col-sm-3 px-1">Foto</label>
@@ -980,7 +986,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGSDatas[]" style="width: 100%;" id="pilihanGSData" aria-label="multiple select pilihanGSData" multiple>
-                                      <option>-Personality - MBTI-</option>
+                                      <option value="">-Personality - MBTI-</option>
                                       @foreach ($persMbtis as $persMbti)
                                         <option value="{{$persMbti->mbti}}">{{$persMbti->mbti}}</option>
                                       @endforeach
@@ -998,7 +1004,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGDDatas[]" style="width: 100%;" id="pilihanGDData" aria-label="multiple select pilihanGDData" multiple>
-                                      <option>-Personality - Holland</option>
+                                      <option value="">-Personality - Holland</option>
                                       @foreach ($persHollands as $persHolland)
                                         <option value="{{$persHolland->holland}}">{{$persHolland->holland}}</option>
                                       @endforeach
@@ -1016,7 +1022,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGTDatas[]" style="width: 100%;" id="pilihanGTData" aria-label="multiple select pilihanGTData" multiple>
-                                      <option>-Spiritual Gifts-</option>
+                                      <option value="">-Spiritual Gifts-</option>
                                       @foreach ($spiritGifts as $spiritGift)
                                         <option value="{{$spiritGift->gifts}}">{{$spiritGift->gifts}}</option>
                                       @endforeach
@@ -1034,7 +1040,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGEDatas[]" style="width: 100%;" id="pilihanGEData" aria-label="multiple select pilihanGEData" multiple>
-                                      <option>-Abilities-</option>
+                                      <option value="">-Abilities-</option>
                                       @foreach ($abilities as $ability)
                                         <option value="{{$ability->abilities}}">{{$ability->abilities}}</option>
                                       @endforeach
@@ -1052,7 +1058,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGLDatas[]" style="width: 100%;" id="ExperienceData" aria-label="multiple select ExperienceData" multiple>
-                                      <option>-Experience-</option>
+                                      <option value="">-Experience-</option>
                                     </select>
                                   </div>
                                   <div class="col-1">
@@ -1067,7 +1073,7 @@
                                 <div class="col-sm-9 row">
                                   <div class="col-11">
                                     <select class="form-select" name="pilihanGEnDatas[]" style="width: 100%;" id="pilihanGEnData" aria-label="multiple select pilihanGEnData" multiple>
-                                      <option>-Kemampuan Bahasa-</option>
+                                      <option value="">-Kemampuan Bahasa-</option>
                                       @foreach ($kemBahasas as $kemBahasa)
                                         <option value="{{$kemBahasa->kem_bahasa}}">{{$kemBahasa->kem_bahasa}}</option>
                                       @endforeach
