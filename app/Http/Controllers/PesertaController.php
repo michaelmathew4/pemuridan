@@ -397,6 +397,11 @@ class PesertaController extends Controller
         $idKelompok->update([
           'id_peserta'     => $request->idDatas
         ]);
+        
+        $idPeserta = Peserta::where('id_peserta', $request->idForGet)->firstOrFail();
+        $idPeserta->update([
+          'id_peserta'     => $request->idDatas
+        ]);
   
         
         if ($addUser) {

@@ -20,7 +20,13 @@ class KelompokController extends Controller
         $nama_kelompoks = Nama_kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
         $pesertas = Peserta::where('peminta', auth()->user()->id_user)->get();
         $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
-        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks']));
+        $pesertaKKs = Kelompok::where('kelompoks.id_ketua_kelompok', auth()->user()->id_user)
+                              ->join('nama_kelompoks', 'nama_kelompoks.id_kelompok', '=', 'kelompoks.id_kelompok')
+                              ->join('pesertas', 'pesertas.id_peserta', '=', 'nama_kelompoks.id_ketua_kelompok')
+                              ->select('kelompoks.*')
+                              ->toSql();
+        dd($pesertaKKs);
+        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs']));
     }
 
     /**

@@ -168,14 +168,22 @@
                         <div class="modal-body">
                           <div id="wraps">
                             <span class="label">{{auth()->user()->name}}</span>
-                            <div class="branch lv1">
-                              @foreach ($kelompoks as $kelompok)
-                                <div class="entry">
-                                  <span class="label">{{$kelompok->id_peserta}}</span>
-                                  
-                                </div>
-                              @endforeach
-                            </div>
+                            @if (count($kelompoks) > 0 )
+                              <div class="branch lv1">
+                                @foreach ($kelompoks as $kelompok)
+                                  <div class="entry">
+                                    <span class="label">{{$kelompok->id_peserta}}</span>
+                                    <div class="branch lv2">
+                                      @foreach ($pesertaKKs as $pesertaKK)
+                                        <div class="entry">
+                                          <span class="label">{{$pesertaKK->id_peserta}}</span>
+                                        </div>
+                                      @endforeach
+                                    </div>
+                                  </div>
+                                @endforeach
+                              </div>
+                            @endif
                           </div>
                         </div>
                         <div class="modal-footer">
