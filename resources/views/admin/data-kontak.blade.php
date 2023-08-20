@@ -461,9 +461,13 @@
                     <td>{{$peserta->lokasi_peserta}}</td>
                     <td>
                       @if ($peserta->skala == '3')
-                        <a href="#rubahStatus{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info" id="ubahStatus" data-user="{{$peserta->id_peserta}}">
-                          Peserta <i class="bi bi-arrow-left-right"></i> Ketua Kelompok
-                        </a>
+                        @if ($peserta->id_peserta == $peserta->id_user)
+                          Ketua Kelompok
+                        @else
+                          <a href="#rubahStatus{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info" id="ubahStatus" data-user="{{$peserta->id_peserta}}">
+                            Peserta <i class="bi bi-arrow-right"></i> Ketua Kelompok
+                          </a>
+                        @endif
                       @else
                         Peserta
                       @endif

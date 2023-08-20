@@ -50,7 +50,7 @@ class PesertaController extends Controller
   public function index()
   {
     $pesertas = Peserta::join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
-                ->select('data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
+                ->select('data_lembagas.id_user', 'data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
                 ->addSelect([
                   'skala' => Skala::select('skala')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')
@@ -59,6 +59,9 @@ class PesertaController extends Controller
                   'catatan' => Catatan::select('catatan')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')
                       ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'id_user' => Data_lembaga::select('id_user')
+                      ->whereColumn('id_user', 'pesertas.id_peserta')
                       ->limit(1)
                 ])->get();
     
