@@ -171,11 +171,11 @@
                             @if (count($kelompoks) > 0 )
                               <div class="branch lv1">
                                 @foreach ($kelompoks as $kelompok)
-                                  <div class="entry">
+                                  <div class="entry {{(count($kelompoks) == 1 ? 'sole' : '')}}">
                                     <span class="label">{{$kelompok->id_peserta}}</span>
                                     <div class="branch lv2">
                                       @foreach ($pesertaKKs as $pesertaKK)
-                                        <div class="entry">
+                                        <div class="entry sole">
                                           <span class="label">{{$pesertaKK->id_peserta}}</span>
                                         </div>
                                       @endforeach
