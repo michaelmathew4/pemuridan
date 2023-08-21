@@ -413,9 +413,14 @@ class DataLembagaController extends Controller
    * @param  \App\Models\Data_lembaga  $data_lembaga
    * @return \Illuminate\Http\Response
    */
-  public function show(Data_lembaga $data_lembaga)
+  public function show($id)
   {
-      //
+    $skala = Nama_kelompok::join('data_lembagas', 'nama_kelompoks.id_ketua_kelompok', '=', 'data_lembagas.id_user')
+                ->select('nama_kelompoks.*')
+                ->where('nama_kelompoks.id_ketua_kelompok', $id)
+                ->get();
+
+    return response()->json(["skala" => $skala]);
   } 
 
   /**

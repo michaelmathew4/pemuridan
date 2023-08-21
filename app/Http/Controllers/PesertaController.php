@@ -473,6 +473,7 @@ class PesertaController extends Controller
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => ''
         ]);
       } else {
@@ -488,6 +489,7 @@ class PesertaController extends Controller
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
         ]);
       }
     } else {
@@ -514,6 +516,7 @@ class PesertaController extends Controller
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => $filename->getClientOriginalName()
         ]);
       }

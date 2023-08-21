@@ -1636,7 +1636,7 @@
                     </td>
                     <td>
                       @if ($dataLembaga->id_ketua_kelompok)
-                        <a href="#kelompok{{$dataLembaga->id_user}}" data-bs-toggle="modal" class="text-primary fs-5">
+                        <a id="lihatKelompokButton" data-bs-target="#kelompokModal" data-bs-toggle="modal" data-attr="{{route('data-lembaga.show', $dataLembaga->id_user)}}" data-id="{{$dataLembaga->id_user}}" class="text-primary fs-5">
                           <i class="bi bi-people" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kelompok"></i>
                         </a>
                       @else
@@ -3740,49 +3740,33 @@
                   </div>
                   <!-- End Modal Hapus Data -->
                   <!-- Modal Lihat Kelompok -->
-                  <div class="modal fade" id="kelompok{{$dataLembaga->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="kelompok{{$dataLembaga->id_user}}Label" aria-hidden="true">
+                  <div class="modal fade" id="kelompokModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="kelompokLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="kelompok{{$dataLembaga->id_user}}Label">
+                          <h5 class="modal-title" id="kelompokLabel">
                             <i class="bi bi-people text-primary"></i>
                             Kelompok
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <div class="row border border-1">
-                            <div class="col-3">
+                          <div class="row">
+                            <div class="col-1">
                               No.
                             </div>
                             <div class="col-3">
                               ID Kelompok
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                               Nama Kelompok
                             </div>
                             <div class="col-3">
                               Tanggal Pembuatan
                             </div>
                           </div>
-                          @forelse ($namaKelompoks as $namaKelompok)
-                            @foreach ($namaKelompok as $namaKlompok)
-                              <div class="row border">
-                                <div class="col-3">{{$noNamaKelompoks++}}</div>
-                                <div class="col-3">{{$namaKlompok->id_kelompok}}</div>
-                                <div class="col-3">
-                                  <a href="#lihatKelompok{{$namaKlompok->id_kelompok}}" data-bs-toggle="modal" class="text-info">
-                                    {{$namaKlompok->nama_kelompok}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Kelompok"></i>
-                                  </a>
-                                </div>
-                                <div class="col-3">{{$namaKlompok->created_at}}</div>
-                              </div>
-                            @endforeach
-                          @empty
-                            <div class="alert alert-danger">
-                              Data Tidak Ada
-                            </div>
-                          @endforelse
+                          <hr>
+                          <div id="namaKelompok"></div>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -4013,6 +3997,28 @@
     $(document).on('click', '.hapusNominal', function(){   
       var button_id = $(this).attr("id");   
       $('#inputNominalTambah'+button_id+'').remove(); 
+    });
+    
+    $(document).on('click', '#lihatKelompokButton', function(event) {
+      event.preventDefault();
+      var href = $(this).data('attr');
+      var id = $(this).data('id');
+      $.get(href, function(result) {
+        no = 1;
+        html = '';
+        $.each(result.skala, function(index, hasil) {
+          $('#kelompokModal').modal("show");
+          nos = no++;
+          html += '<div class="row">';
+          html += '<div class="col-1">'+nos+'.</div>';
+          html += '<div class="col-3">'+hasil.id_kelompok+'</div>';
+          html += '<div class="col-4">'+hasil.nama_kelompok+'</div>';
+          html += '<div class="col-3">'+hasil.created_at+'</div>';
+          html += '</div>';
+          html += '<hr>';
+        });
+        $('#namaKelompok').empty('').append(html);
+      });
     });
   </script>
 @endsection

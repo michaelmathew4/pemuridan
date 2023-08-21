@@ -133,7 +133,7 @@
                           </div>
                           <div class="input-center ps-5">
                             <div class="w-75">
-                              <input type="text" name="inputMethod" value="tambahDataBaru">
+                              <input type="text" name="inputMethod" value="tambahDataBaru" hidden>
                               <div class="mb-3 row">
                                 <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
@@ -474,9 +474,15 @@
                     </td>
                     <td>
                       <div class="icon-action">
-                        <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-primary">
-                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                        </a>
+                        @if ($peserta->id_peserta == $peserta->id_user)
+                          <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="link-secondary pe-none" tabindex="-1" aria-disabled="true" disabled>
+                            <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          </a>
+                        @else
+                          <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-primary">
+                            <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          </a>
+                        @endif
                         |
                         <a href="#hapusData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-danger">
                           <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
@@ -729,14 +735,33 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editInstitusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
+                                    <label for="editInstitusiPeserta" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editInstitusiPeserta" id="editInstitusiPeserta">
-                                        <option value="{{$peserta->institusi_peserta}}">{{$peserta->institusi_peserta}}</option>
-                                        <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                        <option value="{{$peserta->institusi}}">{{$peserta->institusi}}</option>
+                                        <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                         <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                       </select>
                                       @error('editInstitusiPeserta')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="editPemintaInput" class="col-sm-3 px-1">Peminta Input <span class="required-input">(*)</span></label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" name="editPemintaInput" id="editPemintaInput" aria-label=".form-select-sm editPemintaInput">
+                                        <option value="{{$peserta->peminta}}">{{$peserta->nama_lengkap}}</option>
+                                        @foreach ($dataLembagas as $dataLembaga)
+                                          <option value="{{$dataLembaga->id_user}}">{{$dataLembaga->nama_lengkap}} ({{$dataLembaga->data_lembaga}} / {{$dataLembaga->institusi}})</option>
+                                        @endforeach
+                                      </select>
+                                      @error('editPemintaInput')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -872,7 +897,7 @@
                         <form action="{{ route('data-kontak.store') }}" method="post">
                           @csrf
                           <div class="modal-body">
-                            <input type="text" name="inputMethod" value="tambahDataBaru">
+                            <input type="text" name="inputMethod" value="tambahDataBaru" hidden>
                             <div class="row">
                               <div class="col-1">No.</div>
                               <div class="col-4">Tanggal Kontak</div>
@@ -922,8 +947,8 @@
                               </div>
                               <div class="input-center ps-5">
                                 <div class="w-75">
-                                  <input type="text" name="inputMethod" id="" value="rubahJadiKK">
-                                  <input type="text" name="idForGet" id="" value="{{$peserta->id_peserta}}">
+                                  <input type="text" name="inputMethod" id="" value="rubahJadiKK" hidden>
+                                  <input type="text" name="idForGet" id="" value="{{$peserta->id_peserta}}" hidden>
                                   <div class="mb-3 row">
                                     <label for="untukPendataan" class="col-sm-3 px-1">Untuk <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
