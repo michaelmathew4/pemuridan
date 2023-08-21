@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Data_lembaga;
+use App\Models\Nama_kelompok;
 use App\Models\Lokasi;
 use App\Models\Pekerjaan;
 use App\Models\Sektor_industri;
@@ -18,6 +19,7 @@ use App\Models\Abilities;
 use App\Models\Ganda_lima;
 use App\Models\Kem_bahasa;
 use App\Models\Penyakit;
+use App\Models\Kelompok;
 use App\Models\Kc_pilsatu;
 use App\Models\Kc_pildua;
 use App\Models\Kc_piltiga;
@@ -39,8 +41,17 @@ class DataLembagaController extends Controller
      */
     public function index()
     {
-    $dataLembagas = Data_lembaga::all();
+    $dataLembagas = Data_lembaga::addSelect([
+      'id_ketua_kelompok' => Nama_kelompok::select('id_ketua_kelompok')
+          ->whereColumn('id_ketua_kelompok', 'data_lembagas.id_user')
+          ->limit(1)
+        ])->get();
     $nodataLembagas = 1;
+    $noNamaKelompoks = 1;
+    $namaKelompoks = [];
+    foreach ($dataLembagas as $dataLembagaS) {
+      $namaKelompoks[] = Nama_kelompok::where('id_ketua_kelompok', $dataLembagaS->id_user)->get();
+    }
 
     //For Input
     $pekerjaans = Pekerjaan::all();
@@ -66,9 +77,9 @@ class DataLembagaController extends Controller
     $kc_piltujuhs = Kc_piltujuh::all();
     $nominals = Nominal::all();
 
-    return view('admin.data-lembaga', compact(['dataLembagas', 'nodataLembagas', 'pekerjaans', 'statusPekerjaans', 'lokasis', 'sektorIndustris', 'tingkatPendidikans', 'sekolahUnivs',
+    return view('admin.data-lembaga', compact(['dataLembagas', 'nodataLembagas', 'noNamaKelompoks', 'pekerjaans', 'statusPekerjaans', 'lokasis', 'sektorIndustris', 'tingkatPendidikans', 'sekolahUnivs',
                                                       'bidKeterampilans', 'bidKetertarikans', 'persMbtis', 'persHollands', 'spiritGifts', 'abilities', 'gandaLimas', 'kemBahasas',
-                                                      'kc_pilsatus', 'kc_pilduas', 'kc_piltigas', 'kc_pilempats', 'kc_pillimas', 'kc_pilenams', 'kc_piltujuhs', 'nominals']));
+                                                      'kc_pilsatus', 'kc_pilduas', 'kc_piltigas', 'kc_pilempats', 'kc_pillimas', 'kc_pilenams', 'kc_piltujuhs', 'nominals', 'namaKelompoks']));
   }
 
   /**

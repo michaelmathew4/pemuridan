@@ -1635,9 +1635,13 @@
                       </div>
                     </td>
                     <td>
-                      <a href="#kelompok{{$dataLembaga->id}}" data-bs-toggle="modal" class="text-primary fs-5">
-                        <i class="bi bi-people" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kelompok"></i>
-                      </a>
+                      @if ($dataLembaga->id_ketua_kelompok)
+                        <a href="#kelompok{{$dataLembaga->id_user}}" data-bs-toggle="modal" class="text-primary fs-5">
+                          <i class="bi bi-people" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kelompok"></i>
+                        </a>
+                      @else
+                        -
+                      @endif
                     </td>
                   </tr>
                   <!-- Modal Lihat Data -->
@@ -3735,19 +3739,50 @@
                     </div>
                   </div>
                   <!-- End Modal Hapus Data -->
-                  <!-- Modal Hapus Data -->
-                  <div class="modal fade" id="kelompok{{$dataLembaga->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="kelompok{{$dataLembaga->id}}Label" aria-hidden="true">
+                  <!-- Modal Lihat Kelompok -->
+                  <div class="modal fade" id="kelompok{{$dataLembaga->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="kelompok{{$dataLembaga->id_user}}Label" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="kelompok{{$dataLembaga->id}}Label">
+                          <h5 class="modal-title" id="kelompok{{$dataLembaga->id_user}}Label">
                             <i class="bi bi-people text-primary"></i>
                             Kelompok
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          ...
+                          <div class="row border border-1">
+                            <div class="col-3">
+                              No.
+                            </div>
+                            <div class="col-3">
+                              ID Kelompok
+                            </div>
+                            <div class="col-3">
+                              Nama Kelompok
+                            </div>
+                            <div class="col-3">
+                              Tanggal Pembuatan
+                            </div>
+                          </div>
+                          @forelse ($namaKelompoks as $namaKelompok)
+                            @foreach ($namaKelompok as $namaKlompok)
+                              <div class="row border">
+                                <div class="col-3">{{$noNamaKelompoks++}}</div>
+                                <div class="col-3">{{$namaKlompok->id_kelompok}}</div>
+                                <div class="col-3">
+                                  <a href="#lihatKelompok{{$namaKlompok->id_kelompok}}" data-bs-toggle="modal" class="text-info">
+                                    {{$namaKlompok->nama_kelompok}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Kelompok"></i>
+                                  </a>
+                                </div>
+                                <div class="col-3">{{$namaKlompok->created_at}}</div>
+                              </div>
+                            @endforeach
+                          @empty
+                            <div class="alert alert-danger">
+                              Data Tidak Ada
+                            </div>
+                          @endforelse
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -3756,7 +3791,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- End Modal Hapus Data -->
+                  <!-- End Modal Lihat Kelompok -->
                 @empty
                 <div class="alert alert-danger">
                   Data Tidak Ada

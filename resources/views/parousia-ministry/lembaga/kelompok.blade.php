@@ -144,7 +144,7 @@
                     <td>{{$nama_kelompok->created_at}}</td>
                     <td>
                       <div class="icon-action">
-                        <a href="#ubahKelompok{{$nama_kelompok->id_kelompok}}" data-bs-toggle="modal" class="text-primary">
+                        <a href="#ubahKelompok{{$nama_kelompok->id_kelompok}}" id="ubahKelompok" data-user="{{$nama_kelompok->id_kelompok}}" data-bs-toggle="modal" class="text-primary">
                           <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
                         </a>
                         |
@@ -173,17 +173,19 @@
                                 @foreach ($kelompoks as $kelompok)
                                   <div class="entry {{(count($kelompoks) == 1 ? 'sole' : '')}}">
                                     <span class="label">{{$kelompok->id_peserta}}</span>
-                                          @if (count($kelompoks) > 0)
-                                    <div class="branch lv2">
-                                      @foreach ($pesertaKKs as $pesertaKK)
-                                        @foreach ($pesertaKK as $peserta)
-                                          <div class="entry sole">
-                                            <span class="label">{{$peserta->id_peserta}}</span>
-                                          </div>
+                                    @if (count($kelompoks) > 1)
+                                        @foreach ($pesertaKKs as $pesertaKK)
+                                          @foreach ($pesertaKK as $peserta)
+                                            @if ($peserta->id_ketua_kelompok == $kelompok->id_peserta)
+                                              <div class="branch lv{{$branchLv++}}">
+                                                <div class="entry {{(count($pesertaKK) == 1 ? 'sole' : '')}}">
+                                                  <span class="label">{{$peserta->id_peserta}}</span>
+                                                </div>
+                                              </div>
+                                            @endif
+                                          @endforeach
                                         @endforeach
-                                      @endforeach
-                                    </div>
-                                          @endif
+                                    @endif
                                   </div>
                                 @endforeach
                               </div>
@@ -197,6 +199,70 @@
                     </div>
                   </div>
                   <!-- End Modal Lihat Data -->
+                  
+                  <!-- Modal Ubah Data -->
+                  <div class="modal fade" id="ubahKelompok{{$nama_kelompok->id_kelompok}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKelompok{{$nama_kelompok->id_kelompok}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="ubahKelompok{{$nama_kelompok->id_kelompok}}Label">
+                            <i class="bi bi-pencil-square text-primary"></i>
+                            Ubah Kelompok
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('kelompok.update', $nama_kelompok->id_kelompok) }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          <div class="modal-body">
+                            <div class="form-group-input">
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="namaKelompokEdit" class="col-sm-3 px-1 form-label">Nama Kelompok</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="namaKelompokEdits" class="form-control form-control-sm" id="namaKelompokEdit" placeholder="Nama Kelompok" value="{{$nama_kelompok->nama_kelompok}}">
+                                      @error('namaKelompokEdit')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="kontakEdit{{$nama_kelompok->id_kelompok}}" class="col-sm-3 px-1 form-label">Kontak</label>
+                                    <div class="col-sm-9">
+                                      <select class="form-control" name="kontakEdits[]" style="width: 100%;" id="kontakEdit{{$nama_kelompok->id_kelompok}}" aria-label="multiple select kontakEdit{{$nama_kelompok->id_kelompok}}" multiple>
+                                        @foreach ($pesertaEdits as $peserta)
+                                          <option value="{{$peserta->id_peserta}}" {{($peserta->id_peserta) ? 'selected' : ''}}>{{$peserta->nama_peserta}}</option>
+                                        @endforeach
+                                      </select>
+                                      @error('kontakEdit')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-success">Simpan Data</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Ubah Data -->
                 @empty
                   <div class="alert alert-danger">
                     Data Tidak Ada
@@ -218,6 +284,16 @@
         allowClear: true,
         language: "id",
         dropdownParent: $("#tambahData")
+      });
+      
+    });
+    $(document).on('click', '#ubahKelompok', function () {
+      var idUser = $(this).attr('data-user');
+      $('#kontakEdit'+idUser).select2({
+        placeholder: "Kontak",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahKelompok"+idUser)
       });
     });
   </script>

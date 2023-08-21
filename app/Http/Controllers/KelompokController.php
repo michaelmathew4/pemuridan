@@ -19,18 +19,27 @@ class KelompokController extends Controller
         $no = 1;
         $nama_kelompoks = Nama_kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
         $pesertas = Peserta::where('peminta', auth()->user()->id_user)->get();
+        $pesertaEdits = Peserta::leftJoin('kelompoks', 'kelompoks.id_peserta', '=', 'pesertas.id_peserta')
+                                ->where('peminta', auth()->user()->id_user)
+                                ->select('kelompoks.id_peserta', 'pesertas.*')
+                                ->get();
+                                // dd($pesertaEdits);
         $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
-        $pesertaKKs = [];
+        $pesertasKK = [];
+        $branchLv = 2;
+        $pesertaKKs = '';
         foreach ($kelompoks as $kelompok) {
-          $pesertaKKs = Kelompok::join('nama_kelompoks', 'nama_kelompoks.id_ketua_kelompok', '=', 'kelompoks.id_ketua_kelompok')
-                                  ->select('nama_kelompoks.*', 'kelompoks.*')
-                                  // ->where('')
-                                  ->get();
-          
+            $pesertasKK[] = Kelompok::where('id_ketua_kelompok', $kelompok->id_peserta)->get();
+            foreach ($pesertasKK as $key => $value) {
+              foreach ($value as $key => $values) {
+                if ($values->id_ketua_kelompok == $kelompok->id_peserta) {
+                  $pesertaKKs = $pesertasKK;
+                }
+              }
+            }
         }
-        // $pesertaKKs = $pesertasKK->first();
         // dd($pesertaKKs);
-        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs']));
+        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits']));
     }
 
     /**
