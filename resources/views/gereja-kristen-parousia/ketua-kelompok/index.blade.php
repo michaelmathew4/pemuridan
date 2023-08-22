@@ -5,19 +5,19 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link " href="{{route('berandaDataLembagaGKP')}}">
+    <a class="nav-link " href="{{route('berandaDataKKGKP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('kelompokDataLembagaGKP')}}">
+    <a class="nav-link collapsed" href="{{route('kelompok.indexKelompokKKGKP')}}">
       <i class="bi bi-people"></i>
       <span>Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.indexDataLembagaGKP')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexDataKKGKP')}}">
       <i class="bi bi-people"></i>
       <span>Data Kontak</span>
     </a>

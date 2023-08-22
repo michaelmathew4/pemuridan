@@ -39,7 +39,7 @@ class KelompokController extends Controller
         }
         // dd($pesertaKKs);
         // var_dump($pesertaKKs);
-        return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits']));
+        return view('parousia-ministry.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits']));
     }
 
     /**
@@ -95,9 +95,9 @@ class KelompokController extends Controller
         }
     
         if($inputNamaKelompok){
-          return redirect()->route('kelompok.index')->with(['success' => 'Kelompok Berhasil Disimpan!']);
+          return redirect()->route('ketua-kelompok.kelompok.index')->with(['success' => 'Kelompok Berhasil Disimpan!']);
         }else{
-          return redirect()->route('kelompok.index')->with(['error' => 'Kelompok Gagal Disimpan!']);
+          return redirect()->route('ketua-kelompok.kelompok.index')->with(['error' => 'Kelompok Gagal Disimpan!']);
         }
     }
 
@@ -158,9 +158,9 @@ class KelompokController extends Controller
       }
   
       if($inputNamaKelompok){
-        return redirect()->route('kelompok.index')->with(['success' => 'Kelompok Berhasil Diubah!']);
+        return redirect()->route('ketua-kelompok.kelompok.index')->with(['success' => 'Kelompok Berhasil Diubah!']);
       }else{
-        return redirect()->route('kelompok.index')->with(['error' => 'Kelompok Gagal Diubah!']);
+        return redirect()->route('ketua-kelompok.kelompok.index')->with(['error' => 'Kelompok Gagal Diubah!']);
       }
     }
 
@@ -170,8 +170,106 @@ class KelompokController extends Controller
      * @param  \App\Models\Kelompok  $kelompok
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelompok $kelompok)
+    public function destroy($id)
     {
-        //
+      $deleteNamaKelompok = Nama_kelompok::firstWhere('id_kelompok', $id);
+      $deleteKelompok = Kelompok::whereIn('id_kelompok', $id);
+      $deleteKelompok->delete();
+      $deleteNamaWKelompok->delete();
+  
+  
+      if($deleteNamaWKelompok){
+        return redirect()->route('video.index')->with(['success' => 'Video Youtube Berhasil Dihapus!']);
+      }else{
+        return redirect()->route('video.index')->with(['error' => 'Video Youtube Gagal Dihapus!']);
+      }
+    }
+
+
+
+
+
+
+    // GKP
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexKelompokKKGKP()
+    {
+        $no = 1;
+        $nama_kelompoks = Nama_kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
+        $pesertas = Peserta::where('peminta', auth()->user()->id_user)->get();
+        $pesertaEdits = Peserta::join('kelompoks', 'kelompoks.id_peserta', 'pesertas.id_peserta')
+                                ->where('peminta', auth()->user()->id_user)
+                                ->first();
+                                // dd($pesertaEdits);
+        $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
+        $pesertasKK = [];
+        $branchLv = 2;
+        $pesertaKKs = '';
+        foreach ($kelompoks as $kelompok) {
+            $pesertasKK[] = Kelompok::where('id_ketua_kelompok', $kelompok->id_peserta)->get();
+            foreach ($pesertasKK as $key => $value) {
+              foreach ($value as $key => $values) {
+                if ($values->id_ketua_kelompok == $kelompok->id_peserta) {
+                  $pesertaKKs = $pesertasKK;
+                }
+              }
+            }
+        }
+        // dd($pesertaKKs);
+        // var_dump($pesertaKKs);
+        return view('gereja-kristen-parousia.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits']));
+    }
+
+    function randomCodesGKP()
+    {
+      do {
+        $kode = random_int(100000000, 999999999);
+      } while (Nama_kelompok::where("id_kelompok", "=", $kode)->first());
+  
+      return $kode;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeKelompokKKGKP(Request $request)
+    {
+        $request->validate([
+          'namaKelompok'     => 'required'
+        ],
+        [
+          'namaKelompok.required' => 'Nama Kelompok tidak boleh kosong.'
+        ]);
+
+        
+        $inputNamaKelompok = new Nama_kelompok;
+        $inputNamaKelompok->id_kelompok = $this->randomCodesGKP();
+        $inputNamaKelompok->id_ketua_kelompok = auth()->user()->id_user;
+        $inputNamaKelompok->nama_kelompok = $request->namaKelompok;
+        $inputNamaKelompok->save();
+
+        if(count($request->kontaks) != 0 ) {
+          foreach ($request->kontaks as $kontak) {
+            $input = new Kelompok;
+            $input->id_kelompok = $inputNamaKelompok->id_kelompok;
+            $input->nama_kelompok = $request->namaKelompok;
+            $input->id_ketua_kelompok = auth()->user()->id_user;
+            $input->id_peserta = $kontak;
+            $input->save();
+          }
+        }
+    
+        if($inputNamaKelompok){
+          return redirect()->route('kelompok.indexKelompokKKGKP')->with(['success' => 'Kelompok Berhasil Disimpan!']);
+        }else{
+          return redirect()->route('kelompok.indexKelompokKKGKP')->with(['error' => 'Kelompok Gagal Disimpan!']);
+        }
     }
 }

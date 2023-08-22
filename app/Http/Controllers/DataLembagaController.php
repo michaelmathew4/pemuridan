@@ -231,8 +231,18 @@ class DataLembagaController extends Controller
     $storeData->ext = $request->extDatas;
     $storeData->tingkat_pendidikan = $request->tingkatPendidikanDatas;
     $storeData->sekolah_univ = $request->sekolahDatas;
-    $storeData->bidang_ketertarikan = json_encode($request->bKetertarikanDatas);
-    $storeData->bidang_keterampilan = json_encode($request->bKeterampilanDatas);
+    if ($request->bKetertarikanDatas != null) {
+      $bKetertarikanDatasPost = json_encode($request->bKetertarikanDatas);
+    } else {
+      $bKetertarikanDatasPost = '';
+    }
+    $storeData->bidang_ketertarikan = $bKetertarikanDatasPost;
+    if ($request->bKeterampilanDatas != null) {
+      $bKeterampilanDatasPost = json_encode($request->bKeterampilanDatas);
+    } else {
+      $bKeterampilanDatasPost = '';
+    }
+    $storeData->bidang_keterampilan = $bKeterampilanDatasPost;
     $storeData->catatan = $request->catatanDatas;
     $storeData->status = $request->statusDatas;
     $storeData->verif_email = $request->verifEmailDatas;
@@ -250,12 +260,42 @@ class DataLembagaController extends Controller
     $storeData->kolom_cadanganPLima = $request->pilihanLDatas;
     $storeData->kolom_cadanganPEnam = $request->pilihanEnDatas;
     $storeData->kolom_cadanganPTujuh = $request->pilihanTuDatas;
-    $storeData->personality_mbti = json_encode($request->pilihanGSDatas);
-    $storeData->personality_holland = json_encode($request->pilihanGDDatas);
-    $storeData->spiritual_gifts = json_encode($request->pilihanGTDatas);
-    $storeData->abilities = json_encode($request->pilihanGEDatas);
-    $storeData->experience = json_encode($request->pilihanGLDatas);
-    $storeData->kemampuan_bahasa = json_encode($request->pilihanGEnDatas);
+    if ($request->pilihanGSDatas != null) {
+      $pilihanGSDatasPost = json_encode($request->pilihanGSDatas);
+    } else {
+      $pilihanGSDatasPost = '';
+    }
+    $storeData->personality_mbti = $pilihanGSDatasPost;
+    if ($request->pilihanGDDatas != null) {
+      $pilihanGDDatasPost = json_encode($request->pilihanGDDatas);
+    } else {
+      $pilihanGDDatasPost = '';
+    }
+    $storeData->personality_holland = $pilihanGDDatasPost;
+    if ($request->pilihanGTDatas != null) {
+      $pilihanGTDatasPost = json_encode($request->pilihanGTDatas);
+    } else {
+      $pilihanGTDatasPost = '';
+    }
+    $storeData->spiritual_gifts = $pilihanGTDatasPost;
+    if ($request->pilihanGEDatas != null) {
+      $pilihanGEDatasPost = json_encode($request->pilihanGEDatas);
+    } else {
+      $pilihanGEDatasPost = '';
+    }
+    $storeData->abilities = $pilihanGEDatasPost;
+    if ($request->pilihanGLDatas != null) {
+      $pilihanGLDatasPost = json_encode($request->pilihanGLDatas);
+    } else {
+      $pilihanGLDatasPost = '';
+    }
+    $storeData->experience = $pilihanGLDatasPost;
+    if ($request->pilihanGEnDatas != null) {
+      $pilihanGEnDatasPost = json_encode($request->pilihanGEnDatas);
+    } else {
+      $pilihanGEnDatasPost = '';
+    }
+    $storeData->kemampuan_bahasa = $pilihanGEnDatasPost;
     $storeData->kolom_cadanganCBSatu = $request->checkSDatas;
     $storeData->kolom_cadanganCBDua = $request->checkDDatas;
     $storeData->kolom_cadanganCBTiga = $request->checkTDatas;

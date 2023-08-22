@@ -1625,7 +1625,7 @@
                     <td>{{$dataLembaga->institusi}}</td>
                     <td>
                       <div class="icon-action">
-                        <a data-bs-target="#ubahData{{$dataLembaga->id_user}}" id="ubahData" data-bs-toggle="modal" class="text-primary" data-user="{{$dataLembaga->id}}">
+                        <a data-bs-target="#ubahData{{$dataLembaga->id_user}}" id="ubahDataButton" data-bs-toggle="modal" class="text-primary" data-user="{{$dataLembaga->id_user}}">
                           <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
                         </a>
                         |
@@ -1658,7 +1658,7 @@
                         <div class="modal-body bg-light">
                           <div class="d-flex align-items-start">
                             <div class="nav flex-column nav-pills me-3 shadow rounded w-25 bg-white p-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                              <button class="nav-link active" class="border-bottom" id="personal{{$dataLembaga->id}}-tab" data-bs-toggle="pill" data-bs-target="#personal{{$dataLembaga->id}}" type="button" role="tab" aria-controls="personal{{$dataLembaga->id}}" aria-selected="true">Personal</button>
+                              <button class="nav-link active" class="border-bottom" id="personal{{$dataLembaga->id_user}}-tab" data-bs-toggle="pill" data-bs-target="#personal{{$dataLembaga->id}}" type="button" role="tab" aria-controls="personal{{$dataLembaga->id}}" aria-selected="true">Personal</button>
                               <button class="nav-link" id="tempat-tinggal{{$dataLembaga->id}}-tab" data-bs-toggle="pill" data-bs-target="#tempat-tinggal{{$dataLembaga->id}}" type="button" role="tab" aria-controls="tempat-tinggal{{$dataLembaga->id}}" aria-selected="false">Tempat Tinggal</button>
                               <button class="nav-link" id="kontak{{$dataLembaga->id}}-tab" data-bs-toggle="pill" data-bs-target="#kontak{{$dataLembaga->id}}" type="button" role="tab" aria-controls="kontak{{$dataLembaga->id}}" aria-selected="false">Kontak</button>
                               <button class="nav-link" id="pekerjaan{{$dataLembaga->id}}-tab" data-bs-toggle="pill" data-bs-target="#pekerjaan{{$dataLembaga->id}}" type="button" role="tab" aria-controls="pekerjaan{{$dataLembaga->id}}" aria-selected="false">Pekerjaan</button>
@@ -2367,7 +2367,7 @@
                   <!-- End Modal Lihat Data -->
                   <!-- Modal Ubah Data -->
                   <div class="modal fade" id="ubahData{{$dataLembaga->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$dataLembaga->id_user}}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="ubahData{{$dataLembaga->id_user}}Label">
@@ -2386,6 +2386,40 @@
                               </div>
                               <div class="input-center ps-5">
                                 <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editUntukPendataandata" class="col-sm-3 px-1">Untuk <span class="required-input">(*)</span></label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" name="editUntukPendataandatas" id="editUntukPendataandata" aria-label=".form-select-sm editUntukPendataandata">
+                                        <option value="">-Untuk-</option>
+                                        <option value="Pengurus" {{($dataLembaga->data_lembaga == 'Pengurus' ? 'selected' : '')}}>Pengurus</option>
+                                        <option value="Utusan" {{($dataLembaga->data_lembaga == 'Utusan' ? 'selected' : '')}}>Utusan</option>
+                                        <option value="Beasiswa" {{($dataLembaga->data_lembaga == 'Beasiswa' ? 'selected' : '')}}>Beasiswa</option>
+                                        <option value="Ketua Kelompok" {{($dataLembaga->data_lembaga == 'Ketua Kelompok' ? 'selected' : '')}}>Ketua Kelompok</option>
+                                      </select>
+                                      @error('editUntukPendataandatas')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="idDataEdit" class="col-sm-3 px-1">ID <span class="required-input">(*)</span></label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="idDataEdits" class="form-control form-control-sm" id="idDataEdit" placeholder="ID" value="{{$dataLembaga->id_user}}">
+                                      @error('idDataEdits')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
                                   <div class="mb-3 row">
                                     <label for="editTglRegistrasiData" class="col-sm-3 px-1">Tgl Registrasi <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
@@ -2514,6 +2548,12 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
+                                    <label for="editSuku" class="col-sm-3 px-1">Suku</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editSukus" class="form-control form-control-sm" id="editSuku" placeholder="Sunda" value="{{$dataLembaga->suku}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
                                     <label for="editFotoData" class="col-sm-3 px-1">Foto</label>
                                     <div class="col-sm-9">
                                       <input type="file" name="editFotoData" class="form-control form-control-sm" id="editFotoData" value="{{$dataLembaga->foto}}">
@@ -2572,7 +2612,10 @@
                                     <label for="editNegaraData" class="col-sm-3 px-1">Negara</label>
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" name="editNegaraData" id="editNegaraData" aria-label=".form-select-sm editNegaraData">
-                                        <option value="{{$dataLembaga->negara}}"> {{$dataLembaga->negara}}</option>
+                                        <option value="{{$dataLembaga->negara}}">{{$dataLembaga->negara}}</option>
+                                        <option value="Indonesia">Indonesia</option>
+                                        <option value="USA">USA</option>
+                                        <option value="England">England</option>
                                       </select>
                                     </div>
                                   </div>
@@ -2859,10 +2902,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editBKetertarikandataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Bidang Ketertarikan</label>
+                                    <label for="editBKetertarikandataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Bidang Ketertarikan</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-control" name="editBKetertarikandataLembaga[]" style="width: 100%;" id="editBKetertarikandataLembaga{{$dataLembaga->id}}" aria-label="multiple select editBKetertarikandataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-control" name="editBKetertarikandataLembaga[]" style="width: 100%;" id="editBKetertarikandataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editBKetertarikandataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->bidang_ketertarikan}}"> {{$dataLembaga->bidang_ketertarikan}}</option>
                                           @foreach ($bidKetertarikans as $bidKetertarikan)
                                             <option value="{{$bidKetertarikan->bidang_ketertarikan}}">{{$bidKetertarikan->bidang_ketertarikan}}</option>
@@ -2877,10 +2920,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editBKeterampilandataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Bidang Keterampilan</label>
+                                    <label for="editBKeterampilandataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Bidang Keterampilan</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-control" name="editBKeterampilandataLembaga[]" id="editBKeterampilandataLembaga{{$dataLembaga->id}}" style="width: 100%;" aria-label="multiple select editBKeterampilandataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-control" name="editBKeterampilandataLembaga[]" id="editBKeterampilandataLembaga{{$dataLembaga->id_user}}" style="width: 100%;" aria-label="multiple select editBKeterampilandataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->bidang_keterampilan}}"> {{$dataLembaga->bidang_keterampilan}}</option>
                                           @foreach ($bidKeterampilans as $bidKeterampilan)
                                             <option value="{{$bidKeterampilan->bidang_keterampilan}}">{{$bidKeterampilan->bidang_keterampilan}}</option>
@@ -3126,10 +3169,10 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editPilihanGSdataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Personality - MBTI</label>
+                                    <label for="editPilihanGSdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Personality - MBTI</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGSdataLembaga[]" style="width: 100%;" id="editPilihanGSdataLembaga{{$dataLembaga->id}}" aria-label="multiple select editPilihanGSdataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-select" name="editPilihanGSdataLembaga[]" style="width: 100%;" id="editPilihanGSdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGSdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->personality_mbti}}">{{$dataLembaga->personality_mbti}}</option>
                                           @foreach ($persMbtis as $persMbti)
                                             <option value="{{$persMbti->mbti}}">{{$persMbti->mbti}}</option>
@@ -3144,10 +3187,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editPilihanGDdataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Personality - Holland</label>
+                                    <label for="editPilihanGDdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Personality - Holland</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGDdataLembaga[]" style="width: 100%;" id="editPilihanGDdataLembaga{{$dataLembaga->id}}" aria-label="multiple select editPilihanGDdataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-select" name="editPilihanGDdataLembaga[]" style="width: 100%;" id="editPilihanGDdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGDdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->personality_holland}}">{{$dataLembaga->personality_holland}}</option>
                                           @foreach ($persHollands as $persHolland)
                                             <option value="{{$persHolland->holland}}">{{$persHolland->holland}}</option>
@@ -3162,10 +3205,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editPilihanGTdataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Spiritual Gifts</label>
+                                    <label for="editPilihanGTdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Spiritual Gifts</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGTdataLembaga[]" style="width: 100%;" id="editPilihanGTdataLembaga{{$dataLembaga->id}}" aria-label="multiple select editPilihanGTdataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-select" name="editPilihanGTdataLembaga[]" style="width: 100%;" id="editPilihanGTdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGTdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->spiritual_gifts}}">{{$dataLembaga->spiritual_gifts}}</option>
                                           @foreach ($spiritGifts as $spiritGift)
                                             <option value="{{$spiritGift->gifts}}">{{$spiritGift->gifts}}</option>
@@ -3180,10 +3223,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editPilihanGEdataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Abilities</label>
+                                    <label for="editPilihanGEdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Abilities</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGEdataLembaga[]" style="width: 100%;" id="editPilihanGEdataLembaga{{$dataLembaga->id}}" aria-label="multiple select editPilihanGEdataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-select" name="editPilihanGEdataLembaga[]" style="width: 100%;" id="editPilihanGEdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGEdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->abilities}}">{{$dataLembaga->abilities}}</option>
                                           @foreach ($abilities as $ability)
                                             <option value="{{$ability->abilities}}">{{$ability->abilities}}</option>
@@ -3198,10 +3241,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editExperienceDataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Ganda 5</label>
+                                    <label for="editExperienceDataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Ganda 5</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editExperienceDataLembaga[]" style="width: 100%;" id="editExperienceDataLembaga{{$dataLembaga->id}}" aria-label="multiple select editExperienceDataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-select" name="editExperienceDataLembaga[]" style="width: 100%;" id="editExperienceDataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editExperienceDataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->kolom_cadanganPGLima}}">{{$dataLembaga->kolom_cadanganPGLima}}</option>
                                           @foreach ($gandaLimas as $gandaLima)
                                             <option value="{{$gandaLima->ganda_lima}}">{{$gandaLima->ganda_lima}}</option>
@@ -3216,10 +3259,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editPilihanGEndataLembaga{{$dataLembaga->id}}" class="col-sm-3 px-1">Kemampuan Bahasa</label>
+                                    <label for="editPilihanGEndataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kemampuan Bahasa</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGEndataLembaga[]" style="width: 100%;" id="editPilihanGEndataLembaga{{$dataLembaga->id}}" aria-label="multiple select editPilihanGEndataLembaga{{$dataLembaga->id}}" multiple>
+                                        <select class="form-select" name="editPilihanGEndataLembaga[]" style="width: 100%;" id="editPilihanGEndataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGEndataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->kemampuan_bahasa}}">{{$dataLembaga->kemampuan_bahasa}}</option>
                                           @foreach ($kemBahasas as $kemBahasa)
                                             <option value="{{$kemBahasa->kem_bahasa}}">{{$kemBahasa->kem_bahasa}}</option>
@@ -3873,10 +3916,10 @@
     });
 
     // Edit
-    $(document).on('click', '#ubahData', function () {
+    $(document).on('click', '#ubahDataButton', function () {
       var idUser = $(this).attr('data-user');
       // console.log(idUser);
-      $('#editBKetertarikanData'+idUser).select2({
+      $('#editBKetertarikandataLembaga'+idUser).select2({
         placeholder: "Pilih Bidang Ketertarikan",
         allowClear: true,
         language: "id",
@@ -3884,7 +3927,7 @@
       });
 
       
-      $('#editBKeterampilanData'+idUser).select2({
+      $('#editBKeterampilandataLembaga'+idUser).select2({
         placeholder: "Pilih Bidang Keterampilan",
         allowClear: true,
         language: "id",
@@ -3892,7 +3935,7 @@
       });
 
       
-      $('#editPilihanGSData'+idUser).select2({
+      $('#editPilihanGSdataLembaga'+idUser).select2({
         placeholder: "Personality - MBTI",
         allowClear: true,
         language: "id",
@@ -3900,7 +3943,7 @@
       });
 
       
-      $('#editPilihanGDData'+idUser).select2({
+      $('#editPilihanGDdataLembaga'+idUser).select2({
         placeholder: "Personality - Holland",
         allowClear: true,
         language: "id",
@@ -3908,7 +3951,7 @@
       });
 
       
-      $('#editPilihanGTData'+idUser).select2({
+      $('#editPilihanGTdataLembaga'+idUser).select2({
         placeholder: "Spiritual Gifts",
         allowClear: true,
         language: "id",
@@ -3916,7 +3959,7 @@
       });
 
       
-      $('#editPilihanGEData'+idUser).select2({
+      $('#editPilihanGEdataLembaga'+idUser).select2({
         placeholder: "Abilities",
         allowClear: true,
         language: "id",
@@ -3924,7 +3967,7 @@
       });
 
       
-      $('#editExperienceData'+idUser).select2({
+      $('#editExperiencedataLembaga'+idUser).select2({
         placeholder: "Pilihan Ganda Lima",
         allowClear: true,
         language: "id",
@@ -3932,20 +3975,13 @@
       });
 
       
-      $('#editPilihanGEnData'+idUser).select2({
+      $('#editPilihanGEndataLembaga'+idUser).select2({
         placeholder: "Kemampuan Bahasa",
         allowClear: true,
         language: "id",
         dropdownParent: $("#ubahData"+idUser)
       });
 
-      
-      $('#editPilihanGTuData'+idUser).select2({
-        placeholder: "Pernah Menderita Penyakit",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
     });
     
     $(document).ready(function(){

@@ -5,25 +5,25 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link " href="{{route('berandaPengurusYMP')}}">
+    <a class="nav-link " href="{{route('berandaPengurusPM')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.indexPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('ketua-lokasi.indexPengurusPM')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('ketua-kelompok.indexPengurusPM')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusPM')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>

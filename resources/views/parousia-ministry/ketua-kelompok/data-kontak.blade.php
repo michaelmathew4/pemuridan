@@ -9,19 +9,19 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('berandaDataLembagaPM')}}">
+    <a class="nav-link collapsed" href="{{route('berandaDataKKPM')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('kelompok.index')}}">
+    <a class="nav-link collapsed" href="{{route('ketua-kelompok.kelompok.index')}}">
       <i class="bi bi-people"></i>
       <span>Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{route('data-kontak.indexDataLembagaPM')}}">
+    <a class="nav-link" href="{{route('data-kontak.indexDataKKPM')}}">
       <i class="bi bi-people"></i>
       <span>Data Kontak</span>
     </a>
@@ -39,7 +39,7 @@
     <h1>Data Kontak</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('berandaDataLembagaPM')}}">Ketua Kelompok</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaDataKKPM')}}">Ketua Kelompok</a></li>
         <li class="breadcrumb-item active">Data Kontak</li>
       </ol>
     </nav>
@@ -71,7 +71,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form action="{{ route('data-kontak.storeDataLembagaPM') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('data-kontak.storeDataKKPM') }}" method="post" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group-input">
                         <div class="form-header-group mb-3">
@@ -397,12 +397,12 @@
                     <td>{{$peserta->jk_peserta}}</td>
                     <td>{{$peserta->alamat_peserta}}</td>
                     <td>
-                      <a data-bs-toggle="modal" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.showDataLembagaPM', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
+                      <a data-bs-toggle="modal" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.showDataKKPM', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->skala}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Skala"></i>
                       </a>
                     </td>
                     <td>
-                      <a data-bs-toggle="modal" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.showDataLembagaPM', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
+                      <a data-bs-toggle="modal" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.showDataKKPM', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->catatan}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Catatan"></i>
                       </a>
                     </td>
@@ -498,7 +498,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-kontak.updateDataLembagaPM', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
+                          <form action="{{ route('data-kontak.updateDataKKPM', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -721,7 +721,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.destroyDataLembagaPM', $peserta->id) }}" method="POST">
+                        <form action="{{ route('data-kontak.destroyDataKKPM', $peserta->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
@@ -747,7 +747,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeDataLembagaPM') }}" method="post">
+                        <form action="{{ route('data-kontak.storeDataKKPM') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">
@@ -803,7 +803,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeDataLembagaPM') }}" method="post">
+                        <form action="{{ route('data-kontak.storeDataKKPM') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">

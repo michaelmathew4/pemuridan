@@ -49,7 +49,7 @@ class MasukController extends Controller
                             return redirect('/parousia-ministry/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
                             break;
                         case 'Ketua Kelompok':
-                            return redirect('/parousia-ministry/lembaga')->with(['success' => $role.' berhasil Masuk!']);
+                            return redirect('/parousia-ministry/ketua-kelompok')->with(['success' => $role.' berhasil Masuk!']);
                             break;
                     }
                     # code...
@@ -70,7 +70,7 @@ class MasukController extends Controller
                             return redirect('/gereja-kristen-parousia/ketua-lokasi')->with(['success' => 'Ketua Lokasi berhasil Masuk!']);
                             break;
                         case 'Ketua Kelompok':
-                            return redirect('/gereja-kristen-parousia/lembaga')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
+                            return redirect('/gereja-kristen-parousia/ketua-kelompok')->with(['success' => 'Ketua Kelompok berhasil Masuk!']);
                             break;
                     }
                     # code...

@@ -9,19 +9,19 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link " href="{{route('berandaDataLembagaPM')}}">
+    <a class="nav-link collapsed" href="{{route('berandaDataKKPM')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('kelompok.index')}}">
+    <a class="nav-link " href="{{route('ketua-kelompok.kelompok.index')}}">
       <i class="bi bi-people"></i>
       <span>Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.indexDataLembagaPM')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexDataKKPM')}}">
       <i class="bi bi-people"></i>
       <span>Data Kontak</span>
     </a>
@@ -70,7 +70,7 @@
                       </h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{route('kelompok.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('ketua-kelompok.kelompok.store')}}" method="POST" enctype="multipart/form-data">
                       @csrf
                       <div class="modal-body">
                         <div class="form-group-input">
@@ -145,11 +145,11 @@
                     <td>
                       <div class="icon-action">
                         <a href="#ubahKelompok{{$nama_kelompok->id_kelompok}}" id="ubahKelompok" data-user="{{$nama_kelompok->id_kelompok}}" data-bs-toggle="modal" class="text-primary">
-                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Kelompok"></i>
                         </a>
                         |
                         <a href="#hapusKelompok{{$nama_kelompok->id_kelompok}}" data-bs-toggle="modal" class="text-danger">
-                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Kelompok"></i>
                         </a>
                       </div>
                     </td>
@@ -213,7 +213,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('kelompok.update', $nama_kelompok->id_kelompok) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('ketua-kelompok.kelompok.update', $nama_kelompok->id_kelompok) }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
                           <div class="modal-body">
@@ -265,6 +265,32 @@
                     </div>
                   </div>
                   <!-- End Modal Ubah Data -->
+                  <!-- Modal Hapus Data -->
+                  <div class="modal fade" id="hapusKelompok{{$nama_kelompok->id_kelompok}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapusKelompok{{$nama_kelompok->id_kelompok}}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="hapusKelompok{{$nama_kelompok->id_kelompok}}Label">
+                            <i class="bi bi-trash text-danger"></i>
+                            Hapus Data Kontak
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('ketua-kelompok.kelompok.destroy', $nama_kelompok->id_kelompok) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Kelompok {{$nama_kelompok->nama_kelompok}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal Hapus Data -->
                 @empty
                   <div class="alert alert-danger">
                     Data Tidak Ada

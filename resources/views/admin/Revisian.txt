@@ -30,5 +30,11 @@ Delete Data Lembaga yang menjadi ketua kelompok = Delete kelompok(?)
 Ganti dari peserta menjadi ketua kelompok pake button menjadi ketua kelompok (jika, peserta tersebut sudah berskala +3, button otomatis muncul) (DONE)
 Nanti suruh lengkapi data yang belum lengkap (data ketua kelompok) (DONE)
 
+Kelompok Jadi Bagan
+GKP data GKP only
+PM data PM only
 
-LAGI NGERJAIN PESERTA -> KETUA KELOMPOK (DATA FORM)
+Fitur Lain:
+1. Table Responsive
+2. Profil yang login
+3. Setting yang login

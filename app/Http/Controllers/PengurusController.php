@@ -87,7 +87,7 @@ class PengurusController extends Controller
     $upload->save();
 
     if($upload){
-      if ($request->kepengurusanPRS == 'BPH J2 / YMP (Yayasan Ministry Parousia)') {
+      if ($request->kepengurusanPRS == 'PM (Parousia Ministry)') {
         $institusi = 'YMP';
       } else {
         $institusi = 'GKP';

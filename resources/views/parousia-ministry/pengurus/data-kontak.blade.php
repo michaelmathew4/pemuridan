@@ -9,25 +9,25 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('berandaPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('berandaPengurusPM')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.indexPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('ketua-lokasi.indexPengurusPM')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexPengurusYMP')}}">
+    <a class="nav-link collapsed" href="{{route('ketua-kelompok.indexPengurusPM')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Ketua Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{route('data-kontak.indexPengurusYMP')}}">
+    <a class="nav-link" href="{{route('data-kontak.indexPengurusPM')}}">
       <i class="bi bi-people"></i>
       <span>Data Peserta</span>
     </a>
@@ -45,7 +45,7 @@
     <h1>Data Kontak</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('berandaPengurusYMP')}}">Pengurus</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaPengurusPM')}}">Pengurus</a></li>
         <li class="breadcrumb-item active">Data Kontak</li>
       </ol>
     </nav>
@@ -77,7 +77,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form action="{{ route('data-kontak.storePengurusYMP') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('data-kontak.storePengurusPM') }}" method="post" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group-input">
                         <div class="form-header-group mb-3">
@@ -361,8 +361,9 @@
                   <th scope="col">Alamat</th>
                   <th scope="col">Skala</th>
                   <th scope="col">Catatan</th>
-                  <th scope="col">Status</th>
+                  <th scope="col">Aktif/Tidak Aktif</th>
                   <th scope="col">Lokasi</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
@@ -379,22 +380,41 @@
                     <td>{{$peserta->jk_peserta}}</td>
                     <td>{{$peserta->alamat_peserta}}</td>
                     <td>
-                      <a href="#lihatSkala{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.show', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->skala}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Skala"></i>
                       </a>
                     </td>
                     <td>
-                      <a href="#lihatCatatan{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.show', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->catatan}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Catatan"></i>
                       </a>
                     </td>
                     <td>{{$peserta->status_peserta}}</td>
                     <td>{{$peserta->lokasi_peserta}}</td>
                     <td>
+                      @if ($peserta->skala == '3')
+                        @if ($peserta->id_peserta == $peserta->id_user)
+                          Ketua Kelompok
+                        @else
+                          <a href="#rubahStatus{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info" id="ubahStatus" data-user="{{$peserta->id_peserta}}">
+                            Peserta <i class="bi bi-arrow-right"></i> Ketua Kelompok
+                          </a>
+                        @endif
+                      @else
+                        Peserta
+                      @endif
+                    </td>
+                    <td>
                       <div class="icon-action">
-                        <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-primary">
-                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                        </a>
+                        @if ($peserta->id_peserta == $peserta->id_user)
+                          <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="link-secondary pe-none" tabindex="-1" aria-disabled="true" disabled>
+                            <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          </a>
+                        @else
+                          <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-primary">
+                            <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          </a>
+                        @endif
                         |
                         <a href="#hapusData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-danger">
                           <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
@@ -480,7 +500,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-kontak.updatePengurusYMP', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
+                          <form action="{{ route('data-kontak.updatePengurusPM', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -703,7 +723,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.destroyPengurusYMP', $peserta->id) }}" method="POST">
+                        <form action="{{ route('data-kontak.destroyPengurusPM', $peserta->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
@@ -719,17 +739,17 @@
                   </div>
                   <!-- End Modal Hapus Data -->
                   <!-- Modal Lihat Skala -->
-                  <div class="modal fade" id="lihatSkala{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkala{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkalaLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatSkala{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatSkalaLabel">
                             <i class="bi bi-graph-up text-info"></i>
                             Lihat Skala Kontak
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storePengurusYMP') }}" method="post">
+                        <form action="{{ route('data-kontak.storePengurusPM') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">
@@ -740,17 +760,7 @@
                               <div class="col-3">Keterangan</div>
                             </div>
                             <hr>
-                            @forelse ($skalas as $skala)
-                              <div class="row">
-                                <div class="col-1">{{$noSkalas++}}.</div>
-                                <div class="col-3">{{$skala->tgl_kontak}}</div>
-                                <div class="col-2">{{$skala->skala}}</div>
-                                <div class="col-3">{{$skala->status}}</div>
-                                <div class="col-3">{{$skala->keterangan}}</div>
-                              </div>
-                              <hr class="text-muted">
-                            @empty
-                            @endforelse
+                            <div id="skalas"></div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-3">
@@ -785,17 +795,17 @@
                   </div>
                   <!-- End Modal Lihat Skala -->
                   <!-- Modal Lihat Catatan -->
-                  <div class="modal fade" id="lihatCatatan{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatan{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatCatatan}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatan}Label" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatCatatan{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatCatatan}Label">
                             <i class="bi bi-journal-text text-info"></i>
                             Lihat Catatan Kontak
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storePengurusYMP') }}" method="post">
+                        <form action="{{ route('data-kontak.storePengurusPM') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">
@@ -804,15 +814,7 @@
                               <div class="col-7">Catatan</div>
                             </div>
                             <hr>
-                            @forelse ($catatans as $catatan)
-                              <div class="row">
-                                <div class="col-1">{{$noCatatans}}.</div>
-                                <div class="col-4">{{$catatan->tgl_kontak}}</div>
-                                <div class="col-7">{{$catatan->catatan}}</div>
-                              </div>
-                              <hr class="text-muted">
-                            @empty
-                            @endforelse
+                            <div id="catatans"></div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-4">
@@ -948,6 +950,47 @@
 @section('javascript')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
 <script>
-
+  $(document).on('click', '#lihatSkalaButton', function(event) {
+    event.preventDefault();
+    var href = $(this).data('attr');
+    var id = $(this).data('id');
+    $.get(href, function(result) {
+      no = 1;
+      html = '';
+      $.each(result.skala, function(index, hasil) {
+        $('#lihatSkala').modal("show");
+        nos = no++;
+        html += '<div class="row">';
+        html += '<div class="col-1">'+nos+'</div>';
+        html += '<div class="col-3">'+hasil.tgl_kontak+'</div>';
+        html += '<div class="col-2">'+hasil.skala+'</div>';
+        html += '<div class="col-3">'+hasil.status+'</div>';
+        html += '<div class="col-3">'+hasil.keterangan+'</div>';
+        html += '</div>';
+        html += '<hr>';
+      });
+      $('#skalas').empty('').append(html);
+    });
+  });
+  $(document).on('click', '#lihatCatatanButton', function(event) {
+    event.preventDefault();
+    var href = $(this).data('attr');
+    var id = $(this).data('id');
+    $.get(href, function(result) {
+      no = 1;
+      html = '';
+      $.each(result.catatan, function(index, hasil) {
+        $('#lihatCatatan').modal("show");
+        nos = no++;
+        html += '<div class="row">';
+        html += '<div class="col-1">'+nos+'</div>';
+        html += '<div class="col-4">'+hasil.tgl_kontak+'</div>';
+        html += '<div class="col-7">'+hasil.catatan+'</div>';
+        html += '</div>';
+        html += '<hr>';
+      });
+      $('#catatans').empty('').append(html);
+    });
+  });
 </script>
 @endsection

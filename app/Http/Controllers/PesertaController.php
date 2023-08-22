@@ -169,7 +169,7 @@ class PesertaController extends Controller
       }
 
       $upload = new Peserta;
-      $upload->id_peserta = $this->randomCodesPengurusPM();
+      $upload->id_peserta = $this->randomCodes();
       $upload->nama_peserta = $request->namaKontakPeserta;
       $upload->jk_peserta = $request->jenisKelaminPeserta;
       $upload->alamat_peserta = $request->alamatPeserta;
@@ -458,7 +458,7 @@ class PesertaController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::find($id);
+    $pesertaUpdate = Peserta::firstWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -538,7 +538,7 @@ class PesertaController extends Controller
    */
   public function destroy($id)
   {
-    $deleteDataPeserta = Peserta::find($id);
+    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -570,6 +570,24 @@ class PesertaController extends Controller
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   //Pengurus PM
   /**
    * Display a listing of the resource.
@@ -578,7 +596,10 @@ class PesertaController extends Controller
    */
   public function indexPengurusPM()
   {
-    $pesertas = Peserta::addSelect([
+    $pesertas = Peserta::join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
+                ->select('data_lembagas.id_user', 'data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
+                ->where('institusi_peserta', 'PM (Parousia Ministry)')
+                ->addSelect([
                   'skala' => Skala::select('skala')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')
                       ->orderBy('created_at', 'desc')
@@ -586,6 +607,9 @@ class PesertaController extends Controller
                   'catatan' => Catatan::select('catatan')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')
                       ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'id_user' => Data_lembaga::select('id_user')
+                      ->whereColumn('id_user', 'pesertas.id_peserta')
                       ->limit(1)
                 ])->get();
     
@@ -628,7 +652,8 @@ class PesertaController extends Controller
         'sukuPeserta'   => 'required',
         'lokasiPeserta'   => 'required',
         'institusiPeserta'   => 'required',
-        'fotoPRS'     => 'image|mimes:png,jpg,jpeg'
+        'fotoPRS'     => 'image|mimes:png,jpg,jpeg',
+        'pemintaInput'     => 'required'
       ],
       [
         'namaKontakPeserta.required' => 'Nama tidak boleh kosong.',
@@ -644,7 +669,8 @@ class PesertaController extends Controller
         'sukuPeserta.required' => 'Suku tidak boleh kosong.',
         'lokasiPeserta.required' => 'Lokasi tidak boleh kosong.',
         'institusiPeserta.required' => 'Naungan tidak boleh kosong.',
-        'fotoPeserta.image' => 'Berkas harus berupa Gambar.'
+        'fotoPeserta.image' => 'Berkas harus berupa Gambar.',
+        'pemintaInput.required' => 'Peminta Input tidak boleh kosong.'
       ]);
 
       $fotoPesertaUpload = '';
@@ -668,6 +694,7 @@ class PesertaController extends Controller
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $request->lokasiPeserta;
       $upload->institusi_peserta = $request->institusiPeserta;
+      $upload->peminta = $request->pemintaInput;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -767,7 +794,7 @@ class PesertaController extends Controller
    */
   public function updatePengurusPM(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::find($id);
+    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -782,6 +809,7 @@ class PesertaController extends Controller
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => ''
         ]);
       } else {
@@ -797,6 +825,7 @@ class PesertaController extends Controller
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
         ]);
       }
     } else {
@@ -823,6 +852,7 @@ class PesertaController extends Controller
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => $filename->getClientOriginalName()
         ]);
       }
@@ -844,7 +874,7 @@ class PesertaController extends Controller
    */
   public function destroyPengurusPM($id)
   {
-    $deleteDataPeserta = Peserta::find($id);
+    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -885,15 +915,21 @@ class PesertaController extends Controller
     $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
     $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
     $pesertas = Peserta::where('lokasi_peserta', $cekLokasi->nama_lokasi)
-                ->addSelect(['skala' => Skala::select('skala')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1),
-            'catatan' => Catatan::select('catatan')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1)
-            ])->get();
+                ->join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
+                ->select('data_lembagas.id_user', 'data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
+                ->addSelect([
+                  'skala' => Skala::select('skala')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'catatan' => Catatan::select('catatan')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'id_user' => Data_lembaga::select('id_user')
+                      ->whereColumn('id_user', 'pesertas.id_peserta')
+                      ->limit(1)
+                ])->get();
     
     $no = 1;
     $lokasis = Lokasi::all();
@@ -935,7 +971,8 @@ class PesertaController extends Controller
         'sukuPeserta'   => 'required',
         'lokasiPeserta'   => 'required',
         'institusiPeserta'   => 'required',
-        'fotoPRS'     => 'image|mimes:png,jpg,jpeg'
+        'fotoPRS'     => 'image|mimes:png,jpg,jpeg',
+        'pemintaInput'     => 'required'
       ],
       [
         'namaKontakPeserta.required' => 'Nama tidak boleh kosong.',
@@ -951,7 +988,8 @@ class PesertaController extends Controller
         'sukuPeserta.required' => 'Suku tidak boleh kosong.',
         'lokasiPeserta.required' => 'Lokasi tidak boleh kosong.',
         'institusiPeserta.required' => 'Naungan tidak boleh kosong.',
-        'fotoPeserta.image' => 'Berkas harus berupa Gambar.'
+        'fotoPeserta.image' => 'Berkas harus berupa Gambar.',
+        'pemintaInput.required' => 'Peminta Input tidak boleh kosong.'
       ]);
 
       $fotoPesertaUpload = '';
@@ -975,6 +1013,7 @@ class PesertaController extends Controller
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $cekLokasi->nama_lokasi;
       $upload->institusi_peserta = $request->institusiPeserta;
+      $upload->peminta = $request->pemintaInput;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -1074,7 +1113,7 @@ class PesertaController extends Controller
    */
   public function updateKetuaLokasiPM(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::find($id);
+    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -1088,6 +1127,7 @@ class PesertaController extends Controller
           'suku_peserta'   => $request->editSukuPeserta,
           'status_peserta'   => $request->editStatusPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => ''
         ]);
       } else {
@@ -1102,6 +1142,7 @@ class PesertaController extends Controller
           'suku_peserta'   => $request->editSukuPeserta,
           'status_peserta'   => $request->editStatusPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
         ]);
       }
     } else {
@@ -1127,6 +1168,7 @@ class PesertaController extends Controller
           'suku_peserta'   => $request->editSukuPeserta,
           'status_peserta'   => $request->editStatusPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => $filename->getClientOriginalName()
         ]);
       }
@@ -1148,7 +1190,7 @@ class PesertaController extends Controller
    */
   public function destroyKetuaLokasiPM($id)
   {
-    $deleteDataPeserta = Peserta::find($id);
+    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -1183,7 +1225,7 @@ class PesertaController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function indexDataLembagaPM()
+  public function indexDataKKPM()
   {
     $pesertas = Peserta::where('peminta', '=', auth()->user()->id_user)
                 ->addSelect([
@@ -1200,7 +1242,7 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('parousia-ministry.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    return view('parousia-ministry.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
 
@@ -1213,21 +1255,13 @@ class PesertaController extends Controller
     return $kode;
   }
 
-  function randomCodesIDKelompokDataLembagaPM()
-  {
-    do {
-      $kode = random_int(100000000, 999999999);
-    } while (Kelompok::where("id_kelompok", "=", $kode)->first());
-
-    return $kode;
-  }
   /**
    * Store a newly created resource in storage.
    *
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storeDataLembagaPM(Request $request)
+  public function storeDataKKPM(Request $request)
   {
     if ($request->inputTambah == "tambahData") {
       $request->validate([
@@ -1284,6 +1318,7 @@ class PesertaController extends Controller
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $request->lokasiPeserta;
       $upload->institusi_peserta = $request->institusiPeserta;
+      $upload->peminta = auth()->user()->id_user;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -1304,20 +1339,15 @@ class PesertaController extends Controller
           $catatan->save();
 
           if ($catatan) {
-            // $kelompok = new Kelompok;
-            // $kelompok->id_kelompok = $this->randomCodesIDKelompokDataLembagaPM();
-            // $kelompok->id_ketua_kelompok = auth()->user()->id_user;
-            // $kelompok->id_peserta = $upload->id_peserta;
-            // $kelompok->generasi = 
-            return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.indexDataKKPM')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -1337,9 +1367,9 @@ class PesertaController extends Controller
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKPM')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -1351,9 +1381,9 @@ class PesertaController extends Controller
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKPM')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
@@ -1365,7 +1395,7 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function showDataLembagaPM($id)
+  public function showDataKKPM($id)
   {
     $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
                 ->select('skalas.*')
@@ -1386,9 +1416,9 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function updateDataLembagaPM(Request $request, $id)
+  public function updateDataKKPM(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::find($id);
+    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -1447,10 +1477,10 @@ class PesertaController extends Controller
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.indexDataKKPM')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -1460,9 +1490,9 @@ class PesertaController extends Controller
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroyDataLembagaPM($id)
+  public function destroyDataKKPM($id)
   {
-    $deleteDataPeserta = Peserta::find($id);
+    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -1478,17 +1508,21 @@ class PesertaController extends Controller
         $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
         $deleteCatatanPeserta->delete();
         if ($deleteCatatanPeserta) {
-          return redirect()->route('data-kontak.indexDataLembagaPM')->with(['success' => 'Peserta Berhasil Dihapus!']);
+          return redirect()->route('data-kontak.indexDataKKPM')->with(['success' => 'Peserta Berhasil Dihapus!']);
         }else{
-          return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+          return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Peserta Gagal Dihapus!']);
         }
       }else{
-        return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+        return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Peserta Gagal Dihapus!']);
       }
     }else{
-      return redirect()->route('data-kontak.indexDataLembagaPM')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.indexDataKKPM')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
+
+
+
+
 
 
 
@@ -1514,8 +1548,8 @@ class PesertaController extends Controller
           ])->get();
 
 
-$no = 1;
-$lokasis = Lokasi::all();
+    $no = 1;
+    $lokasis = Lokasi::all();
     return view('gereja-kristen-parousia.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
@@ -1552,7 +1586,8 @@ $lokasis = Lokasi::all();
         'sukuPeserta'   => 'required',
         'lokasiPeserta'   => 'required',
         'institusiPeserta'   => 'required',
-        'fotoPRS'     => 'image|mimes:png,jpg,jpeg'
+        'fotoPRS'     => 'image|mimes:png,jpg,jpeg',
+        'pemintaInput'     => 'required'
       ],
       [
         'namaKontakPeserta.required' => 'Nama tidak boleh kosong.',
@@ -1568,7 +1603,8 @@ $lokasis = Lokasi::all();
         'sukuPeserta.required' => 'Suku tidak boleh kosong.',
         'lokasiPeserta.required' => 'Lokasi tidak boleh kosong.',
         'institusiPeserta.required' => 'Naungan tidak boleh kosong.',
-        'fotoPeserta.image' => 'Berkas harus berupa Gambar.'
+        'fotoPeserta.image' => 'Berkas harus berupa Gambar.',
+        'pemintaInput.required' => 'Peminta Input tidak boleh kosong.'
       ]);
 
       $fotoPesertaUpload = '';
@@ -1592,6 +1628,7 @@ $lokasis = Lokasi::all();
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $request->lokasiPeserta;
       $upload->institusi_peserta = $request->institusiPeserta;
+      $upload->peminta = $request->pemintaInput;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -1691,7 +1728,7 @@ $lokasis = Lokasi::all();
    */
   public function updatePengurusGKP(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::find($id);
+    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -1706,6 +1743,7 @@ $lokasis = Lokasi::all();
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => ''
         ]);
       } else {
@@ -1721,6 +1759,7 @@ $lokasis = Lokasi::all();
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
         ]);
       }
     } else {
@@ -1747,6 +1786,7 @@ $lokasis = Lokasi::all();
           'status_peserta'   => $request->editStatusPeserta,
           'lokasi_peserta'   => $request->editLokasiPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => $filename->getClientOriginalName()
         ]);
       }
@@ -1768,7 +1808,7 @@ $lokasis = Lokasi::all();
    */
   public function destroyPengurusGKP($id)
   {
-    $deleteDataPeserta = Peserta::find($id);
+    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -1797,7 +1837,7 @@ $lokasis = Lokasi::all();
   }
 
   
-  //Ketua Lokasi YMP
+  //Ketua Lokasi GKP
   /**
    * Display a listing of the resource.
    *
@@ -1808,15 +1848,21 @@ $lokasis = Lokasi::all();
     $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
     $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
     $pesertas = Peserta::where('lokasi_peserta', $cekLokasi->nama_lokasi)
-                ->addSelect(['skala' => Skala::select('skala')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1),
-            'catatan' => Catatan::select('catatan')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1)
-            ])->get();
+                ->join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
+                ->select('data_lembagas.id_user', 'data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
+                ->addSelect([
+                  'skala' => Skala::select('skala')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'catatan' => Catatan::select('catatan')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'id_user' => Data_lembaga::select('id_user')
+                      ->whereColumn('id_user', 'pesertas.id_peserta')
+                      ->limit(1)
+                ])->get();
     
     $no = 1;
     $lokasis = Lokasi::all();
@@ -1858,7 +1904,8 @@ $lokasis = Lokasi::all();
         'sukuPeserta'   => 'required',
         'lokasiPeserta'   => 'required',
         'institusiPeserta'   => 'required',
-        'fotoPRS'     => 'image|mimes:png,jpg,jpeg'
+        'fotoPRS'     => 'image|mimes:png,jpg,jpeg',
+        'pemintaInput'     => 'required'
       ],
       [
         'namaKontakPeserta.required' => 'Nama tidak boleh kosong.',
@@ -1874,7 +1921,8 @@ $lokasis = Lokasi::all();
         'sukuPeserta.required' => 'Suku tidak boleh kosong.',
         'lokasiPeserta.required' => 'Lokasi tidak boleh kosong.',
         'institusiPeserta.required' => 'Naungan tidak boleh kosong.',
-        'fotoPeserta.image' => 'Berkas harus berupa Gambar.'
+        'fotoPeserta.image' => 'Berkas harus berupa Gambar.',
+        'pemintaInput.required' => 'Peminta Input tidak boleh kosong.'
       ]);
 
       $fotoPesertaUpload = '';
@@ -1898,6 +1946,7 @@ $lokasis = Lokasi::all();
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $cekLokasi->nama_lokasi;
       $upload->institusi_peserta = $request->institusiPeserta;
+      $upload->peminta = $request->pemintaInput;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -1997,7 +2046,7 @@ $lokasis = Lokasi::all();
    */
   public function updateKetuaLokasiGKP(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::find($id);
+    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -2011,6 +2060,7 @@ $lokasis = Lokasi::all();
           'suku_peserta'   => $request->editSukuPeserta,
           'status_peserta'   => $request->editStatusPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => ''
         ]);
       } else {
@@ -2025,6 +2075,7 @@ $lokasis = Lokasi::all();
           'suku_peserta'   => $request->editSukuPeserta,
           'status_peserta'   => $request->editStatusPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
         ]);
       }
     } else {
@@ -2050,6 +2101,7 @@ $lokasis = Lokasi::all();
           'suku_peserta'   => $request->editSukuPeserta,
           'status_peserta'   => $request->editStatusPeserta,
           'institusi_peserta'   => $request->editInstitusiPeserta,
+          'peminta'   => $request->editPemintaInput,
           'foto_peserta'     => $filename->getClientOriginalName()
         ]);
       }
@@ -2071,7 +2123,7 @@ $lokasis = Lokasi::all();
    */
   public function destroyKetuaLokasiGKP($id)
   {
-    $deleteDataPeserta = Peserta::find($id);
+    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -2100,27 +2152,30 @@ $lokasis = Lokasi::all();
   }
   
 
-  //Ketua Kelompok YMP
+  //Ketua Kelompok GKP
   /**
    * Display a listing of the resource.
    *
    * @return \Illuminate\Http\Response
    */
-  public function indexDataLembagaGKP()
+  public function indexDataKKGKP()
   {
-    $pesertas = Peserta::addSelect(['skala' => Skala::select('skala')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1),
-            'catatan' => Catatan::select('catatan')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1)
-            ])->get();
-  
+    $pesertas = Peserta::where('peminta', '=', auth()->user()->id_user)
+                ->addSelect([
+                  'skala' => Skala::select('skala')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'catatan' => Catatan::select('catatan')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1)
+                ])->get();
+    
+    
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('gereja-kristen-parousia.lembaga.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    return view('gereja-kristen-parousia.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis']));
   }
 
 
@@ -2132,15 +2187,7 @@ $lokasis = Lokasi::all();
 
     return $kode;
   }
-
-  function randomCodesIDKelompokDataLembagaGKP()
-  {
-    do {
-      $kode = random_int(100000000, 999999999);
-    } while (Kelompok::where("id_kelompok", "=", $kode)->first());
-
-    return $kode;
-  }
+  
   /**
    * Store a newly created resource in storage.
    *
@@ -2204,6 +2251,7 @@ $lokasis = Lokasi::all();
       $upload->status_peserta = $request->statusPeserta;
       $upload->lokasi_peserta = $request->lokasiPeserta;
       $upload->institusi_peserta = $request->institusiPeserta;
+      $upload->peminta = auth()->user()->id_user;
       $upload->foto_peserta = $fotoPesertaUpload;
       $upload->save();
 
@@ -2224,20 +2272,15 @@ $lokasis = Lokasi::all();
           $catatan->save();
 
           if ($catatan) {
-            // $kelompok = new Kelompok;
-            // $kelompok->id_kelompok = $this->randomCodesIDKelompokDataLembagaGKP();
-            // $kelompok->id_ketua_kelompok = auth()->user()->id_user;
-            // $kelompok->id_peserta = $upload->id_peserta;
-            // $kelompok->generasi = 
-            return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
+            return redirect()->route('data-kontak.indexDataKKGKP')->with(['success' => 'Data Kontak Berhasil Disimpan!']);
           } else{
-            return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+            return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
           }
         } else{
-          return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+          return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
         }
       } else{
-        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Data Kontak Gagal Disimpan!']);
       }
     }
 
@@ -2257,9 +2300,9 @@ $lokasis = Lokasi::all();
         $newCatatans->id_peserta = $request->id_pesertaSkala;
         $newCatatans->tgl_kontak = $request->tambahTgl_kontak;
         $newCatatans->save();
-        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Skala Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKGKP')->with(['success' => 'Skala Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Skala Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Skala Gagal Disimpan!']);
       }
     }
 
@@ -2271,9 +2314,9 @@ $lokasis = Lokasi::all();
       $newCatatan->save();
 
       if ($newCatatan) {
-        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Catatan Berhasil Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKGKP')->with(['success' => 'Catatan Berhasil Disimpan!']);
       } else {
-        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Catatan Gagal Disimpan!']);
+        return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Catatan Gagal Disimpan!']);
       }
     }
     
@@ -2285,7 +2328,7 @@ $lokasis = Lokasi::all();
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function showDataLembagaGKP($id)
+  public function showDataKKGKP($id)
   {
     $skala = Skala::join('pesertas', 'skalas.id_peserta', '=', 'pesertas.id_peserta')
                 ->select('skalas.*')
@@ -2306,9 +2349,9 @@ $lokasis = Lokasi::all();
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function updateDataLembagaGKP(Request $request, $id)
+  public function updateDataKKGKP(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::find($id);
+    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -2367,10 +2410,10 @@ $lokasis = Lokasi::all();
     }
     if($pesertaUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Kontak Berhasil Diubah!']);
+      return redirect()->route('data-kontak.indexDataKKGKP')->with(['success' => 'Kontak Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Kontak Gagal Diubah!']);
+      return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Kontak Gagal Diubah!']);
     }
   }
 
@@ -2380,9 +2423,9 @@ $lokasis = Lokasi::all();
    * @param  \App\Models\Peserta  $peserta
    * @return \Illuminate\Http\Response
    */
-  public function destroyDataLembagaGKP($id)
+  public function destroyDataKKGKP($id)
   {
-    $deleteDataPeserta = Peserta::find($id);
+    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -2398,15 +2441,15 @@ $lokasis = Lokasi::all();
         $deleteCatatanPeserta = Catatan::where('id_peserta', $id);
         $deleteCatatanPeserta->delete();
         if ($deleteCatatanPeserta) {
-          return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
+          return redirect()->route('data-kontak.indexDataKKGKP')->with(['success' => 'Peserta Berhasil Dihapus!']);
         }else{
-          return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+          return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
         }
       }else{
-        return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+        return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
       }
     }else{
-      return redirect()->route('data-kontak.indexDataLembagaGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
+      return redirect()->route('data-kontak.indexDataKKGKP')->with(['error' => 'Peserta Gagal Dihapus!']);
     }
   }
 }

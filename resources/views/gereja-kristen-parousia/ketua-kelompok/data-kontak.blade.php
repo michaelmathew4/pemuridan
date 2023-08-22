@@ -9,19 +9,19 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('berandaDataLembagaGKP')}}">
+    <a class="nav-link collapsed" href="{{route('berandaDataKKGKP')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('kelompokDataLembagaGKP')}}">
+    <a class="nav-link collapsed" href="{{route('kelompok.indexKelompokKKGKP')}}">
       <i class="bi bi-people"></i>
       <span>Kelompok</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link " href="{{route('data-kontak.indexDataLembagaGKP')}}">
+    <a class="nav-link" href="{{route('data-kontak.indexDataKKGKP')}}">
       <i class="bi bi-people"></i>
       <span>Data Kontak</span>
     </a>
@@ -39,7 +39,7 @@
     <h1>Data Kontak</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('berandaDataLembagaGKP')}}">Ketua Kelompok</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaDataKKGKP')}}">Ketua Kelompok</a></li>
         <li class="breadcrumb-item active">Data Kontak</li>
       </ol>
     </nav>
@@ -71,7 +71,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <form action="{{ route('data-kontak.storeDataLembagaGKP') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('data-kontak.storeDataKKGKP') }}" method="post" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group-input">
                         <div class="form-header-group mb-3">
@@ -133,16 +133,6 @@
                                   <option value="2">Skala 2</option>
                                   <option value="3">Skala 3</option>
                                 </select>
-                                <!-- <input type="range" name="skalaPeserta"
-                                  data-provide="slider"
-                                  data-slider-ticks="[-3, -2, -1, 0, 1, 2, 3]"
-                                  data-slider-ticks-labels='["-3", "-2", "-1", "0", "1", "2", "3"]'
-                                  data-slider-ticks-positions="[0,16.6,33.2,49.8,66.4,83,100]"
-                                  data-slider-min="-3"
-                                  data-slider-max="3"
-                                  data-slider-step="1"
-                                  data-slider-value="-3"
-                                  data-slider-tooltip="hide"> -->
                                 @error('skalaPeserta')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
@@ -298,11 +288,11 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
+                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga</label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
-                                  <option value="">-Naungan-</option>
-                                  <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                  <option value="">-Lembaga-</option>
+                                  <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                   <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                 </select>
                                 @error('institusiPeserta')
@@ -340,9 +330,9 @@
                         <div class="input-center ps-5">
                           <div class="w-75">
                             <div class="mb-3 row">
-                              <label for="ketuaKelompok" class="col-sm-3 px-1">Ketua Kelompok</label>
+                              <label for="kelompok" class="col-sm-3 px-1">Kelompok</label>
                               <div class="col-sm-9">
-                                <select class="form-select form-select-sm" name="ketuaKelompok" id="ketuaKelompok" aria-label=".form-select-sm ketuaKelompok">
+                                <select class="form-select form-select-sm" name="kelompok" id="kelompok" aria-label=".form-select-sm kelompok">
                                   <option value="{{auth()->user()->id_user}}">Anda ({{auth()->user()->name}})</option>
                                   <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
                                   <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
@@ -353,7 +343,7 @@
                                   <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
                                   <option value="Lain-lain">Lain-lain</option>
                                 </select>
-                                @error('ketuaKelompok')
+                                @error('kelompok')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
                                       <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -407,12 +397,12 @@
                     <td>{{$peserta->jk_peserta}}</td>
                     <td>{{$peserta->alamat_peserta}}</td>
                     <td>
-                      <a href="#lihatSkala{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.showDataKKGKP', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->skala}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Skala"></i>
                       </a>
                     </td>
                     <td>
-                      <a href="#lihatCatatan{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.showDataKKGKP', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->catatan}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Catatan"></i>
                       </a>
                     </td>
@@ -508,7 +498,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-kontak.updateDataLembagaGKP', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
+                          <form action="{{ route('data-kontak.updateDataKKGKP', $peserta->id_peserta) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -731,7 +721,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.destroyDataLembagaGKP', $peserta->id) }}" method="POST">
+                        <form action="{{ route('data-kontak.destroyDataKKGKP', $peserta->id) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
@@ -747,17 +737,17 @@
                   </div>
                   <!-- End Modal Hapus Data -->
                   <!-- Modal Lihat Skala -->
-                  <div class="modal fade" id="lihatSkala{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkala{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkalaLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatSkala{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatSkalaLabel">
                             <i class="bi bi-graph-up text-info"></i>
                             Lihat Skala Kontak
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeKetuaLokasiGKP') }}" method="post">
+                        <form action="{{ route('data-kontak.storeDataKKGKP') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">
@@ -803,17 +793,17 @@
                   </div>
                   <!-- End Modal Lihat Skala -->
                   <!-- Modal Lihat Catatan -->
-                  <div class="modal fade" id="lihatCatatan{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatan{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatCatatan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatanLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatCatatan{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatCatatanLabel">
                             <i class="bi bi-journal-text text-info"></i>
                             Lihat Catatan Kontak
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-kontak.storeKetuaLokasiGKP') }}" method="post">
+                        <form action="{{ route('data-kontak.storeDataKKGKP') }}" method="post">
                           @csrf
                           <div class="modal-body">
                             <div class="row">

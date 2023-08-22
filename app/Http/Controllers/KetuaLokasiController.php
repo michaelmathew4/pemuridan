@@ -30,7 +30,7 @@ class KetuaLokasiController extends Controller
     $no = 1;
     $lokasiWilayahs = Lokasi::all();
 
-    return view('admin.data-ketua-lokasi', compact(['lokasis', 'no', 'lokasiWilayahs']));
+    return view('admin.ketua-lokasi', compact(['lokasis', 'no', 'lokasiWilayahs']));
   }
   
 
@@ -115,12 +115,12 @@ class KetuaLokasiController extends Controller
       $addUser->save();
       
       if ($addUser) {
-        return redirect()->route('data-ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
+        return redirect()->route('ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
       } else{
-        return redirect()->route('data-ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
+        return redirect()->route('ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
       }
     } else{
-      return redirect()->route('data-ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
+      return redirect()->route('ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
     }
   }
 
@@ -208,10 +208,10 @@ class KetuaLokasiController extends Controller
     }
     if($lokasiUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Diubah!']);
+      return redirect()->route('ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Diubah!']);
+      return redirect()->route('ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Diubah!']);
     }
   }
 
@@ -235,9 +235,9 @@ class KetuaLokasiController extends Controller
     $deleteDataKetuaLokasi->delete();
 
     if($deleteDataKetuaLokasi){
-      return redirect()->route('data-ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Dihapus!']);
+      return redirect()->route('ketua-lokasi.index')->with(['success' => 'Ketua Lokasi Berhasil Dihapus!']);
     }else{
-      return redirect()->route('data-ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Dihapus!']);
+      return redirect()->route('ketua-lokasi.index')->with(['error' => 'Ketua Lokasi Gagal Dihapus!']);
     }
   }
 
@@ -255,13 +255,13 @@ class KetuaLokasiController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function indexPengurusYMP()
+  public function indexPengurusPM()
   {
     $lokasis = Ketua_lokasi::all();
     $no = 1;
     $lokasiWilayahs = Lokasi::all();
 
-    return view('ymp.pengurus.data-ketua-lokasi', compact(['lokasis', 'no', 'lokasiWilayahs']));
+    return view('parousia-ministry.pengurus.ketua-lokasi', compact(['lokasis', 'no', 'lokasiWilayahs']));
   }
 
   /**
@@ -270,7 +270,7 @@ class KetuaLokasiController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storePengurusYMP(Request $request)
+  public function storePengurusPM(Request $request)
   {
     $request->validate([
       'namaKL'     => 'required',
@@ -335,12 +335,12 @@ class KetuaLokasiController extends Controller
       $addUser->save();
       
       if ($addUser) {
-        return redirect()->route('data-ketua-lokasi.indexPengurusYMP')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
+        return redirect()->route('ketua-lokasi.indexPengurusPM')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
       } else{
-        return redirect()->route('data-ketua-lokasi.indexPengurusYMP')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
+        return redirect()->route('ketua-lokasi.indexPengurusPM')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
       }
     } else{
-      return redirect()->route('data-ketua-lokasi.indexPengurusYMP')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
+      return redirect()->route('ketua-lokasi.indexPengurusPM')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
     }
   }
 
@@ -351,7 +351,7 @@ class KetuaLokasiController extends Controller
    * @param  \App\Models\Ketua_lokasi  $ketua_lokasi
    * @return \Illuminate\Http\Response
    */
-  public function updatePengurusYMP(Request $request, $id)
+  public function updatePengurusPM(Request $request, $id)
   {
     $lokasiUpdate = Ketua_lokasi::findOrFail($id);
     if($request->file('editFotoKL') == "") {
@@ -406,10 +406,10 @@ class KetuaLokasiController extends Controller
     }
     if($lokasiUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-ketua-lokasi.indexPengurusYMP')->with(['success' => 'Ketua Lokasi Berhasil Diubah!']);
+      return redirect()->route('ketua-lokasi.indexPengurusPM')->with(['success' => 'Ketua Lokasi Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-ketua-lokasi.indexPengurusYMP')->with(['error' => 'Ketua Lokasi Gagal Diubah!']);
+      return redirect()->route('ketua-lokasi.indexPengurusPM')->with(['error' => 'Ketua Lokasi Gagal Diubah!']);
     }
   }
 
@@ -419,7 +419,7 @@ class KetuaLokasiController extends Controller
    * @param  \App\Models\Ketua_lokasi  $ketua_lokasi
    * @return \Illuminate\Http\Response
    */
-  public function destroyPengurusYMP($id)
+  public function destroyPengurusPM($id)
   {
     $deleteDataKetuaLokasi = Ketua_lokasi::find($id);
     if ($deleteDataKetuaLokasi->fotoKL != '') {
@@ -433,9 +433,9 @@ class KetuaLokasiController extends Controller
     $deleteDataKetuaLokasi->delete();
 
     if($deleteDataKetuaLokasi){
-      return redirect()->route('data-ketua-lokasi.indexPengurusYMP')->with(['success' => 'Ketua Lokasi Berhasil Dihapus!']);
+      return redirect()->route('ketua-lokasi.indexPengurusPM')->with(['success' => 'Ketua Lokasi Berhasil Dihapus!']);
     }else{
-      return redirect()->route('data-ketua-lokasi.indexPengurusYMP')->with(['error' => 'Ketua Lokasi Gagal Dihapus!']);
+      return redirect()->route('ketua-lokasi.indexPengurusPM')->with(['error' => 'Ketua Lokasi Gagal Dihapus!']);
     }
   }
 
@@ -453,7 +453,7 @@ class KetuaLokasiController extends Controller
     $no = 1;
     $lokasiWilayahs = Lokasi::all();
 
-    return view('gkp.pengurus.data-ketua-lokasi', compact(['lokasis', 'no', 'lokasiWilayahs']));
+    return view('gereja-kristen-parousia.pengurus.ketua-lokasi', compact(['lokasis', 'no', 'lokasiWilayahs']));
   }
 
   /**
@@ -527,12 +527,12 @@ class KetuaLokasiController extends Controller
       $addUser->save();
       
       if ($addUser) {
-        return redirect()->route('data-ketua-lokasi.indexPengurusGKP')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
+        return redirect()->route('ketua-lokasi.indexPengurusGKP')->with(['success' => 'Ketua Lokasi Berhasil Disimpan!']);
       } else{
-        return redirect()->route('data-ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
+        return redirect()->route('ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
       }
     } else{
-      return redirect()->route('data-ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
+      return redirect()->route('ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Disimpan!']);
     }
   }
 
@@ -598,10 +598,10 @@ class KetuaLokasiController extends Controller
     }
     if($lokasiUpdate){
       //redirect dengan pesan sukses
-      return redirect()->route('data-ketua-lokasi.indexPengurusGKP')->with(['success' => 'Ketua Lokasi Berhasil Diubah!']);
+      return redirect()->route('ketua-lokasi.indexPengurusGKP')->with(['success' => 'Ketua Lokasi Berhasil Diubah!']);
     }else{
       //redirect dengan pesan error
-      return redirect()->route('data-ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Diubah!']);
+      return redirect()->route('ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Diubah!']);
     }
   }
 
@@ -625,9 +625,9 @@ class KetuaLokasiController extends Controller
     $deleteDataKetuaLokasi->delete();
 
     if($deleteDataKetuaLokasi){
-      return redirect()->route('data-ketua-lokasi.indexPengurusGKP')->with(['success' => 'Ketua Lokasi Berhasil Dihapus!']);
+      return redirect()->route('ketua-lokasi.indexPengurusGKP')->with(['success' => 'Ketua Lokasi Berhasil Dihapus!']);
     }else{
-      return redirect()->route('data-ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Dihapus!']);
+      return redirect()->route('ketua-lokasi.indexPengurusGKP')->with(['error' => 'Ketua Lokasi Gagal Dihapus!']);
     }
   }
 }
