@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/pengurus/data-ketua-lokasi/{data_ketua_lokasi}', [KetuaLokasiController::class, 'destroyPengurusPM'])
           ->name('data-ketua-lokasi.destroyPengurusPM');
+    //End Ketua Lokasi
     
     //Ketua Kelompok
     Route::get('/parousia-ministry/pengurus/data-lembaga', [DataLembagaController::class, 'indexPengurusPM'])
@@ -104,6 +105,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/pengurus/data-lembaga/{data_ketua_kelompok}', [DataLembagaController::class, 'destroyPengurusPM'])
           ->name('data-lembaga.destroyPengurusPM');
+    //End Ketua Kelompok
 
     //Data Kontak
     Route::get('/parousia-ministry/pengurus/data-kontak', [PesertaController::class, 'indexPengurusPM'])
@@ -117,7 +119,10 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/pengurus/data-kontak/{data_peserta}', [PesertaController::class, 'destroyPengurusPM'])
           ->name('data-kontak.destroyPengurusPM');
+    //End Data Kontak
   });
+  //End Pengurus
+
   //Ketua Lokasi
   Route::group(['middleware' => ['auth', 'cekRole:Lokasi']], function () {
     Route::get('/parousia-ministry/ketua-lokasi', function () {
@@ -136,6 +141,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/ketua-lokasi/data-lembaga/{data_ketua_kelompok}', [DataLembagaController::class, 'destroyKetuaLokasiPM'])
           ->name('data-lembaga.destroyKetuaLokasiPM');
+    //End Ketua Kelompok
 
     //Data Kontak
     Route::get('/parousia-ministry/ketua-lokasi/data-kontak', [PesertaController::class, 'indexKetuaLokasiPM'])
@@ -149,7 +155,9 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/ketua-lokasi/data-kontak/{data_peserta}', [PesertaController::class, 'destroyKetuaLokasiPM'])
           ->name('data-kontak.destroyKetuaLokasiPM');
+    //End Data Kontak
   });
+  //End Ketua Lokasi
 
   //Ketua Kelompok
   Route::group(['middleware' => ['auth', 'cekRole:Ketua Kelompok']], function () {
@@ -159,6 +167,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     //Kelompok
     Route::resource('/parousia-ministry/lembaga/kelompok', KelompokController::class);
+    //End Kelompok
     
     //Data Kontak
     Route::get('/parousia-ministry/lembaga/data-kontak', [PesertaController::class, 'indexDataLembagaPM'])
@@ -175,9 +184,11 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/lembaga/data-kontak/{data_peserta}', [PesertaController::class, 'destroyDataLembagaPM'])
           ->name('data-kontak.destroyDataLembagaPM');
+    //End data Kontak
   });
+  //END Ketua Kelompok
 });
-
+// END PM
   
 
 //GKP
@@ -200,6 +211,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/pengurus/data-ketua-lokasi/{data_ketua_lokasi}', [KetuaLokasiController::class, 'destroyPengurusGKP'])
           ->name('data-ketua-lokasi.destroyPengurusGKP');
+    //End Ketua Lokasi
     
     //Ketua Kelompok
     Route::get('/gereja-kristen-parousia/pengurus/data-lembaga', [DataLembagaController::class, 'indexPengurusGKP'])
@@ -213,6 +225,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/pengurus/data-lembaga/{data_ketua_kelompok}', [DataLembagaController::class, 'destroyPengurusGKP'])
           ->name('data-lembaga.destroyPengurusGKP');
+    //End Ketua Kelompok
 
     //Data Kontak
     Route::get('/gereja-kristen-parousia/pengurus/data-kontak', [PesertaController::class, 'indexPengurusGKP'])
@@ -226,7 +239,10 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/pengurus/data-kontak/{data_peserta}', [PesertaController::class, 'destroyPengurusGKP'])
           ->name('data-kontak.destroyPengurusGKP');
+    //End Data Kontak
   });
+  //End Pengurus
+
   //Ketua Lokasi
   Route::group(['middleware' => ['auth', 'cekRole:Lokasi']], function () {
     Route::get('/gereja-kristen-parousia/ketua-lokasi', function () {
@@ -245,6 +261,7 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/ketua-lokasi/data-lembaga/{data_ketua_kelompok}', [DataLembagaController::class, 'destroyKetuaLokasiGKP'])
           ->name('data-lembaga.destroyKetuaLokasiGKP');
+    //End Ketua Kelompok
 
     //Data Kontak
     Route::get('/gereja-kristen-parousia/ketua-lokasi/data-kontak', [PesertaController::class, 'indexKetuaLokasiGKP'])
@@ -258,7 +275,9 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/ketua-lokasi/data-kontak/{data_peserta}', [PesertaController::class, 'destroyKetuaLokasiGKP'])
           ->name('data-kontak.destroyKetuaLokasiGKP');
+    //End Data Kontak
   });
+  //End Ketua Lokasi
 
   //Ketua Kelompok
   Route::group(['middleware' => ['auth', 'cekRole:Ketua Kelompok']], function () {
@@ -285,5 +304,8 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/lembaga/data-kontak/{data_peserta}', [PesertaController::class, 'destroyDataLembagaGKP'])
           ->name('data-kontak.destroyDataLembagaGKP');
+    //End Data Kontak
   });
+  //End Ketua Kelompok
 });
+//ENDGKP

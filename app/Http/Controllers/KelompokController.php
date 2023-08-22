@@ -19,10 +19,9 @@ class KelompokController extends Controller
         $no = 1;
         $nama_kelompoks = Nama_kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
         $pesertas = Peserta::where('peminta', auth()->user()->id_user)->get();
-        $pesertaEdits = Peserta::leftJoin('kelompoks', 'kelompoks.id_peserta', '=', 'pesertas.id_peserta')
+        $pesertaEdits = Peserta::join('kelompoks', 'kelompoks.id_peserta', 'pesertas.id_peserta')
                                 ->where('peminta', auth()->user()->id_user)
-                                ->select('kelompoks.id_peserta', 'pesertas.*')
-                                ->get();
+                                ->first();
                                 // dd($pesertaEdits);
         $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
         $pesertasKK = [];
@@ -39,6 +38,7 @@ class KelompokController extends Controller
             }
         }
         // dd($pesertaKKs);
+        // var_dump($pesertaKKs);
         return view('parousia-ministry.lembaga.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits']));
     }
 
@@ -70,12 +70,10 @@ class KelompokController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-          'namaKelompok'     => 'required',
-          'kontaks'     => 'required',
+          'namaKelompok'     => 'required'
         ],
         [
-          'namaKelompok.required' => 'Nama Kelompok tidak boleh kosong.',
-          'kontaks.required' => 'Data Kontak tidak boleh kosong.'
+          'namaKelompok.required' => 'Nama Kelompok tidak boleh kosong.'
         ]);
 
         
@@ -85,14 +83,15 @@ class KelompokController extends Controller
         $inputNamaKelompok->nama_kelompok = $request->namaKelompok;
         $inputNamaKelompok->save();
 
-        
-        foreach ($request->kontaks as $kontak) {
-          $input = new Kelompok;
-          $input->id_kelompok = $inputNamaKelompok->id_kelompok;
-          $input->nama_kelompok = $request->namaKelompok;
-          $input->id_ketua_kelompok = auth()->user()->id_user;
-          $input->id_peserta = $kontak;
-          $input->save();
+        if(count($request->kontaks) != 0 ) {
+          foreach ($request->kontaks as $kontak) {
+            $input = new Kelompok;
+            $input->id_kelompok = $inputNamaKelompok->id_kelompok;
+            $input->nama_kelompok = $request->namaKelompok;
+            $input->id_ketua_kelompok = auth()->user()->id_user;
+            $input->id_peserta = $kontak;
+            $input->save();
+          }
         }
     
         if($inputNamaKelompok){
@@ -131,9 +130,38 @@ class KelompokController extends Controller
      * @param  \App\Models\Kelompok  $kelompok
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelompok $kelompok)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'namaKelompokEdits'     => 'required'
+      ],
+      [
+        'namaKelompokEdits.required' => 'Nama Kelompok tidak boleh kosong.'
+      ]);
+
+      
+      $inputNamaKelompok = Nama_kelompok::firstWhere('id_kelompok', $id);
+      $inputNamaKelompok->update([
+        'nama_kelompok'     => $request->namaKelompokEdits,
+      ]);
+
+      
+      if(count($request->kontakEdits) != 0 ) {
+        foreach ($request->kontakEdits as $kontak) {
+          $input = new Kelompok;
+          $input->id_kelompok = $inputNamaKelompok->id_kelompok;
+          $input->nama_kelompok = $request->namaKelompok;
+          $input->id_ketua_kelompok = auth()->user()->id_user;
+          $input->id_peserta = $kontak;
+          $input->save();
+        }
+      }
+  
+      if($inputNamaKelompok){
+        return redirect()->route('kelompok.index')->with(['success' => 'Kelompok Berhasil Diubah!']);
+      }else{
+        return redirect()->route('kelompok.index')->with(['error' => 'Kelompok Gagal Diubah!']);
+      }
     }
 
     /**

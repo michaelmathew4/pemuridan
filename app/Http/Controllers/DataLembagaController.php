@@ -454,7 +454,8 @@ class DataLembagaController extends Controller
    */
   public function destroy($id)
   {
-    $deleteData = Data_lembaga::find($id);
+    $deleteData = Data_lembaga::firstWhere('id_user', $id);
+    // dd($deleteData);
     if ($deleteData->foto != '') {
       $destination = 'images/Data Lembaga/Foto/'.$deleteData->foto;
       if (File::exists($destination)) {
@@ -517,6 +518,14 @@ class DataLembagaController extends Controller
     }
     $getUser = User::where('email', $deleteData->alamat_surel);
     $getUser->delete();
+    $getNamaKelompok = Nama_kelompok::where('id_ketua_kelompok', $id);
+    if ($getNamaKelompok) {
+      $getNamaKelompok->delete();
+    }
+    $getKelompok = Kelompok::where('id_ketua_kelompok', $id);
+    if ($getKelompok) {
+      $getKelompok->delete();
+    }
     $deleteData->delete();
 
     if($deleteData){

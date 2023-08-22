@@ -175,15 +175,17 @@
                                     <span class="label">{{$kelompok->id_peserta}}</span>
                                     @if (count($kelompoks) > 1)
                                         @foreach ($pesertaKKs as $pesertaKK)
+                                          @if ($pesertaKK != null)
+                                              <div class="branch lv{{$branchLv++}}">
                                           @foreach ($pesertaKK as $peserta)
                                             @if ($peserta->id_ketua_kelompok == $kelompok->id_peserta)
-                                              <div class="branch lv{{$branchLv++}}">
                                                 <div class="entry {{(count($pesertaKK) == 1 ? 'sole' : '')}}">
                                                   <span class="label">{{$peserta->id_peserta}}</span>
                                                 </div>
-                                              </div>
                                             @endif
                                           @endforeach
+                                              </div>
+                                          @endif
                                         @endforeach
                                     @endif
                                   </div>
@@ -236,8 +238,8 @@
                                     <label for="kontakEdit{{$nama_kelompok->id_kelompok}}" class="col-sm-3 px-1 form-label">Kontak</label>
                                     <div class="col-sm-9">
                                       <select class="form-control" name="kontakEdits[]" style="width: 100%;" id="kontakEdit{{$nama_kelompok->id_kelompok}}" aria-label="multiple select kontakEdit{{$nama_kelompok->id_kelompok}}" multiple>
-                                        @foreach ($pesertaEdits as $peserta)
-                                          <option value="{{$peserta->id_peserta}}" {{($peserta->id_peserta) ? 'selected' : ''}}>{{$peserta->nama_peserta}}</option>
+                                        @foreach ($pesertas as $peser)
+                                          <option value="{{$peser->id_peserta}}" {{($pesertaEdits->id_peserta == $peser->id_peserta) ? 'selected' : ''}}>{{$peser->nama_peserta}}</option>
                                         @endforeach
                                       </select>
                                       @error('kontakEdit')

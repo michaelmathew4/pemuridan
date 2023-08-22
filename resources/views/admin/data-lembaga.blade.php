@@ -3728,13 +3728,17 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        <form action="{{ route('data-lembaga.destroy', $dataLembaga->id_user) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <div class="modal-body">
+                            <p>Apa anda yakin ingin menghapus Data Lembaga {{$dataLembaga->nama_lengkap}} ini?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>
