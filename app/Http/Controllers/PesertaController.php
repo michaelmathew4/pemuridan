@@ -616,7 +616,8 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('parousia-ministry.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    $dataLembagas = Data_lembaga::all();
+    return view('parousia-ministry.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
   
@@ -915,6 +916,7 @@ class PesertaController extends Controller
     $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
     $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
     $pesertas = Peserta::where('lokasi_peserta', $cekLokasi->nama_lokasi)
+                ->where('institusi_peserta', 'PM (Parousia Ministry)')
                 ->join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
                 ->select('data_lembagas.id_user', 'data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
                 ->addSelect([
@@ -1228,6 +1230,7 @@ class PesertaController extends Controller
   public function indexDataKKPM()
   {
     $pesertas = Peserta::where('peminta', '=', auth()->user()->id_user)
+                ->where('institusi_peserta', 'PM (Parousia Ministry)')
                 ->addSelect([
                   'skala' => Skala::select('skala')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')
@@ -1536,21 +1539,28 @@ class PesertaController extends Controller
    */
   public function indexPengurusGKP()
   {
-    $pesertas = Peserta::where('institusi_peserta', 'GKP (Gereja Kristen Parousia)')
-                ->addSelect(['skala' => Skala::select('skala')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1),
-            'catatan' => Catatan::select('catatan')
-                ->whereColumn('id_peserta', 'pesertas.id_peserta')
-                ->orderBy('created_at', 'desc')
-                ->limit(1)
-          ])->get();
+    $pesertas = Peserta::join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
+                ->select('data_lembagas.id_user', 'data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
+                ->where('institusi_peserta', 'GKP (Gereja Kristen Parousia)')
+                ->addSelect([
+                  'skala' => Skala::select('skala')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'catatan' => Catatan::select('catatan')
+                      ->whereColumn('id_peserta', 'pesertas.id_peserta')
+                      ->orderBy('created_at', 'desc')
+                      ->limit(1),
+                  'id_user' => Data_lembaga::select('id_user')
+                      ->whereColumn('id_user', 'pesertas.id_peserta')
+                      ->limit(1)
+                ])->get();
 
 
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('gereja-kristen-parousia.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    $dataLembagas = Data_lembaga::all();
+    return view('gereja-kristen-parousia.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
   
@@ -1848,6 +1858,7 @@ class PesertaController extends Controller
     $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
     $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
     $pesertas = Peserta::where('lokasi_peserta', $cekLokasi->nama_lokasi)
+                ->where('institusi_peserta', 'GKP (Gereja Kristen Parousia)')
                 ->join('data_lembagas', 'data_lembagas.id_user', '=', 'pesertas.peminta')
                 ->select('data_lembagas.id_user', 'data_lembagas.nama_lengkap', 'data_lembagas.data_lembaga', 'data_lembagas.institusi', 'pesertas.*')
                 ->addSelect([
@@ -2161,6 +2172,7 @@ class PesertaController extends Controller
   public function indexDataKKGKP()
   {
     $pesertas = Peserta::where('peminta', '=', auth()->user()->id_user)
+                ->where('institusi_peserta', 'GKP (Gereja Kristen Parousia)')
                 ->addSelect([
                   'skala' => Skala::select('skala')
                       ->whereColumn('id_peserta', 'pesertas.id_peserta')

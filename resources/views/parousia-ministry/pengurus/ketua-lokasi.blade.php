@@ -17,9 +17,9 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('ketua-kelompok.indexPengurusPM')}}">
+    <a class="nav-link collapsed" href="{{route('data-lembaga.indexPengurusPM')}}">
       <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+      <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">
@@ -197,11 +197,11 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="institusiKL" class="col-sm-3 px-1 form-label">Naungan</label>
+                                <label for="institusiKL" class="col-sm-3 px-1 form-label">Lembaga</label>
                                 <div class="col-sm-9">
                                   <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiKL" id="institusiKL">
-                                    <option value="">-Naungan-</option>
-                                    <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                    <option value="">-Lembaga-</option>
+                                    <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                     <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                   </select>
                                   @error('institusiKL')
@@ -478,20 +478,6 @@
                                     <div class="col-sm-9">
                                       <input type="email" name="editAlamat_surelKL" class="form-control form-control-sm" id="editAlamat_surelKL" placeholder="Alamat Surel" value="{{$lokasi->alamat_surelKL}}">
                                       @error('editAlamat_surelKL')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
-                                        </div>
-                                      @enderror
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editNama_penggunaKL" class="col-sm-3 px-1 form-label">Nama Pengguna</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNama_penggunaKL" class="form-control form-control-sm" id="editNama_penggunaKL" placeholder="Nama Pengguna" value="{{$lokasi->nama_penggunaKL}}">
-                                      @error('editNama_penggunaKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>

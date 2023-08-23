@@ -166,32 +166,32 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <div id="wraps">
-                            <span class="label">{{auth()->user()->name}}</span>
-                            @if (count($kelompoks) > 0 )
-                              <div class="branch lv1">
+                          <div class="border border-1">
+                            <div class="bg-light text-center p-3 mb-2">
+                              {{auth()->user()->name}}
+                              <p>(Ketua Kelompok)</p>
+                            </div>
+                            <div class="container">
+                              <div class="row p-1">
                                 @foreach ($kelompoks as $kelompok)
-                                  <div class="entry {{(count($kelompoks) == 1 ? 'sole' : '')}}">
-                                    <span class="label">{{$kelompok->id_peserta}}</span>
-                                    @if (count($kelompoks) > 1)
+                                  <div class="col-4 border">
+                                    <p class="pt-2">{{$noBagan++}}. {{$kelompok->id_peserta}} (G1)</p>
+                                    <hr>
+                                    <ol>
+                                      @if (is_array($pesertaKKs) || is_object($pesertaKKs))
                                         @foreach ($pesertaKKs as $pesertaKK)
-                                          @if ($pesertaKK != null)
-                                              <div class="branch lv{{$branchLv++}}">
                                           @foreach ($pesertaKK as $peserta)
                                             @if ($peserta->id_ketua_kelompok == $kelompok->id_peserta)
-                                                <div class="entry {{(count($pesertaKK) == 1 ? 'sole' : '')}}">
-                                                  <span class="label">{{$peserta->id_peserta}}</span>
-                                                </div>
+                                              <li>{{$peserta->id_peserta}} (G{{($peserta->id_ketua_kelompok == $kelompok->id_peserta) ? $branchLv : $branchLv++}})</li>
                                             @endif
                                           @endforeach
-                                              </div>
-                                          @endif
                                         @endforeach
-                                    @endif
+                                      @endif
+                                    </ol>
                                   </div>
                                 @endforeach
                               </div>
-                            @endif
+                            </div>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -204,7 +204,7 @@
                   
                   <!-- Modal Ubah Data -->
                   <div class="modal fade" id="ubahKelompok{{$nama_kelompok->id_kelompok}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahKelompok{{$nama_kelompok->id_kelompok}}Label" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="ubahKelompok{{$nama_kelompok->id_kelompok}}Label">

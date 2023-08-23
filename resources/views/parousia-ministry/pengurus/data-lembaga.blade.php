@@ -9,79 +9,31 @@
 
 @section('menu')
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('admin')}}">
+    <a class="nav-link collapsed" href="{{route('berandaPengurusPM')}}">
       <i class="bi bi-house"></i>
       <span>Beranda</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#data-master" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-list"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
-    </a>
-    <ul id="data-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-      <li>
-        <a href="{{route('data-lokasi.index')}}">
-          <i class="bi bi-geo-alt"></i><span>Data Lokasi</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('artikel-modul.index')}}">
-          <i class="bi bi-journal-text"></i><span>Artikel/Modul</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('video.index')}}">
-          <i class="bi bi-play"></i><span>Video Youtube</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('pekerjaan.index')}}">
-          <i class="bi bi-person-workspace"></i><span>Pekerjaan</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('studi-minat.index')}}">
-          <i class="bi bi-book"></i><span>Studi & Minat</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('kolom-pilihan.index')}}">
-          <i class="bi bi-ui-checks-grid"></i><span>Kolom Cadangan (Pilihan)</span>
-        </a>
-      </li>
-      <li>
-        <a href="{{route('shape.index')}}">
-          <i class="bi bi-suit-heart"></i><span>SHAPE</span>
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-admin.index')}}">
-      <i class="bi bi-person-bounding-box"></i>
-      <span>Data Admin</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.index')}}">
+    <a class="nav-link collapsed" href="{{route('ketua-lokasi.indexPengurusPM')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{{route('data-lembaga.index')}}" class="active">
+    <a class="nav-link" href="{{route('data-lembaga.indexPengurusPM')}}">
       <i class="bi bi-person-square"></i>
       <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-kontak.index')}}">
+    <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusPM')}}">
       <i class="bi bi-people"></i>
-      <span>Data Kontak</span>
+      <span>Data Peserta</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{url('/admin/data-laporan')}}">
+    <a class="nav-link collapsed" href="{{url('/pengurus/data-laporan')}}">
       <i class="bi bi-bar-chart-line"></i>
       <span>Laporan</span>
     </a>
@@ -93,7 +45,7 @@
     <h1>Data Lembaga</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('/admin')}}">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{route('berandaPengurusPM')}}">Pengurus</a></li>
         <li class="breadcrumb-item active">Data Lembaga</li>
       </ol>
     </nav>
@@ -120,12 +72,12 @@
                     <div class="modal-header">
                       <h5 class="modal-title" id="tambahDataLabel">
                         <i class="bi bi-person-add text-success"></i>
-                        Tambah Data
+                        Tambah Data Lembaga
                       </h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="{{ route('data-lembaga.store') }}" method="post" enctype="multipart/form-data">
+                      <form action="{{ route('data-lembaga.storePengurusPM') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group-input">
                           <div class="form-header-group mb-3">
@@ -1636,7 +1588,7 @@
                     </td>
                     <td>
                       @if ($dataLembaga->id_ketua_kelompok)
-                        <a id="lihatKelompokButton" data-bs-target="#kelompokModal" data-bs-toggle="modal" data-attr="{{route('data-lembaga.show', $dataLembaga->id_user)}}" data-id="{{$dataLembaga->id_user}}" class="text-primary fs-5">
+                        <a id="lihatKelompokButton" data-bs-target="#kelompokModal" data-bs-toggle="modal" data-attr="{{route('data-lembaga.showPengurusPM', $dataLembaga->id_user)}}" data-id="{{$dataLembaga->id_user}}" class="text-primary fs-5">
                           <i class="bi bi-people" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kelompok"></i>
                         </a>
                       @else
@@ -2367,17 +2319,17 @@
                   <!-- End Modal Lihat Data -->
                   <!-- Modal Ubah Data -->
                   <div class="modal fade" id="ubahData{{$dataLembaga->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$dataLembaga->id_user}}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                    <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="ubahData{{$dataLembaga->id_user}}Label">
                             <i class="bi bi-pencil-square text-primary"></i>
-                            Ubah Data Lembaga
+                            Ubah Data Ketua Kelompok
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-lembaga.update', $dataLembaga->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('data-lembaga.updatePengurusPM', $dataLembaga->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -3771,7 +3723,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-lembaga.destroy', $dataLembaga->id_user) }}" method="POST">
+                        <form action="{{ route('data-lembaga.destroyPengurusPM', $dataLembaga->id_user) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
@@ -3890,7 +3842,7 @@
       });
 
       
-      $('#ExperienceData').select2({
+      $('#pilihanGLData').select2({
         placeholder: "Pilihan Ganda Lima",
         allowClear: true,
         language: "id",
@@ -3914,130 +3866,84 @@
       });
 
     });
+      // Edit
 
-    // Edit
-    $(document).on('click', '#ubahDataButton', function () {
-      var idUser = $(this).attr('data-user');
-      // console.log(idUser);
-      $('#editBKetertarikandataLembaga'+idUser).select2({
-        placeholder: "Pilih Bidang Ketertarikan",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
 
-      
-      $('#editBKeterampilandataLembaga'+idUser).select2({
-        placeholder: "Pilih Bidang Keterampilan",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
-
-      
-      $('#editPilihanGSdataLembaga'+idUser).select2({
-        placeholder: "Personality - MBTI",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
-
-      
-      $('#editPilihanGDdataLembaga'+idUser).select2({
-        placeholder: "Personality - Holland",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
-
-      
-      $('#editPilihanGTdataLembaga'+idUser).select2({
-        placeholder: "Spiritual Gifts",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
-
-      
-      $('#editPilihanGEdataLembaga'+idUser).select2({
-        placeholder: "Abilities",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
-
-      
-      $('#editExperiencedataLembaga'+idUser).select2({
-        placeholder: "Pilihan Ganda Lima",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
-
-      
-      $('#editPilihanGEndataLembaga'+idUser).select2({
-        placeholder: "Kemampuan Bahasa",
-        allowClear: true,
-        language: "id",
-        dropdownParent: $("#ubahData"+idUser)
-      });
-
-    });
     
-    $(document).ready(function(){
-      $('#untukPendataan').on('change', function(){
-        var isiData = $(this).val(); 
-        if (isiData == "Beasiswa" || isiData == "Utusan") {
-          $("div.divTampil1").show();
-          $("div.divTampil2").show();
-          $("div.divTampil3").show();
-          $("div.divTampil4").show();
-          $("div.divTampil5").show();
-          $("div.divTampil6").show();
-          $("div.divTampil7").show();
-          $("div.divTampil8").show();
-          $("div.divTampil9").show();
-          $("div.divTampil10").show();
-          $("div.divTampil11").show();
-          $("div.divTampil12").show();
-          $("#sembunyiData1").hide();
-          $("#sembunyiData2").hide();
-          $("#sembunyiData3").hide();
-          $("#sembunyiData4").hide();
-          $("#sembunyiData5").hide();
-          $("#sembunyiData6").hide();
-          $("#sembunyiData7").hide();
-          $("#sembunyiData8").hide();
-          $("#sembunyiData9").hide();
-          $("#sembunyiData10").hide();
-          $("#sembunyiData11").hide();
-        } else {
-          $("div.divTampil1").show();
-          $("div.divTampil2").show();
-          $("div.divTampil3").show();
-          $("div.divTampil4").show();
-          $("div.divTampil5").show();
-          $("div.divTampil6").show();
-          $("div.divTampil7").show();
-          $("div.divTampil8").show();
-          $("div.divTampil9").show();
-          $("div.divTampil10").show();
-          $("div.divTampil11").show();
-          $("#sembunyiData12").hide();
-        }
-      });
-    });
+      $(document).on('click', '#ubahData', function () {
+        var idUser = $(this).attr('data-user');
+        console.log(idUser);
+        $('#editBKetertarikanData'+idUser).select2({
+          placeholder: "Pilih Bidang Ketertarikan",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
 
-    var i = 0;
-    $("#tambahNominal").click(function(){
-      ++i;
-      $("#inputNominal").append('<div class="position-relative mt-1" id="inputNominalTambah'+i+'"><div class="position-absolute top-50 start-100 ms-1 translate-middle-y"><button type="button" class="btn btn-transparent p-0 hapusNominal" id="'+i+'"><i class="bi bi-x-circle fs-5 text-danger d-inline"></i></button></div><div class="row"><div class="col-6"><input type="text" name="tambahNominals['+i+'][ket_nominal]" class="form-control form-control-sm" id="ketNominal" placeholder="Keterangan Nominal"></div><div class="col-6"><input type="text" name="tambahNominals['+i+'][nominal]" class="form-control form-control-sm" id="nominal" placeholder="Nominal"></div></div></div>');
-    });
-   
-    $(document).on('click', '.hapusNominal', function(){   
-      var button_id = $(this).attr("id");   
-      $('#inputNominalTambah'+button_id+'').remove(); 
-    });
+        
+        $('#editBKeterampilanData'+idUser).select2({
+          placeholder: "Pilih Bidang Keterampilan",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+
+        
+        $('#editPilihanGSData'+idUser).select2({
+          placeholder: "Personality - MBTI",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+
+        
+        $('#editPilihanGDData'+idUser).select2({
+          placeholder: "Personality - Holland",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+
+        
+        $('#editPilihanGTData'+idUser).select2({
+          placeholder: "Spiritual Gifts",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+
+        
+        $('#editPilihanGEData'+idUser).select2({
+          placeholder: "Abilities",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+
+        
+        $('#editPilihanGLData'+idUser).select2({
+          placeholder: "Pilihan Ganda Lima",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+
+        
+        $('#editPilihanGEnData'+idUser).select2({
+          placeholder: "Kemampuan Bahasa",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+
+        
+        $('#editPilihanGTuData'+idUser).select2({
+          placeholder: "Pernah Menderita Penyakit",
+          allowClear: true,
+          language: "id",
+          dropdownParent: $("#ubahData"+idUser)
+        });
+      });
     
     $(document).on('click', '#lihatKelompokButton', function(event) {
       event.preventDefault();

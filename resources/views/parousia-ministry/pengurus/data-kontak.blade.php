@@ -21,9 +21,9 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('ketua-kelompok.indexPengurusPM')}}">
+    <a class="nav-link collapsed" href="{{route('data-lembaga.indexPengurusPM')}}">
       <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+      <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">
@@ -85,6 +85,7 @@
                         </div>
                         <div class="input-center ps-5">
                           <div class="w-75">
+                            <input type="text" name="inputMethod" value="tambahDataBaru" hidden>
                             <div class="mb-3 row">
                               <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
@@ -127,7 +128,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span></label>
+                              <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span> <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
                                   <option value="">-Skala-</option>
@@ -160,7 +161,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="catatanPeserta" class="col-sm-3 px-1">Catatan</label>
+                              <label for="catatanPeserta" class="col-sm-3 px-1">Catatan <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
                                 @error('catatanPeserta')
@@ -174,7 +175,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP</label>
+                              <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999">
                                 @error('noHpPeserta')
@@ -188,7 +189,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="alamatPeserta" class="col-sm-3 px-1">Alamat</label>
+                              <label for="alamatPeserta" class="col-sm-3 px-1">Alamat <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
                                 @error('alamatPeserta')
@@ -202,7 +203,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
+                              <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir <span class="required-input">(*)</span></label>
                               <div class="col-sm-5">
                                 <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung">
                                 @error('tempatLahirPeserta')
@@ -230,7 +231,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
+                              <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
                                   <option value="">-Pekerjaan-</option>
@@ -254,7 +255,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku</label>
+                              <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda">
                                 @error('sukuPeserta')
@@ -268,7 +269,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="statusPeserta" class="col-sm-3 px-1">Status</label>
+                              <label for="statusPeserta" class="col-sm-3 px-1">Status <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <div class="form-check form-switch">
                                   <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" value="Aktif">
@@ -285,7 +286,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
+                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
                                   <option value="">-Lokasi Kontak-</option>
@@ -304,14 +305,33 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
+                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
-                                  <option value="">-Naungan-</option>
-                                  <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                  <option value="">-Lembaga-</option>
+                                  <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                   <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                 </select>
                                 @error('institusiPeserta')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="pemintaInput" class="col-sm-3 px-1">Peminta Input <span class="required-input">(*)</span></label>
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" name="pemintaInput" id="pemintaInput" aria-label=".form-select-sm pemintaInput">
+                                  <option value="">-Peminta Input-</option>
+                                  @foreach ($dataLembagas as $dataLembaga)
+                                    <option value="{{$dataLembaga->id_user}}">{{$dataLembaga->nama_lengkap}} ({{$dataLembaga->data_lembaga}} / {{$dataLembaga->institusi}})</option>
+                                  @endforeach
+                                </select>
+                                @error('pemintaInput')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
                                       <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -380,12 +400,12 @@
                     <td>{{$peserta->jk_peserta}}</td>
                     <td>{{$peserta->alamat_peserta}}</td>
                     <td>
-                      <a data-bs-toggle="modal" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.show', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
+                      <a data-bs-toggle="modal" data-bs-target="#lihatSkala" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.showPengurusPM', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->skala}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Skala"></i>
                       </a>
                     </td>
                     <td>
-                      <a data-bs-toggle="modal" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.show', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
+                      <a data-bs-toggle="modal" data-bs-target="#lihatCatatan" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.showPengurusPM', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->catatan}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Catatan"></i>
                       </a>
                     </td>
@@ -667,14 +687,33 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editInstitusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
+                                    <label for="editInstitusiPeserta" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editInstitusiPeserta" id="editInstitusiPeserta">
-                                        <option value="{{$peserta->institusi_peserta}}">{{$peserta->institusi_peserta}}</option>
-                                        <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                        <option value="{{$peserta->institusi}}">{{$peserta->institusi}}</option>
+                                        <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                         <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                       </select>
                                       @error('editInstitusiPeserta')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="editPemintaInput" class="col-sm-3 px-1">Peminta Input <span class="required-input">(*)</span></label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" name="editPemintaInput" id="editPemintaInput" aria-label=".form-select-sm editPemintaInput">
+                                        <option value="{{$peserta->peminta}}">{{$peserta->nama_lengkap}}</option>
+                                        @foreach ($dataLembagas as $dataLembaga)
+                                          <option value="{{$dataLembaga->id_user}}">{{$dataLembaga->nama_lengkap}} ({{$dataLembaga->data_lembaga}} / {{$dataLembaga->institusi}})</option>
+                                        @endforeach
+                                      </select>
+                                      @error('editPemintaInput')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -698,7 +737,7 @@
                                       @enderror
                                     </div>
                                   </div>
-                                  <input type="text" name="inputTambah" id="" value="tambahData" hidden>
+                                  <input type="text" name="inputTambah" id="" value="ubahData" hidden>
                                 </div>
                               </div>
                             </div>
@@ -727,7 +766,7 @@
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
-                            <p>Apa anda yakin ingin menghapus Pengurus {{$peserta->nama_peserta}} ini?</p>
+                            <p>Apa anda yakin ingin menghapus Data Kontak {{$peserta->nama_peserta}} ini?</p>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
@@ -795,11 +834,11 @@
                   </div>
                   <!-- End Modal Lihat Skala -->
                   <!-- Modal Lihat Catatan -->
-                  <div class="modal fade" id="lihatCatatan}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatan}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatCatatan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatanLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatCatatan}Label">
+                          <h5 class="modal-title" id="lihatCatatanLabel">
                             <i class="bi bi-journal-text text-info"></i>
                             Lihat Catatan Kontak
                           </h5>

@@ -26,6 +26,7 @@ class KelompokController extends Controller
         $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
         $pesertasKK = [];
         $branchLv = 2;
+        $noBagan = 1;
         $pesertaKKs = '';
         foreach ($kelompoks as $kelompok) {
             $pesertasKK[] = Kelompok::where('id_ketua_kelompok', $kelompok->id_peserta)->get();
@@ -37,9 +38,9 @@ class KelompokController extends Controller
               }
             }
         }
-        // dd($pesertaKKs);
+        // dd($pesertasKK);
         // var_dump($pesertaKKs);
-        return view('parousia-ministry.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits']));
+        return view('parousia-ministry.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits', 'noBagan', 'pesertasKK']));
     }
 
     /**
@@ -179,9 +180,9 @@ class KelompokController extends Controller
   
   
       if($deleteNamaWKelompok){
-        return redirect()->route('video.index')->with(['success' => 'Video Youtube Berhasil Dihapus!']);
+        return redirect()->route('ketua-kelompok.kelompok.index')->with(['success' => 'Kelompok Berhasil Dihapus!']);
       }else{
-        return redirect()->route('video.index')->with(['error' => 'Video Youtube Gagal Dihapus!']);
+        return redirect()->route('ketua-kelompok.kelompok.index')->with(['error' => 'Kelompok Gagal Dihapus!']);
       }
     }
 
@@ -271,5 +272,67 @@ class KelompokController extends Controller
         }else{
           return redirect()->route('kelompok.indexKelompokKKGKP')->with(['error' => 'Kelompok Gagal Disimpan!']);
         }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Kelompok  $kelompok
+     * @return \Illuminate\Http\Response
+     */
+    public function updateKelompokKKGKP(Request $request, $id)
+    {
+      $request->validate([
+        'namaKelompokEdits'     => 'required'
+      ],
+      [
+        'namaKelompokEdits.required' => 'Nama Kelompok tidak boleh kosong.'
+      ]);
+
+      
+      $inputNamaKelompok = Nama_kelompok::firstWhere('id_kelompok', $id);
+      $inputNamaKelompok->update([
+        'nama_kelompok'     => $request->namaKelompokEdits,
+      ]);
+
+      
+      if(count($request->kontakEdits) != 0 ) {
+        foreach ($request->kontakEdits as $kontak) {
+          $input = new Kelompok;
+          $input->id_kelompok = $inputNamaKelompok->id_kelompok;
+          $input->nama_kelompok = $request->namaKelompok;
+          $input->id_ketua_kelompok = auth()->user()->id_user;
+          $input->id_peserta = $kontak;
+          $input->save();
+        }
+      }
+  
+      if($inputNamaKelompok){
+        return redirect()->route('kelompok.indexKelompokKKGKP')->with(['success' => 'Kelompok Berhasil Diubah!']);
+      }else{
+        return redirect()->route('kelompok.indexKelompokKKGKP')->with(['error' => 'Kelompok Gagal Diubah!']);
+      }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Kelompok  $kelompok
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyKelompokKKGKP($id)
+    {
+      $deleteNamaKelompok = Nama_kelompok::firstWhere('id_kelompok', $id);
+      $deleteKelompok = Kelompok::whereIn('id_kelompok', $id);
+      $deleteKelompok->delete();
+      $deleteNamaWKelompok->delete();
+  
+  
+      if($deleteNamaWKelompok){
+        return redirect()->route('kelompok.indexKelompokKKGKP')->with(['success' => 'Kelompok Berhasil Dihapus!']);
+      }else{
+        return redirect()->route('kelompok.indexKelompokKKGKP')->with(['error' => 'Kelompok Gagal Dihapus!']);
+      }
     }
 }

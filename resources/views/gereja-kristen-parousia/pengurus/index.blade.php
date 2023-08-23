@@ -11,15 +11,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-lokasi.indexPengurusGKP')}}">
+    <a class="nav-link collapsed" href="{{route('ketua-lokasi.indexPengurusGKP')}}">
       <i class="bi bi-person-circle"></i>
       <span>Data Ketua Lokasi</span>
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexPengurusGKP')}}">
+    <a class="nav-link collapsed" href="{{route('data-lembaga.indexPengurusGKP')}}">
       <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+      <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">

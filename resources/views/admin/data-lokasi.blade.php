@@ -128,10 +128,24 @@
                           <div class="input-center ps-5">
                             <div class="w-75">
                               <div class="mb-3 row">
-                                <label for="kode_lokasi" class="col-sm-3 px-1 form-label">Kode Wilayah</label>
+                                <label for="kode_lokasi" class="col-sm-3 px-1 form-label">Kode Lokasi</label>
                                 <div class="col-sm-9">
                                   <input type="text" name="kode_lokasi" class="form-control form-control-sm" id="kode_lokasi" placeholder="Kode Wilayah">
                                   @error('kode_lokasi')
+                                    <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                      <p class="p-1 pb-0" style="font-size: 10pt;">
+                                        <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                        {{ $message }}
+                                      </p>
+                                    </div>
+                                  @enderror
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="nama_lokasi" class="col-sm-3 px-1 form-label">Nama Lokasi</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="nama_lokasi" class="form-control form-control-sm" id="nama_lokasi" placeholder="Nama Lokasi">
+                                  @error('nama_lokasi')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                       <p class="p-1 pb-0" style="font-size: 10pt;">
                                         <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>

@@ -17,15 +17,15 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('ketua-kelompok.indexPengurusPM')}}">
+    <a class="nav-link collapsed" href="{{route('data-lembaga.indexPengurusPM')}}">
       <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+      <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link collapsed" href="{{route('data-kontak.indexPengurusPM')}}">
       <i class="bi bi-people"></i>
-      <span>Data Peserta</span>
+      <span>Data Kontak</span>
     </a>
   </li>
   <li class="nav-item">

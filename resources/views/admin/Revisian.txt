@@ -38,3 +38,4 @@ Fitur Lain:
 1. Table Responsive
 2. Profil yang login
 3. Setting yang login
+4. Konfirmasi ke Admin jika Skala turun

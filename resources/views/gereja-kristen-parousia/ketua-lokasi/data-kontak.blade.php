@@ -15,9 +15,9 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link collapsed" href="{{route('data-ketua-kelompok.indexKetuaLokasiGKP')}}">
+    <a class="nav-link collapsed" href="{{route('data-lembaga.indexKetuaLokasiGKP')}}">
       <i class="bi bi-person-square"></i>
-      <span>Data Ketua Kelompok</span>
+      <span>Data Lembaga</span>
     </a>
   </li>
   <li class="nav-item">
