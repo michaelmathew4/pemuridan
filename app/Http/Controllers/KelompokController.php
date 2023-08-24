@@ -204,7 +204,7 @@ class KelompokController extends Controller
         $pesertas = Peserta::where('peminta', auth()->user()->id_user)->get();
         $pesertaEdits = Peserta::join('kelompoks', 'kelompoks.id_peserta', 'pesertas.id_peserta')
                                 ->where('peminta', auth()->user()->id_user)
-                                ->first();
+                                ->get();
                                 // dd($pesertaEdits);
         $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
         $pesertasKK = [];

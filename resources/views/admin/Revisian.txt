@@ -39,3 +39,4 @@ Fitur Lain:
 2. Profil yang login
 3. Setting yang login
 4. Konfirmasi ke Admin jika Skala turun
+5. Konfirmasi ke Admin Merubah dari Peserta -> Ketua Kelompok

@@ -504,7 +504,7 @@
                           </div>
                           <div class="modal-body">
                             <div class="container">
-                              <img src="{{ $peserta->foto_peserta != '' ? asset('images/Peserta/Foto/'.$peserta->foto_peserta) : asset('images/no-user.png') }}" class="img-fluid img-thumbnail rounded mx-auto d-block w-25" alt="...">
+                              <img src="{{ $peserta->foto_peserta != '' ? asset('images/Peserta/'.$peserta->foto_peserta) : asset('images/no-user.png') }}" class="img-fluid img-thumbnail rounded mx-auto d-block w-25" alt="...">
                             </div>
                             <hr>
                             <div class="content">
