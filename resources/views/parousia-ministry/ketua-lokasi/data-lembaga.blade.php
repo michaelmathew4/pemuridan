@@ -71,7 +71,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="{{ route('data-lembaga.storePengurusPM') }}" method="post" enctype="multipart/form-data">
+                      <form action="{{ route('data-lembaga.storeKetuaLokasiPM') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group-input">
                           <div class="form-header-group mb-3">
@@ -415,22 +415,22 @@
                           <div class="input-center ps-5">
                             <div class="w-75">
                               <div class="mb-3 row">
-                                <label for="noTelpSData" class="col-sm-3 px-1">No Telp 1</label>
+                                <label for="noHpSData" class="col-sm-3 px-1">No HP 1</label>
                                 <div class="col-sm-9">
-                                  <input type="text" name="noTelpSDatas" class="form-control form-control-sm" id="noTelpSData" placeholder="cth: +62">
+                                  <input type="text" name="noHpSDatas" class="form-control form-control-sm" id="noHpSData" placeholder="cth: +62">
                                 </div>
                               </div>
                               <div id="sembunyiData4" class="divTampil4">
                                 <div class="mb-3 row">
-                                  <label for="telpRumahData" class="col-sm-3 px-1">Telp. Rumah 2</label>
+                                  <label for="noTelpSData" class="col-sm-3 px-1">No Telp 1</label>
                                   <div class="col-sm-9">
-                                    <input type="text" name="telpRumahDatas" class="form-control form-control-sm" id="telpRumahData" placeholder="cth: +622174130258">
+                                    <input type="text" name="noTelpSDatas" class="form-control form-control-sm" id="noTelpSData" placeholder="cth: +62">
                                   </div>
                                 </div>
                                 <div class="mb-3 row">
-                                  <label for="noHpSData" class="col-sm-3 px-1">No HP 1</label>
+                                  <label for="telpRumahData" class="col-sm-3 px-1">Telp. Rumah 2</label>
                                   <div class="col-sm-9">
-                                    <input type="text" name="noHpSDatas" class="form-control form-control-sm" id="noHpSData" placeholder="cth: +62">
+                                    <input type="text" name="telpRumahDatas" class="form-control form-control-sm" id="telpRumahData" placeholder="cth: +622174130258">
                                   </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -1008,7 +1008,7 @@
                                     </select>
                                   </div>
                                   <div class="col-1">
-                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Ganda 5" class="fs-5">
+                                    <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Experience" class="fs-5">
                                       <i class="bi bi-plus-lg text-success text-center"></i>
                                     </a>
                                   </div>
@@ -1571,13 +1571,17 @@
                     <td>{{$dataLembaga->institusi}}</td>
                     <td>
                       <div class="icon-action">
-                        <a data-bs-target="#ubahData{{$dataLembaga->id_user}}" id="ubahDataButton" data-bs-toggle="modal" class="text-primary" data-user="{{$dataLembaga->id_user}}">
-                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                        </a>
-                        |
-                        <a href="#hapusData{{$dataLembaga->id_user}}" data-bs-toggle="modal" class="text-danger">
-                          <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
-                        </a>
+                        @if ($dataLembaga->id_user == auth()->user()->id_user)
+                          - | -
+                        @else
+                          <a data-bs-target="#ubahData{{$dataLembaga->id_user}}" id="ubahDataButton" data-bs-toggle="modal" class="text-primary" data-user="{{$dataLembaga->id_user}}">
+                            <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          </a>
+                          |
+                          <a href="#hapusData{{$dataLembaga->id_user}}" data-bs-toggle="modal" class="text-danger">
+                            <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
+                          </a>
+                        @endif
                       </div>
                     </td>
                     <td>
@@ -1668,7 +1672,7 @@
                                   </div>
                                   <div class="row p-2 border-bottom">
                                     <div class="col-4">Peran dalam Keluarga</div>
-                                    <div class="col-8">{{$dataLembaga->perandataLembaga}}</div>
+                                    <div class="col-8">{{$dataLembaga->peran}}</div>
                                   </div>
                                   <div class="row p-2 border-bottom">
                                     <div class="col-4">Jenis Identitas</div>
@@ -1676,7 +1680,7 @@
                                   </div>
                                   <div class="row p-2 border-bottom">
                                     <div class="col-4">No. Identitas</div>
-                                    <div class="col-8">{{$dataLembaga->no_iden}}</div>
+                                    <div class="col-8">{{$dataLembaga->no_identitas}}</div>
                                   </div>
                                   <div class="row p-2 border-bottom">
                                     <div class="col-4">Tempat / Tanggal Lahir</div>
@@ -1756,7 +1760,7 @@
                                   </div>
                                   <div class="row p-2">
                                     <div class="col-4">Lokasi</div>
-                                    <div class="col-8">{{$dataLembaga->Lokasi}}</div>
+                                    <div class="col-8">{{$dataLembaga->lokasi}}</div>
                                   </div>
                                 </div>
                               </div>
@@ -2313,7 +2317,7 @@
                   <!-- End Modal Lihat Data -->
                   <!-- Modal Ubah Data -->
                   <div class="modal fade" id="ubahData{{$dataLembaga->id_user}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ubahData{{$dataLembaga->id_user}}Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
                       <div class="modal-content">
                         <div class="modal-header">
                           <h5 class="modal-title" id="ubahData{{$dataLembaga->id_user}}Label">
@@ -2323,7 +2327,7 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="{{ route('data-lembaga.updatePengurusPM', $dataLembaga->id) }}" method="post" enctype="multipart/form-data">
+                          <form action="{{ route('data-lembaga.updateKetuaLokasiPM', $dataLembaga->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group-input">
@@ -2333,16 +2337,16 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editUntukPendataandata" class="col-sm-3 px-1">Untuk <span class="required-input">(*)</span></label>
+                                    <label for="editUntukPendataan{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Untuk <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editUntukPendataandatas" id="editUntukPendataandata" aria-label=".form-select-sm editUntukPendataandata">
+                                      <select class="form-select form-select-sm" name="editUntukPendataans" id="editUntukPendataan{{$dataLembaga->id_user}}" aria-label=".form-select-sm editUntukPendataan{{$dataLembaga->id_user}}">
                                         <option value="">-Untuk-</option>
                                         <option value="Pengurus" {{($dataLembaga->data_lembaga == 'Pengurus' ? 'selected' : '')}}>Pengurus</option>
                                         <option value="Utusan" {{($dataLembaga->data_lembaga == 'Utusan' ? 'selected' : '')}}>Utusan</option>
                                         <option value="Beasiswa" {{($dataLembaga->data_lembaga == 'Beasiswa' ? 'selected' : '')}}>Beasiswa</option>
                                         <option value="Ketua Kelompok" {{($dataLembaga->data_lembaga == 'Ketua Kelompok' ? 'selected' : '')}}>Ketua Kelompok</option>
                                       </select>
-                                      @error('editUntukPendataandatas')
+                                      @error('editUntukPendataans')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -2353,10 +2357,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="idDataEdit" class="col-sm-3 px-1">ID <span class="required-input">(*)</span></label>
+                                    <label for="editIdData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">ID <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="idDataEdits" class="form-control form-control-sm" id="idDataEdit" placeholder="ID" value="{{$dataLembaga->id_user}}">
-                                      @error('idDataEdits')
+                                      <input type="text" name="editIdDatas" class="form-control form-control-sm" id="editIdData{{$dataLembaga->id_user}}" placeholder="ID" value="{{$dataLembaga->id_user}}">
+                                      @error('editIdDatas')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -2367,10 +2371,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editTglRegistrasiData" class="col-sm-3 px-1">Tgl Registrasi <span class="required-input">(*)</span></label>
+                                    <label for="editTglRegistrasi{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Tgl Registrasi <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
-                                      <input type="date" name="editTglRegistrasiData" class="form-control form-control-sm" id="editTglRegistrasiData" value="{{$dataLembaga->tanggal_regist}}">
-                                      @error('editTglRegistrasiData')
+                                      <input type="date" name="editTglRegistrasiDatas" class="form-control form-control-sm" id="editTglRegistrasi{{$dataLembaga->id_user}}" value="{{$dataLembaga->tanggal_regist}}">
+                                      @error('editTglRegistrasiDatas')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -2380,151 +2384,165 @@
                                       @enderror
                                     </div>
                                   </div>
-                                  <div class="mb-3 row">
-                                    <label for="editReferensiData" class="col-sm-3 px-1">Referensi Dari</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editReferensiData" class="form-control form-control-sm" id="editReferensiData" placeholder="Referensi Dari" value="{{$dataLembaga->refrensi}}">
+                                  <div id="sembunyiDataEdit1{{$dataLembaga->id_user}}" class="divTampilEdit1{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row">
+                                      <label for="editReferensiData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Referensi Dari</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editReferensiDatas" class="form-control form-control-sm" id="editReferensiData{{$dataLembaga->id_user}}" placeholder="Referensi Dari" value="{{$dataLembaga->refrensi}}">
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editSapaanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Sapaan</label>
+                                      <div class="col-sm-9">
+                                        <select class="form-select form-select-sm" name="editSapaanDatas" id="editSapaanData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editSapaanData{{$dataLembaga->id_user}}">
+                                          <option value="">-Sapaan-</option>
+                                          <option value="Bapak" {{($dataLembaga->sapaan == 'Bapak' ? 'selected' : '')}}>Bapak</option>
+                                          <option value="Ibu" {{($dataLembaga->sapaan == 'Ibu' ? 'selected' : '')}}>Ibu</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editGelarAwalanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Gelar Awalan</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editGelarAwalanDatas" class="form-control form-control-sm" id="editGelarAwalanData{{$dataLembaga->id_user}}" placeholder="Gelar Awalan" value="{{$dataLembaga->gelar_awalan}}">
+                                      </div>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editSapaanData" class="col-sm-3 px-1">Sapaan</label>
+                                    <label for="editNamaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Nama Lengkap <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editSapaanData" id="editSapaanData" aria-label=".form-select-sm editSapaanData">
-                                        <option value="{{$dataLembaga->sapaan}}">{{$dataLembaga->sapaan}}</option>
+                                      <input type="text" name="editNamaDatas" class="form-control form-control-sm" id="editNamaData{{$dataLembaga->id_user}}" placeholder="cth: Angelica Gabriel" value="{{$dataLembaga->nama_lengkap}}">
+                                      @error('editNamaDatas')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
+                                    </div>
+                                  </div>
+                                  <div id="sembunyiDataEdit2{{$dataLembaga->id_user}}" class="divTampilEdit2{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row">
+                                      <label for="editGelarAkhiranData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Gelar Akhiran</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editGelarAkhiranDatas" class="form-control form-control-sm" id="editGelarAkhiranData{{$dataLembaga->id_user}}" placeholder="Gelar Akhiran" value="{{$dataLembaga->gelar_akhiran}}">
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editNamaPanggilanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Nama Panggilan</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editNamaPanggilanDatas" class="form-control form-control-sm" id="editNamaPanggilanData{{$dataLembaga->id_user}}" placeholder="cth: Angel" value="{{$dataLembaga->nama_panggilan}}">
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editPeranData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Peran dalam Keluarga</label>
+                                      <div class="col-sm-9">
+                                        <select class="form-select form-select-sm" name="editPeranDatas" id="editPeranData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPeranData{{$dataLembaga->id_user}}">
+                                          <option value="">-Peran dalam Keluarga-</option>
+                                          <option value="Kepala Keluarga" {{($dataLembaga->peran == 'Kepala Keluarga' ? 'selected' : '')}}>Kepala Keluarga</option>
+                                          <option value="Ibu Rumah Tangga" {{($dataLembaga->peran == 'Ibu Rumah Tangga' ? 'selected' : '')}}>Ibu Rumah Tangga</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="editJenisIdentitasData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Jenis Identitas</label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" name="editJenisIdentitasDatas" id="editJenisIdentitasData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editJenisIdentitasData{{$dataLembaga->id_user}}">
+                                        <option value="">-Jenis Identitas-</option>
+                                        <option value="KTP" {{($dataLembaga->jenis_identitas == 'KTP' ? 'selected' : '')}}>KTP</option>
+                                        <option value="SIM" {{($dataLembaga->jenis_identitas == 'SIM' ? 'selected' : '')}}>SIM</option>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editGelarAwalanData" class="col-sm-3 px-1">Gelar Awalan</label>
+                                    <label for="editNoIdentitasData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">No. Identitas</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editGelarAwalanData" class="form-control form-control-sm" id="editGelarAwalanData" placeholder="Gelar Awalan" value="{{$dataLembaga->gelar_awalan}}">
+                                      <input type="text" name="editNoIdentitasDatas" class="form-control form-control-sm" id="editNoIdentitasData{{$dataLembaga->id_user}}" placeholder="cth: 12*********" value="{{$dataLembaga->no_identitas}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editNamaData" class="col-sm-3 px-1">Nama Lengkap <span class="required-input">(*)</span></label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNamaData" class="form-control form-control-sm" id="editNamaData" placeholder="cth: Angelica Gabriel" value="{{$dataLembaga->nama_lengkap}}">
-                                      @error('editNamaData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
-                                        </div>
-                                      @enderror
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editGelarAkhiranData" class="col-sm-3 px-1">Gelar Akhiran</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editGelarAkhiranData" class="form-control form-control-sm" id="editGelarAkhiranData" placeholder="Gelar Akhiran" value="{{$dataLembaga->gelar_akhiran}}">
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editNamaPanggilanData" class="col-sm-3 px-1">Nama Panggilan</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNamaPanggilanData" class="form-control form-control-sm" id="editNamaPanggilanData" placeholder="cth: Angel" value="{{$dataLembaga->nama_panggilan}}">
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPeranData" class="col-sm-3 px-1">Peran dalam Keluarga</label>
-                                    <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editPeranData" id="editPeranData" aria-label=".form-select-sm editPeranData">
-                                        <option value="{{$dataLembaga->peran}}"> {{$dataLembaga->peran}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editJenisIdentitasData" class="col-sm-3 px-1">Jenis Identitas</label>
-                                    <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editJenisIdentitasData" id="editJenisIdentitasData" aria-label=".form-select-sm editJenisIdentitasData">
-                                        <option value="{{$dataLembaga->jenis_identitas}}"> {{$dataLembaga->jenis_identitas}}</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editNoIdentitasData" class="col-sm-3 px-1">No. Identitas</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNoIdentitasData" class="form-control form-control-sm" id="editNoIdentitasData" placeholder="cth: 12*********" value="{{$dataLembaga->no_identitas}}">
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editTempatLahirData" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
+                                    <label for="editTempatLahirData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
                                     <div class="col-sm-5">
-                                      <input type="text" name="editTempatLahirData" class="form-control form-control-sm" id="editTempatLahirData" placeholder="cth: Bandung" value="{{$dataLembaga->tempat_lahir}}">
+                                      <input type="text" name="editTempatLahirDatas" class="form-control form-control-sm" id="editTempatLahirData{{$dataLembaga->id_user}}" placeholder="cth: Bandung" value="{{$dataLembaga->tempat_lahir}}">
                                     </div>
                                     <div class="col-sm-1">
                                       <p>/</p>
                                     </div>
                                     <div class="col-sm-3">
-                                      <input type="date" name="editTglLahirData" class="form-control form-control-sm" id="editTglLahirData" value="{{$dataLembaga->tanggal_lahir}}">
+                                      <input type="date" name="editTglLahirDatas" class="form-control form-control-sm" id="editTglLahirData{{$dataLembaga->id_user}}" value="{{$dataLembaga->tanggal_lahir}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editJenisKelaminData" class="col-sm-3 px-1">Jenis Kelamin</label>
+                                    <label for="editJenisKelaminData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Jenis Kelamin</label>
                                     <div class="col-sm-9">
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editJenisKelaminData" id="jenisKelaminPData" value="Pria" {{$dataLembaga->jK == 'Pria' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="jenisKelaminPData">Pria</label>
+                                        <input class="form-check-input" type="radio" name="editJenisKelaminDatas" id="editJenisKelaminPData{{$dataLembaga->id_user}}" value="Pria" {{$dataLembaga->jK == 'Pria' ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="editJenisKelaminPData{{$dataLembaga->id_user}}">Pria</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editJenisKelaminData" id="jenisKelaminWData" value="Wanita" {{$dataLembaga->jK == 'Wanita' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="jenisKelaminWData">Wanita</label>
+                                        <input class="form-check-input" type="radio" name="editJenisKelaminDatas" id="editJenisKelaminWData{{$dataLembaga->id_user}}" value="Wanita" {{$dataLembaga->jK == 'Wanita' ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="editJenisKelaminWData{{$dataLembaga->id_user}}">Wanita</label>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editGolonganDarahData" class="col-sm-3 px-1">Golongan Darah</label>
+                                    <label for="editGolonganDarahData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Golongan Darah</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editGolonganDarahData" id="editGolonganDarahData" aria-label=".form-select-sm editGolonganDarahData">
-                                        <option value="{{$dataLembaga->goldar}}"> {{$dataLembaga->goldar}}</option>
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="AB">AB</option>
-                                        <option value="O">O</option>
+                                      <select class="form-select form-select-sm" name="editGolonganDarahDatas" id="editGolonganDarahData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editGolonganDarahData{{$dataLembaga->id_user}}">
+                                        <option value="">-Golongan Darah-</option>
+                                        <option value="A" {{$dataLembaga->goldar == 'A' ? 'selected' : ''}}>A</option>
+                                        <option value="B" {{$dataLembaga->goldar == 'B' ? 'selected' : ''}}>B</option>
+                                        <option value="AB" {{$dataLembaga->goldar == 'AB' ? 'selected' : ''}}>AB</option>
+                                        <option value="O" {{$dataLembaga->goldar == 'O' ? 'selected' : ''}}>O</option>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editStatusPernikahanData" class="col-sm-3 px-1">Status Pernikahan</label>
+                                    <label for="editStatusPernikahanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Status Pernikahan</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editStatusPernikahanData" id="editStatusPernikahanData" aria-label=".form-select-sm editStatusPernikahanData">
-                                        <option value="{{$dataLembaga->status_pernikahan}}"> {{$dataLembaga->status_pernikahan}}</option>
+                                      <select class="form-select form-select-sm" name="editStatusPernikahanDatas" id="editStatusPernikahanData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editStatusPernikahanData{{$dataLembaga->id_user}}">
+                                        <option value="">-Status Pernikahan-</option>
+                                        <option value="Cerai" {{$dataLembaga->status_pernikahan == 'Cerai' ? 'selected' : ''}}>Cerai</option>
+                                        <option value="Belum Menikah" {{$dataLembaga->status_pernikahan == 'Belum Menikah' ? 'selected' : ''}}>Belum Menikah</option>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editSuku" class="col-sm-3 px-1">Suku</label>
+                                    <label for="editSukuData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Suku</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editSukus" class="form-control form-control-sm" id="editSuku" placeholder="Sunda" value="{{$dataLembaga->suku}}">
+                                      <input type="text" name="editSukuDatas" class="form-control form-control-sm" id="editSukuData{{$dataLembaga->id_user}}" placeholder="Sunda" value="{{$dataLembaga->suku}}">
                                     </div>
                                   </div>
-                                  <div class="mb-3 row">
-                                    <label for="editFotoData" class="col-sm-3 px-1">Foto</label>
-                                    <div class="col-sm-9">
-                                      <input type="file" name="editFotoData" class="form-control form-control-sm" id="editFotoData" value="{{$dataLembaga->foto}}">
-                                      @error('editFotoData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
-                                        </div>
-                                      @enderror
+                                  <div id="sembunyiDataEdit3{{$dataLembaga->id_user}}" class="divTampilEdit3{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row">
+                                      <label for="editFotoData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Foto</label>
+                                      <div class="col-sm-9">
+                                        <input type="file" name="editFotoDatas" class="form-control form-control-sm" id="editFotoData{{$dataLembaga->id_user}}">
+                                        @error('editFotoDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editFotoBitmapData" class="col-sm-3 px-1">Foto Bitmap</label>
-                                    <div class="col-sm-9">
-                                      <input type="file" name="editFotoBitmapData" class="form-control form-control-sm" id="editFotoBitmapData" value="{{$dataLembaga->foto_bitmap}}">
-                                      @error('editFotoBitmapData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
-                                        </div>
-                                      @enderror
+                                    <div class="mb-3 row">
+                                      <label for="editFotoBitmapData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Foto Bitmap</label>
+                                      <div class="col-sm-9">
+                                        <input type="file" name="editFotoBitmapDatas" class="form-control form-control-sm" id="editFotoBitmapData{{$dataLembaga->id_user}}">
+                                        @error('editFotoBitmapDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -2537,101 +2555,111 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editAlamatData" class="col-sm-3 px-1">Alamat</label>
+                                    <label for="editAlamatData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Alamat</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editAlamatData" class="form-control form-control-sm" id="editAlamatData" placeholder="Alamat" value="{{$dataLembaga->alamat}}">
+                                      <input type="text" name="editAlamatDatas" class="form-control form-control-sm" id="editAlamatData{{$dataLembaga->id_user}}" placeholder="Alamat" value="{{$dataLembaga->alamat}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKeteranganArahData" class="col-sm-3 px-1">Keterangan Arah</label>
+                                    <label for="editKeteranganArahData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Keterangan Arah</label>
                                     <div class="col-sm-9">
-                                      <textarea class="form-control form-control-sm" name="editKeteranganArahData" id="editKeteranganArahData" rows="3" placeholder="Keterangan Arah"> {{$dataLembaga->ket_arah}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editKeteranganArahDatas" id="editKeteranganArahData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan Arah">{{$dataLembaga->ket_arah}}</textarea>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editPetaData" class="col-sm-3 px-1">Peta</label>
+                                    <label for="editPetaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Peta</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editPetaData" class="form-control form-control-sm" id="editPetaData" placeholder="Peta" value="{{$dataLembaga->peta}}">
+                                      <input type="text" name="editPetaDatas" class="form-control form-control-sm" id="editPetaData{{$dataLembaga->id_user}}" placeholder="Peta" value="{{$dataLembaga->peta}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editNegaraData" class="col-sm-3 px-1">Negara</label>
+                                    <label for="editNegaraData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Negara</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editNegaraData" id="editNegaraData" aria-label=".form-select-sm editNegaraData">
-                                        <option value="{{$dataLembaga->negara}}">{{$dataLembaga->negara}}</option>
-                                        <option value="Indonesia">Indonesia</option>
-                                        <option value="USA">USA</option>
-                                        <option value="England">England</option>
+                                      <select class="form-select form-select-sm" name="editNegaraDatas" id="editNegaraData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editNegaraData{{$dataLembaga->id_user}}">
+                                        <option value="">-Negara-</option>
+                                        <option value="Indonesia" {{$dataLembaga->negara == 'Indonesia' ? 'selected' : ''}}>Indonesia</option>
+                                        <option value="USA" {{$dataLembaga->negara == 'USA' ? 'selected' : ''}}>USA</option>
+                                        <option value="England" {{$dataLembaga->negara == 'England' ? 'selected' : ''}}>England</option>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editProvinsiData" class="col-sm-3 px-1">Provinsi</label>
+                                    <label for="editProvinsiData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Provinsi</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editProvinsiData" class="form-control form-control-sm" id="editProvinsiData" placeholder="Provinsi" value="{{$dataLembaga->provinsi}}">
+                                      <input type="text" name="editProvinsiDatas" class="form-control form-control-sm" id="editProvinsiData{{$dataLembaga->id_user}}" placeholder="Provinsi" value="{{$dataLembaga->provinsi}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKotaData" class="col-sm-3 px-1">Kota</label>
+                                    <label for="editKotaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kota</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKotaData" class="form-control form-control-sm" id="editKotaData" placeholder="Kota" value="{{$dataLembaga->kota}}">
+                                      <input type="text" name="editKotaDatas" class="form-control form-control-sm" id="editKotaData{{$dataLembaga->id_user}}" placeholder="Kota" value="{{$dataLembaga->kota}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKecamatanData" class="col-sm-3 px-1">Kecamatan</label>
+                                    <label for="editKecamatanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kecamatan</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKecamatanData" class="form-control form-control-sm" id="editKecamatanData" placeholder="Kecamatan" value="{{$dataLembaga->kecamatan}}">
+                                      <input type="text" name="editKecamatanDatas" class="form-control form-control-sm" id="editKecamatanData{{$dataLembaga->id_user}}" placeholder="Kecamatan" value="{{$dataLembaga->kecamatan}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKelurahanData" class="col-sm-3 px-1">Kelurahan</label>
+                                    <label for="editKelurahanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kelurahan</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKelurahanData" class="form-control form-control-sm" id="editKelurahanData" placeholder="Kelurahan" value="{{$dataLembaga->kelurahan}}">
+                                      <input type="text" name="editKelurahanDatas" class="form-control form-control-sm" id="editKelurahanData{{$dataLembaga->id_user}}" placeholder="Kelurahan" value="{{$dataLembaga->kelurahan}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKodePosData" class="col-sm-3 px-1">Kode Pos</label>
+                                    <label for="editKodePosData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kode Pos</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKodePosData" class="form-control form-control-sm" id="editKodePosData" placeholder="Kode Pos" value="{{$dataLembaga->kode_pos}}">
+                                      <input type="text" name="editKodePosDatas" class="form-control form-control-sm" id="editKodePosData{{$dataLembaga->id_user}}" placeholder="Kode Pos" value="{{$dataLembaga->kode_pos}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editDusunData" class="col-sm-3 px-1">Dusun (Desa)</label>
+                                    <label for="editDusunData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Dusun (Desa)</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editDusunData" aria-label=".form-select-sm editDusunData">
-                                        <option value="{{$dataLembaga->dusun}}"> {{$dataLembaga->dusun}}</option>
+                                      <select class="form-select form-select-sm" name="editDusunDatas" aria-label=".form-select-sm editDusunData{{$dataLembaga->id_user}}">
+                                        <option value="">-Dusun (desa)-</option>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editRtRwData" class="col-sm-3 px-1">RT / RW</label>
+                                    <label for="editRtData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">RT / RW</label>
                                     <div class="col-sm-4">
-                                      <input type="text" name="rtData" class="form-control form-control-sm" id="editRtRwData" placeholder="RT" value="{{$dataLembaga->rt}}">
+                                      <input type="text" name="editRtDatas" class="form-control form-control-sm" id="editRtData{{$dataLembaga->id_user}}" placeholder="RT" value="{{$dataLembaga->rt}}">
                                     </div>
                                     <div class="col-sm-1">
                                       <p>/</p>
                                     </div>
                                     <div class="col-sm-4">
-                                      <input type="text" name="rwData" class="form-control form-control-sm" id="editRtRwData" placeholder="RW" value="{{$dataLembaga->rw}}">
+                                      <input type="text" name="editRwDatas" class="form-control form-control-sm" id="editRtRwData{{$dataLembaga->id_user}}" placeholder="RW" value="{{$dataLembaga->rw}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editAreaData" class="col-sm-3 px-1">Area</label>
+                                    <label for="editAreaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Area</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editAreaData" id="editAreaData" aria-label=".form-select-sm editAreaData">
-                                        <option value="{{$dataLembaga->area}}"> {{$dataLembaga->area}}</option>
+                                      <select class="form-select form-select-sm" name="editAreaDatas" id="editAreaData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editAreaData{{$dataLembaga->id_user}}">
+                                        <option value="">-Area-</option>
+                                        <option value="021" {{$dataLembaga->area == '021' ? 'selected' : ''}}>021</option>
+                                        <option value="022" {{$dataLembaga->area == '022' ? 'selected' : ''}}>022</option>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editLokasi" class="col-sm-3 px-1">Lokasi</label>
+                                    <label for="editLokasiData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Lokasi <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editLokasis" id="editLokasi" aria-label=".form-select-sm editLokasi">
-                                        <option value="{{$dataLembaga->lokasi}}">{{$dataLembaga->lokasi}}</option>
+                                      <select class="form-select form-select-sm" name="editLokasis" id="editLokasiData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editLokasiData{{$dataLembaga->id_user}}">
+                                        <option value="">-Lokasi-</option>
                                         @foreach ($lokasis as $lokasi)
-                                          <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                          <option value="{{$lokasi->nama_lokasi}}" {{($lokasi->nama_lokasi == $dataLembaga->lokasi) ? 'selected' : '' }}>{{$lokasi->nama_lokasi}}</option>
                                         @endforeach
                                       </select>
+                                      @error('lokasiDatas')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
                                     </div>
                                   </div>
                                 </div>
@@ -2644,69 +2672,83 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editNoTelpSData" class="col-sm-3 px-1">No Telp 1</label>
+                                    <label for="editNoHpSData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">No HP 1</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editNoTelpSData" class="form-control form-control-sm" id="editNoTelpSData" placeholder="cth: +62" value="{{$dataLembaga->no_telp}}">
+                                      <input type="text" name="editNoHpSDatas" class="form-control form-control-sm" id="editNoHpSData{{$dataLembaga->id_user}}" placeholder="cth: +62" value="{{$dataLembaga->no_hpsatu}}">
                                     </div>
                                   </div>
-                                  <div class="mb-3 row">
-                                    <label for="editTelpRumahData" class="col-sm-3 px-1">Telp. Rumah 2</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editTelpRumahData" class="form-control form-control-sm" id="editTelpRumahData" placeholder="cth: +622174130258" value="{{$dataLembaga->no_rumah}}">
+                                  <div id="sembunyiDataEdit4{{$dataLembaga->id_user}}" class="divTampilEdit4{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row">
+                                      <label for="editNoTelpSData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">No Telp 1</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editNoTelpSDatas" class="form-control form-control-sm" id="editNoTelpSData{{$dataLembaga->id_user}}" placeholder="cth: +62" value="{{$dataLembaga->no_telp}}">
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editNoHpSData" class="col-sm-3 px-1">No HP 1</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNoHpSData" class="form-control form-control-sm" id="editNoHpSData" placeholder="cth: +62" value="{{$dataLembaga->no_hpsatu}}">
+                                    <div class="mb-3 row">
+                                      <label for="editTelpRumahData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Telp. Rumah 2</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editTelpRumahDatas" class="form-control form-control-sm" id="editTelpRumahData{{$dataLembaga->id_user}}" placeholder="cth: +622174130258" value="{{$dataLembaga->no_rumah}}">
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editTerimaSMSData" class="col-sm-3 px-1">Bisa Terima SMS?</label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editTerimaSMSData" type="checkbox" id="editTerimaSMSData" value="Ya" {{$dataLembaga->bisa_sms == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editTerimaSMSData">Ya</label>
+                                    <div class="mb-3 row">
+                                      <label for="editTerimaSMSData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Bisa Terima SMS?</label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editTerimaSMSDatas" type="checkbox" id="editTerimaSMSData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->bisa_sms == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editTerimaSMSData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editNoHpDData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">No HP 2</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editNoHpDDatas" class="form-control form-control-sm" id="editNoHpDData{{$dataLembaga->id_user}}" placeholder="cth: +62856789456" value="{{$dataLembaga->no_hpdua}}">
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editNoLainData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">No Lainnya</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editNoLainDatas" class="form-control form-control-sm" id="editNoLainData{{$dataLembaga->id_user}}" placeholder="mis: Pin BB" value="{{$dataLembaga->no_lainnya}}">
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editFaxData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Fax. Rumah</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editFaxDatas" class="form-control form-control-sm" id="editFaxData{{$dataLembaga->id_user}}" placeholder="FAX" value="{{$dataLembaga->fax_rumah}}">
                                       </div>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editNoHpDData" class="col-sm-3 px-1">No HP 2</label>
+                                    <label for="emailData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Email</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editNoHpDData" class="form-control form-control-sm" id="editNoHpDData" placeholder="cth: +62856789456" value="{{$dataLembaga->no_hpdua}}">
+                                      <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData{{$dataLembaga->id_user}}" placeholder="cth: email@gmail.com">
+                                      @error('emailDatas')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="p-1 pb-0" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
                                     </div>
                                   </div>
-                                  <div class="mb-3 row">
-                                    <label for="editNoLainData" class="col-sm-3 px-1">No Lainnya</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNoLainData" class="form-control form-control-sm" id="editNoLainData" placeholder="mis: Pin BB" value="{{$dataLembaga->no_lainnya}}">
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editFaxData" class="col-sm-3 px-1">Fax. Rumah</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editFaxData" class="form-control form-control-sm" id="editFaxData" placeholder="FAX" value="{{$dataLembaga->fax_rumah}}">
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editEmailData" class="col-sm-3 px-1">Email</label>
-                                    <div class="col-sm-9">
-                                      <input type="email" name="editEmailData" class="form-control form-control-sm" id="editEmailData" placeholder="cth: email@gmail.com" value="{{$dataLembaga->alamat_surel}}">
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editTerimaEmailData" class="col-sm-3 px-1">Bisa Terima Email?</label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editTerimaEmailData" type="checkbox" id="editTerimaEmailData" value="Ya" {{$dataLembaga->no_hpsatu == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editTerimaEmailData">Ya</label>
+                                  <div id="sembunyiDataEdit5{{$dataLembaga->id_user}}" class="divTampilEdit5{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row">
+                                      <label for="editTerimaEmailData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Bisa Terima Email?</label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editTerimaEmailDatas" type="checkbox" id="editTerimaEmailData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->bisa_email == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editTerimaEmailData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="mb-3 row">
-                                    <label for="editWebsiteData" class="col-sm-3 px-1">Website</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editWebsiteData" class="form-control form-control-sm" id="editWebsiteData" placeholder="cth: Facebook, Twitter, etc" value="{{$dataLembaga->website}}">
+                                  <div id="sembunyiDataEdit6{{$dataLembaga->id_user}}" class="divTampilEdit6{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row">
+                                      <label for="editWebsiteData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Website</label>
+                                      <div class="col-sm-9">
+                                        <input type="text" name="editWebsiteDatas" class="form-control form-control-sm" id="editWebsiteData{{$dataLembaga->id_user}}" placeholder="cth: Facebook, Twitter, etc" value="{{$dataLembaga->website}}">
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -2719,13 +2761,13 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editPekerjaanData" class="col-sm-3 px-1">Pekerjaan</label>
+                                    <label for="editPekerjaanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Pekerjaan</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPekerjaanData" id="editPekerjaanData" aria-label=".form-select-sm editPekerjaanData">
-                                          <option value="{{$dataLembaga->pekerjaan}}"> {{$dataLembaga->pekerjaan}}</option>
+                                        <select class="form-select form-select-sm" name="editPekerjaanDatas" id="editPekerjaanData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPekerjaanData{{$dataLembaga->id_user}}">
+                                          <option value="">-Pekerjaan-</option>
                                           @foreach ($pekerjaans as $pekerjaan)
-                                            <option value="{{$pekerjaan->nama_pekerjaanPJ}}">{{$pekerjaan->nama_pekerjaanPJ}}</option>
+                                            <option value="{{$pekerjaan->nama_pekerjaanPJ}}" {{($pekerjaan->nama_pekerjaanPJ == $dataLembaga->pekerjaan) ? 'selected' : ''}}>{{$pekerjaan->nama_pekerjaanPJ}}</option>
                                           @endforeach
                                         </select>
                                       </div>
@@ -2737,43 +2779,43 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editJabatanData" class="col-sm-3 px-1">Jabatan Dalam Pekerjaan</label>
+                                    <label for="editJabatanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Jabatan Dalam Pekerjaan</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editJabatanData" class="form-control form-control-sm" id="editJabatanData" placeholder="cth: Manager, Staff, etc" value="{{$dataLembaga->jabatan}}">
+                                      <input type="text" name="editJabatanDatas" class="form-control form-control-sm" id="editJabatanData{{$dataLembaga->id_user}}" placeholder="cth: Manager, Staff, etc" value="{{$dataLembaga->jabatan}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editStatusPekerjaanData" class="col-sm-3 px-1">Status Pekerjaan</label>
+                                    <label for="editStatusPekerjaanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Status Pekerjaan</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editStatusPekerjaanData" id="editStatusPekerjaanData" aria-label=".form-select-sm editStatusPekerjaanData">
-                                          <option value="{{$dataLembaga->status_pekerjaan}}"> {{$dataLembaga->status_pekerjaan}}</option>
+                                        <select class="form-select form-select-sm" name="editStatusPekerjaanDatas" id="editStatusPekerjaanData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editStatusPekerjaanData{{$dataLembaga->id_user}}">
+                                          <option value="">-Status Pekerjaan-</option>
                                           @foreach ($statusPekerjaans as $statusPekerjaan)
-                                            <option value="{{$statusPekerjaan->status_pekerjaanSPJ}}">{{$statusPekerjaan->status_pekerjaanSPJ}}</option>
+                                            <option value="{{$statusPekerjaan->status_pekerjaanSPJ}}" {{($statusPekerjaan->status_pekerjaanSPJ == $dataLembaga->status_pekerjaan) ? 'selected' : ''}}>{{$statusPekerjaan->status_pekerjaanSPJ}}</option>
                                           @endforeach
                                         </select>
                                       </div>
                                       <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Status Pekerjaan" class="fs-5">
+                                        <a href="" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Status Pekerjaan" class="fs-5">
                                           <i class="bi bi-plus-lg text-success text-center"></i>
                                         </a>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editNamaPerusahaanData" class="col-sm-3 px-1">Nama Perusahaan</label>
+                                    <label for="editNamaPerusahaanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Nama Perusahaan</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editNamaPerusahaanData" class="form-control form-control-sm" id="editNamaPerusahaanData" placeholder="Nama Perusahaan" value="{{$dataLembaga->nama_perusahaan}}">
+                                      <input type="text" name="editNamaPerusahaanDatas" class="form-control form-control-sm" id="editNamaPerusahaanData{{$dataLembaga->id_user}}" placeholder="Nama Perusahaan" value="{{$dataLembaga->nama_perusahaan}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editSektorIndustriData" class="col-sm-3 px-1">Sektor Industri</label>
+                                    <label for="sektorIndustriData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Sektor Industri</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editSektorIndustriData" id="editSektorIndustriData" aria-label=".form-select-sm editSektorIndustriData">
-                                          <option value="{{$dataLembaga->sektor_industri}}"> {{$dataLembaga->sektor_industri}}</option>
+                                        <select class="form-select form-select-sm" name="sektorIndustriDatas" id="sektorIndustriData{{$dataLembaga->id_user}}" aria-label=".form-select-sm sektorIndustriData{{$dataLembaga->id_user}}">
+                                          <option value="">-Sektor Industri-</option>
                                           @foreach ($sektorIndustris as $sektorIndustri)
-                                            <option value="{{$sektorIndustri->sektor_industriSI}}">{{$sektorIndustri->sektor_industriSI}}</option>
+                                            <option value="{{$sektorIndustri->sektor_industriSI}}" {{($sektorIndustri->sektor_industriSI == $dataLembaga->sektor_industri) ? 'selected' : ''}}>{{$sektorIndustri->sektor_industriSI}}</option>
                                           @endforeach
                                         </select>
                                       </div>
@@ -2785,21 +2827,21 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editAlamatKantorData" class="col-sm-3 px-1">Alamat Kantor</label>
+                                    <label for="editAlamatKantorData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Alamat Kantor</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editAlamatKantorData" class="form-control form-control-sm" id="editAlamatKantorData" placeholder="Alamat Kantor" value="{{$dataLembaga->alamat_kantor}}">
+                                      <input type="text" name="editAlamatKantorDatas" class="form-control form-control-sm" id="editAlamatKantorData{{$dataLembaga->id_user}}" placeholder="Alamat Kantor" value="{{$dataLembaga->alamat_kantor}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editTelpKantorData" class="col-sm-3 px-1">Telp. Kantor</label>
+                                    <label for="editTelpKantorData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Telp. Kantor</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editTelpKantorData" class="form-control form-control-sm" id="editTelpKantorData" placeholder="cth: +62" value="{{$dataLembaga->telp_kantor}}">
+                                      <input type="text" name="editTelpKantorDatas" class="form-control form-control-sm" id="editTelpKantorData{{$dataLembaga->id_user}}" placeholder="cth: +62" value="{{$dataLembaga->telp_kantor}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editExtData" class="col-sm-3 px-1">Ext.</label>
+                                    <label for="editExtData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Ext.</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editExtData" class="form-control form-control-sm" id="editExtData" placeholder="EXT" value="{{$dataLembaga->ext}}">
+                                      <input type="text" name="editExtDatas" class="form-control form-control-sm" id="editExtData{{$dataLembaga->id_user}}" placeholder="EXT" value="{{$dataLembaga->ext}}">
                                     </div>
                                   </div>
                                 </div>
@@ -2812,13 +2854,13 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editTingkatPendidikanData" class="col-sm-3 px-1">Tingkat Pendidikan</label>
+                                    <label for="editTingkatPendidikanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Tingkat Pendidikan</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editTingkatPendidikanData" id="editTingkatPendidikanData" aria-label="form-select-sm editTingkatPendidikanData">
-                                          <option value="{{$dataLembaga->tingkat_pendidikan}}"> {{$dataLembaga->tingkat_pendidikan}}</option>
+                                        <select class="form-select form-select-sm" name="editTingkatPendidikanDatas" id="editTingkatPendidikanData{{$dataLembaga->id_user}}" aria-label="form-select-sm editTingkatPendidikanData{{$dataLembaga->id_user}}">
+                                          <option value="">-Tingkat Pendidikan-</option>
                                           @foreach ($tingkatPendidikans as $tingkatPendidikan)
-                                            <option value="{{$tingkatPendidikan->tingkat_pendidikan}}">{{$tingkatPendidikan->tingkat_pendidikan}}</option>
+                                            <option value="{{$tingkatPendidikan->tingkat_pendidikan}}" {{($tingkatPendidikan->tingkat_pendidikan == $dataLembaga->tingkat_pendidikan) ? 'selected' : ''}}>{{$tingkatPendidikan->tingkat_pendidikan}}</option>
                                           @endforeach
                                         </select>
                                       </div>
@@ -2830,13 +2872,13 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editSekolahData" class="col-sm-3 px-1">Sekolah/Univ (Saat ini Ditempuh)</label>
+                                    <label for="editSekolahData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Sekolah/Univ (Saat ini Ditempuh)</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editSekolahData" id="editSekolahData" aria-label="form-select-sm editSekolahData">
-                                          <option value="{{$dataLembaga->sekolah_univ}}"> {{$dataLembaga->sekolah_univ}}</option>
+                                        <select class="form-select form-select-sm" name="editSekolahDatas" id="editSekolahData{{$dataLembaga->id_user}}" aria-label="form-select-sm editSekolahData{{$dataLembaga->id_user}}">
+                                          <option value="">-Sekolah / Universitas</option>
                                           @foreach ($sekolahUnivs as $sekolahUniv)
-                                            <option value="{{$sekolahUniv->sekolah_univ}}">{{$sekolahUniv->sekolah_univ}}</option>
+                                            <option value="{{$sekolahUniv->sekolah_univ}}" {{($sekolahUniv->sekolah_univ == $dataLembaga->sekolah_univ) ? 'selected' : ''}}>{{$sekolahUniv->sekolah_univ}}</option>
                                           @endforeach
                                         </select>
                                       </div>
@@ -2851,10 +2893,10 @@
                                     <label for="editBKetertarikandataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Bidang Ketertarikan</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-control" name="editBKetertarikandataLembaga[]" style="width: 100%;" id="editBKetertarikandataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editBKetertarikandataLembaga{{$dataLembaga->id_user}}" multiple>
-                                          <option value="{{$dataLembaga->bidang_ketertarikan}}"> {{$dataLembaga->bidang_ketertarikan}}</option>
+                                        <select class="form-control" name="editBKetertarikandataLembagas[]" style="width: 100%;" id="editBKetertarikandataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editBKetertarikandataLembaga{{$dataLembaga->id_user}}" multiple>
+                                          <option>-Bidang Ketertarikan-</option>
                                           @foreach ($bidKetertarikans as $bidKetertarikan)
-                                            <option value="{{$bidKetertarikan->bidang_ketertarikan}}">{{$bidKetertarikan->bidang_ketertarikan}}</option>
+                                            <option value="{{$bidKetertarikan->bidang_ketertarikan}}" {{($bidKetertarikan->bidang_ketertarikan == $dataLembaga->bidang_ketertarikan) ? 'selected' : ''}}>{{$bidKetertarikan->bidang_ketertarikan}}</option>
                                           @endforeach
                                         </select>
                                       </div>
@@ -2869,10 +2911,10 @@
                                     <label for="editBKeterampilandataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Bidang Keterampilan</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-control" name="editBKeterampilandataLembaga[]" id="editBKeterampilandataLembaga{{$dataLembaga->id_user}}" style="width: 100%;" aria-label="multiple select editBKeterampilandataLembaga{{$dataLembaga->id_user}}" multiple>
-                                          <option value="{{$dataLembaga->bidang_keterampilan}}"> {{$dataLembaga->bidang_keterampilan}}</option>
+                                        <select class="form-control" name="editBKeterampilandataLembagas[]" id="editBKeterampilandataLembaga{{$dataLembaga->id_user}}" style="width: 100%;" aria-label="multiple select editBKeterampilandataLembaga{{$dataLembaga->id_user}}" multiple>
+                                          <option>Bidang Keterampilan</option>
                                           @foreach ($bidKeterampilans as $bidKeterampilan)
-                                            <option value="{{$bidKeterampilan->bidang_keterampilan}}">{{$bidKeterampilan->bidang_keterampilan}}</option>
+                                            <option value="{{$bidKeterampilan->bidang_keterampilan}}" {{($bidKeterampilan->bidang_keterampilan == $dataLembaga->bidang_keterampilan) ? 'selected' : ''}}>{{$bidKeterampilan->bidang_keterampilan}}</option>
                                           @endforeach
                                         </select>
                                       </div>
@@ -2893,29 +2935,31 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editCatatanData" class="col-sm-3 px-1">Catatan</label>
+                                    <label for="editCatatanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Catatan</label>
                                     <div class="col-sm-9">
-                                      <textarea class="form-control form-control-sm" name="editCatatanData" id="editCatatanData" rows="3" placeholder="Catatan"> {{$dataLembaga->catatan}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editCatatanDatas" id="editCatatanData{{$dataLembaga->id_user}}" rows="3" placeholder="Catatan"> {{$dataLembaga->catatan}}</textarea>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editStatusData" class="col-sm-3 px-1">Status</label>
+                                    <label for="editStatusData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Status</label>
                                     <div class="col-sm-9">
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editStatusData" id="statusAData" value="Aktif" {{$dataLembaga->status == 'Aktif' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="statusAData">Aktif</label>
+                                        <input class="form-check-input" type="radio" name="editStatusDatas" id="statusAData{{$dataLembaga->id_user}}" value="Aktif" {{$dataLembaga->status == 'Aktif' ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="statusAData{{$dataLembaga->id_user}}">Aktif</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editStatusData" id="statusTaData" value="Tidak Aktif" {{$dataLembaga->status == 'Tidak Aktif' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="statusTaData">Tidak Aktif</label>
+                                        <input class="form-check-input" type="radio" name="editStatusDatas" id="statusTaData{{$dataLembaga->id_user}}" value="Tidak Aktif" {{$dataLembaga->status == 'Tidak Aktif' ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="statusTaData{{$dataLembaga->id_user}}">Tidak Aktif</label>
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="mb-3 row">
-                                    <label for="editVerifEmailData" class="col-sm-3 px-1">Email Sudah Verifikasi?</label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editVerifEmailData" type="checkbox" id="editVerifEmailData" {{$dataLembaga->verif_email == 'Ya' ? 'checked' : ''}}>
+                                  <div id="sembunyiDataEdit7{{$dataLembaga->id_user}}" class="divTampilEdit7{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row">
+                                      <label for="editVerifEmailData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Email Sudah Verifikasi?</label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editVerifEmailDatas" type="checkbox" id="editVerifEmailData{{$dataLembaga->id_user}}" {{$dataLembaga->verif_email == 'Ya' ? 'checked' : ''}}>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -2929,179 +2973,205 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editNoRekData" class="col-sm-3 px-1">Nomor Rekening</label>
+                                    <label for="editNoRekData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Nomor Rekening</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editNoRekData" class="form-control form-control-sm" id="editNoRekData" placeholder="123456789" value="{{$dataLembaga->no_rekening}}">
+                                      <input type="text" name="editNoRekData{{$dataLembaga->id_user}}" class="form-control form-control-sm" id="editNoRekData{{$dataLembaga->id_user}}" placeholder="123456789" value="{{$dataLembaga->no_rekening}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editPerBeasiswaData" class="col-sm-3 px-1">Periode Beasiswa</label>
+                                    <label for="editPerBeasiswaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Periode Beasiswa</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editPerBeasiswaData" class="form-control form-control-sm" id="editPerBeasiswaData" placeholder="Periode Beasiswa" value="{{$dataLembaga->periode_beasiswa}}">
+                                      <input type="text" name="editPerBeasiswaDatas" class="form-control form-control-sm" id="editPerBeasiswaData{{$dataLembaga->id_user}}" placeholder="Periode Beasiswa" value="{{$dataLembaga->periode_beasiswa}}">
+                                    </div>
+                                  </div>
+                                  <div id="sembunyiDataEdit12{{$dataLembaga->id_user}}" class="divTampilEdit12{{$dataLembaga->id_user}}">
+                                    <div class="mb-3 row nominalTampil" id="nominalHide">
+                                      <label for="editNominal{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Nominal</label>
+                                      <div class="col-9">
+                                        <div id="editInputNominal{{$dataLembaga->id_user}}">
+                                          <div class="position-relative">
+                                            <div class="position-absolute top-50 start-100 ms-1 translate-middle-y">
+                                              <button type="button" class="btn btn-transparent p-0" id="editTambahNominal{{$dataLembaga->id_user}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Input Nominal">
+                                                <i class="bi bi-plus-circle fs-5 text-success d-inline"></i>
+                                              </button>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-6">
+                                                <input type="text" name="editTambahNominals[0][ket_nominal]" class="form-control form-control-sm" id="editKetNominal{{$dataLembaga->id_user}}" placeholder="Keterangan Nominal">
+                                              </div>
+                                              <div class="col-6">
+                                                <input type="text" name="editTambahNominals[0][nominal]" class="form-control form-control-sm" id="editNominal{{$dataLembaga->id_user}}" placeholder="Nominal">
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editPerKerjaPData" class="col-sm-3 px-1">Periode Kerja Praktik</label>
+                                    <label for="editPerKerjaPData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Periode Kerja Praktik</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editPerKerjaPData" class="form-control form-control-sm" id="editPerKerjaPData" placeholder="Periode Kerja Praktik" value="{{$dataLembaga->periode_kerja_praktiK}}">
+                                      <input type="text" name="editPerKerjaPDatas" class="form-control form-control-sm" id="editPerKerjaPData{{$dataLembaga->id_user}}" placeholder="Periode Kerja Praktik" value="{{$dataLembaga->periode_kerja_praktiK}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editRiwayatPelSData" class="col-sm-3 px-1">Riwayat Pelayanan 1</label>
+                                    <label for="editRiwayatPelSData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 1</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editRiwayatPelSData" class="form-control form-control-sm" id="editRiwayatPelSData" placeholder="Riwayat Pelayanan 1" value="{{$dataLembaga->riwayat_pelayananSatu}}">
+                                      <input type="text" name="editRiwayatPelSDatas" class="form-control form-control-sm" id="editRiwayatPelSData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 1" value="{{$dataLembaga->riwayat_pelayananSatu}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editRiwayatPelDData" class="col-sm-3 px-1">Riwayat Pelayanan 2</label>
+                                    <label for="editRiwayatPelDData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 2</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editRiwayatPelDData" class="form-control form-control-sm" id="editRiwayatPelDData" placeholder="Riwayat Pelayanan 2" value="{{$dataLembaga->riwayat_pelayananDua}}">
+                                      <input type="text" name="editRiwayatPelDDatas" class="form-control form-control-sm" id="editRiwayatPelDData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 2" value="{{$dataLembaga->riwayat_pelayananDua}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editRiwayatPelTData" class="col-sm-3 px-1">Riwayat Pelayanan 3</label>
+                                    <label for="editRiwayatPelTData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 3</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editRiwayatPelTData" class="form-control form-control-sm" id="editRiwayatPelTData" placeholder="Riwayat Pelayanan 3" value="{{$dataLembaga->riwayat_pelayananTiga}}">
+                                      <input type="text" name="editRiwayatPelTDatas" class="form-control form-control-sm" id="editRiwayatPelTData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 3" value="{{$dataLembaga->riwayat_pelayananTiga}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editRiwayatPelEData" class="col-sm-3 px-1">Riwayat Pelayanan 4</label>
+                                    <label for="editRiwayatPelEData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 4</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editRiwayatPelEData" class="form-control form-control-sm" id="editRiwayatPelEData" placeholder="Riwayat Pelayanan 4" value="{{$dataLembaga->riwayat_pelayananEmpat}}">
+                                      <input type="text" name="editRiwayatPelEDatas" class="form-control form-control-sm" id="editRiwayatPelEData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 4" value="{{$dataLembaga->riwayat_pelayananEmpat}}">
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group-input">
-                              <div class="form-header-group mb-3">
-                                <h6>KOLOM CADANGAN (PILIHAN)</h6>
-                              </div>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="editPilihanSData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 row">
-                                      <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPilihanSData" id="editPilihanSData" aria-label=".form-select-sm editPilihanSData">
-                                          <option value="{{$dataLembaga->kolom_cadanganPSatu}}"> {{$dataLembaga->kolom_cadanganPSatu}}</option>
-                                          @foreach ($kc_pilsatus as $kc_pilsatu)
-                                            <option value="{{$kc_pilsatu->kc_pilsatu}}">{{$kc_pilsatu->kc_pilsatu}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Satu" class="fs-5">
-                                          <i class="bi bi-plus-lg text-success text-center"></i>
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPilihanDData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 row">
-                                      <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPilihanDData" id="editPilihanDData" aria-label=".form-select-sm editPilihanDData">
-                                          <option value="{{$dataLembaga->kolom_cadanganPDua}}"> {{$dataLembaga->kolom_cadanganPDua}}</option>
-                                          @foreach ($kc_pilduas as $kc_pildua)
-                                            <option value="{{$kc_pildua->kc_pildua}}">{{$kc_pildua->kc_pildua}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Dua" class="fs-5">
-                                          <i class="bi bi-plus-lg text-success text-center"></i>
-                                        </a>
+                            <div id="sembunyiDataEdit8{{$dataLembaga->id_user}}" class="divTampilEdit8{{$dataLembaga->id_user}}">
+                              <div class="form-group-input">
+                                <div class="form-header-group mb-3">
+                                  <h6>KOLOM CADANGAN (PILIHAN)</h6>
+                                </div>
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="editPilihanSData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 row">
+                                        <div class="col-11">
+                                          <select class="form-select form-select-sm" name="editPilihanSDatas" id="editPilihanSData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPilihanSData{{$dataLembaga->id_user}}">
+                                            <option value="{{$dataLembaga->kolom_cadanganPSatu}}"> {{$dataLembaga->kolom_cadanganPSatu}}</option>
+                                            @foreach ($kc_pilsatus as $kc_pilsatu)
+                                              <option value="{{$kc_pilsatu->kc_pilsatu}}">{{$kc_pilsatu->kc_pilsatu}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-1">
+                                          <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Satu" class="fs-5">
+                                            <i class="bi bi-plus-lg text-success text-center"></i>
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPilihanTData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 row">
-                                      <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPilihanTData" id="editPilihanTData" aria-label=".form-select-sm editPilihanTData">
-                                          <option value="{{$dataLembaga->kolom_cadanganPTiga}}"> {{$dataLembaga->kolom_cadanganPTiga}}</option>
-                                          @foreach ($kc_piltigas as $kc_piltiga)
-                                            <option value="{{$kc_piltiga->kc_piltiga}}">{{$kc_piltiga->kc_piltiga}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tiga" class="fs-5">
-                                          <i class="bi bi-plus-lg text-success text-center"></i>
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPilihanEData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 row">
-                                      <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPilihanEData" id="editPilihanEData" aria-label=".form-select-sm editPilihanEData">
-                                          <option value="{{$dataLembaga->kolom_cadanganPEmpat}}"> {{$dataLembaga->kolom_cadanganPEmpat}}</option>
-                                          @foreach ($kc_pilempats as $kc_pilempat)
-                                            <option value="{{$kc_pilempat->kc_pilempat}}">{{$kc_pilempat->kc_pilempat}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Empat" class="fs-5">
-                                          <i class="bi bi-plus-lg text-success text-center"></i>
-                                        </a>
+                                    <div class="mb-3 row">
+                                      <label for="editPilihanDData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 row">
+                                        <div class="col-11">
+                                          <select class="form-select form-select-sm" name="editPilihanDDatas" id="editPilihanDData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPilihanDData{{$dataLembaga->id_user}}">
+                                            <option value="{{$dataLembaga->kolom_cadanganPDua}}"> {{$dataLembaga->kolom_cadanganPDua}}</option>
+                                            @foreach ($kc_pilduas as $kc_pildua)
+                                              <option value="{{$kc_pildua->kc_pildua}}">{{$kc_pildua->kc_pildua}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-1">
+                                          <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Dua" class="fs-5">
+                                            <i class="bi bi-plus-lg text-success text-center"></i>
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPilihanLData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 row">
-                                      <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPilihanLData" id="editPilihanLData" aria-label=".form-select-sm editPilihanLData">
-                                          <option value="{{$dataLembaga->kolom_cadanganPLima}}"> {{$dataLembaga->kolom_cadanganPLima}}</option>
-                                          @foreach ($kc_pillimas as $kc_pillima)
-                                            <option value="{{$kc_pillima->kc_pillima}}">{{$kc_pillima->kc_pillima}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Lima" class="fs-5">
-                                          <i class="bi bi-plus-lg text-success text-center"></i>
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPilihanEnData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 row">
-                                      <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPilihanEnData" id="editPilihanEnData" aria-label=".form-select-sm editPilihanEnData">
-                                          <option value="{{$dataLembaga->kolom_cadanganPEnam}}"> {{$dataLembaga->kolom_cadanganPEnam}}</option>
-                                          @foreach ($kc_pilenams as $kc_pilenam)
-                                            <option value="{{$kc_pilenam->kc_pilenam}}">{{$kc_pilenam->kc_pilenam}}</option>
-                                          @endforeach
-                                        </select>
-                                      </div>
-                                      <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Enam" class="fs-5">
-                                          <i class="bi bi-plus-lg text-success text-center"></i>
-                                        </a>
+                                    <div class="mb-3 row">
+                                      <label for="editPilihanTData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 row">
+                                        <div class="col-11">
+                                          <select class="form-select form-select-sm" name="editPilihanTDatas" id="editPilihanTData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPilihanTData{{$dataLembaga->id_user}}">
+                                            <option value="{{$dataLembaga->kolom_cadanganPTiga}}"> {{$dataLembaga->kolom_cadanganPTiga}}</option>
+                                            @foreach ($kc_piltigas as $kc_piltiga)
+                                              <option value="{{$kc_piltiga->kc_piltiga}}">{{$kc_piltiga->kc_piltiga}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-1">
+                                          <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tiga" class="fs-5">
+                                            <i class="bi bi-plus-lg text-success text-center"></i>
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editPilihanTuData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 row">
-                                      <div class="col-11">
-                                        <select class="form-select form-select-sm" name="editPilihanTuData" id="editPilihanTuData" aria-label=".form-select-sm editPilihanTuData">
-                                          <option value="{{$dataLembaga->kolom_cadanganPTujuh}}"> {{$dataLembaga->kolom_cadanganPTujuh}}</option>
-                                          @foreach ($kc_piltujuhs as $kc_piltujuh)
-                                            <option value="{{$kc_piltujuh->kc_piltujuh}}">{{$kc_piltujuh->kc_piltujuh}}</option>
-                                          @endforeach
-                                        </select>
+                                    <div class="mb-3 row">
+                                      <label for="editPilihanEData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 row">
+                                        <div class="col-11">
+                                          <select class="form-select form-select-sm" name="editPilihanEDatas" id="editPilihanEData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPilihanEData{{$dataLembaga->id_user}}">
+                                            <option value="{{$dataLembaga->kolom_cadanganPEmpat}}"> {{$dataLembaga->kolom_cadanganPEmpat}}</option>
+                                            @foreach ($kc_pilempats as $kc_pilempat)
+                                              <option value="{{$kc_pilempat->kc_pilempat}}">{{$kc_pilempat->kc_pilempat}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-1">
+                                          <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Empat" class="fs-5">
+                                            <i class="bi bi-plus-lg text-success text-center"></i>
+                                          </a>
+                                        </div>
                                       </div>
-                                      <div class="col-1">
-                                        <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tujuh" class="fs-5">
-                                          <i class="bi bi-plus-lg text-success text-center"></i>
-                                        </a>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editPilihanLData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 row">
+                                        <div class="col-11">
+                                          <select class="form-select form-select-sm" name="editPilihanLDatas" id="editPilihanLData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPilihanLData{{$dataLembaga->id_user}}">
+                                            <option value="{{$dataLembaga->kolom_cadanganPLima}}"> {{$dataLembaga->kolom_cadanganPLima}}</option>
+                                            @foreach ($kc_pillimas as $kc_pillima)
+                                              <option value="{{$kc_pillima->kc_pillima}}">{{$kc_pillima->kc_pillima}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-1">
+                                          <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Lima" class="fs-5">
+                                            <i class="bi bi-plus-lg text-success text-center"></i>
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editPilihanEnData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 row">
+                                        <div class="col-11">
+                                          <select class="form-select form-select-sm" name="editPilihanEnDatas" id="editPilihanEnData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPilihanEnData{{$dataLembaga->id_user}}">
+                                            <option value="{{$dataLembaga->kolom_cadanganPEnam}}"> {{$dataLembaga->kolom_cadanganPEnam}}</option>
+                                            @foreach ($kc_pilenams as $kc_pilenam)
+                                              <option value="{{$kc_pilenam->kc_pilenam}}">{{$kc_pilenam->kc_pilenam}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-1">
+                                          <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Enam" class="fs-5">
+                                            <i class="bi bi-plus-lg text-success text-center"></i>
+                                          </a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <label for="editPilihanTuData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 row">
+                                        <div class="col-11">
+                                          <select class="form-select form-select-sm" name="editPilihanTuDatas" id="editPilihanTuData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPilihanTuData{{$dataLembaga->id_user}}">
+                                            <option value="{{$dataLembaga->kolom_cadanganPTujuh}}"> {{$dataLembaga->kolom_cadanganPTujuh}}</option>
+                                            @foreach ($kc_piltujuhs as $kc_piltujuh)
+                                              <option value="{{$kc_piltujuh->kc_piltujuh}}">{{$kc_piltujuh->kc_piltujuh}}</option>
+                                            @endforeach
+                                          </select>
+                                        </div>
+                                        <div class="col-1">
+                                          <a href=""  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tambah Pilihan Tujuh" class="fs-5">
+                                            <i class="bi bi-plus-lg text-success text-center"></i>
+                                          </a>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -3118,7 +3188,7 @@
                                     <label for="editPilihanGSdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Personality - MBTI</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGSdataLembaga[]" style="width: 100%;" id="editPilihanGSdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGSdataLembaga{{$dataLembaga->id_user}}" multiple>
+                                        <select class="form-select" name="editPilihanGSdataLembagas[]" style="width: 100%;" id="editPilihanGSdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGSdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->personality_mbti}}">{{$dataLembaga->personality_mbti}}</option>
                                           @foreach ($persMbtis as $persMbti)
                                             <option value="{{$persMbti->mbti}}">{{$persMbti->mbti}}</option>
@@ -3136,7 +3206,7 @@
                                     <label for="editPilihanGDdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Personality - Holland</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGDdataLembaga[]" style="width: 100%;" id="editPilihanGDdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGDdataLembaga{{$dataLembaga->id_user}}" multiple>
+                                        <select class="form-select" name="editPilihanGDdataLembagas[]" style="width: 100%;" id="editPilihanGDdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGDdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->personality_holland}}">{{$dataLembaga->personality_holland}}</option>
                                           @foreach ($persHollands as $persHolland)
                                             <option value="{{$persHolland->holland}}">{{$persHolland->holland}}</option>
@@ -3154,7 +3224,7 @@
                                     <label for="editPilihanGTdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Spiritual Gifts</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGTdataLembaga[]" style="width: 100%;" id="editPilihanGTdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGTdataLembaga{{$dataLembaga->id_user}}" multiple>
+                                        <select class="form-select" name="editPilihanGTdataLembagas[]" style="width: 100%;" id="editPilihanGTdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGTdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->spiritual_gifts}}">{{$dataLembaga->spiritual_gifts}}</option>
                                           @foreach ($spiritGifts as $spiritGift)
                                             <option value="{{$spiritGift->gifts}}">{{$spiritGift->gifts}}</option>
@@ -3172,7 +3242,7 @@
                                     <label for="editPilihanGEdataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Abilities</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGEdataLembaga[]" style="width: 100%;" id="editPilihanGEdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGEdataLembaga{{$dataLembaga->id_user}}" multiple>
+                                        <select class="form-select" name="editPilihanGEdataLembagas[]" style="width: 100%;" id="editPilihanGEdataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGEdataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->abilities}}">{{$dataLembaga->abilities}}</option>
                                           @foreach ($abilities as $ability)
                                             <option value="{{$ability->abilities}}">{{$ability->abilities}}</option>
@@ -3187,10 +3257,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editExperienceDataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Ganda 5</label>
+                                    <label for="editExperienceDataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Experience</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editExperienceDataLembaga[]" style="width: 100%;" id="editExperienceDataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editExperienceDataLembaga{{$dataLembaga->id_user}}" multiple>
+                                        <select class="form-select" name="editExperienceDataLembagas[]" style="width: 100%;" id="editExperienceDataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editExperienceDataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->kolom_cadanganPGLima}}">{{$dataLembaga->kolom_cadanganPGLima}}</option>
                                           @foreach ($gandaLimas as $gandaLima)
                                             <option value="{{$gandaLima->ganda_lima}}">{{$gandaLima->ganda_lima}}</option>
@@ -3208,7 +3278,7 @@
                                     <label for="editPilihanGEndataLembaga{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kemampuan Bahasa</label>
                                     <div class="col-sm-9 row">
                                       <div class="col-11">
-                                        <select class="form-select" name="editPilihanGEndataLembaga[]" style="width: 100%;" id="editPilihanGEndataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGEndataLembaga{{$dataLembaga->id_user}}" multiple>
+                                        <select class="form-select" name="editPilihanGEndataLembagas[]" style="width: 100%;" id="editPilihanGEndataLembaga{{$dataLembaga->id_user}}" aria-label="multiple select editPilihanGEndataLembaga{{$dataLembaga->id_user}}" multiple>
                                           <option value="{{$dataLembaga->kemampuan_bahasa}}">{{$dataLembaga->kemampuan_bahasa}}</option>
                                           @foreach ($kemBahasas as $kemBahasa)
                                             <option value="{{$kemBahasa->kem_bahasa}}">{{$kemBahasa->kem_bahasa}}</option>
@@ -3225,72 +3295,74 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="form-group-input">
-                              <div class="form-header-group mb-3">
-                                <h6>KOLOM CADANGAN (CHECK BOX)</h6>
-                              </div>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="editCheckSData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckSData" type="checkbox" id="editCheckSData" value="Ya" {{$dataLembaga->kolom_cadanganCBSatu == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editCheckSData">Ya</label>
+                            <div id="sembunyiDataEdit9{{$dataLembaga->id_user}}" class="divTampilEdit9{{$dataLembaga->id_user}}">
+                              <div class="form-group-input">
+                                <div class="form-header-group mb-3">
+                                  <h6>KOLOM CADANGAN (CHECK BOX)</h6>
+                                </div>
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="editCheckSData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editCheckSDatas" type="checkbox" id="editCheckSData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->kolom_cadanganCBSatu == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editCheckSData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editCheckDData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckDData" type="checkbox" id="editCheckDData" value="Ya" {{$dataLembaga->kolom_cadanganCBDua == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editCheckDData">Ya</label>
+                                    <div class="mb-3 row">
+                                      <label for="editCheckDData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editCheckDDatas" type="checkbox" id="editCheckDData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->kolom_cadanganCBDua == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editCheckDData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editCheckTData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckTData" type="checkbox" id="editCheckTData" value="Ya" {{$dataLembaga->kolom_cadanganCBTiga == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editCheckTData">Ya</label>
+                                    <div class="mb-3 row">
+                                      <label for="editCheckTData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editCheckTDatas" type="checkbox" id="editCheckTData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->kolom_cadanganCBTiga == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editCheckTData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editCheckEData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckEData" type="checkbox" id="editCheckEData" value="Ya" {{$dataLembaga->kolom_cadanganCBEmpat == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editCheckEData">Ya</label>
+                                    <div class="mb-3 row">
+                                      <label for="editCheckEData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editCheckEDatas" type="checkbox" id="editCheckEData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->kolom_cadanganCBEmpat == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editCheckEData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editCheckLData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckLData" type="checkbox" id="editCheckLData" value="Ya" {{$dataLembaga->kolom_cadanganCBLima == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editCheckLData">Ya</label>
+                                    <div class="mb-3 row">
+                                      <label for="editCheckLData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editCheckLDatas" type="checkbox" id="editCheckLData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->kolom_cadanganCBLima == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editCheckLData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editCheckEnData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckEnData" type="checkbox" id="editCheckEnData" value="Ya" {{$dataLembaga->kolom_cadanganCBEnam == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editCheckEnData">Ya</label>
+                                    <div class="mb-3 row">
+                                      <label for="editCheckEnData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editCheckEnDatas" type="checkbox" id="editCheckEnData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->kolom_cadanganCBEnam == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editCheckEnData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div class="mb-3 row">
-                                    <label for="editCheckTuData" class="col-sm-3 px-1"></label>
-                                    <div class="col-sm-9 pt-1">
-                                      <div class="form-check form-switch">
-                                        <input class="form-check-input" name="editCheckTuData" type="checkbox" id="editCheckTuData" value="Ya" {{$dataLembaga->kolom_cadanganCBTujuh == 'Ya' ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="editCheckTuData">Ya</label>
+                                    <div class="mb-3 row">
+                                      <label for="editCheckTuData{{$dataLembaga->id_user}}" class="col-sm-3 px-1"></label>
+                                      <div class="col-sm-9 pt-1">
+                                        <div class="form-check form-switch">
+                                          <input class="form-check-input" name="editCheckTuDatas" type="checkbox" id="editCheckTuData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->kolom_cadanganCBTujuh == 'Ya' ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="editCheckTuData{{$dataLembaga->id_user}}">Ya</label>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -3301,45 +3373,47 @@
                               <div class="form-header-group mb-3">
                                 <h6>DOKUMEN PENTING</h6>
                               </div>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="" class="col-sm-3 px-1">Baptis Anak</label>
-                                    <div class="col-sm-9">
-                                      <label for="" class="">Sudah?</label>
-                                      <div class="form-check">
-                                        <input class="form-check-input" name="editSudahBaptisAnakData" type="checkbox" value="" id="editSudahBaptisAnakData" {{$dataLembaga->ba_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahBaptisAnakData">
-                                          Sudah
-                                        </label>
-                                      </div>
-                                      <hr>
-                                      <label for="editTglBaptisAnakData" class="">Tanggal</label>
-                                      <input type="date" name="editTglBaptisAnakData" class="form-control form-control-sm" id="editTglBaptisAnakData" value="{{$dataLembaga->ba_tanggal}}">
-                                      <hr>
-                                      <label for="" class="">Tempat</label><br>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatBaptisAnakData" id="editTempatBaptisAnakData" value="Gereja Lokal" {{$dataLembaga->ba_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatBaptisAnakData">Gereja Lokal</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatBaptisAnakData" id="editTempatBaptisAnakLData" value="Gereja Lain" {{$dataLembaga->ba_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatBaptisAnakLData">Gereja Lain</label>
-                                      </div>
-                                      <hr>
-                                      <label for="editFileUploadBaptisAnakData" class="">File</label>
-                                      <input type="file" name="editFileUploadBaptisAnakData" class="form-control form-control-sm" id="editFileUploadBaptisAnakData" value="{{$dataLembaga->ba_file}}">
-                                      @error('editFileUploadBaptisAnakData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
+                              <div id="sembunyiDataEdit10{{$dataLembaga->id_user}}" class="divTampilEdit10{{$dataLembaga->id_user}}">
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="" class="col-sm-3 px-1">Baptis Anak</label>
+                                      <div class="col-sm-9">
+                                        <label for="" class="">Sudah?</label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" name="editSudahBaptisAnakDatas" type="checkbox" value="" id="editSudahBaptisAnakData{{$dataLembaga->id_user}}" {{$dataLembaga->ba_sudah == 'Sudah' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editSudahBaptisAnakData{{$dataLembaga->id_user}}">
+                                            Sudah
+                                          </label>
                                         </div>
-                                      @enderror
-                                      <hr>
-                                      <label for="editKetBaptisAnakData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetBaptisAnakData" id="editKetBaptisAnakData" rows="3" placeholder="Keterangan">{{$dataLembaga->ba_ket}}</textarea>
+                                        <hr>
+                                        <label for="editTglBaptisAnakData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                        <input type="date" name="editTglBaptisAnakDatas" class="form-control form-control-sm" id="editTglBaptisAnakData{{$dataLembaga->id_user}}" value="{{$dataLembaga->ba_tanggal}}">
+                                        <hr>
+                                        <label for="" class="">Tempat</label><br>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatBaptisAnakDatas" id="editTempatBaptisAnakData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->ba_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatBaptisAnakData{{$dataLembaga->id_user}}">Gereja Lokal</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatBaptisAnakDatas" id="editTempatBaptisAnakLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->ba_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatBaptisAnakLData{{$dataLembaga->id_user}}">Gereja Lain</label>
+                                        </div>
+                                        <hr>
+                                        <label for="editFileUploadBaptisAnakData{{$dataLembaga->id_user}}" class="">File</label>
+                                        <input type="file" name="editFileUploadBaptisAnakDatas" class="form-control form-control-sm" id="editFileUploadBaptisAnakData{{$dataLembaga->id_user}}" value="{{$dataLembaga->ba_file}}">
+                                        @error('editFileUploadBaptisAnakDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                        <hr>
+                                        <label for="editKetBaptisAnakData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="editKetBaptisAnakDatas" id="editKetBaptisAnakData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->ba_ket}}</textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -3352,28 +3426,28 @@
                                     <div class="col-sm-9">
                                       <label for="" class="">Sudah?</label>
                                       <div class="form-check">
-                                        <input class="form-check-input" name="editSudahMenikahData" type="checkbox" value="" id="editSudahMenikahData" {{$dataLembaga->menikah_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahMenikahData">
+                                        <input class="form-check-input" name="editSudahMenikahDatas" type="checkbox" value="" id="editSudahMenikahData{{$dataLembaga->id_user}}" {{$dataLembaga->menikah_sudah == 'Sudah' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="editSudahMenikahData{{$dataLembaga->id_user}}">
                                           Sudah
                                         </label>
                                       </div>
                                       <hr>
-                                      <label for="editTglMenikahData" class="">Tanggal</label>
-                                      <input type="date" name="editTglMenikahData" class="form-control form-control-sm" id="editTglMenikahData" value="{{$dataLembaga->menikah_tanggal}}">
+                                      <label for="editTglMenikahData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                      <input type="date" name="editTglMenikahDatas" class="form-control form-control-sm" id="editTglMenikahData{{$dataLembaga->id_user}}" value="{{$dataLembaga->menikah_tanggal}}">
                                       <hr>
                                       <label for="" class="">Tempat</label><br>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatMenikahData" id="editTempatMenikahData" value="Gereja Lokal" {{$dataLembaga->menikah_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatMenikahData">Gereja Lokal</label>
+                                        <input class="form-check-input" type="radio" name="editTempatMenikahDatas" id="editTempatMenikahData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->menikah_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="editTempatMenikahData{{$dataLembaga->id_user}}">Gereja Lokal</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatMenikahData" id="editTempatMenikahLData" value="Gereja Lain" {{$dataLembaga->menikah_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatMenikahLData">Gereja Lain</label>
+                                        <input class="form-check-input" type="radio" name="editTempatMenikahDatas" id="editTempatMenikahLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->menikah_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="editTempatMenikahLData{{$dataLembaga->id_user}}">Gereja Lain</label>
                                       </div>
                                       <hr>
-                                      <label for="editFileUploadMenikahData" class="">File</label>
-                                      <input type="file" name="editFileUploadMenikahData" class="form-control form-control-sm" id="editFileUploadMenikahData" value="{{$dataLembaga->menikah_file}}">
-                                      @error('editFileUploadMenikahData')
+                                      <label for="editFileUploadMenikahData{{$dataLembaga->id_user}}" class="">File</label>
+                                      <input type="file" name="editFileUploadMenikahDatas" class="form-control form-control-sm" id="editFileUploadMenikahData{{$dataLembaga->id_user}}" value="{{$dataLembaga->menikah_file}}">
+                                      @error('editFileUploadMenikahDatas')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -3382,8 +3456,8 @@
                                         </div>
                                       @enderror
                                       <hr>
-                                      <label for="editKetMenikahData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetMenikahData" id="editKetMenikahData" rows="3" placeholder="Keterangan">{{$dataLembaga->menikah_ket}}</textarea>
+                                      <label for="editKetMenikahData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                      <textarea class="form-control form-control-sm" name="editKetMenikahDatas" id="editKetMenikahData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->menikah_ket}}</textarea>
                                     </div>
                                   </div>
                                 </div>
@@ -3396,28 +3470,28 @@
                                     <div class="col-sm-9">
                                       <label for="" class="">Sudah?</label>
                                       <div class="form-check">
-                                        <input class="form-check-input" name="editSudahBaptisData" type="checkbox" value="" id="editSudahBaptisData" {{$dataLembaga->bap_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahBaptisData">
+                                        <input class="form-check-input" name="editSudahBaptisDatas" type="checkbox" value="" id="editSudahBaptisData{{$dataLembaga->id_user}}" {{$dataLembaga->bap_sudah == 'Sudah' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="editSudahBaptisData{{$dataLembaga->id_user}}">
                                           Sudah
                                         </label>
                                       </div>
                                       <hr>
-                                      <label for="editTglBaptisData" class="">Tanggal</label>
-                                      <input type="date" name="editTglBaptisData" class="form-control form-control-sm" id="editTglBaptisData" value="{{$dataLembaga->bap_tanggal}}">
+                                      <label for="editTglBaptisData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                      <input type="date" name="editTglBaptisDatas" class="form-control form-control-sm" id="editTglBaptisData{{$dataLembaga->id_user}}" value="{{$dataLembaga->bap_tanggal}}">
                                       <hr>
                                       <label for="" class="">Tempat</label><br>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatBaptisData" id="editTempatBaptisData" value="Gereja Lokal" {{$dataLembaga->bap_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatBaptisData">Gereja Lokal</label>
+                                        <input class="form-check-input" type="radio" name="editTempatBaptisDatas" id="editTempatBaptisData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->bap_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="editTempatBaptisData{{$dataLembaga->id_user}}">Gereja Lokal</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatBaptisData" id="editTempatBaptisLData" value="Gereja Lain" {{$dataLembaga->bap_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatBaptisLData">Gereja Lain</label>
+                                        <input class="form-check-input" type="radio" name="editTempatBaptisDatas" id="editTempatBaptisLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->bap_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="editTempatBaptisLData{{$dataLembaga->id_user}}">Gereja Lain</label>
                                       </div>
                                       <hr>
-                                      <label for="editFileUploadBaptisData" class="">File</label>
-                                      <input type="file" name="editFileUploadBaptisData" class="form-control form-control-sm" id="editFileUploadBaptisData" value="{{$dataLembaga->bap_file}}">
-                                      @error('editFileUploadBaptisData')
+                                      <label for="editFileUploadBaptisData{{$dataLembaga->id_user}}" class="">File</label>
+                                      <input type="file" name="editFileUploadBaptisDatas" class="form-control form-control-sm" id="editFileUploadBaptisData{{$dataLembaga->id_user}}" value="{{$dataLembaga->bap_file}}">
+                                      @error('editFileUploadBaptisDatas')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -3426,228 +3500,230 @@
                                         </div>
                                       @enderror
                                       <hr>
-                                      <label for="editKetBaptisData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetBaptisData" id="editKetBaptisData" rows="3" placeholder="Keterangan">{{$dataLembaga->bap_ket}}</textarea>
+                                      <label for="editKetBaptisData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                      <textarea class="form-control form-control-sm" name="editKetBaptisDatas" id="editKetBaptisData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->bap_ket}}</textarea>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                               <hr>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="" class="col-sm-3 px-1">Meninggal Dunia</label>
-                                    <div class="col-sm-9">
-                                      <label for="" class="">Sudah?</label>
-                                      <div class="form-check">
-                                        <input class="form-check-input" name="editSudahMeninggalDuniaData" type="checkbox" value="" id="editSudahMeninggalDuniaData" {{$dataLembaga->md_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahMeninggalDuniaData">
-                                          Sudah
-                                        </label>
-                                      </div>
-                                      <hr>
-                                      <label for="editTglMeninggalDuniaData" class="">Tanggal</label>
-                                      <input type="date" name="editTglMeninggalDuniaData" class="form-control form-control-sm" id="editTglMeninggalDuniaData" value="{{$dataLembaga->md_tanggal}}">
-                                      <hr>
-                                      <label for="" class="">Tempat</label><br>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatMeninggalDuniaData" id="editTempatMeninggalDuniaData" value="Gereja Lokal" {{$dataLembaga->md_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatMeninggalDuniaData">Gereja Lokal</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatMeninggalDuniaData" id="editTempatMeninggalDuniaLData" value="Gereja Lain" {{$dataLembaga->md_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatMeninggalDuniaLData">Gereja Lain</label>
-                                      </div>
-                                      <hr>
-                                      <label for="editFileUploadMeninggalDuniaData" class="">File</label>
-                                      <input type="file" name="editFileUploadMeninggalDuniaData" class="form-control form-control-sm" id="editFileUploadMeninggalDuniaData" value="{{$dataLembaga->md_file}}">
-                                      @error('editFileUploadMeninggalDuniaData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
+                              <div id="sembunyiDataEdit11{{$dataLembaga->id_user}}" class="divTampilEdit11{{$dataLembaga->id_user}}">
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="" class="col-sm-3 px-1">Meninggal Dunia</label>
+                                      <div class="col-sm-9">
+                                        <label for="" class="">Sudah?</label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" name="editSudahMeninggalDuniaDatas" type="checkbox" value="" id="editSudahMeninggalDuniaData{{$dataLembaga->id_user}}" {{$dataLembaga->md_sudah == 'Sudah' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editSudahMeninggalDuniaData{{$dataLembaga->id_user}}">
+                                            Sudah
+                                          </label>
                                         </div>
-                                      @enderror
-                                      <hr>
-                                      <label for="editKetMeninggalDuniaData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetMeninggalDuniaData" id="editKetMeninggalDuniaData" rows="3" placeholder="Keterangan">{{$dataLembaga->md_ket}}</textarea>
+                                        <hr>
+                                        <label for="editTglMeninggalDuniaData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                        <input type="date" name="editTglMeninggalDuniaDatas" class="form-control form-control-sm" id="editTglMeninggalDuniaData{{$dataLembaga->id_user}}" value="{{$dataLembaga->md_tanggal}}">
+                                        <hr>
+                                        <label for="" class="">Tempat</label><br>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatMeninggalDuniaDatas" id="editTempatMeninggalDuniaData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->md_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatMeninggalDuniaData{{$dataLembaga->id_user}}">Gereja Lokal</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatMeninggalDuniaDatas" id="editTempatMeninggalDuniaLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->md_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatMeninggalDuniaLData{{$dataLembaga->id_user}}">Gereja Lain</label>
+                                        </div>
+                                        <hr>
+                                        <label for="editFileUploadMeninggalDuniaData{{$dataLembaga->id_user}}" class="">File</label>
+                                        <input type="file" name="editFileUploadMeninggalDuniaDatas" class="form-control form-control-sm" id="editFileUploadMeninggalDuniaData{{$dataLembaga->id_user}}" value="{{$dataLembaga->md_file}}">
+                                        @error('editFileUploadMeninggalDuniaDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                        <hr>
+                                        <label for="editKetMeninggalDuniaData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="editKetMeninggalDuniaDatas" id="editKetMeninggalDuniaData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->md_ket}}</textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <hr>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="" class="col-sm-3 px-1">Penyerahan Anak</label>
-                                    <div class="col-sm-9">
-                                      <label for="" class="">Sudah?</label>
-                                      <div class="form-check">
-                                        <input class="form-check-input" name="editSudahPenyerahanAnakData" type="checkbox" value="" id="editSudahPenyerahanAnakData" {{$dataLembaga->pa_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahPenyerahanAnakData">
-                                          Sudah
-                                        </label>
-                                      </div>
-                                      <hr>
-                                      <label for="editTglPenyerahanAnakData" class="">Tanggal</label>
-                                      <input type="date" name="editTglPenyerahanAnakData" class="form-control form-control-sm" id="editTglPenyerahanAnakData" value="{{$dataLembaga->pa_tanggal}}">
-                                      <hr>
-                                      <label for="" class="">Tempat</label><br>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatPenyerahanAnakData" id="editTempatPenyerahanAnakData" value="Gereja Lokal" {{$dataLembaga->pa_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatPenyerahanAnakData">Gereja Lokal</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatPenyerahanAnakData" id="editTempatPenyerahanAnakLData" value="Gereja Lain" {{$dataLembaga->pa_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatPenyerahanAnakLData">Gereja Lain</label>
-                                      </div>
-                                      <hr>
-                                      <label for="editFileUploadPenyerahanAnakData" class="">File</label>
-                                      <input type="file" name="editFileUploadPenyerahanAnakData" class="form-control form-control-sm" id="editFileUploadPenyerahanAnakData" value="{{$dataLembaga->pa_file}}">
-                                      @error('editFileUploadPenyerahanAnakData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
+                                <hr>
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="" class="col-sm-3 px-1">Penyerahan Anak</label>
+                                      <div class="col-sm-9">
+                                        <label for="" class="">Sudah?</label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" name="editSudahPenyerahanAnakDatas" type="checkbox" value="" id="editSudahPenyerahanAnakData{{$dataLembaga->id_user}}" {{$dataLembaga->pa_sudah == 'Sudah' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editSudahPenyerahanAnakData{{$dataLembaga->id_user}}">
+                                            Sudah
+                                          </label>
                                         </div>
-                                      @enderror
-                                      <hr>
-                                      <label for="editKetPenyerahanAnakData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetPenyerahanAnakData" id="editKetPenyerahanAnakData" rows="3" placeholder="Keterangan">{{$dataLembaga->pa_ket}}</textarea>
+                                        <hr>
+                                        <label for="editTglPenyerahanAnakData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                        <input type="date" name="editTglPenyerahanAnakDatas" class="form-control form-control-sm" id="editTglPenyerahanAnakData{{$dataLembaga->id_user}}" value="{{$dataLembaga->pa_tanggal}}">
+                                        <hr>
+                                        <label for="" class="">Tempat</label><br>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatPenyerahanAnakDatas" id="editTempatPenyerahanAnakData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->pa_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatPenyerahanAnakData{{$dataLembaga->id_user}}">Gereja Lokal</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatPenyerahanAnakDatas" id="editTempatPenyerahanAnakLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->pa_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatPenyerahanAnakLData{{$dataLembaga->id_user}}">Gereja Lain</label>
+                                        </div>
+                                        <hr>
+                                        <label for="editFileUploadPenyerahanAnakData{{$dataLembaga->id_user}}" class="">File</label>
+                                        <input type="file" name="editFileUploadPenyerahanAnakDatas" class="form-control form-control-sm" id="editFileUploadPenyerahanAnakData{{$dataLembaga->id_user}}" value="{{$dataLembaga->pa_file}}">
+                                        @error('editFileUploadPenyerahanAnakDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                        <hr>
+                                        <label for="editKetPenyerahanAnakData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="editKetPenyerahanAnakDatas" id="editKetPenyerahanAnakData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->pa_ket}}</textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <hr>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="" class="col-sm-3 px-1">Evangelism Explosion</label>
-                                    <div class="col-sm-9">
-                                      <label for="" class="">Sudah?</label>
-                                      <div class="form-check">
-                                        <input class="form-check-input" name="editSudahEvangelismExplosionData" type="checkbox" value="" id="editSudahEvangelismExplosionData" {{$dataLembaga->ee_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahEvangelismExplosionData">
-                                          Sudah
-                                        </label>
-                                      </div>
-                                      <hr>
-                                      <label for="editTglEvangelismExplosionData" class="">Tanggal</label>
-                                      <input type="date" name="editTglEvangelismExplosionData" class="form-control form-control-sm" id="editTglEvangelismExplosionData" value="{{$dataLembaga->ee_tanggal}}">
-                                      <hr>
-                                      <label for="" class="">Tempat</label><br>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatEvangelismExplosionData" id="editTempatEvangelismExplosionData" value="Gereja Lokal" {{$dataLembaga->ee_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatEvangelismExplosionData">Gereja Lokal</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatEvangelismExplosionData" id="editTempatEvangelismExplosionLData" value="Gereja Lain" {{$dataLembaga->ee_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatEvangelismExplosionLData">Gereja Lain</label>
-                                      </div>
-                                      <hr>
-                                      <label for="editFileUploadEvangelismExplosionData" class="">File</label>
-                                      <input type="file" name="editFileUploadEvangelismExplosionData" class="form-control form-control-sm" id="editFileUploadEvangelismExplosionData" value="{{$dataLembaga->ee_file}}">
-                                      @error('editFileUploadEvangelismExplosionData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
+                                <hr>
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="" class="col-sm-3 px-1">Evangelism Explosion</label>
+                                      <div class="col-sm-9">
+                                        <label for="" class="">Sudah?</label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" name="editSudahEvangelismExplosionDatas" type="checkbox" value="" id="editSudahEvangelismExplosionData{{$dataLembaga->id_user}}" {{$dataLembaga->ee_sudah == 'Sudah' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editSudahEvangelismExplosionData{{$dataLembaga->id_user}}">
+                                            Sudah
+                                          </label>
                                         </div>
-                                      @enderror
-                                      <hr>
-                                      <label for="editKetEvangelismExplosionData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetEvangelismExplosionData" id="editKetEvangelismExplosionData" rows="3" placeholder="Keterangan">{{$dataLembaga->ee_ket}}</textarea>
+                                        <hr>
+                                        <label for="editTglEvangelismExplosionData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                        <input type="date" name="editTglEvangelismExplosionDatas" class="form-control form-control-sm" id="editTglEvangelismExplosionData{{$dataLembaga->id_user}}" value="{{$dataLembaga->ee_tanggal}}">
+                                        <hr>
+                                        <label for="" class="">Tempat</label><br>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatEvangelismExplosionDatas" id="editTempatEvangelismExplosionData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->ee_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatEvangelismExplosionData{{$dataLembaga->id_user}}">Gereja Lokal</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatEvangelismExplosionDatas" id="editTempatEvangelismExplosionLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->ee_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatEvangelismExplosionLData{{$dataLembaga->id_user}}">Gereja Lain</label>
+                                        </div>
+                                        <hr>
+                                        <label for="editFileUploadEvangelismExplosionData{{$dataLembaga->id_user}}" class="">File</label>
+                                        <input type="file" name="editFileUploadEvangelismExplosionDatas" class="form-control form-control-sm" id="editFileUploadEvangelismExplosionData{{$dataLembaga->id_user}}" value="{{$dataLembaga->ee_file}}">
+                                        @error('editFileUploadEvangelismExplosionDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                        <hr>
+                                        <label for="editKetEvangelismExplosionData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="editKetEvangelismExplosionDatas" id="editKetEvangelismExplosionData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->ee_ket}}</textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <hr>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="" class="col-sm-3 px-1">Tgl Berakhir Ikatan Dinas</label>
-                                    <div class="col-sm-9">
-                                      <label for="" class="">Sudah?</label>
-                                      <div class="form-check">
-                                        <input class="form-check-input" name="editSudahIkatanDinasData" type="checkbox" value="" id="editSudahIkatanDinasData" {{$dataLembaga->bid_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahIkatanDinasData">
-                                          Sudah
-                                        </label>
-                                      </div>
-                                      <hr>
-                                      <label for="editTglIkatanDinasData" class="">Tanggal</label>
-                                      <input type="date" name="editTglIkatanDinasData" class="form-control form-control-sm" id="editTglIkatanDinasData" value="{{$dataLembaga->bid_tanggal}}">
-                                      <hr>
-                                      <label for="" class="">Tempat</label><br>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatIkatanDinasData" id="editTempatIkatanDinasData" value="Gereja Lokal" {{$dataLembaga->bid_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatIkatanDinasData">Gereja Lokal</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatIkatanDinasData" id="editTempatIkatanDinasLData" value="Gereja Lain" {{$dataLembaga->bid_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatIkatanDinasLData">Gereja Lain</label>
-                                      </div>
-                                      <hr>
-                                      <label for="editFileUploadIkatanDinasData" class="">File</label>
-                                      <input type="file" name="editFileUploadIkatanDinasData" class="form-control form-control-sm" id="editFileUploadIkatanDinasData" value="{{$dataLembaga->bid_file}}">
-                                      @error('editFileUploadIkatanDinasData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
+                                <hr>
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="" class="col-sm-3 px-1">Tgl Berakhir Ikatan Dinas</label>
+                                      <div class="col-sm-9">
+                                        <label for="" class="">Sudah?</label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" name="editSudahIkatanDinasDatas" type="checkbox" value="" id="editSudahIkatanDinasData{{$dataLembaga->id_user}}" {{$dataLembaga->bid_sudah == 'Sudah' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editSudahIkatanDinasData{{$dataLembaga->id_user}}">
+                                            Sudah
+                                          </label>
                                         </div>
-                                      @enderror
-                                      <hr>
-                                      <label for="editKetIkatanDinasData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetIkatanDinasData" id="editKetIkatanDinasData" rows="3" placeholder="Keterangan">{{$dataLembaga->bid_ket}}</textarea>
+                                        <hr>
+                                        <label for="editTglIkatanDinasData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                        <input type="date" name="editTglIkatanDinasDatas" class="form-control form-control-sm" id="editTglIkatanDinasData{{$dataLembaga->id_user}}" value="{{$dataLembaga->bid_tanggal}}">
+                                        <hr>
+                                        <label for="" class="">Tempat</label><br>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatIkatanDinasDatas" id="editTempatIkatanDinasData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->bid_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatIkatanDinasData{{$dataLembaga->id_user}}">Gereja Lokal</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatIkatanDinasDatas" id="editTempatIkatanDinasLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->bid_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatIkatanDinasLData{{$dataLembaga->id_user}}">Gereja Lain</label>
+                                        </div>
+                                        <hr>
+                                        <label for="editFileUploadIkatanDinasData{{$dataLembaga->id_user}}" class="">File</label>
+                                        <input type="file" name="editFileUploadIkatanDinasDatas" class="form-control form-control-sm" id="editFileUploadIkatanDinasData{{$dataLembaga->id_user}}" value="{{$dataLembaga->bid_file}}">
+                                        @error('editFileUploadIkatanDinasDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                        <hr>
+                                        <label for="editKetIkatanDinasData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="editKetIkatanDinasDatas" id="editKetIkatanDinasData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->bid_ket}}</textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <hr>
-                              <div class="input-center ps-5">
-                                <div class="w-75">
-                                  <div class="mb-3 row">
-                                    <label for="" class="col-sm-3 px-1">Praktek 2 Tahun</label>
-                                    <div class="col-sm-9">
-                                      <label for="" class="">Sudah?</label>
-                                      <div class="form-check">
-                                        <input class="form-check-input" name="editSudahPrktkDuaThnData" type="checkbox" value="" id="editSudahPrktkDuaThnData" {{$dataLembaga->pdt_sudah == 'Sudah' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editSudahPrktkDuaThnData">
-                                          Sudah
-                                        </label>
-                                      </div>
-                                      <hr>
-                                      <label for="editTglPrktkDuaThnData" class="">Tanggal</label>
-                                      <input type="date" name="editTglPrktkDuaThnData" class="form-control form-control-sm" id="editTglPrktkDuaThnData" value="{{$dataLembaga->pdt_tanggal}}">
-                                      <hr>
-                                      <label for="" class="">Tempat</label><br>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatPrktkDuaThnData" id="editTempatPrktkDuaThnData" value="Gereja Lokal" {{$dataLembaga->pdt_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatPrktkDuaThnData">Gereja Lokal</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editTempatPrktkDuaThnData" id="editTempatPrktkDuaThnLData" value="Gereja Lain" {{$dataLembaga->pdt_tempat == 'Gereja Lain' ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="editTempatPrktkDuaThnLData">Gereja Lain</label>
-                                      </div>
-                                      <hr>
-                                      <label for="editFileUploadPrktkDuaThnData" class="">File</label>
-                                      <input type="file" name="editFileUploadPrktkDuaThnData" class="form-control form-control-sm" id="editFileUploadPrktkDuaThnData" value="{{$dataLembaga->pdt_file}}">
-                                      @error('editFileUploadPrktkDuaThnData')
-                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
-                                          <p class="p-1 pb-0" style="font-size: 10pt;">
-                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-                                            {{ $message }}
-                                          </p>
+                                <hr>
+                                <div class="input-center ps-5">
+                                  <div class="w-75">
+                                    <div class="mb-3 row">
+                                      <label for="" class="col-sm-3 px-1">Praktek 2 Tahun</label>
+                                      <div class="col-sm-9">
+                                        <label for="" class="">Sudah?</label>
+                                        <div class="form-check">
+                                          <input class="form-check-input" name="editSudahPrktkDuaThnDatas" type="checkbox" value="" id="editSudahPrktkDuaThnData{{$dataLembaga->id_user}}" {{$dataLembaga->pdt_sudah == 'Sudah' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editSudahPrktkDuaThnData{{$dataLembaga->id_user}}">
+                                            Sudah
+                                          </label>
                                         </div>
-                                      @enderror
-                                      <hr>
-                                      <label for="editKetPrktkDuaThnData" class="">Keterangan</label>
-                                      <textarea class="form-control form-control-sm" name="editKetPrktkDuaThnData" id="editKetPrktkDuaThnData" rows="3" placeholder="Keterangan">{{$dataLembaga->pdt_ket}}</textarea>
+                                        <hr>
+                                        <label for="editTglPrktkDuaThnData{{$dataLembaga->id_user}}" class="">Tanggal</label>
+                                        <input type="date" name="editTglPrktkDuaThnDatas" class="form-control form-control-sm" id="editTglPrktkDuaThnData{{$dataLembaga->id_user}}" value="{{$dataLembaga->pdt_tanggal}}">
+                                        <hr>
+                                        <label for="" class="">Tempat</label><br>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatPrktkDuaThnDatas" id="editTempatPrktkDuaThnData{{$dataLembaga->id_user}}" value="Gereja Lokal" {{$dataLembaga->pdt_tempat == 'Gereja Lokal' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatPrktkDuaThnData{{$dataLembaga->id_user}}">Gereja Lokal</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="editTempatPrktkDuaThnDatas" id="editTempatPrktkDuaThnLData{{$dataLembaga->id_user}}" value="Gereja Lain" {{$dataLembaga->pdt_tempat == 'Gereja Lain' ? 'checked' : '' }}>
+                                          <label class="form-check-label" for="editTempatPrktkDuaThnLData{{$dataLembaga->id_user}}">Gereja Lain</label>
+                                        </div>
+                                        <hr>
+                                        <label for="editFileUploadPrktkDuaThnData{{$dataLembaga->id_user}}" class="">File</label>
+                                        <input type="file" name="editFileUploadPrktkDuaThnDatas" class="form-control form-control-sm" id="editFileUploadPrktkDuaThnData{{$dataLembaga->id_user}}" value="{{$dataLembaga->pdt_file}}">
+                                        @error('editFileUploadPrktkDuaThnDatas')
+                                          <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                            <p class="p-1 pb-0" style="font-size: 10pt;">
+                                              <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                              {{ $message }}
+                                            </p>
+                                          </div>
+                                        @enderror
+                                        <hr>
+                                        <label for="editKetPrktkDuaThnData{{$dataLembaga->id_user}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="editKetPrktkDuaThnDatas" id="editKetPrktkDuaThnData{{$dataLembaga->id_user}}" rows="3" placeholder="Keterangan">{{$dataLembaga->pdt_ket}}</textarea>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -3660,9 +3736,9 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="kata_sandiLamaData" class="col-sm-3 px-1">Masuan Kata Sandi Lama</label>
+                                    <label for="kata_sandiLamaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Masukan Kata Sandi Lama</label>
                                     <div class="col-sm-9">
-                                      <input class="form-control form-control-sm" type="password" name="kata_sandiLamaData" id="kata_sandiLamaData" rows="3" placeholder="********">
+                                      <input class="form-control form-control-sm" type="password" name="kata_sandiLamaDatas" id="kata_sandiLamaData{{$dataLembaga->id_user}}" rows="3" placeholder="********">
                                       @error('kata_sandiLamaData')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -3674,10 +3750,10 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKata_sandiData" class="col-sm-3 px-1">Kata Sandi</label>
+                                    <label for="editKata_sandiData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kata Sandi <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
-                                      <input class="form-control form-control-sm" type="password" name="editKata_sandiData" id="editKata_sandiData" rows="3" placeholder="********">
-                                      @error('editKata_sandiData')
+                                      <input class="form-control form-control-sm" type="password" name="editKata_sandiDatas" id="editKata_sandiData{{$dataLembaga->id_user}}" rows="3" placeholder="********">
+                                      @error('editKata_sandiDatas')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="p-1 pb-0" style="font-size: 10pt;">
                                             <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -3688,9 +3764,36 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="konfirmasi_editKata_sandiData" class="col-sm-3 px-1">Konfirmasi Kata Sandi</label>
+                                    <label for="editKonfirmasi_kata_sandiData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Konfirmasi Kata Sandi <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
-                                      <input class="form-control form-control-sm" type="password" name="konfirmasi_editKata_sandiData" id="konfirmasi_editKata_sandidataLembaga" rows="3" placeholder="********">
+                                      <input class="form-control form-control-sm" type="password" name="editKonfirmasi_kata_sandiDatas" id="editKonfirmasi_kata_sandiData{{$dataLembaga->id_user}}" rows="3" placeholder="********">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group-input">
+                              <div class="form-header-group mb-3">
+                                <h6>Lembaga</h6>
+                              </div>
+                              <div class="input-center ps-5">
+                                <div class="w-75">
+                                  <div class="mb-3 row">
+                                    <label for="editInstitusiData{{$dataLembaga->id_user}}" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
+                                    <div class="col-sm-9">
+                                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editInstitusiDatas" id="editInstitusiData{{$dataLembaga->id_user}}">
+                                        <option value="">-Lembaga-</option>
+                                        <option value="PM (Parousia Ministry)" {{($dataLembaga->institusi == "PM (Parousia Ministry)" ? 'selected' : '')}}>PM (Parousia Ministry)</option>
+                                        <option value="GKP (Gereja Kristen Parousia)" {{($dataLembaga->institusi == "GKP (Gereja Kristen Parousia)" ? 'selected' : '')}}>GKP (Gereja Kristen Parousia)</option>
+                                      </select>
+                                      @error('editInstitusiDatas')
+                                        <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                          <p class="" style="font-size: 10pt;">
+                                            <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                            {{ $message }}
+                                          </p>
+                                        </div>
+                                      @enderror
                                     </div>
                                   </div>
                                 </div>
@@ -3717,7 +3820,7 @@
                           </h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ route('data-lembaga.destroyPengurusPM', $dataLembaga->id_user) }}" method="POST">
+                        <form action="{{ route('data-lembaga.destroyKetuaLokasiPM', $dataLembaga->id_user) }}" method="POST">
                           @csrf
                           @method('DELETE')
                           <div class="modal-body">
@@ -3836,8 +3939,8 @@
       });
 
       
-      $('#pilihanGLData').select2({
-        placeholder: "Pilihan Ganda Lima",
+      $('#ExperienceData').select2({
+        placeholder: "Experience",
         allowClear: true,
         language: "id",
         dropdownParent: $("#tambahData")
@@ -3851,95 +3954,130 @@
         dropdownParent: $("#tambahData")
       });
 
-      
-      $('#pilihanGTuData').select2({
-        placeholder: "Pernah Menderita Penyakit",
+    });
+
+    $(document).on('click', '#ubahDataButton', function () {
+      var idUser = $(this).attr('data-user');
+      // console.log(idUser);
+      $('#editBKetertarikandataLembaga'+idUser).select2({
+        placeholder: "Pilih Bidang Ketertarikan",
         allowClear: true,
         language: "id",
-        dropdownParent: $("#tambahData")
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editBKeterampilandataLembaga'+idUser).select2({
+        placeholder: "Pilih Bidang Keterampilan",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGSdataLembaga'+idUser).select2({
+        placeholder: "Personality - MBTI",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGDdataLembaga'+idUser).select2({
+        placeholder: "Personality - Holland",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGTdataLembaga'+idUser).select2({
+        placeholder: "Spiritual Gifts",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGEdataLembaga'+idUser).select2({
+        placeholder: "Abilities",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editExperienceDataLembaga'+idUser).select2({
+        placeholder: "Pilihan Ganda Lima",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+      
+      $('#editPilihanGEndataLembaga'+idUser).select2({
+        placeholder: "Kemampuan Bahasa",
+        allowClear: true,
+        language: "id",
+        dropdownParent: $("#ubahData"+idUser)
+      });
+
+    
+      $('#editUntukPendataan'+idUser).on('change', function(){
+        var isiData = $(this).val(); 
+        if (isiData == "Beasiswa" || isiData == "Utusan") {
+          $("div.divTampilEdit1"+idUser).show();
+          $("div.divTampilEdit2"+idUser).show();
+          $("div.divTampilEdit3"+idUser).show();
+          $("div.divTampilEdit4"+idUser).show();
+          $("div.divTampilEdit5"+idUser).show();
+          $("div.divTampilEdit6"+idUser).show();
+          $("div.divTampilEdit7"+idUser).show();
+          $("div.divTampilEdit8"+idUser).show();
+          $("div.divTampilEdit9"+idUser).show();
+          $("div.divTampilEdit10"+idUser).show();
+          $("div.divTampilEdit11"+idUser).show();
+          $("div.divTampilEdit12"+idUser).show();
+          $("#sembunyiDataEdit1"+idUser).hide();
+          $("#sembunyiDataEdit2"+idUser).hide();
+          $("#sembunyiDataEdit3"+idUser).hide();
+          $("#sembunyiDataEdit4"+idUser).hide();
+          $("#sembunyiDataEdit5"+idUser).hide();
+          $("#sembunyiDataEdit6"+idUser).hide();
+          $("#sembunyiDataEdit7"+idUser).hide();
+          $("#sembunyiDataEdit8"+idUser).hide();
+          $("#sembunyiDataEdit9"+idUser).hide();
+          $("#sembunyiDataEdit10"+idUser).hide();
+          $("#sembunyiDataEdit11"+idUser).hide();
+        } else {
+          $("div.divTampilEdit1"+idUser).show();
+          $("div.divTampilEdit2"+idUser).show();
+          $("div.divTampilEdit3"+idUser).show();
+          $("div.divTampilEdit4"+idUser).show();
+          $("div.divTampilEdit5"+idUser).show();
+          $("div.divTampilEdit6"+idUser).show();
+          $("div.divTampilEdit7"+idUser).show();
+          $("div.divTampilEdit8"+idUser).show();
+          $("div.divTampilEdit9"+idUser).show();
+          $("div.divTampilEdit10"+idUser).show();
+          $("div.divTampilEdit11"+idUser).show();
+          $("#sembunyiDataEdit12"+idUser).hide();
+        }
+      });
+
+      
+      var e = 0;
+      $("#editTambahNominal"+idUser).click(function(){
+        ++e;
+        $("#editInputNominal"+idUser).append('<div class="position-relative mt-1" id="editInputNominalTambah'+idUser+e+'"><div class="position-absolute top-50 start-100 ms-1 translate-middle-y"><button type="button" class="btn btn-transparent p-0 editHapusNominal'+idUser+'" id="'+e+'"><i class="bi bi-x-circle fs-5 text-danger d-inline"></i></button></div><div class="row"><div class="col-6"><input type="text" name="editTambahNominals['+e+'][ket_nominal]" class="form-control form-control-sm" id="editKetNominal" placeholder="Keterangan Nominal"></div><div class="col-6"><input type="text" name="editTambahNominals['+e+'][nominal]" class="form-control form-control-sm" id="editNominals" placeholder="Nominal"></div></div></div>');
+      });
+      
+      $(document).on('click', '.editHapusNominal'+idUser, function(){   
+        var button_id = $(this).attr("id");   
+        $('#editInputNominalTambah'+idUser+button_id+'').remove(); 
       });
 
     });
-      // Edit
-
-
-    
-      $(document).on('click', '#ubahData', function () {
-        var idUser = $(this).attr('data-user');
-        console.log(idUser);
-        $('#editBKetertarikanData'+idUser).select2({
-          placeholder: "Pilih Bidang Ketertarikan",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editBKeterampilanData'+idUser).select2({
-          placeholder: "Pilih Bidang Keterampilan",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGSData'+idUser).select2({
-          placeholder: "Personality - MBTI",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGDData'+idUser).select2({
-          placeholder: "Personality - Holland",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGTData'+idUser).select2({
-          placeholder: "Spiritual Gifts",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGEData'+idUser).select2({
-          placeholder: "Abilities",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGLData'+idUser).select2({
-          placeholder: "Pilihan Ganda Lima",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGEnData'+idUser).select2({
-          placeholder: "Kemampuan Bahasa",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-
-        
-        $('#editPilihanGTuData'+idUser).select2({
-          placeholder: "Pernah Menderita Penyakit",
-          allowClear: true,
-          language: "id",
-          dropdownParent: $("#ubahData"+idUser)
-        });
-      });
-
-      
     
     $(document).ready(function(){
       $('#untukPendataan').on('change', function(){
@@ -3984,6 +4122,20 @@
         }
       });
     });
+
+
+    var i = 0;
+    $("#tambahNominal").click(function(){
+      ++i;
+      $("#inputNominal").append('<div class="position-relative mt-1" id="inputNominalTambah'+i+'"><div class="position-absolute top-50 start-100 ms-1 translate-middle-y"><button type="button" class="btn btn-transparent p-0 hapusNominal" id="'+i+'"><i class="bi bi-x-circle fs-5 text-danger d-inline"></i></button></div><div class="row"><div class="col-6"><input type="text" name="tambahNominals['+i+'][ket_nominal]" class="form-control form-control-sm" id="ketNominal" placeholder="Keterangan Nominal"></div><div class="col-6"><input type="text" name="tambahNominals['+i+'][nominal]" class="form-control form-control-sm" id="nominal" placeholder="Nominal"></div></div></div>');
+    });
+   
+    $(document).on('click', '.hapusNominal', function(){   
+      var button_id = $(this).attr("id");   
+      $('#inputNominalTambah'+button_id+'').remove(); 
+    });
+
+    
     
     $(document).on('click', '#lihatKelompokButton', function(event) {
       event.preventDefault();

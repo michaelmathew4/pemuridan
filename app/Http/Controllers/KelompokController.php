@@ -23,24 +23,111 @@ class KelompokController extends Controller
                                 ->where('peminta', auth()->user()->id_user)
                                 ->first();
                                 // dd($pesertaEdits);
-        $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
-        $pesertasKK = [];
+        $kelompokGenSs = Kelompok::join('nama_kelompoks', 'nama_kelompoks.id_kelompok', 'kelompoks.id_kelompok')
+                                  ->where('kelompoks.id_ketua_kelompok', auth()->user()->id_user)
+                                  ->addSelect([
+                                      'nama_peserta' => Peserta::select('nama_peserta')
+                                          ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                          ->limit(1)])
+                                  ->get();
+        $kelompoksGenDs = [];
+        $kelompoksGenTs = [];
+        $kelompoksGenEs = [];
+        $kelompoksGenLs = [];
         $branchLv = 2;
         $noBagan = 1;
-        $pesertaKKs = '';
-        foreach ($kelompoks as $kelompok) {
-            $pesertasKK[] = Kelompok::where('id_ketua_kelompok', $kelompok->id_peserta)->get();
-            foreach ($pesertasKK as $key => $value) {
-              foreach ($value as $key => $values) {
-                if ($values->id_ketua_kelompok == $kelompok->id_peserta) {
-                  $pesertaKKs = $pesertasKK;
+        $kelompoksGenDuas = '';
+        $kelompoksGenTigas = '';
+        $kelompoksGenEmpats = '';
+        $kelompoksGenLimas = '';
+        //Gen 2
+        foreach ($kelompokGenSs as $kelompokGenS) {
+          $kelompoksGenDs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenS->id_peserta)
+                                      ->addSelect([
+                                          'nama_peserta' => Peserta::select('nama_peserta')
+                                              ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                              ->limit(1)])
+                                      ->get();
+          foreach ($kelompoksGenDs as $kelompoksGenD) {
+            foreach ($kelompoksGenD as $kelompoksGenDua) {
+              if ($kelompoksGenDua->id_ketua_kelompok == $kelompokGenS->id_peserta) {
+                $kelompoksGenDuas = $kelompoksGenDs;
+        //Mid Gen 2
+
+        //Gen 3
+                foreach ($kelompoksGenDuas as $kelompoksGenDua) {
+                  foreach ($kelompoksGenDua as $kelompokGenDua) {
+                    $kelompoksGenTs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenDua->id_peserta)
+                                                ->addSelect([
+                                                    'nama_peserta' => Peserta::select('nama_peserta')
+                                                        ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                                        ->limit(1)])
+                                                ->get();
+                    foreach ($kelompoksGenTs as $kelompoksGenT) {
+                      foreach ($kelompoksGenT as $kelompoksGenTiga) {
+                        if ($kelompoksGenTiga->id_ketua_kelompok == $kelompokGenDua->id_peserta) {
+                          $kelompoksGenTigas = $kelompoksGenTs;
+        //Mid Gen 3
+
+        //Gen 4
+                          foreach ($kelompoksGenTigas as $kelompoksGenTiga) {
+                            foreach ($kelompoksGenTiga as $kelompokGenTiga) {
+                              $kelompoksGenEs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenTiga->id_peserta)
+                                                          ->addSelect([
+                                                              'nama_peserta' => Peserta::select('nama_peserta')
+                                                                  ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                                                  ->limit(1)])
+                                                          ->get();
+                              foreach ($kelompoksGenEs as $kelompoksGenE) {
+                                foreach ($kelompoksGenE as $kelompoksGenEmpat) {
+                                  if ($kelompoksGenEmpat->id_ketua_kelompok == $kelompokGenTiga->id_peserta) {
+                                    $kelompoksGenEmpats = $kelompoksGenEs;
+        //Mid Gen 4
+
+        //Gen 5
+                                    foreach ($kelompoksGenEmpats as $kelompoksGenEmpat) {
+                                      foreach ($kelompoksGenEmpat as $kelompokGenEmpat) {
+                                        $kelompoksGenLs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenEmpat->id_peserta)
+                                                                    ->addSelect([
+                                                                        'nama_peserta' => Peserta::select('nama_peserta')
+                                                                            ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                                                            ->limit(1)])
+                                                                    ->get();
+                                        foreach ($kelompoksGenLs as $kelompoksGenL) {
+                                          foreach ($kelompoksGenL as $kelompoksGenLima) {
+                                            if ($kelompoksGenLima->id_ketua_kelompok == $kelompokGenEmpat->id_peserta) {
+                                              $kelompoksGenLimas = $kelompoksGenLs;
+        //Mid Gen 5
+
+        //End Gen 5
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+
+        //End Gen 4
+                                  }
+                                }
+                              }
+                            }
+                          }
+
+        //End Gen 3
+                        }
+                      }
+                    }
+                  }
                 }
+
+        //End Gen 2
               }
             }
+          }
         }
-        // dd($pesertasKK);
+        // dd($kelompokGenSs);
         // var_dump($pesertaKKs);
-        return view('parousia-ministry.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits', 'noBagan', 'pesertasKK']));
+        return view('parousia-ministry.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompokGenSs', 'kelompoksGenDuas', 'branchLv', 'pesertaEdits', 'noBagan', 'kelompoksGenTigas', 'kelompoksGenEmpats', 'kelompoksGenLimas']));
     }
 
     /**
@@ -151,7 +238,7 @@ class KelompokController extends Controller
         foreach ($request->kontakEdits as $kontak) {
           $input = new Kelompok;
           $input->id_kelompok = $inputNamaKelompok->id_kelompok;
-          $input->nama_kelompok = $request->namaKelompok;
+          $input->nama_kelompok = $request->namaKelompokEdits;
           $input->id_ketua_kelompok = auth()->user()->id_user;
           $input->id_peserta = $kontak;
           $input->save();
@@ -204,25 +291,113 @@ class KelompokController extends Controller
         $pesertas = Peserta::where('peminta', auth()->user()->id_user)->get();
         $pesertaEdits = Peserta::join('kelompoks', 'kelompoks.id_peserta', 'pesertas.id_peserta')
                                 ->where('peminta', auth()->user()->id_user)
-                                ->get();
+                                ->first();
                                 // dd($pesertaEdits);
-        $kelompoks = Kelompok::where('id_ketua_kelompok', auth()->user()->id_user)->get();
-        $pesertasKK = [];
+        $kelompokGenSs = Kelompok::join('nama_kelompoks', 'nama_kelompoks.id_kelompok', 'kelompoks.id_kelompok')
+                                  ->where('kelompoks.id_ketua_kelompok', auth()->user()->id_user)
+                                  ->addSelect([
+                                      'nama_peserta' => Peserta::select('nama_peserta')
+                                          ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                          ->limit(1)])
+                                  ->get();
+        $kelompoksGenDs = [];
+        $kelompoksGenTs = [];
+        $kelompoksGenEs = [];
+        $kelompoksGenLs = [];
         $branchLv = 2;
-        $pesertaKKs = '';
-        foreach ($kelompoks as $kelompok) {
-            $pesertasKK[] = Kelompok::where('id_ketua_kelompok', $kelompok->id_peserta)->get();
-            foreach ($pesertasKK as $key => $value) {
-              foreach ($value as $key => $values) {
-                if ($values->id_ketua_kelompok == $kelompok->id_peserta) {
-                  $pesertaKKs = $pesertasKK;
+        $noBagan = 1;
+        $kelompoksGenDuas = '';
+        $kelompoksGenTigas = '';
+        $kelompoksGenEmpats = '';
+        $kelompoksGenLimas = '';
+        //Gen 2
+        foreach ($kelompokGenSs as $kelompokGenS) {
+          $kelompoksGenDs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenS->id_peserta)
+                                      ->addSelect([
+                                          'nama_peserta' => Peserta::select('nama_peserta')
+                                              ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                              ->limit(1)])
+                                      ->get();
+          foreach ($kelompoksGenDs as $kelompoksGenD) {
+            foreach ($kelompoksGenD as $kelompoksGenDua) {
+              if ($kelompoksGenDua->id_ketua_kelompok == $kelompokGenS->id_peserta) {
+                $kelompoksGenDuas = $kelompoksGenDs;
+        //Mid Gen 2
+
+        //Gen 3
+                foreach ($kelompoksGenDuas as $kelompoksGenDua) {
+                  foreach ($kelompoksGenDua as $kelompokGenDua) {
+                    $kelompoksGenTs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenDua->id_peserta)
+                                                ->addSelect([
+                                                    'nama_peserta' => Peserta::select('nama_peserta')
+                                                        ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                                        ->limit(1)])
+                                                ->get();
+                    foreach ($kelompoksGenTs as $kelompoksGenT) {
+                      foreach ($kelompoksGenT as $kelompoksGenTiga) {
+                        if ($kelompoksGenTiga->id_ketua_kelompok == $kelompokGenDua->id_peserta) {
+                          $kelompoksGenTigas = $kelompoksGenTs;
+        //Mid Gen 3
+
+        //Gen 4
+                          foreach ($kelompoksGenTigas as $kelompoksGenTiga) {
+                            foreach ($kelompoksGenTiga as $kelompokGenTiga) {
+                              $kelompoksGenEs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenTiga->id_peserta)
+                                                          ->addSelect([
+                                                              'nama_peserta' => Peserta::select('nama_peserta')
+                                                                  ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                                                  ->limit(1)])
+                                                          ->get();
+                              foreach ($kelompoksGenEs as $kelompoksGenE) {
+                                foreach ($kelompoksGenE as $kelompoksGenEmpat) {
+                                  if ($kelompoksGenEmpat->id_ketua_kelompok == $kelompokGenTiga->id_peserta) {
+                                    $kelompoksGenEmpats = $kelompoksGenEs;
+        //Mid Gen 4
+
+        //Gen 5
+                                    foreach ($kelompoksGenEmpats as $kelompoksGenEmpat) {
+                                      foreach ($kelompoksGenEmpat as $kelompokGenEmpat) {
+                                        $kelompoksGenLs[] = Kelompok::where('id_ketua_kelompok', $kelompokGenEmpat->id_peserta)
+                                                                    ->addSelect([
+                                                                        'nama_peserta' => Peserta::select('nama_peserta')
+                                                                            ->whereColumn('id_peserta', 'kelompoks.id_peserta')
+                                                                            ->limit(1)])
+                                                                    ->get();
+                                        foreach ($kelompoksGenLs as $kelompoksGenL) {
+                                          foreach ($kelompoksGenL as $kelompoksGenLima) {
+                                            if ($kelompoksGenLima->id_ketua_kelompok == $kelompokGenEmpat->id_peserta) {
+                                              $kelompoksGenLimas = $kelompoksGenLs;
+        //Mid Gen 5
+
+        //End Gen 5
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+
+        //End Gen 4
+                                  }
+                                }
+                              }
+                            }
+                          }
+
+        //End Gen 3
+                        }
+                      }
+                    }
+                  }
                 }
+
+        //End Gen 2
               }
             }
+          }
         }
-        // dd($pesertaKKs);
+        // dd($kelompokGenSs);
         // var_dump($pesertaKKs);
-        return view('gereja-kristen-parousia.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompoks', 'pesertaKKs', 'branchLv', 'pesertaEdits']));
+        return view('gereja-kristen-parousia.ketua-kelompok.kelompok', compact(['no', 'nama_kelompoks', 'pesertas', 'kelompokGenSs', 'kelompoksGenDuas', 'branchLv', 'pesertaEdits', 'noBagan', 'kelompoksGenTigas', 'kelompoksGenEmpats', 'kelompoksGenLimas']));
     }
 
     function randomCodesGKP()
@@ -260,7 +435,7 @@ class KelompokController extends Controller
           foreach ($request->kontaks as $kontak) {
             $input = new Kelompok;
             $input->id_kelompok = $inputNamaKelompok->id_kelompok;
-            $input->nama_kelompok = $request->namaKelompok;
+            $input->nama_kelompok = $inputNamaKelompok->namaKelompok;
             $input->id_ketua_kelompok = auth()->user()->id_user;
             $input->id_peserta = $kontak;
             $input->save();

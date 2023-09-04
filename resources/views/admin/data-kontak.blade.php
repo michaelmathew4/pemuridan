@@ -403,7 +403,7 @@
                                   @enderror
                                 </div>
                               </div>
-                              <input type="text" name="inputTambah" id="" value="tambahData" hidden>
+                              <input type="text" name="inputTambah" value="tambahData" hidden>
                             </div>
                           </div>
                         </div>
@@ -420,7 +420,7 @@
             </div>
             <hr>
             <div class="table-responsive">
-              <table class="table">
+              <table class="table datatable">
                 <thead>
                   <tr>
                     <th scope="col">No.</th>
@@ -544,9 +544,13 @@
                                 <div class="col-4">Status</div>
                                 <div class="col-8">{{$peserta->status_peserta}}</div>
                               </div>
-                              <div class="row p-2">
+                              <div class="row p-2 border-bottom">
                                 <div class="col-4">Lokasi</div>
                                 <div class="col-8">{{$peserta->lokasi_peserta}}</div>
+                              </div>
+                              <div class="row p-2">
+                                <div class="col-4">Peminta</div>
+                                <div class="col-8">{{$peserta->nama_lengkap}}</div>
                               </div>
                             </div>
                           </div>
@@ -579,9 +583,9 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="editNamaKontakPeserta" class="col-sm-3 px-1">Nama Kontak <span class="required-input">(*)</span></label>
+                                      <label for="editNamaKontakPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Nama Kontak <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="editNamaKontakPeserta" required class="form-control form-control-sm" id="editNamaKontakPeserta" placeholder="cth: Angelica Gabriel" value="{{$peserta->nama_peserta}}">
+                                        <input type="text" name="editNamaKontakPeserta" required class="form-control form-control-sm" id="editNamaKontakPeserta{{$peserta->id_peserta}}" placeholder="cth: Angelica Gabriel" value="{{$peserta->nama_peserta}}">
                                         @error('editNamaKontakPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="" style="font-size: 10pt;">
@@ -593,22 +597,22 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editJenisKelaminPeserta" class="col-sm-3 px-1">Jenis Kelamin <span class="required-input">(*)</span></label>
+                                      <label for="editJenisKelaminPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Jenis Kelamin <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="editJenisKelaminPeserta" id="jenisKelaminPPeserta" value="Pria" {{($peserta->jk_peserta == 'Pria') ? 'checked' : ''}}>
-                                          <label class="form-check-label" for="jenisKelaminPPeserta">Pria</label>
+                                          <input class="form-check-input" type="radio" name="editJenisKelaminPeserta" id="jenisKelaminPPeserta{{$peserta->id_peserta}}" value="Pria" {{($peserta->jk_peserta == 'Pria') ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="jenisKelaminPPeserta{{$peserta->id_peserta}}">Pria</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="editJenisKelaminPeserta" id="jenisKelaminWPeserta" value="Wanita" {{($peserta->jk_peserta == 'Wanita') ? 'checked' : ''}}>
-                                          <label class="form-check-label" for="jenisKelaminWPeserta">Wanita</label>
+                                          <input class="form-check-input" type="radio" name="editJenisKelaminPeserta" id="jenisKelaminWPeserta{{$peserta->id_peserta}}" value="Wanita" {{($peserta->jk_peserta == 'Wanita') ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="jenisKelaminWPeserta{{$peserta->id_peserta}}">Wanita</label>
                                         </div>
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editNoHpPeserta" class="col-sm-3 px-1">Nomor HP</label>
+                                      <label for="editNoHpPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Nomor HP</label>
                                       <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="editNoHpPeserta" placeholder="(9999)-999999999" value="{{$peserta->no_hp_peserta}}">
+                                        <input class="form-control" type="text" name="editNoHpPeserta" id="editNoHpPeserta{{$peserta->id_peserta}}" placeholder="(9999)-999999999" value="{{$peserta->no_hp_peserta}}">
                                         @error('editNoHpPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="" style="font-size: 10pt;">
@@ -620,9 +624,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editAlamatPeserta" class="col-sm-3 px-1">Alamat</label>
+                                      <label for="editAlamatPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Alamat</label>
                                       <div class="col-sm-9">
-                                        <textarea class="form-control" name="editAlamatPeserta" id="editAlamatPeserta" rows="3" placeholder="Alamat Peserta" value="{{$peserta->alamat_peserta}}">{{$peserta->alamat_peserta}}</textarea>
+                                        <textarea class="form-control" name="editAlamatPeserta" id="editAlamatPeserta{{$peserta->id_peserta}}" rows="3" placeholder="Alamat Peserta" value="{{$peserta->alamat_peserta}}">{{$peserta->alamat_peserta}}</textarea>
                                         @error('editAlamatPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="" style="font-size: 10pt;">
@@ -634,9 +638,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editTempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
+                                      <label for="editTempatLahirPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
                                       <div class="col-sm-5">
-                                        <input type="text" name="editTempatLahirPeserta" class="form-control form-control-sm" id="editTempatLahirPeserta" placeholder="cth: Bandung" value="{{$peserta->tempat_lahir_peserta}}">
+                                        <input type="text" name="editTempatLahirPeserta" class="form-control form-control-sm" id="editTempatLahirPeserta{{$peserta->id_peserta}}" placeholder="cth: Bandung" value="{{$peserta->tempat_lahir_peserta}}">
                                         @error('editTempatLahirPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="" style="font-size: 10pt;">
@@ -650,7 +654,7 @@
                                         <p>/</p>
                                       </div>
                                       <div class="col-sm-3">
-                                        <input type="date" name="editTanggalLahirPeserta" class="form-control form-control-sm" id="editTanggalLahirPeserta" value="{{$peserta->tgl_lahir_peserta}}">
+                                        <input type="date" name="editTanggalLahirPeserta" class="form-control form-control-sm" id="editTanggalLahirPeserta{{$peserta->id_peserta}}" value="{{$peserta->tgl_lahir_peserta}}">
                                         @error('editTanggalLahirPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="" style="font-size: 10pt;">
@@ -662,9 +666,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editPekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
+                                      <label for="editPekerjaanPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Pekerjaan</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="editPekerjaanPeserta" id="editPekerjaanPeserta" aria-label=".form-select-sm editPekerjaanPeserta">
+                                        <select class="form-select form-select-sm" name="editPekerjaanPeserta" id="editPekerjaanPeserta{{$peserta->id_peserta}}" aria-label=".form-select-sm editPekerjaanPeserta">
                                           <option value="{{$peserta->pekerjaan_peserta}}">{{$peserta->pekerjaan_peserta}}</option>
                                           <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
                                           <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
@@ -686,9 +690,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editSukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku</label>
+                                      <label for="editSukuPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Berasal Dari Suku</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="editSukuPeserta" class="form-control form-control-sm" id="editSukuPeserta" placeholder="cth: Sunda" value="{{$peserta->suku_peserta}}">
+                                        <input type="text" name="editSukuPeserta" class="form-control form-control-sm" id="editSukuPeserta{{$peserta->id_peserta}}" placeholder="cth: Sunda" value="{{$peserta->suku_peserta}}">
                                         @error('editSukuPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="" style="font-size: 10pt;">
@@ -700,11 +704,11 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editStatusPeserta" class="col-sm-3 px-1">Status</label>
+                                      <label for="editStatusPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Status</label>
                                       <div class="col-sm-9">
                                         <div class="form-check form-switch">
-                                          <input class="form-check-input" name="editStatusPeserta" type="checkbox" id="aktif" value="Aktif" {{($peserta->status_peserta == 'Aktif') ? 'checked' : ''}}>
-                                          <label class="form-check-label" for="aktif">Aktif</label>
+                                          <input class="form-check-input" name="editStatusPeserta" type="checkbox" id="aktif{{$peserta->id_peserta}}" value="Aktif" {{($peserta->status_peserta == 'Aktif') ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="aktif{{$peserta->id_peserta}}">Aktif</label>
                                         </div>
                                         @error('editStatusPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -717,9 +721,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editLokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
+                                      <label for="editLokasiPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Lokasi Kontak</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="editLokasiPeserta" id="editLokasiPeserta" aria-label=".form-select-sm editLokasiPeserta">
+                                        <select class="form-select form-select-sm" name="editLokasiPeserta" id="editLokasiPeserta{{$peserta->id_peserta}}" aria-label=".form-select-sm editLokasiPeserta">
                                           <option value="{{$peserta->lokasi_peserta}}">{{$peserta->lokasi_peserta}}</option>
                                           @foreach ($lokasis as $lokasi)
                                             <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
@@ -736,9 +740,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editInstitusiPeserta" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
+                                      <label for="editInstitusiPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editInstitusiPeserta" id="editInstitusiPeserta">
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editInstitusiPeserta" id="editInstitusiPeserta{{$peserta->id_peserta}}">
                                           <option value="{{$peserta->institusi}}">{{$peserta->institusi}}</option>
                                           <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                           <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
@@ -754,9 +758,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editPemintaInput" class="col-sm-3 px-1">Peminta Input <span class="required-input">(*)</span></label>
+                                      <label for="editPemintaInput{{$peserta->id_peserta}}" class="col-sm-3 px-1">Peminta Input <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="editPemintaInput" id="editPemintaInput" aria-label=".form-select-sm editPemintaInput">
+                                        <select class="form-select form-select-sm" name="editPemintaInput" id="editPemintaInput{{$peserta->id_peserta}}" aria-label=".form-select-sm editPemintaInput">
                                           <option value="{{$peserta->peminta}}">{{$peserta->nama_lengkap}}</option>
                                           @foreach ($dataLembagas as $dataLembaga)
                                             <option value="{{$dataLembaga->id_user}}">{{$dataLembaga->nama_lengkap}} ({{$dataLembaga->data_lembaga}} / {{$dataLembaga->institusi}})</option>
@@ -773,9 +777,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="editFotoPeserta" class="col-sm-3 px-1">Foto</label>
+                                      <label for="editFotoPeserta{{$peserta->id_peserta}}" class="col-sm-3 px-1">Foto</label>
                                       <div class="col-sm-9">
-                                        <input type="file" name="editFotoPeserta" class="form-control form-control-sm" id="editFotoPeserta">
+                                        <input type="file" name="editFotoPeserta" class="form-control form-control-sm" id="editFotoPeserta{{$peserta->id_peserta}}">
                                         @error('editFotoPeserta')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="" style="font-size: 10pt;">
@@ -786,7 +790,7 @@
                                         @enderror
                                       </div>
                                     </div>
-                                    <input type="text" name="inputTambah" id="" value="ubahData" hidden>
+                                    <input type="text" name="inputTambah" id="Found 10 elements with non-unique id #:" value="ubahData" hidden>
                                   </div>
                                 </div>
                               </div>
@@ -854,11 +858,11 @@
                                 <div class="col-1"></div>
                                 <div class="col-3">
                                   <input type="date" class="form-control form-control-sm" name="tambahTgl_kontak">
-                                  <input type="text" name="inputTambah" id="" value="inputSkala" hidden>
-                                  <input type="text" name="id_pesertaSkala" id="" value="{{$peserta->id_peserta}}" hidden>
+                                  <input type="text" name="inputTambah" value="inputSkala" hidden>
+                                  <input type="text" name="id_pesertaSkala" value="{{$peserta->id_peserta}}" hidden>
                                 </div>
                                 <div class="col-2">
-                                  <select class="form-select form-select-sm" name="tambahSkalaPeserta" id="tambahSkalaPeserta" aria-label=".form-select-sm tambahSkalaPeserta">
+                                  <select class="form-select form-select-sm" name="tambahSkalaPeserta" id="tambahSkalaPeserta{{$peserta->id_peserta}}" aria-label=".form-select-sm tambahSkalaPeserta{{$peserta->id_peserta}}">
                                     <option value="{{$peserta->skala}}">{{$peserta->skala}}</option>
                                     <option value="-3">Skala -3</option>
                                     <option value="-2">Skala -2</option>
@@ -871,7 +875,7 @@
                                 </div>
                                 <div class="col-3"></div>
                                 <div class="col-3">
-                                  <textarea class="form-control form-control-sm" name="tambahKeteranganSkalaPeserta" id="" cols="30" rows="3" placeholder="Tambah Keterangan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="tambahKeteranganSkalaPeserta" cols="30" rows="3" placeholder="Tambah Keterangan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -910,11 +914,11 @@
                                 <div class="col-1"></div>
                                 <div class="col-4">
                                   <input type="date" class="form-control form-control-sm" name="tambahTgl_kontakCatatan">
-                                  <input type="text" name="inputTambah" id="" value="inputCatatan" hidden>
-                                  <input type="text" name="id_pesertaCatatan" id="" value="{{$peserta->id_peserta}}" hidden>
+                                  <input type="text" name="inputTambah" value="inputCatatan" hidden>
+                                  <input type="text" name="id_pesertaCatatan" value="{{$peserta->id_peserta}}" hidden>
                                 </div>
                                 <div class="col-7">
-                                  <textarea class="form-control form-control-sm" name="tambahCatatanPeserta" id="" cols="30" rows="3" placeholder="Tambah Catatan"></textarea>
+                                  <textarea class="form-control form-control-sm" name="tambahCatatanPeserta" cols="30" rows="3" placeholder="Tambah Catatan"></textarea>
                                 </div>
                               </div>
                             </div>
@@ -948,18 +952,18 @@
                                 </div>
                                 <div class="input-center ps-5">
                                   <div class="w-75">
-                                    <input type="text" name="inputMethod" id="" value="rubahJadiKK" hidden>
-                                    <input type="text" name="idForGet" id="" value="{{$peserta->id_peserta}}" hidden>
+                                    <input type="text" name="inputMethod" value="rubahJadiKK" hidden>
+                                    <input type="text" name="idForGet" value="{{$peserta->id_peserta}}" hidden>
                                     <div class="mb-3 row">
-                                      <label for="untukPendataan" class="col-sm-3 px-1">Untuk <span class="required-input">(*)</span></label>
+                                      <label for="untukPendataan{{$peserta->id_peserta}}" class="col-sm-3 px-1">Untuk <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <input class="form-control form-control-sm" name="untukPendataans" id="untukPendataan" value="Ketua Kelompok">
+                                        <input class="form-control form-control-sm" name="untukPendataans" id="untukPendataan{{$peserta->id_peserta}}" value="Ketua Kelompok">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="idData" class="col-sm-3 px-1">ID <span class="required-input">(*)</span></label>
+                                      <label for="idData{{$peserta->id_peserta}}" class="col-sm-3 px-1">ID <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="idDatas" class="form-control form-control-sm" id="idData" placeholder="ID" value="{{$peserta->id_peserta}}">
+                                        <input type="text" name="idDatas" class="form-control form-control-sm" id="idData{{$peserta->id_peserta}}" placeholder="ID" value="{{$peserta->id_peserta}}">
                                         @error('idDatas')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -985,9 +989,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="namaData" class="col-sm-3 px-1">Nama Lengkap <span class="required-input">(*)</span></label>
+                                      <label for="namaData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Nama Lengkap <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="namaDatas" class="form-control form-control-sm" id="namaData" placeholder="cth: Angelica Gabriel" value="{{$peserta->nama_peserta}}">
+                                        <input type="text" name="namaDatas" class="form-control form-control-sm" id="namaData{{$peserta->id_peserta}}" placeholder="cth: Angelica Gabriel" value="{{$peserta->nama_peserta}}">
                                         @error('namaDatas')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -999,9 +1003,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="jenisIdentitasData" class="col-sm-3 px-1">Jenis Identitas</label>
+                                      <label for="jenisIdentitasData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Jenis Identitas</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="jenisIdentitasDatas" id="jenisIdentitasData" aria-label=".form-select-sm jenisIdentitasData">
+                                        <select class="form-select form-select-sm" name="jenisIdentitasDatas" id="jenisIdentitasData{{$peserta->id_peserta}}" aria-label=".form-select-sm jenisIdentitasData{{$peserta->id_peserta}}">
                                           <option value="">-Jenis Identitas-</option>
                                           <option value="KTP">KTP</option>
                                           <option value="SIM">SIM</option>
@@ -1009,40 +1013,40 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="noIdentitasData" class="col-sm-3 px-1">No. Identitas</label>
+                                      <label for="noIdentitasData{{$peserta->id_peserta}}" class="col-sm-3 px-1">No. Identitas</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="noIdentitasDatas" class="form-control form-control-sm" id="noIdentitasData" placeholder="cth: 12*********">
+                                        <input type="text" name="noIdentitasDatas" class="form-control form-control-sm" id="noIdentitasData{{$peserta->id_peserta}}" placeholder="cth: 12*********">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="tempatLahirData" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
+                                      <label for="tempatLahirData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
                                       <div class="col-sm-5">
-                                        <input type="text" name="tempatLahirDatas" class="form-control form-control-sm" id="tempatLahirData" placeholder="cth: Bandung" value="{{$peserta->tempat_lahir_peserta}}">
+                                        <input type="text" name="tempatLahirDatas" class="form-control form-control-sm" id="tempatLahirData{{$peserta->id_peserta}}" placeholder="cth: Bandung" value="{{$peserta->tempat_lahir_peserta}}">
                                       </div>
                                       <div class="col-sm-1">
                                         <p>/</p>
                                       </div>
                                       <div class="col-sm-3">
-                                        <input type="date" name="tglLahirDatas" class="form-control form-control-sm" id="tglLahirData" value="{{$peserta->tgl_lahir_peserta}}">
+                                        <input type="date" name="tglLahirDatas" class="form-control form-control-sm" id="tglLahirData{{$peserta->id_peserta}}" value="{{$peserta->tgl_lahir_peserta}}">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="jenisKelaminData" class="col-sm-3 px-1">Jenis Kelamin</label>
+                                      <label for="jenisKelaminData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Jenis Kelamin</label>
                                       <div class="col-sm-9">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="jenisKelaminDatas" id="jenisKelaminPData" value="Pria" {{($peserta->jk_peserta == 'Pria') ? 'checked' : ''}}>
-                                          <label class="form-check-label" for="jenisKelaminPData">Pria</label>
+                                          <input class="form-check-input" type="radio" name="jenisKelaminDatas" id="jenisKelaminPData{{$peserta->id_peserta}}" value="Pria" {{($peserta->jk_peserta == 'Pria') ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="jenisKelaminPData{{$peserta->id_peserta}}">Pria</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="jenisKelaminDatas" id="jenisKelaminWData" value="Wanita" {{($peserta->jk_peserta == 'Wanita') ? 'checked' : ''}}>
-                                          <label class="form-check-label" for="jenisKelaminWData">Wanita</label>
+                                          <input class="form-check-input" type="radio" name="jenisKelaminDatas" id="jenisKelaminWData{{$peserta->id_peserta}}" value="Wanita" {{($peserta->jk_peserta == 'Wanita') ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="jenisKelaminWData{{$peserta->id_peserta}}">Wanita</label>
                                         </div>
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="golonganDarahData" class="col-sm-3 px-1">Golongan Darah</label>
+                                      <label for="golonganDarahData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Golongan Darah</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="golonganDarahDatas" id="golonganDarahData" aria-label=".form-select-sm golonganDarahData">
+                                        <select class="form-select form-select-sm" name="golonganDarahDatas" id="golonganDarahData{{$peserta->id_peserta}}" aria-label=".form-select-sm golonganDarahData{{$peserta->id_peserta}}">
                                           <option value="">-Golongan Darah-</option>
                                           <option value="A">A</option>
                                           <option value="B">B</option>
@@ -1052,9 +1056,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="statusPernikahanData" class="col-sm-3 px-1">Status Pernikahan</label>
+                                      <label for="statusPernikahanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Status Pernikahan</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="statusPernikahanDatas" id="statusPernikahanData" aria-label=".form-select-sm statusPernikahanData">
+                                        <select class="form-select form-select-sm" name="statusPernikahanDatas" id="statusPernikahanData{{$peserta->id_peserta}}" aria-label=".form-select-sm statusPernikahanData{{$peserta->id_peserta}}">
                                           <option value="">-Status Pernikahan-</option>
                                           <option value="Cerai">Cerai</option>
                                           <option value="Belum Menikah">Belum Menikah</option>
@@ -1077,27 +1081,27 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="alamatData" class="col-sm-3 px-1">Alamat</label>
+                                      <label for="alamatData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Alamat</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="alamatDatas" class="form-control form-control-sm" id="alamatData" placeholder="Alamat" value="{{$peserta->alamat_peserta}}">
+                                        <input type="text" name="alamatDatas" class="form-control form-control-sm" id="alamatData{{$peserta->id_peserta}}" placeholder="Alamat" value="{{$peserta->alamat_peserta}}">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="keteranganArahData" class="col-sm-3 px-1">Keterangan Arah</label>
+                                      <label for="keteranganArahData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Keterangan Arah</label>
                                       <div class="col-sm-9">
-                                        <textarea class="form-control form-control-sm" name="keteranganArahDatas" id="keteranganArahData" rows="3" placeholder="Keterangan Arah"></textarea>
+                                        <textarea class="form-control form-control-sm" name="keteranganArahDatas" id="keteranganArahData{{$peserta->id_peserta}}" rows="3" placeholder="Keterangan Arah"></textarea>
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="petaData" class="col-sm-3 px-1">Peta</label>
+                                      <label for="petaData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Peta</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="petaDatas" class="form-control form-control-sm" id="petaData" placeholder="Peta">
+                                        <input type="text" name="petaDatas" class="form-control form-control-sm" id="petaData{{$peserta->id_peserta}}" placeholder="Peta">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="negaraData" class="col-sm-3 px-1">Negara</label>
+                                      <label for="negaraData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Negara</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="negaraDatas" id="negaraData" aria-label=".form-select-sm negaraData">
+                                        <select class="form-select form-select-sm" name="negaraDatas" id="negaraData{{$peserta->id_peserta}}" aria-label=".form-select-sm negaraData{{$peserta->id_peserta}}">
                                           <option value="">-Negara-</option>
                                           <option value="Indonesia">Indonesia</option>
                                           <option value="USA">USA</option>
@@ -1106,59 +1110,59 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="provinsiData" class="col-sm-3 px-1">Provinsi</label>
+                                      <label for="provinsiData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Provinsi</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="provinsiDatas" class="form-control form-control-sm" id="provinsiData" placeholder="Provinsi">
+                                        <input type="text" name="provinsiDatas" class="form-control form-control-sm" id="provinsiData{{$peserta->id_peserta}}" placeholder="Provinsi">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="kotaData" class="col-sm-3 px-1">Kota</label>
+                                      <label for="kotaData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Kota</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="kotaDatas" class="form-control form-control-sm" id="kotaData" placeholder="Kota">
+                                        <input type="text" name="kotaDatas" class="form-control form-control-sm" id="kotaData{{$peserta->id_peserta}}" placeholder="Kota">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="kecamatanData" class="col-sm-3 px-1">Kecamatan</label>
+                                      <label for="kecamatanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Kecamatan</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="kecamatanDatas" class="form-control form-control-sm" id="kecamatanData" placeholder="Kecamatan">
+                                        <input type="text" name="kecamatanDatas" class="form-control form-control-sm" id="kecamatanData{{$peserta->id_peserta}}" placeholder="Kecamatan">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="kelurahanData" class="col-sm-3 px-1">Kelurahan</label>
+                                      <label for="kelurahanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Kelurahan</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="kelurahanDatas" class="form-control form-control-sm" id="kelurahanData" placeholder="Kelurahan">
+                                        <input type="text" name="kelurahanDatas" class="form-control form-control-sm" id="kelurahanData{{$peserta->id_peserta}}" placeholder="Kelurahan">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="kodePosData" class="col-sm-3 px-1">Kode Pos</label>
+                                      <label for="kodePosData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Kode Pos</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="kodePosDatas" class="form-control form-control-sm" id="kodePosData" placeholder="Kode Pos">
+                                        <input type="text" name="kodePosDatas" class="form-control form-control-sm" id="kodePosData{{$peserta->id_peserta}}" placeholder="Kode Pos">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="dusunData" class="col-sm-3 px-1">Dusun (Desa)</label>
+                                      <label for="dusunData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Dusun (Desa)</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="dusunDatas" aria-label=".form-select-sm dusunData">
+                                        <select class="form-select form-select-sm" name="dusunDatas" aria-label=".form-select-sm dusunData{{$peserta->id_peserta}}">
                                           <option value="">-Dusun (desa)-</option>
                                         </select>
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="rtRwData" class="col-sm-3 px-1">RT / RW</label>
+                                      <label for="rtData{{$peserta->id_peserta}}" class="col-sm-3 px-1">RT / RW</label>
                                       <div class="col-sm-4">
-                                        <input type="text" name="rtDatas" class="form-control form-control-sm" id="rtRwData" placeholder="RT">
+                                        <input type="text" name="rtDatas" class="form-control form-control-sm" id="rtData{{$peserta->id_peserta}}" placeholder="RT">
                                       </div>
                                       <div class="col-sm-1">
                                         <p>/</p>
                                       </div>
                                       <div class="col-sm-4">
-                                        <input type="text" name="rwDatas" class="form-control form-control-sm" id="rtRwData" placeholder="RW">
+                                        <input type="text" name="rwDatas" class="form-control form-control-sm" id="rwData{{$peserta->id_peserta}}" placeholder="RW">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="areaData" class="col-sm-3 px-1">Area</label>
+                                      <label for="areaData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Area</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="areaDatas" id="areaData" aria-label=".form-select-sm areaData">
+                                        <select class="form-select form-select-sm" name="areaDatas" id="areaData{{$peserta->id_peserta}}" aria-label=".form-select-sm areaData{{$peserta->id_peserta}}">
                                           <option value="">-Area-</option>
                                           <option value="021">021</option>
                                           <option value="022">022</option>
@@ -1166,9 +1170,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="lokasiData" class="col-sm-3 px-1">Lokasi <span class="required-input">(*)</span></label>
+                                      <label for="lokasiData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Lokasi <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="lokasiDatas" id="lokasiData" aria-label=".form-select-sm lokasiData">
+                                        <select class="form-select form-select-sm" name="lokasiDatas" id="lokasiData{{$peserta->id_peserta}}" aria-label=".form-select-sm lokasiData{{$peserta->id_peserta}}">
                                           <option value="{{$peserta->lokasi_peserta}}">{{$peserta->lokasi_peserta}}</option>
                                           @foreach ($lokasis as $lokasi)
                                             <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
@@ -1194,15 +1198,15 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="noTelpSData" class="col-sm-3 px-1">No Telp 1</label>
+                                      <label for="noTelpSData{{$peserta->id_peserta}}" class="col-sm-3 px-1">No Telp 1</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="noTelpSDatas" class="form-control form-control-sm" id="noTelpSData" placeholder="cth: +62" value="{{$peserta->no_hp_peserta}}">
+                                        <input type="text" name="noTelpSDatas" class="form-control form-control-sm" id="noTelpSData{{$peserta->id_peserta}}" placeholder="cth: +62" value="{{$peserta->no_hp_peserta}}">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="emailData" class="col-sm-3 px-1">Email</label>
+                                      <label for="emailData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Email</label>
                                       <div class="col-sm-9">
-                                        <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData" placeholder="cth: email@gmail.com">
+                                        <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData{{$peserta->id_peserta}}" placeholder="cth: email@gmail.com" value="{{$peserta->email}}">
                                         @error('emailDatas')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -1223,10 +1227,10 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="pekerjaanData" class="col-sm-3 px-1">Pekerjaan</label>
+                                      <label for="pekerjaanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Pekerjaan</label>
                                       <div class="col-sm-9 row">
                                         <div class="col-11">
-                                          <select class="form-select form-select-sm" name="pekerjaanDatas" id="pekerjaanData" aria-label=".form-select-sm pekerjaanData">
+                                          <select class="form-select form-select-sm" name="pekerjaanDatas" id="pekerjaanData{{$peserta->id_peserta}}" aria-label=".form-select-sm pekerjaanData{{$peserta->id_peserta}}">
                                             <option value="{{$peserta->pekerjaan_peserta}}">{{$peserta->pekerjaan_peserta}}</option>
                                             @foreach ($pekerjaans as $pekerjaan)
                                               <option value="{{$pekerjaan->nama_pekerjaanPJ}}">{{$pekerjaan->nama_pekerjaanPJ}}</option>
@@ -1241,16 +1245,16 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="jabatanData" class="col-sm-3 px-1">Jabatan Dalam Pekerjaan</label>
+                                      <label for="jabatanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Jabatan Dalam Pekerjaan</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="jabatanDatas" class="form-control form-control-sm" id="jabatanData" placeholder="cth: Manager, Staff, etc">
+                                        <input type="text" name="jabatanDatas" class="form-control form-control-sm" id="jabatanData{{$peserta->id_peserta}}" placeholder="cth: Manager, Staff, etc">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="statusPekerjaanData" class="col-sm-3 px-1">Status Pekerjaan</label>
+                                      <label for="statusPekerjaanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Status Pekerjaan</label>
                                       <div class="col-sm-9 row">
                                         <div class="col-11">
-                                          <select class="form-select form-select-sm" name="statusPekerjaanDatas" id="statusPekerjaanData" aria-label=".form-select-sm statusPekerjaanData">
+                                          <select class="form-select form-select-sm" name="statusPekerjaanDatas" id="statusPekerjaanData{{$peserta->id_peserta}}" aria-label=".form-select-sm statusPekerjaanData{{$peserta->id_peserta}}">
                                             <option value="">-Status Pekerjaan-</option>
                                             @foreach ($statusPekerjaans as $statusPekerjaan)
                                               <option value="{{$statusPekerjaan->status_pekerjaanSPJ}}">{{$statusPekerjaan->status_pekerjaanSPJ}}</option>
@@ -1265,16 +1269,16 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="namaPerusahaanData" class="col-sm-3 px-1">Nama Perusahaan</label>
+                                      <label for="namaPerusahaanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Nama Perusahaan</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="namaPerusahaanDatas" class="form-control form-control-sm" id="namaPerusahaanData" placeholder="Nama Perusahaan">
+                                        <input type="text" name="namaPerusahaanDatas" class="form-control form-control-sm" id="namaPerusahaanData{{$peserta->id_peserta}}" placeholder="Nama Perusahaan">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="sektorIndustriData" class="col-sm-3 px-1">Sektor Industri</label>
+                                      <label for="sektorIndustriData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Sektor Industri</label>
                                       <div class="col-sm-9 row">
                                         <div class="col-11">
-                                          <select class="form-select form-select-sm" name="sektorIndustriDatas" id="sektorIndustriData" aria-label=".form-select-sm sektorIndustriData">
+                                          <select class="form-select form-select-sm" name="sektorIndustriDatas" id="sektorIndustriData{{$peserta->id_peserta}}" aria-label=".form-select-sm sektorIndustriData{{$peserta->id_peserta}}">
                                             <option value="">-Sektor Industri-</option>
                                             @foreach ($sektorIndustris as $sektorIndustri)
                                               <option value="{{$sektorIndustri->sektor_industriSI}}">{{$sektorIndustri->sektor_industriSI}}</option>
@@ -1289,21 +1293,21 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="alamatKantorData" class="col-sm-3 px-1">Alamat Kantor</label>
+                                      <label for="alamatKantorData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Alamat Kantor</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="alamatKantorDatas" class="form-control form-control-sm" id="alamatKantorData" placeholder="Alamat Kantor">
+                                        <input type="text" name="alamatKantorDatas" class="form-control form-control-sm" id="alamatKantorData{{$peserta->id_peserta}}" placeholder="Alamat Kantor">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="telpKantorData" class="col-sm-3 px-1">Telp. Kantor</label>
+                                      <label for="telpKantorData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Telp. Kantor</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="telpKantorDatas" class="form-control form-control-sm" id="telpKantorData" placeholder="cth: +62">
+                                        <input type="text" name="telpKantorDatas" class="form-control form-control-sm" id="telpKantorData{{$peserta->id_peserta}}" placeholder="cth: +62">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="extData" class="col-sm-3 px-1">Ext.</label>
+                                      <label for="extData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Ext.</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="extDatas" class="form-control form-control-sm" id="extData" placeholder="EXT">
+                                        <input type="text" name="extDatas" class="form-control form-control-sm" id="extData{{$peserta->id_peserta}}" placeholder="EXT">
                                       </div>
                                     </div>
                                   </div>
@@ -1316,10 +1320,10 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="tingkatPendidikanData" class="col-sm-3 px-1">Tingkat Pendidikan</label>
+                                      <label for="tingkatPendidikanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Tingkat Pendidikan</label>
                                       <div class="col-sm-9 row">
                                         <div class="col-11">
-                                          <select class="form-select form-select-sm" name="tingkatPendidikanDatas" id="tingkatPendidikanData" aria-label="form-select-sm tingkatPendidikanData">
+                                          <select class="form-select form-select-sm" name="tingkatPendidikanDatas" id="tingkatPendidikanData{{$peserta->id_peserta}}" aria-label="form-select-sm tingkatPendidikanData{{$peserta->id_peserta}}">
                                             <option value="">-Tingkat Pendidikan-</option>
                                             @foreach ($tingkatPendidikans as $tingkatPendidikan)
                                               <option value="{{$tingkatPendidikan->tingkat_pendidikan}}">{{$tingkatPendidikan->tingkat_pendidikan}}</option>
@@ -1334,10 +1338,10 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="sekolahData" class="col-sm-3 px-1">Sekolah/Univ (Saat ini Ditempuh)</label>
+                                      <label for="sekolahData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Sekolah/Univ (Saat ini Ditempuh)</label>
                                       <div class="col-sm-9 row">
                                         <div class="col-11">
-                                          <select class="form-select form-select-sm" name="sekolahDatas" id="sekolahData" aria-label="form-select-sm sekolahData">
+                                          <select class="form-select form-select-sm" name="sekolahDatas" id="sekolahData{{$peserta->id_peserta}}" aria-label="form-select-sm sekolahData{{$peserta->id_peserta}}">
                                             <option value="">-Sekolah / Universitas</option>
                                             @foreach ($sekolahUnivs as $sekolahUniv)
                                               <option value="{{$sekolahUniv->sekolah_univ}}">{{$sekolahUniv->sekolah_univ}}</option>
@@ -1397,21 +1401,21 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="catatanData" class="col-sm-3 px-1">Catatan</label>
+                                      <label for="catatanData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Catatan</label>
                                       <div class="col-sm-9">
-                                        <textarea class="form-control form-control-sm" name="catatanDatas" id="catatanData" rows="3" placeholder="Catatan"></textarea>
+                                        <textarea class="form-control form-control-sm" name="catatanDatas" id="catatanData{{$peserta->id_peserta}}" rows="3" placeholder="Catatan"></textarea>
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="statusData" class="col-sm-3 px-1">Status</label>
+                                      <label for="statusData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Status</label>
                                       <div class="col-sm-9">
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="statusDatas" id="statusAData" value="Aktif" {{($peserta->status_peserta == 'Aktif') ? 'checked' : ''}}>
-                                          <label class="form-check-label" for="statusAData">Aktif</label>
+                                          <input class="form-check-input" type="radio" name="statusDatas" id="statusAData{{$peserta->id_peserta}}" value="Aktif" {{($peserta->status_peserta == 'Aktif') ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="statusAData{{$peserta->id_peserta}}">Aktif</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="statusDatas" id="statusTaData" value="Tidak Aktif" {{($peserta->status_peserta == 'Tidak Aktif') ? 'checked' : ''}}>
-                                          <label class="form-check-label" for="statusTaData">Tidak Aktif</label>
+                                          <input class="form-check-input" type="radio" name="statusDatas" id="statusTaData{{$peserta->id_peserta}}" value="Tidak Aktif" {{($peserta->status_peserta == 'Tidak Aktif') ? 'checked' : ''}}>
+                                          <label class="form-check-label" for="statusTaData{{$peserta->id_peserta}}">Tidak Aktif</label>
                                         </div>
                                       </div>
                                     </div>
@@ -1425,45 +1429,45 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="noRekData" class="col-sm-3 px-1">Nomor Rekening</label>
+                                      <label for="noRekData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Nomor Rekening</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="noRekDatas" class="form-control form-control-sm" id="noRekData" placeholder="123456789">
+                                        <input type="text" name="noRekDatas" class="form-control form-control-sm" id="noRekData{{$peserta->id_peserta}}" placeholder="123456789">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="perBeasiswaData" class="col-sm-3 px-1">Periode Beasiswa</label>
+                                      <label for="perBeasiswaData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Periode Beasiswa</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="perBeasiswaDatas" class="form-control form-control-sm" id="perBeasiswaData" placeholder="Periode Beasiswa">
+                                        <input type="text" name="perBeasiswaDatas" class="form-control form-control-sm" id="perBeasiswaData{{$peserta->id_peserta}}" placeholder="Periode Beasiswa">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="perKerjaPData" class="col-sm-3 px-1">Periode Kerja Praktik</label>
+                                      <label for="perKerjaPData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Periode Kerja Praktik</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="perKerjaPDatas" class="form-control form-control-sm" id="perKerjaPData" placeholder="Periode Kerja Praktik">
+                                        <input type="text" name="perKerjaPDatas" class="form-control form-control-sm" id="perKerjaPData{{$peserta->id_peserta}}" placeholder="Periode Kerja Praktik">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="riwayatPelSData" class="col-sm-3 px-1">Riwayat Pelayanan 1</label>
+                                      <label for="riwayatPelSData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Riwayat Pelayanan 1</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="riwayatPelSDatas" class="form-control form-control-sm" id="riwayatPelSData" placeholder="Riwayat Pelayanan 1">
+                                        <input type="text" name="riwayatPelSDatas" class="form-control form-control-sm" id="riwayatPelSData{{$peserta->id_peserta}}" placeholder="Riwayat Pelayanan 1">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="riwayatPelDData" class="col-sm-3 px-1">Riwayat Pelayanan 2</label>
+                                      <label for="riwayatPelDData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Riwayat Pelayanan 2</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="riwayatPelDDatas" class="form-control form-control-sm" id="riwayatPelDData" placeholder="Riwayat Pelayanan 2">
+                                        <input type="text" name="riwayatPelDDatas" class="form-control form-control-sm" id="riwayatPelDData{{$peserta->id_peserta}}" placeholder="Riwayat Pelayanan 2">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="riwayatPelTData" class="col-sm-3 px-1">Riwayat Pelayanan 3</label>
+                                      <label for="riwayatPelTData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Riwayat Pelayanan 3</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="riwayatPelTDatas" class="form-control form-control-sm" id="riwayatPelTData" placeholder="Riwayat Pelayanan 3">
+                                        <input type="text" name="riwayatPelTDatas" class="form-control form-control-sm" id="riwayatPelTData{{$peserta->id_peserta}}" placeholder="Riwayat Pelayanan 3">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="riwayatPelEData" class="col-sm-3 px-1">Riwayat Pelayanan 4</label>
+                                      <label for="riwayatPelEData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Riwayat Pelayanan 4</label>
                                       <div class="col-sm-9">
-                                        <input type="text" name="riwayatPelEDatas" class="form-control form-control-sm" id="riwayatPelEData" placeholder="Riwayat Pelayanan 4">
+                                        <input type="text" name="riwayatPelEDatas" class="form-control form-control-sm" id="riwayatPelEData{{$peserta->id_peserta}}" placeholder="Riwayat Pelayanan 4">
                                       </div>
                                     </div>
                                   </div>
@@ -1595,27 +1599,27 @@
                                       <div class="col-sm-9">
                                         <label for="" class="">Sudah?</label>
                                         <div class="form-check">
-                                          <input class="form-check-input" name="sudahMenikahDatas" type="checkbox" value="Sudah" id="sudahMenikahData">
-                                          <label class="form-check-label" for="sudahMenikahData">
+                                          <input class="form-check-input" name="sudahMenikahDatas" type="checkbox" value="Sudah" id="sudahMenikahData{{$peserta->id_peserta}}">
+                                          <label class="form-check-label" for="sudahMenikahData{{$peserta->id_peserta}}">
                                             Sudah
                                           </label>
                                         </div>
                                         <hr>
-                                        <label for="tglMenikahData" class="">Tanggal</label>
-                                        <input type="date" name="tglMenikahDatas" class="form-control form-control-sm" id="tglMenikahData">
+                                        <label for="tglMenikahData{{$peserta->id_peserta}}" class="">Tanggal</label>
+                                        <input type="date" name="tglMenikahDatas" class="form-control form-control-sm" id="tglMenikahData{{$peserta->id_peserta}}">
                                         <hr>
                                         <label for="" class="">Tempat</label><br>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="tempatMenikahDatas" id="tempatMenikahData" value="Gereja Lokal">
-                                          <label class="form-check-label" for="tempatMenikahData">Gereja Lokal</label>
+                                          <input class="form-check-input" type="radio" name="tempatMenikahDatas" id="tempatMenikahData{{$peserta->id_peserta}}" value="Gereja Lokal">
+                                          <label class="form-check-label" for="tempatMenikahData{{$peserta->id_peserta}}">Gereja Lokal</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="tempatMenikahDatas" id="tempatMenikahLData" value="Gereja Lain">
-                                          <label class="form-check-label" for="tempatMenikahLData">Gereja Lain</label>
+                                          <input class="form-check-input" type="radio" name="tempatMenikahDatas" id="tempatMenikahLData{{$peserta->id_peserta}}" value="Gereja Lain">
+                                          <label class="form-check-label" for="tempatMenikahLData{{$peserta->id_peserta}}">Gereja Lain</label>
                                         </div>
                                         <hr>
-                                        <label for="fileUploadMenikahData" class="">File</label>
-                                        <input type="file" name="fileUploadMenikahDatas" class="form-control form-control-sm" id="fileUploadMenikahData">
+                                        <label for="fileUploadMenikahData{{$peserta->id_peserta}}" class="">File</label>
+                                        <input type="file" name="fileUploadMenikahDatas" class="form-control form-control-sm" id="fileUploadMenikahData{{$peserta->id_peserta}}">
                                         @error('fileUploadMenikahDatas')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -1625,8 +1629,8 @@
                                           </div>
                                         @enderror
                                         <hr>
-                                        <label for="ketMenikahData" class="">Keterangan</label>
-                                        <textarea class="form-control form-control-sm" name="ketMenikahDatas" id="ketMenikahData" rows="3" placeholder="Keterangan"></textarea>
+                                        <label for="ketMenikahData{{$peserta->id_peserta}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="ketMenikahDatas" id="ketMenikahData{{$peserta->id_peserta}}" rows="3" placeholder="Keterangan"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -1639,27 +1643,27 @@
                                       <div class="col-sm-9">
                                         <label for="" class="">Sudah?</label>
                                         <div class="form-check">
-                                          <input class="form-check-input" name="sudahBaptisDatas" type="checkbox" value="Sudah" id="sudahBaptisData">
-                                          <label class="form-check-label" for="sudahBaptisData">
+                                          <input class="form-check-input" name="sudahBaptisDatas" type="checkbox" value="Sudah" id="sudahBaptisData{{$peserta->id_peserta}}">
+                                          <label class="form-check-label" for="sudahBaptisData{{$peserta->id_peserta}}">
                                             Sudah
                                           </label>
                                         </div>
                                         <hr>
-                                        <label for="tglBaptisData" class="">Tanggal</label>
-                                        <input type="date" name="tglBaptisDatas" class="form-control form-control-sm" id="tglBaptisData">
+                                        <label for="tglBaptisData{{$peserta->id_peserta}}" class="">Tanggal</label>
+                                        <input type="date" name="tglBaptisDatas" class="form-control form-control-sm" id="tglBaptisData{{$peserta->id_peserta}}">
                                         <hr>
                                         <label for="" class="">Tempat</label><br>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="tempatBaptisDatas" id="tempatBaptisData" value="Gereja Lokal">
-                                          <label class="form-check-label" for="tempatBaptisData">Gereja Lokal</label>
+                                          <input class="form-check-input" type="radio" name="tempatBaptisDatas" id="tempatBaptisData{{$peserta->id_peserta}}" value="Gereja Lokal">
+                                          <label class="form-check-label" for="tempatBaptisData{{$peserta->id_peserta}}">Gereja Lokal</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="tempatBaptisDatas" id="tempatBaptisLData" value="Gereja Lain">
-                                          <label class="form-check-label" for="tempatBaptisLData">Gereja Lain</label>
+                                          <input class="form-check-input" type="radio" name="tempatBaptisDatas" id="tempatBaptisLData{{$peserta->id_peserta}}" value="Gereja Lain">
+                                          <label class="form-check-label" for="tempatBaptisLData{{$peserta->id_peserta}}">Gereja Lain</label>
                                         </div>
                                         <hr>
-                                        <label for="fileUploadBaptisData" class="">File</label>
-                                        <input type="file" name="fileUploadBaptisDatas" class="form-control form-control-sm" id="fileUploadBaptisData">
+                                        <label for="fileUploadBaptisData{{$peserta->id_peserta}}" class="">File</label>
+                                        <input type="file" name="fileUploadBaptisDatas" class="form-control form-control-sm" id="fileUploadBaptisData{{$peserta->id_peserta}}">
                                         @error('fileUploadBaptisDatas')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -1669,8 +1673,8 @@
                                           </div>
                                         @enderror
                                         <hr>
-                                        <label for="ketBaptisData" class="">Keterangan</label>
-                                        <textarea class="form-control form-control-sm" name="ketBaptisDatas" id="ketBaptisData" rows="3" placeholder="Keterangan"></textarea>
+                                        <label for="ketBaptisData{{$peserta->id_peserta}}" class="">Keterangan</label>
+                                        <textarea class="form-control form-control-sm" name="ketBaptisDatas" id="ketBaptisData{{$peserta->id_peserta}}" rows="3" placeholder="Keterangan"></textarea>
                                       </div>
                                     </div>
                                   </div>
@@ -1683,9 +1687,9 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="kata_sandiData" class="col-sm-3 px-1">Kata Sandi <span class="required-input">(*)</span></label>
+                                      <label for="kata_sandiData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Kata Sandi <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <input class="form-control form-control-sm" type="password" name="kata_sandiDatas" id="kata_sandiData" rows="3" placeholder="********">
+                                        <input class="form-control form-control-sm" type="password" name="kata_sandiDatas" id="kata_sandiData{{$peserta->id_peserta}}" rows="3" placeholder="********">
                                         @error('kata_sandiDatas')
                                           <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                             <p class="p-1 pb-0" style="font-size: 10pt;">
@@ -1697,9 +1701,9 @@
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
-                                      <label for="konfirmasi_kata_sandiData" class="col-sm-3 px-1">Konfirmasi Kata Sandi <span class="required-input">(*)</span></label>
+                                      <label for="konfirmasi_kata_sandiData{{$peserta->id_peserta}}" class="col-sm-3 px-1">Konfirmasi Kata Sandi <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <input class="form-control form-control-sm" type="password" name="konfirmasi_kata_sandiDatas" id="konfirmasi_kata_sandiData" rows="3" placeholder="********">
+                                        <input class="form-control form-control-sm" type="password" name="konfirmasi_kata_sandiDatas" id="konfirmasi_kata_sandiData{{$peserta->id_peserta}}" rows="3" placeholder="********">
                                       </div>
                                     </div>
                                   </div>
@@ -1712,9 +1716,9 @@
                                 <div class="input-center ps-5">
                                   <div class="w-75">
                                     <div class="mb-3 row">
-                                      <label for="institusiData" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
+                                      <label for="institusiData{{$peserta->id_peserta}}" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiDatas" id="institusiData">
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiDatas" id="institusiData{{$peserta->id_peserta}}">
                                           <option value="{{$peserta->institusi_peserta}}">{{$peserta->institusi_peserta}}</option>
                                           <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                           <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>

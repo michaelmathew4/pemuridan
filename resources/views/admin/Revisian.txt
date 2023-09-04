@@ -34,10 +34,14 @@ Kelompok Jadi Bagan
 GKP data GKP only
 PM data PM only
 
+Bikin tb family, buat suami istri, nanti id suami dan id istri disatuin di tb family, kegunaannya untuk report data keseluruhan (get id_family)
+
+Aktivitas di Kelompk (Catatan), Tanggal Aktivitas, Absen (Data kontak)
+
 Fitur Lain:
 1. Table Responsive
 2. Profil yang login
 3. Setting yang login
 4. Konfirmasi ke Admin jika Skala turun
-5. Konfirmasi ke Admin Merubah dari Peserta -> Ketua Kelompok
-6. Bagan Keluarga
+
+LAGI NGERJAIN TAMPILAN UTUSAN DAN PENGURUS SERTA KETUA LOKASI TIDAK BISA INPUT TAMBAH DATA PENGURUS

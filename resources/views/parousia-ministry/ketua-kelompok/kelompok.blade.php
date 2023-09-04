@@ -173,16 +173,47 @@
                             </div>
                             <div class="container">
                               <div class="row p-1">
-                                @foreach ($kelompoks as $kelompok)
-                                  <div class="col-4 border">
-                                    <p class="pt-2">{{$noBagan++}}. {{$kelompok->id_peserta}} (G1)</p>
-                                    <hr>
+                                @foreach ($kelompokGenSs as $kelompokGenS)
+                                  <div class="col-4 border p-1">
+                                    {{$noBagan++}}. {{$kelompokGenS->nama_peserta}} (G1)
+                                    <hr class="p-0 m-0">
                                     <ol>
-                                      @if (is_array($pesertaKKs) || is_object($pesertaKKs))
-                                        @foreach ($pesertaKKs as $pesertaKK)
-                                          @foreach ($pesertaKK as $peserta)
-                                            @if ($peserta->id_ketua_kelompok == $kelompok->id_peserta)
-                                              <li>{{$peserta->id_peserta}} (G{{($peserta->id_ketua_kelompok == $kelompok->id_peserta) ? $branchLv : $branchLv++}})</li>
+                                      @if (is_array($kelompoksGenDuas) || is_object($kelompoksGenDuas)) <!-- 2 -->
+                                        @foreach ($kelompoksGenDuas as $kelompoksGenDua)
+                                          @foreach ($kelompoksGenDua as $kelompokGenDua)
+                                            @if ($kelompokGenDua->id_ketua_kelompok == $kelompokGenS->id_peserta)
+                                              <li>{{$kelompokGenDua->nama_peserta}} (G2)</li>
+                                              <ol>
+                                                @if (is_array($kelompoksGenTigas) || is_object($kelompoksGenTigas)) <!-- 3 -->
+                                                  @foreach ($kelompoksGenTigas as $kelompoksGenTiga)
+                                                    @foreach ($kelompoksGenTiga as $kelompokGenTiga)
+                                                      @if ($kelompokGenTiga->id_ketua_kelompok == $kelompokGenDua->id_peserta)
+                                                        <li>{{$kelompokGenTiga->nama_peserta}} (G3)</li>
+                                                        <ol>
+                                                          @if (is_array($kelompoksGenEmpats) || is_object($kelompoksGenEmpats)) <!-- 4 -->
+                                                            @foreach ($kelompoksGenEmpats as $kelompoksGenEmpat)
+                                                              @foreach ($kelompoksGenEmpat as $kelompokGenEmpat)
+                                                                @if ($kelompokGenEmpat->id_ketua_kelompok == $kelompokGenTiga->id_peserta)
+                                                                  <li>{{$kelompokGenEmpat->nama_peserta}} (G4)</li>
+                                                                  <ol>
+                                                                    @if (is_array($kelompoksGenLimas) || is_object($kelompoksGenLimas)) <!-- 4 -->
+                                                                      @foreach ($kelompoksGenLimas as $kelompoksGenLima)
+                                                                        @foreach ($kelompoksGenLima as $kelompokGenLima)
+                                                                          <li>{{$kelompokGenLima->nama_peserta}} (G5)</li>
+                                                                        @endforeach
+                                                                      @endforeach
+                                                                    @endif
+                                                                  </ol>
+                                                                @endif
+                                                              @endforeach
+                                                            @endforeach
+                                                          @endif
+                                                        </ol>
+                                                      @endif
+                                                    @endforeach
+                                                  @endforeach
+                                                @endif
+                                              </ol>
                                             @endif
                                           @endforeach
                                         @endforeach

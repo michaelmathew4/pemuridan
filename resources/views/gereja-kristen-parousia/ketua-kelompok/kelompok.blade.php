@@ -166,32 +166,63 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <div id="wraps">
-                            <span class="label">{{auth()->user()->name}}</span>
-                            @if (count($kelompoks) > 0 )
-                              <div class="branch lv1">
-                                @foreach ($kelompoks as $kelompok)
-                                  <div class="entry {{(count($kelompoks) == 1 ? 'sole' : '')}}">
-                                    <span class="label">{{$kelompok->id_peserta}}</span>
-                                    @if (count($kelompoks) > 1)
-                                        @foreach ($pesertaKKs as $pesertaKK)
-                                          @if ($pesertaKK != null)
-                                              <div class="branch lv{{$branchLv++}}">
-                                          @foreach ($pesertaKK as $peserta)
-                                            @if ($peserta->id_ketua_kelompok == $kelompok->id_peserta)
-                                                <div class="entry {{(count($pesertaKK) == 1 ? 'sole' : '')}}">
-                                                  <span class="label">{{$peserta->id_peserta}}</span>
-                                                </div>
+                          <div class="border border-1">
+                            <div class="bg-light text-center p-3 mb-2">
+                              {{auth()->user()->name}}
+                              <p>(Ketua Kelompok)</p>
+                            </div>
+                            <div class="container">
+                              <div class="row p-1">
+                                @foreach ($kelompokGenSs as $kelompokGenS)
+                                  <div class="col-4 border p-1">
+                                    {{$noBagan++}}. {{$kelompokGenS->nama_peserta}} (G1)
+                                    <hr class="p-0 m-0">
+                                    <ol>
+                                      @if (is_array($kelompoksGenDuas) || is_object($kelompoksGenDuas)) <!-- 2 -->
+                                        @foreach ($kelompoksGenDuas as $kelompoksGenDua)
+                                          @foreach ($kelompoksGenDua as $kelompokGenDua)
+                                            @if ($kelompokGenDua->id_ketua_kelompok == $kelompokGenS->id_peserta)
+                                              <li>{{$kelompokGenDua->nama_peserta}} (G2)</li>
+                                              <ol>
+                                                @if (is_array($kelompoksGenTigas) || is_object($kelompoksGenTigas)) <!-- 3 -->
+                                                  @foreach ($kelompoksGenTigas as $kelompoksGenTiga)
+                                                    @foreach ($kelompoksGenTiga as $kelompokGenTiga)
+                                                      @if ($kelompokGenTiga->id_ketua_kelompok == $kelompokGenDua->id_peserta)
+                                                        <li>{{$kelompokGenTiga->nama_peserta}} (G3)</li>
+                                                        <ol>
+                                                          @if (is_array($kelompoksGenEmpats) || is_object($kelompoksGenEmpats)) <!-- 4 -->
+                                                            @foreach ($kelompoksGenEmpats as $kelompoksGenEmpat)
+                                                              @foreach ($kelompoksGenEmpat as $kelompokGenEmpat)
+                                                                @if ($kelompokGenEmpat->id_ketua_kelompok == $kelompokGenTiga->id_peserta)
+                                                                  <li>{{$kelompokGenEmpat->nama_peserta}} (G4)</li>
+                                                                  <ol>
+                                                                    @if (is_array($kelompoksGenLimas) || is_object($kelompoksGenLimas)) <!-- 4 -->
+                                                                      @foreach ($kelompoksGenLimas as $kelompoksGenLima)
+                                                                        @foreach ($kelompoksGenLima as $kelompokGenLima)
+                                                                          <li>{{$kelompokGenLima->nama_peserta}} (G5)</li>
+                                                                        @endforeach
+                                                                      @endforeach
+                                                                    @endif
+                                                                  </ol>
+                                                                @endif
+                                                              @endforeach
+                                                            @endforeach
+                                                          @endif
+                                                        </ol>
+                                                      @endif
+                                                    @endforeach
+                                                  @endforeach
+                                                @endif
+                                              </ol>
                                             @endif
                                           @endforeach
-                                              </div>
-                                          @endif
                                         @endforeach
-                                    @endif
+                                      @endif
+                                    </ol>
                                   </div>
                                 @endforeach
                               </div>
-                            @endif
+                            </div>
                           </div>
                         </div>
                         <div class="modal-footer">

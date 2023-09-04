@@ -124,7 +124,7 @@ class DataLembagaController extends Controller
       'fileUploadEvangelismExplosionDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadIkatanDinasDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadPrktkDuaThnDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
-      'emailDatas'   => 'email:rfc,dns|unique:users,email',
+      'emailDatas'   => 'required|email:rfc,dns|unique:users,email',
       'lokasiDatas'  => 'required',
       'institusiDatas'   => 'required',
       'kata_sandiDatas'  => 'required'
@@ -155,6 +155,8 @@ class DataLembagaController extends Controller
       'fileUploadIkatanDinasDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadPrktkDuaThnDatas.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadPrktkDuaThnDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
+      'emailDatas.rquired' => 'Alamat Surel tidak boleh kosong.',
+      'emailDatas.email' => 'Alamat Surel harus menggunakan @ dan domain.',
       'emailDatas.unique' => 'Alamat Surel sudah ada.',
       'lokasiDatas.required' => 'Lokasi tidak boleh kosong.',
       'institusiDatas.required' => 'Lembaga tidak boleh kosong.',
@@ -482,9 +484,9 @@ class DataLembagaController extends Controller
    * @param  \App\Models\Data_lembaga  $data_lembaga
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, Data_lembaga $data_lembaga)
+  public function update(Request $request, $id)
   {
-      //
+    // $lembagaEdit = Data_lembaga::where('kode_wilayah',$id)->firstOrFail();
   }
 
   /**
@@ -591,7 +593,7 @@ class DataLembagaController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function indexPengurusPM()
-    {
+  {
     $dataLembagas = Data_lembaga::where('institusi', 'PM (Parousia Ministry)')
                                 ->addSelect([
                                   'id_ketua_kelompok' => Nama_kelompok::select('id_ketua_kelompok')
@@ -667,7 +669,7 @@ class DataLembagaController extends Controller
       'fileUploadEvangelismExplosionDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadIkatanDinasDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadPrktkDuaThnDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
-      'emailDatas'   => 'email:rfc,dns|unique:users,email',
+      'emailDatas'   => 'required|email:rfc,dns|unique:users,email',
       'lokasiDatas'  => 'required',
       'institusiDatas'   => 'required',
       'kata_sandiDatas'  => 'required'
@@ -698,6 +700,8 @@ class DataLembagaController extends Controller
       'fileUploadIkatanDinasDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadPrktkDuaThnDatas.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadPrktkDuaThnDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
+      'emailDatas.rquired' => 'Alamat Surel tidak boleh kosong.',
+      'emailDatas.email' => 'Alamat Surel harus menggunakan @ dan domain.',
       'emailDatas.unique' => 'Alamat Surel sudah ada.',
       'lokasiDatas.required' => 'Lokasi tidak boleh kosong.',
       'institusiDatas.required' => 'Lembaga tidak boleh kosong.',
@@ -1104,11 +1108,12 @@ class DataLembagaController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function indexKetuaLokasiPM()
-    {
+  {
     $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
     $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
     $dataLembagas = Data_lembaga::where('institusi', 'PM (Parousia Ministry)')
                                 ->where('lokasi', $cekLokasi->nama_lokasi)
+                                ->where('data_lembaga', '!=', 'Pengurus')
                                 ->addSelect([
                                   'id_ketua_kelompok' => Nama_kelompok::select('id_ketua_kelompok')
                                       ->whereColumn('id_ketua_kelompok', 'data_lembagas.id_user')
@@ -1183,7 +1188,7 @@ class DataLembagaController extends Controller
       'fileUploadEvangelismExplosionDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadIkatanDinasDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadPrktkDuaThnDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
-      'emailDatas'   => 'email:rfc,dns|unique:users,email',
+      'emailDatas'   => 'required|email:rfc,dns|unique:users,email',
       'lokasiDatas'  => 'required',
       'institusiDatas'   => 'required',
       'kata_sandiDatas'  => 'required'
@@ -1214,6 +1219,8 @@ class DataLembagaController extends Controller
       'fileUploadIkatanDinasDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadPrktkDuaThnDatas.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadPrktkDuaThnDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
+      'emailDatas.rquired' => 'Alamat Surel tidak boleh kosong.',
+      'emailDatas.email' => 'Alamat Surel harus menggunakan @ dan domain.',
       'emailDatas.unique' => 'Alamat Surel sudah ada.',
       'lokasiDatas.required' => 'Lokasi tidak boleh kosong.',
       'institusiDatas.required' => 'Lembaga tidak boleh kosong.',
@@ -1700,7 +1707,7 @@ class DataLembagaController extends Controller
       'fileUploadEvangelismExplosionDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadIkatanDinasDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadPrktkDuaThnDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
-      'emailDatas'   => 'email:rfc,dns|unique:users,email',
+      'emailDatas'   => 'required|email:rfc,dns|unique:users,email',
       'lokasiDatas'  => 'required',
       'institusiDatas'   => 'required',
       'kata_sandiDatas'  => 'required'
@@ -1731,6 +1738,8 @@ class DataLembagaController extends Controller
       'fileUploadIkatanDinasDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadPrktkDuaThnDatas.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadPrktkDuaThnDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
+      'emailDatas.rquired' => 'Alamat Surel tidak boleh kosong.',
+      'emailDatas.email' => 'Alamat Surel harus menggunakan @ dan domain.',
       'emailDatas.unique' => 'Alamat Surel sudah ada.',
       'lokasiDatas.required' => 'Lokasi tidak boleh kosong.',
       'institusiDatas.required' => 'Lembaga tidak boleh kosong.',
@@ -2138,11 +2147,12 @@ class DataLembagaController extends Controller
    * @return \Illuminate\Http\Response
    */
   public function indexKetuaLokasiGKP()
-    {
-      $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
-      $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
+  {
+    $cekKetuaLokasi = Ketua_lokasi::where('alamat_surelKL', auth()->user()->email)->first();
+    $cekLokasi = Lokasi::where('nama_lokasi', $cekKetuaLokasi->lokasiKL)->first();
     $dataLembagas = Data_lembaga::where('institusi', 'GKP (Gereja Kristen Parousia)')
                                 ->where('lokasi', $cekLokasi->nama_lokasi)
+                                ->where('data_lembaga', '!=', 'Pengurus')
                                 ->addSelect([
                                   'id_ketua_kelompok' => Nama_kelompok::select('id_ketua_kelompok')
                                       ->whereColumn('id_ketua_kelompok', 'data_lembagas.id_user')
@@ -2217,7 +2227,7 @@ class DataLembagaController extends Controller
       'fileUploadEvangelismExplosionDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadIkatanDinasDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
       'fileUploadPrktkDuaThnDatas'  => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,xlsx,xls,txt,pdf,zip',
-      'emailDatas'   => 'email:rfc,dns|unique:users,email',
+      'emailDatas'   => 'required|email:rfc,dns|unique:users,email',
       'lokasiDatas'  => 'required',
       'institusiDatas'   => 'required',
       'kata_sandiDatas'  => 'required'
@@ -2248,6 +2258,8 @@ class DataLembagaController extends Controller
       'fileUploadIkatanDinasDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
       'fileUploadPrktkDuaThnDatas.file' => 'Berkas harus berupa Dokumen.',
       'fileUploadPrktkDuaThnDatas.mimes' => 'Berkas harus berupa Dokumen (.doc, .docx, .csv, .xlsx, .xls, .txt, .pdf, .zip).',
+      'emailDatas.rquired' => 'Alamat Surel tidak boleh kosong.',
+      'emailDatas.email' => 'Alamat Surel harus menggunakan @ dan domain.',
       'emailDatas.unique' => 'Alamat Surel sudah ada.',
       'lokasiDatas.required' => 'Lokasi tidak boleh kosong.',
       'institusiDatas.required' => 'Lembaga tidak boleh kosong.',

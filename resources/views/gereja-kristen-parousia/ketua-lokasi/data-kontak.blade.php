@@ -79,6 +79,7 @@
                         </div>
                         <div class="input-center ps-5">
                           <div class="w-75">
+                            <input type="text" name="inputMethod" value="tambahDataBaru" hidden>
                             <div class="mb-3 row">
                               <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
@@ -121,7 +122,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span></label>
+                              <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span> <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
                                   <option value="">-Skala-</option>
@@ -154,7 +155,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="catatanPeserta" class="col-sm-3 px-1">Catatan</label>
+                              <label for="catatanPeserta" class="col-sm-3 px-1">Catatan <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
                                 @error('catatanPeserta')
@@ -168,7 +169,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP</label>
+                              <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999">
                                 @error('noHpPeserta')
@@ -182,7 +183,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="alamatPeserta" class="col-sm-3 px-1">Alamat</label>
+                              <label for="alamatPeserta" class="col-sm-3 px-1">Alamat <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
                                 @error('alamatPeserta')
@@ -196,7 +197,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
+                              <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir <span class="required-input">(*)</span></label>
                               <div class="col-sm-5">
                                 <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung">
                                 @error('tempatLahirPeserta')
@@ -224,7 +225,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
+                              <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
                                   <option value="">-Pekerjaan-</option>
@@ -248,7 +249,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku</label>
+                              <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda">
                                 @error('sukuPeserta')
@@ -262,7 +263,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="statusPeserta" class="col-sm-3 px-1">Status</label>
+                              <label for="statusPeserta" class="col-sm-3 px-1">Status <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <div class="form-check form-switch">
                                   <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" value="Aktif">
@@ -279,14 +280,52 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Naungan</label>
+                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak <span class="required-input">(*)</span></label>
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
+                                  <option value="">-Lokasi Kontak-</option>
+                                  @foreach ($lokasis as $lokasi)
+                                    <option value="{{$lokasi->nama_lokasi}}">{{$lokasi->nama_lokasi}}</option>
+                                  @endforeach
+                                </select>
+                                @error('lokasiPeserta')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
-                                  <option value="">-Naungan-</option>
-                                  <option value="BPH J2 / YMP (Yayasan Ministry Parousia)">BPH J2 / YMP (Yayasan Ministry Parousia)</option>
+                                  <option value="">-Lembaga-</option>
+                                  <option value="PM (Parousia Ministry)">PM (Parousia Ministry)</option>
                                   <option value="GKP (Gereja Kristen Parousia)">GKP (Gereja Kristen Parousia)</option>
                                 </select>
                                 @error('institusiPeserta')
+                                  <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
+                                    <p class="" style="font-size: 10pt;">
+                                      <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                                      {{ $message }}
+                                    </p>
+                                  </div>
+                                @enderror
+                              </div>
+                            </div>
+                            <div class="mb-3 row">
+                              <label for="pemintaInput" class="col-sm-3 px-1">Peminta Input <span class="required-input">(*)</span></label>
+                              <div class="col-sm-9">
+                                <select class="form-select form-select-sm" name="pemintaInput" id="pemintaInput" aria-label=".form-select-sm pemintaInput">
+                                  <option value="">-Peminta Input-</option>
+                                  @foreach ($dataLembagas as $dataLembaga)
+                                    <option value="{{$dataLembaga->id_user}}">{{$dataLembaga->nama_lengkap}} ({{$dataLembaga->data_lembaga}} / {{$dataLembaga->institusi}})</option>
+                                  @endforeach
+                                </select>
+                                @error('pemintaInput')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
                                       <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -336,8 +375,9 @@
                   <th scope="col">Alamat</th>
                   <th scope="col">Skala</th>
                   <th scope="col">Catatan</th>
-                  <th scope="col">Status</th>
+                  <th scope="col">Aktif/Tidak Aktif</th>
                   <th scope="col">Lokasi</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Ubah | Hapus</th>
                 </tr>
               </thead>
@@ -354,22 +394,39 @@
                     <td>{{$peserta->jk_peserta}}</td>
                     <td>{{$peserta->alamat_peserta}}</td>
                     <td>
-                      <a href="#lihatSkala{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" data-bs-target="#lihatSkala" id="lihatSkalaButton" class="text-info" data-attr="{{route('data-kontak.showKetuaLokasiGKP', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->skala}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Skala"></i>
                       </a>
                     </td>
                     <td>
-                      <a href="#lihatCatatan{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-info">
+                      <a data-bs-toggle="modal" data-bs-target="#lihatCatatan" id="lihatCatatanButton" class="text-info" data-attr="{{route('data-kontak.showKetuaLokasiGKP', $peserta->id_peserta)}}" data-id="{{$peserta->id_peserta}}">
                         {{$peserta->catatan}} <i class="bi bi-info-circle align-top info-detail" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Catatan"></i>
                       </a>
                     </td>
                     <td>{{$peserta->status_peserta}}</td>
                     <td>{{$peserta->lokasi_peserta}}</td>
                     <td>
+                      @if ($peserta->skala == '3')
+                        @if ($peserta->id_peserta == $peserta->id_user)
+                          Ketua Kelompok
+                        @else
+                          Peserta
+                        @endif
+                      @else
+                        Peserta
+                      @endif
+                    </td>
+                    <td>
                       <div class="icon-action">
-                        <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-primary">
-                          <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
-                        </a>
+                        @if ($peserta->id_peserta == $peserta->id_user)
+                          <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="link-secondary pe-none" tabindex="-1" aria-disabled="true" disabled>
+                            <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          </a>
+                        @else
+                          <a href="#ubahData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-primary">
+                            <i class="bi bi-pencil-square" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ubah Data"></i>
+                          </a>
+                        @endif
                         |
                         <a href="#hapusData{{$peserta->id_peserta}}" data-bs-toggle="modal" class="text-danger">
                           <i class="bi bi-trash" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hapus Data"></i>
@@ -390,7 +447,7 @@
                         </div>
                         <div class="modal-body">
                           <div class="container">
-                            <img src="{{ $peserta->foto_peserta != '' ? asset('images/Peserta/Foto/'.$peserta->foto_peserta) : asset('images/no-user.png') }}" class="img-fluid img-thumbnail rounded mx-auto d-block w-25" alt="...">
+                            <img src="{{ $peserta->foto_peserta != '' ? asset('images/Peserta/'.$peserta->foto_peserta) : asset('images/no-user.png') }}" class="img-fluid img-thumbnail rounded mx-auto d-block w-25" alt="...">
                           </div>
                           <hr>
                           <div class="content">
@@ -675,11 +732,11 @@
                   </div>
                   <!-- End Modal Hapus Data -->
                   <!-- Modal Lihat Skala -->
-                  <div class="modal fade" id="lihatSkala{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkala{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatSkala" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatSkalaLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatSkala{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatSkalaLabel">
                             <i class="bi bi-graph-up text-info"></i>
                             Lihat Skala Kontak
                           </h5>
@@ -696,17 +753,7 @@
                               <div class="col-3">Keterangan</div>
                             </div>
                             <hr>
-                            @forelse ($skalas as $skala)
-                              <div class="row">
-                                <div class="col-1">{{$noSkalas++}}.</div>
-                                <div class="col-3">{{$skala->tgl_kontak}}</div>
-                                <div class="col-2">{{$skala->skala}}</div>
-                                <div class="col-3">{{$skala->status}}</div>
-                                <div class="col-3">{{$skala->keterangan}}</div>
-                              </div>
-                              <hr class="text-muted">
-                            @empty
-                            @endforelse
+                            <div id="skalas"></div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-3">
@@ -741,11 +788,11 @@
                   </div>
                   <!-- End Modal Lihat Skala -->
                   <!-- Modal Lihat Catatan -->
-                  <div class="modal fade" id="lihatCatatan{{$peserta->id_peserta}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatan{{$peserta->id_peserta}}Label" aria-hidden="true">
+                  <div class="modal fade" id="lihatCatatan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lihatCatatanLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="lihatCatatan{{$peserta->id_peserta}}Label">
+                          <h5 class="modal-title" id="lihatCatatanLabel">
                             <i class="bi bi-journal-text text-info"></i>
                             Lihat Catatan Kontak
                           </h5>
@@ -760,15 +807,7 @@
                               <div class="col-7">Catatan</div>
                             </div>
                             <hr>
-                            @forelse ($catatans as $catatan)
-                              <div class="row">
-                                <div class="col-1">{{$noCatatans}}.</div>
-                                <div class="col-4">{{$catatan->tgl_kontak}}</div>
-                                <div class="col-7">{{$catatan->catatan}}</div>
-                              </div>
-                              <hr class="text-muted">
-                            @empty
-                            @endforelse
+                            <div id="catatans"></div>
                             <div class="row">
                               <div class="col-1"></div>
                               <div class="col-4">
@@ -904,6 +943,47 @@
 @section('javascript')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
 <script>
-
+  $(document).on('click', '#lihatSkalaButton', function(event) {
+    event.preventDefault();
+    var href = $(this).data('attr');
+    var id = $(this).data('id');
+    $.get(href, function(result) {
+      no = 1;
+      html = '';
+      $.each(result.skala, function(index, hasil) {
+        $('#lihatSkala').modal("show");
+        nos = no++;
+        html += '<div class="row">';
+        html += '<div class="col-1">'+nos+'</div>';
+        html += '<div class="col-3">'+hasil.tgl_kontak+'</div>';
+        html += '<div class="col-2">'+hasil.skala+'</div>';
+        html += '<div class="col-3">'+hasil.status+'</div>';
+        html += '<div class="col-3">'+hasil.keterangan+'</div>';
+        html += '</div>';
+        html += '<hr>';
+      });
+      $('#skalas').empty('').append(html);
+    });
+  });
+  $(document).on('click', '#lihatCatatanButton', function(event) {
+    event.preventDefault();
+    var href = $(this).data('attr');
+    var id = $(this).data('id');
+    $.get(href, function(result) {
+      no = 1;
+      html = '';
+      $.each(result.catatan, function(index, hasil) {
+        $('#lihatCatatan').modal("show");
+        nos = no++;
+        html += '<div class="row">';
+        html += '<div class="col-1">'+nos+'</div>';
+        html += '<div class="col-4">'+hasil.tgl_kontak+'</div>';
+        html += '<div class="col-7">'+hasil.catatan+'</div>';
+        html += '</div>';
+        html += '<hr>';
+      });
+      $('#catatans').empty('').append(html);
+    });
+  });
 </script>
 @endsection

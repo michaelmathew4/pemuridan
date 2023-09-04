@@ -1,0 +1,35 @@
+Alur Elim
+Status aktifitas dan status pembayaran
+
+USER
+1. User Daftar/Login
+2. User Lengkapi data diri dan Bisa rubah Data email pass
+3. User Pilih dokter
+4. User Pilih jadwal dan isi form
+5. User Booking
+6. User Bayar melalui TF / Cash (Jatuh tempo 12 Jam jika melalui TF)
+7. User Mendapatkan nomor urut
+8. User Akan di Email/Notif = Judul Appointment, Isi = Thanks... Nama user dan Data User, Nama dokter, Jadwal, Keluhan, Alamat Klinik, No Urut, Pembayaran VIA (Lunas atau belum)
+9. User Datang ke Klinik dengan jadwal yang ditentukan
+10. User Dipanggil dan diperiksa
+11. User akan di Email/Notif jika Dokter/Admin menyetujui atau tidaknya appointment
+
+Dokter
+1. Dokter Login
+2. Dokter Lengkapi data diri dan Bisa rubah Data email pass
+3. Dokter CRUD Jadwal
+4. Dokter Melihat Appointment sesuai dokter (dirinya) -> Dokter akan mendapatkan email/notif jika ada appointment terbaru
+5. (Kalau status pasien sudah datang ke klinik (In-coming/Up-coming) dari kasir/Admin) Dokter Melihatnya
+6. Dokter dapat merubah status dan komen jika sudah selesai periksa -> Have been checked
+7. Dokter Bisa report
+8. Dokter Dapat membatalkan appointment dan memberikan alasan/deskripsi
+9. Dokter Dapat memilih Setuju atau tidak appointment dari user dan memberikan alasan
+
+UserAdmin
+1. Admin Login
+2. Admin CRUD Dokter+Jadwal, Klinik dan bisa rubah data email pass
+3. Admin Melihat dan Merubah Appointment -> Admin akan mendapatkan email/notif jika ada appointment terbaru
+4. Admin Merubah status aktifitas dan pembayaran user yang melakukan appointment -> Jika User Datang (Status Aktifitas In-Coming/Up-Coming), Jika Sudah bayar / belum bayar (Paid / not paid)
+5. Admin Bisa cek ulang semua appointment jika status dari dokter Have been Checked dan jika sudah benar dan sesuai menjadi Finish, jika belum Not finished yet
+6. Admin Dapat membatalkan appointment dan memberi alasan/deskripsi
+7. Admin Dapat memilih setuju atau tidak appointment dari user sesuai alasan dokter dan memberikan alasan

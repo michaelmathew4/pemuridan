@@ -411,9 +411,9 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editNamaKL" class="col-sm-3 px-1 form-label">Nama Lengkap</label>
+                                    <label for="editNamaKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">Nama Lengkap</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editNamaKL" class="form-control form-control-sm" id="editNamaKL" placeholder="Nama Lengkap" value="{{$lokasi->namaKL}}">
+                                      <input type="text" name="editNamaKL" class="form-control form-control-sm" id="editNamaKL{{$lokasi->id}}" placeholder="Nama Lengkap" value="{{$lokasi->namaKL}}">
                                       @error('editNamaKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -425,15 +425,15 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editJkKL" class="col-sm-3 px-1 form-label">Jenis Kelamin</label>
+                                    <label for="editJkKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">Jenis Kelamin</label>
                                     <div class="col-sm-9">
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editJkKL"id="laki" value="Laki-laki" {{($lokasi->jkKL == 'Laki-laki') ? 'checked' : ''}} >
-                                        <label class="form-check-label" for="laki">Laki-laki</label>
+                                        <input class="form-check-input" type="radio" name="editJkKL" id="laki{{$lokasi->id}}" value="Laki-laki" {{($lokasi->jkKL == 'Laki-laki') ? 'checked' : ''}} >
+                                        <label class="form-check-label" for="laki{{$lokasi->id}}">Laki-laki</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editJkKL" id="perempuan" value="Perempuan" {{($lokasi->jkKL == 'Perempuan') ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="perempuan">Perempuan</label>
+                                        <input class="form-check-input" type="radio" name="editJkKL" id="perempuan{{$lokasi->id}}" value="Perempuan" {{($lokasi->jkKL == 'Perempuan') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="perempuan{{$lokasi->id}}">Perempuan</label>
                                       </div>
                                       @error('editJkKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -446,9 +446,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editAlamatKL" class="col-sm-3 px-1 form-label">Alamat</label>
+                                    <label for="editAlamatKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">Alamat</label>
                                     <div class="col-sm-9">
-                                      <textarea class="form-control form-control-sm" name="editAlamatKL" id="editAlamatKL" rows="3" placeholder="Alamat">{{$lokasi->alamatKL}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editAlamatKL" id="editAlamatKL{{$lokasi->id}}" rows="3" placeholder="Alamat">{{$lokasi->alamatKL}}</textarea>
                                       @error('editAlamatKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -460,9 +460,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editNohpKL" class="col-sm-3 px-1 form-label">No Hp</label>
+                                    <label for="editNohpKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">No Hp</label>
                                     <div class="col-sm-9">
-                                      <input type="number" name="editNohpKL" class="form-control form-control-sm" id="editNohpKL" placeholder="08123456789" value="{{$lokasi->nohpKL}}">
+                                      <input type="number" name="editNohpKL" class="form-control form-control-sm" id="editNohpKL{{$lokasi->id}}" placeholder="08123456789" value="{{$lokasi->nohpKL}}">
                                       @error('editNohpKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -474,9 +474,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editAlamat_surelKL" class="col-sm-3 px-1 form-label">Alamat Surel</label>
+                                    <label for="editAlamat_surelKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">Alamat Surel</label>
                                     <div class="col-sm-9">
-                                      <input type="email" name="editAlamat_surelKL" class="form-control form-control-sm" id="editAlamat_surelKL" placeholder="Alamat Surel" value="{{$lokasi->alamat_surelKL}}">
+                                      <input type="email" name="editAlamat_surelKL" class="form-control form-control-sm" id="editAlamat_surelKL{{$lokasi->id}}" placeholder="Alamat Surel" value="{{$lokasi->alamat_surelKL}}">
                                       @error('editAlamat_surelKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -488,9 +488,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKata_sandiKL" class="col-sm-3 px-1 form-label">Kata Sandi</label>
+                                    <label for="editKata_sandiKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">Kata Sandi</label>
                                     <div class="col-sm-9">
-                                      <input type="password" name="editKata_sandiKL" class="form-control form-control-sm" id="editKata_sandiKL" placeholder="******" value="{{$lokasi->kata_sandiKL}}">
+                                      <input type="password" name="editKata_sandiKL" class="form-control form-control-sm" id="editKata_sandiKL{{$lokasi->id}}" placeholder="******" value="{{$lokasi->kata_sandiKL}}">
                                       @error('editKata_sandiKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -502,9 +502,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editLokasiKL" class="col-sm-3 px-1 form-label">Lokasi</label>
+                                    <label for="editLokasiKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">Lokasi</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editLokasiKL" id="editLokasiKL">
+                                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editLokasiKL" id="editLokasiKL{{$lokasi->id}}">
                                         <option value="{{$lokasi->lokasiKL}}">{{$lokasi->lokasiKL}}</option>
                                           @foreach ($lokasiWilayahs as $lokasiWilayah)
                                             <option value="{{$lokasiWilayah->kode_lokasi}}">{{$lokasiWilayah->nama_lokasi}}</option>
@@ -521,7 +521,7 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editFotoKL" class="col-sm-3 px-1 form-label">Foto</label>
+                                    <label for="editFotoKL{{$lokasi->id}}" class="col-sm-3 px-1 form-label">Foto</label>
                                     <div class="col-3">
                                       <div class="position-relative wrapping-img-icon">
                                         <div class="">
@@ -537,7 +537,7 @@
                                       </div>
                                     </div>
                                     <div class="col-6">
-                                      <input type="file" name="editFotoKL" class="form-control form-control-sm" id="editFotoKL" onchange="document.getElementById('outputEdit{{$lokasi->id}}').src = window.URL.createObjectURL(this.files[0])">
+                                      <input type="file" name="editFotoKL" class="form-control form-control-sm" id="editFotoKL{{$lokasi->id}}" onchange="document.getElementById('outputEdit{{$lokasi->id}}').src = window.URL.createObjectURL(this.files[0])">
                                       <input type="text" name="editFotoTextKL" id="editFotoTextKL{{$lokasi->id}}" value="{{$lokasi->fotoKL}}" hidden>
                                       @error('editFotoKL')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">

@@ -1,0 +1,33 @@
+if ($checkPageReference == $allFolder) {
+			    			$directOrModal = 'href="'.$allFolder->url.'"';
+			    		} else {
+			    			$directOrModal = 'href="" type="button" data-bs-target="#modalNotPageReference'.$allFolder.'" data-bs-toggle="modal"';
+			    		}
+			    		<?= $directOrModal ?>
+
+
+					  <!-- Modal -->
+						<div class="modal fade" id="modalNotPageReference<?= $allFolder?>" tabindex="-1" aria-labelledby="modalNotPageReference<?= $allFolder?>Label" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="modalNotPageReference<?= $allFolder?>Label">Dilarang!</h5>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body">
+						        <p>Maaf, Anda bukan dari Lokasi <?= $allFolder->title?></p>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
+Hak Akses
+Admin
+Super Admin
+SuperAdmin
+HT
+Hamba Tuhan
+Majelis

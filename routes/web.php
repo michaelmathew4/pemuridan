@@ -101,9 +101,6 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
     Route::get('/parousia-ministry/pengurus/data-lembaga', [DataLembagaController::class, 'indexPengurusPM'])
           ->name('data-lembaga.indexPengurusPM');
 
-    Route::get('/parousia-ministry/pengurus/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'showPengurusPM'])
-          ->name('data-lembaga.showPengurusPM');
-
     Route::post('/parousia-ministry/pengurus/data-lembaga', [DataLembagaController::class, 'storePengurusPM'])
           ->name('data-lembaga.storePengurusPM');
     
@@ -113,14 +110,14 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
     Route::delete('/parousia-ministry/pengurus/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'destroyPengurusPM'])
           ->name('data-lembaga.destroyPengurusPM');
 
+    Route::get('/parousia-ministry/pengurus/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'showPengurusPM'])
+          ->name('data-lembaga.showPengurusPM');
+
     //End Data Lembaga
 
     //Data Kontak
     Route::get('/parousia-ministry/pengurus/data-kontak', [PesertaController::class, 'indexPengurusPM'])
           ->name('data-kontak.indexPengurusPM');
-          
-    Route::get('/parousia-ministry/pengurus/data-kontak/{id_data_kontak}', [PesertaController::class, 'showPengurusPM'])
-          ->name('data-kontak.showPengurusPM');
 
     Route::post('/parousia-ministry/pengurus/data-kontak', [PesertaController::class, 'storePengurusPM'])
           ->name('data-kontak.storePengurusPM');
@@ -130,6 +127,9 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/pengurus/data-kontak/{id_data_kontak}', [PesertaController::class, 'destroyPengurusPM'])
           ->name('data-kontak.destroyPengurusPM');
+          
+    Route::get('/parousia-ministry/pengurus/data-kontak/{id_data_kontak}', [PesertaController::class, 'showPengurusPM'])
+          ->name('data-kontak.showPengurusPM');
     //End Data Kontak
   });
   //End Pengurus
@@ -143,9 +143,6 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
     //Ketua Kelompok
     Route::get('/parousia-ministry/ketua-lokasi/data-lembaga', [DataLembagaController::class, 'indexKetuaLokasiPM'])
           ->name('data-lembaga.indexKetuaLokasiPM');
-          
-    Route::get('/parousia-ministry/ketua-lokasi/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'showKetuaLokasiPM'])
-          ->name('data-lembaga.showKetuaLokasiPM');
 
     Route::post('/parousia-ministry/ketua-lokasi/data-lembaga', [DataLembagaController::class, 'storeKetuaLokasiPM'])
           ->name('data-lembaga.storeKetuaLokasiPM');
@@ -155,15 +152,15 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/ketua-lokasi/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'destroyKetuaLokasiPM'])
           ->name('data-lembaga.destroyKetuaLokasiPM');
+          
+    Route::get('/parousia-ministry/ketua-lokasi/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'showKetuaLokasiPM'])
+          ->name('data-lembaga.showKetuaLokasiPM');
 
     //End Ketua Kelompok
 
     //Data Kontak
     Route::get('/parousia-ministry/ketua-lokasi/data-kontak', [PesertaController::class, 'indexKetuaLokasiPM'])
           ->name('data-kontak.indexKetuaLokasiPM');
-
-    Route::get('/parousia-ministry/ketua-lokasi/data-kontak/{id_data_kontak}', [PesertaController::class, 'showKetuaLokasiPM'])
-          ->name('data-kontak.showKetuaLokasiPM');
 
     Route::post('/parousia-ministry/ketua-lokasi/data-kontak', [PesertaController::class, 'storeKetuaLokasiPM'])
           ->name('data-kontak.storeKetuaLokasiPM');
@@ -173,12 +170,15 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::delete('/parousia-ministry/ketua-lokasi/data-kontak/{id_data_kontak}', [PesertaController::class, 'destroyKetuaLokasiPM'])
           ->name('data-kontak.destroyKetuaLokasiPM');
+
+    Route::get('/parousia-ministry/ketua-lokasi/data-kontak/{id_data_kontak}', [PesertaController::class, 'showKetuaLokasiPM'])
+          ->name('data-kontak.showKetuaLokasiPM');
     //End Data Kontak
   });
   //End Ketua Lokasi
 
   //Ketua Kelompok
-  Route::group(['middleware' => ['auth', 'cekRole:Ketua Kelompok']], function () {
+  Route::group(['middleware' => ['auth', 'cekRole:Utusan']], function () {
     Route::get('/parousia-ministry/ketua-kelompok', function () {
       return view('/parousia-ministry/ketua-kelompok/index');
     })->name('berandaDataKKPM');
@@ -193,15 +193,15 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:PM,Admin,SuperAdmin']], fun
 
     Route::post('/parousia-ministry/ketua-kelompok/data-kontak', [PesertaController::class, 'storeDataKKPM'])
           ->name('data-kontak.storeDataKKPM');
-
-    Route::get('/parousia-ministry/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'showDataKKPM'])
-          ->name('data-kontak.showDataKKPM');
     
     Route::put('/parousia-ministry/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'updateDataKKPM'])
           ->name('data-kontak.updateDataKKPM');
 
     Route::delete('/parousia-ministry/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'destroyDataKKPM'])
           ->name('data-kontak.destroyDataKKPM');
+
+    Route::get('/parousia-ministry/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'showDataKKPM'])
+          ->name('data-kontak.showDataKKPM');
     //End data Kontak
   });
   //END Ketua Kelompok
@@ -248,14 +248,14 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/pengurus/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'destroyPengurusGKP'])
           ->name('data-lembaga.destroyPengurusGKP');
+          
+    Route::get('/gereja-kristen-parousia/pengurus/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'showPengurusGKP'])
+          ->name('data-lembaga.showPengurusGKP');    
     //End Data Lembaga
 
     //Data Kontak
     Route::get('/gereja-kristen-parousia/pengurus/data-kontak', [PesertaController::class, 'indexPengurusGKP'])
           ->name('data-kontak.indexPengurusGKP');
-          
-    Route::get('/gereja-kristen-parousia/pengurus/data-kontak/{id_data_kontak}', [PesertaController::class, 'showPengurusGKP'])
-      ->name('data-kontak.showPengurusGKP');    
 
     Route::post('/gereja-kristen-parousia/pengurus/data-kontak', [PesertaController::class, 'storePengurusGKP'])
           ->name('data-kontak.storePengurusGKP');
@@ -265,6 +265,9 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/pengurus/data-kontak/{id_data_kontak}', [PesertaController::class, 'destroyPengurusGKP'])
           ->name('data-kontak.destroyPengurusGKP');
+          
+    Route::get('/gereja-kristen-parousia/pengurus/data-kontak/{id_data_kontak}', [PesertaController::class, 'showPengurusGKP'])
+      ->name('data-kontak.showPengurusGKP');    
     //End Data Kontak
   });
   //End Pengurus
@@ -287,11 +290,14 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/ketua-lokasi/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'destroyKetuaLokasiGKP'])
           ->name('data-lembaga.destroyKetuaLokasiGKP');
+          
+    Route::get('/gereja-kristen-parousia/ketua-lokasi/data-lembaga/{id_data_lembaga}', [DataLembagaController::class, 'showKetuaLokasiGKP'])
+          ->name('data-lembaga.showKetuaLokasiGKP');
     //End Ketua Kelompok
 
     //Data Kontak
     Route::get('/gereja-kristen-parousia/ketua-lokasi/data-kontak', [PesertaController::class, 'indexKetuaLokasiGKP'])
-          ->name('data-kontak.indexKetuaLokasiGKP');
+          ->name('data-kontak.indexKetuaLokasiGKP'); 
 
     Route::post('/gereja-kristen-parousia/ketua-lokasi/data-kontak', [PesertaController::class, 'storeKetuaLokasiGKP'])
           ->name('data-kontak.storeKetuaLokasiGKP');
@@ -301,12 +307,15 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::delete('/gereja-kristen-parousia/ketua-lokasi/data-kontak/{id_data_kontak}', [PesertaController::class, 'destroyKetuaLokasiGKP'])
           ->name('data-kontak.destroyKetuaLokasiGKP');
+          
+    Route::get('/gereja-kristen-parousia/ketua-lokasi/data-kontak/{id_data_kontak}', [PesertaController::class, 'showKetuaLokasiGKP'])
+      ->name('data-kontak.showKetuaLokasiGKP');   
     //End Data Kontak
   });
   //End Ketua Lokasi
 
   //Ketua Kelompok
-  Route::group(['middleware' => ['auth', 'cekRole:Ketua Kelompok']], function () {
+  Route::group(['middleware' => ['auth', 'cekRole:Ketua Kelompok, Utusan']], function () {
     Route::get('/gereja-kristen-parousia/ketua-kelompok', function () {
       return view('/gereja-kristen-parousia/ketua-kelompok/index');
     })->name('berandaDataKKGKP');
@@ -317,15 +326,15 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::post('/gereja-kristen-parousia/ketua-kelompok/kelompok', [KelompokController::class, 'storeKelompokKKGKP'])
           ->name('kelompok.storeKelompokKKGKP');
-
-    Route::get('/gereja-kristen-parousia/ketua-kelompok/kelompok/{id_kelompok}', [KelompokController::class, 'showKelompokKKGKP'])
-          ->name('kelompok.showKelompokKKGKP');
     
     Route::put('/gereja-kristen-parousia/ketua-kelompok/kelompok/{id_kelompok}', [KelompokController::class, 'updateKelompokKKGKP'])
           ->name('kelompok.updateKelompokKKGKP');
 
     Route::delete('/gereja-kristen-parousia/ketua-kelompok/kelompok/{id_kelompok}', [KelompokController::class, 'destroyKelompokKKGKP'])
           ->name('kelompok.destroyKelompokKKGKP');
+
+    Route::get('/gereja-kristen-parousia/ketua-kelompok/kelompok/{id_kelompok}', [KelompokController::class, 'showKelompokKKGKP'])
+          ->name('kelompok.showKelompokKKGKP');
     //End Kelompok
     
     //Data Kontak
@@ -334,15 +343,15 @@ Route::group(['middleware' => ['auth', 'cekInstitusi:GKP,Admin,SuperAdmin']], fu
 
     Route::post('/gereja-kristen-parousia/ketua-kelompok/data-kontak', [PesertaController::class, 'storeDataKKGKP'])
           ->name('data-kontak.storeDataKKGKP');
-
-    Route::get('/gereja-kristen-parousia/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'showDataKKGKP'])
-          ->name('data-kontak.showDataKKGKP');
     
     Route::put('/gereja-kristen-parousia/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'updateDataKKGKP'])
           ->name('data-kontak.updateDataKKGKP');
 
     Route::delete('/gereja-kristen-parousia/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'destroyDataKKGKP'])
           ->name('data-kontak.destroyDataKKGKP');
+
+    Route::get('/gereja-kristen-parousia/ketua-kelompok/data-kontak/{id_data_kontak}', [PesertaController::class, 'showDataKKGKP'])
+          ->name('data-kontak.showDataKKGKP');
     //End data Kontak
   });
   //End Ketua Kelompok

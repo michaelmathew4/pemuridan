@@ -538,7 +538,7 @@ class PesertaController extends Controller
    */
   public function destroy($id)
   {
-    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
+    $deleteDataPeserta = Peserta::firstWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -616,7 +616,9 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    $dataLembagas = Data_lembaga::all();
+    $dataLembagas = Data_lembaga::where('institusi', 'PM (Parousia Ministry)')
+                                ->where('data_lembaga', '!=', 'Pengurus')
+                                ->get();
     return view('parousia-ministry.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
@@ -795,7 +797,7 @@ class PesertaController extends Controller
    */
   public function updatePengurusPM(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
+    $pesertaUpdate = Peserta::firstWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -875,7 +877,7 @@ class PesertaController extends Controller
    */
   public function destroyPengurusPM($id)
   {
-    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
+    $deleteDataPeserta = Peserta::firstWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -935,7 +937,11 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('parousia-ministry.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    $dataLembagas = Data_lembaga::where('institusi', 'PM (Parousia Ministry)')
+                                ->where('lokasi', $cekLokasi->nama_lokasi)
+                                ->where('data_lembaga', '!=', 'Pengurus')
+                                ->get();
+    return view('parousia-ministry.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
 
@@ -1115,7 +1121,7 @@ class PesertaController extends Controller
    */
   public function updateKetuaLokasiPM(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
+    $pesertaUpdate = Peserta::firstWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -1192,7 +1198,7 @@ class PesertaController extends Controller
    */
   public function destroyKetuaLokasiPM($id)
   {
-    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
+    $deleteDataPeserta = Peserta::firstWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -1245,7 +1251,10 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('parousia-ministry.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    $dataLembagas = Data_lembaga::where('institusi', 'PM (Parousia Ministry)')
+                                ->where('data_lembaga', '!=', 'Pengurus')
+                                ->get();
+    return view('parousia-ministry.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
 
@@ -1421,7 +1430,7 @@ class PesertaController extends Controller
    */
   public function updateDataKKPM(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
+    $pesertaUpdate = Peserta::firstWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -1495,7 +1504,7 @@ class PesertaController extends Controller
    */
   public function destroyDataKKPM($id)
   {
-    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
+    $deleteDataPeserta = Peserta::firstWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -1559,7 +1568,9 @@ class PesertaController extends Controller
 
     $no = 1;
     $lokasis = Lokasi::all();
-    $dataLembagas = Data_lembaga::all();
+    $dataLembagas = Data_lembaga::where('institusi', 'GKP (Gereja Kristen Parousia)')
+                                ->where('data_lembaga', '!=', 'Pengurus')
+                                ->get();
     return view('gereja-kristen-parousia.pengurus.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
@@ -1738,7 +1749,7 @@ class PesertaController extends Controller
    */
   public function updatePengurusGKP(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
+    $pesertaUpdate = Peserta::firstWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -1818,7 +1829,7 @@ class PesertaController extends Controller
    */
   public function destroyPengurusGKP($id)
   {
-    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
+    $deleteDataPeserta = Peserta::firstWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -1877,7 +1888,11 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('gereja-kristen-parousia.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    $dataLembagas = Data_lembaga::where('institusi', 'GKP (Gereja Kristen Parousia)')
+                                ->where('lokasi', $cekLokasi->nama_lokasi)
+                                ->where('data_lembaga', '!=', 'Pengurus')
+                                ->get();
+    return view('gereja-kristen-parousia.ketua-lokasi.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
 
@@ -2057,7 +2072,7 @@ class PesertaController extends Controller
    */
   public function updateKetuaLokasiGKP(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
+    $pesertaUpdate = Peserta::firstWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -2134,7 +2149,7 @@ class PesertaController extends Controller
    */
   public function destroyKetuaLokasiGKP($id)
   {
-    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
+    $deleteDataPeserta = Peserta::firstWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {
@@ -2187,7 +2202,10 @@ class PesertaController extends Controller
     
     $no = 1;
     $lokasis = Lokasi::all();
-    return view('gereja-kristen-parousia.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis']));
+    $dataLembagas = Data_lembaga::where('institusi', 'GKP (Gereja Kristen Parousia)')
+                                ->where('data_lembaga', '!=', 'Pengurus')
+                                ->get();
+    return view('gereja-kristen-parousia.ketua-kelompok.data-kontak', compact(['pesertas', 'no', 'lokasis', 'dataLembagas']));
   }
 
 
@@ -2206,7 +2224,7 @@ class PesertaController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function storeDataLembagaGKP(Request $request)
+  public function storeDataKKGKP(Request $request)
   {
     if ($request->inputTambah == "tambahData") {
       $request->validate([
@@ -2363,7 +2381,7 @@ class PesertaController extends Controller
    */
   public function updateDataKKGKP(Request $request, $id)
   {
-    $pesertaUpdate = Peserta::findWhere('id_peserta', $id);
+    $pesertaUpdate = Peserta::firstWhere('id_peserta', $id);
     if($request->file('editFotoPeserta') == "") {
       if ($request->editFotoTextPeserta == '') {
         $pesertaUpdate->update([
@@ -2437,7 +2455,7 @@ class PesertaController extends Controller
    */
   public function destroyDataKKGKP($id)
   {
-    $deleteDataPeserta = Peserta::findWhere('id_peserta', $id);
+    $deleteDataPeserta = Peserta::firstWhere('id_peserta', $id);
     if ($deleteDataPeserta->foto_peserta != '') {
       $destination = 'images/Peserta/'.$deleteDataPeserta->foto_peserta;
       if (File::exists($destination)) {

@@ -139,9 +139,10 @@
                                   <select class="form-select form-select-sm" name="untukPendataans" id="untukPendataan" aria-label=".form-select-sm untukPendataan">
                                     <option value="">-Untuk-</option>
                                     <option value="Pengurus">Pengurus</option>
+                                    <option value="Ketua Lokasi">Ketua Lokasi</option>
                                     <option value="Utusan">Utusan</option>
-                                    <option value="Beasiswa">Beasiswa</option>
                                     <option value="Ketua Kelompok">Ketua Kelompok</option>
+                                    <option value="Beasiswa">Beasiswa</option>
                                   </select>
                                   @error('untukPendataans')
                                     <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -191,11 +192,7 @@
                                 <div class="mb-3 row">
                                   <label for="sapaanData" class="col-sm-3 px-1">Sapaan</label>
                                   <div class="col-sm-9">
-                                    <select class="form-select form-select-sm" name="sapaanDatas" id="sapaanData" aria-label=".form-select-sm sapaanData">
-                                      <option value="">-Sapaan-</option>
-                                      <option value="Bapak">Bapak</option>
-                                      <option value="Ibu">Ibu</option>
-                                    </select>
+                                    <input type="text" name="sapaanDatas" class="form-control form-control-sm" id="sapaanData" placeholder="Sapaan">
                                   </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -229,28 +226,20 @@
                                 <div class="mb-3 row">
                                   <label for="namaPanggilanData" class="col-sm-3 px-1">Nama Panggilan</label>
                                   <div class="col-sm-9">
-                                    <input type="text" name="namaPanggilanDatas" class="form-control form-control-sm" id="namaPanggilanData" placeholder="cth: Angel">
+                                    <input type="text" name="namaPanggilanDatas" class="form-control form-control-sm" id="namaPanggilanData" placeholder="Angel">
                                   </div>
                                 </div>
                                 <div class="mb-3 row">
                                   <label for="peranData" class="col-sm-3 px-1">Peran dalam Keluarga</label>
                                   <div class="col-sm-9">
-                                    <select class="form-select form-select-sm" name="peranDatas" id="peranData" aria-label=".form-select-sm peranData">
-                                      <option value="">-Peran dalam Keluarga-</option>
-                                      <option value="Kepala Keluarga">Kepala Keluarga</option>
-                                      <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
-                                    </select>
+                                    <input type="text" name="peranDatas" class="form-control form-control-sm" id="peranData" placeholder="Peran Dalam Keluarga">
                                   </div>
                                 </div>
                               </div>
                               <div class="mb-3 row">
                                 <label for="jenisIdentitasData" class="col-sm-3 px-1">Jenis Identitas</label>
                                 <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="jenisIdentitasDatas" id="jenisIdentitasData" aria-label=".form-select-sm jenisIdentitasData">
-                                    <option value="">-Jenis Identitas-</option>
-                                    <option value="KTP">KTP</option>
-                                    <option value="SIM">SIM</option>
-                                  </select>
+                                  <input type="text" name="jenisIdentitasDatas" class="form-control form-control-sm" id="jenisIdentitasData" placeholder="Peran Dalam Keluarga">
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -299,17 +288,19 @@
                               <div class="mb-3 row">
                                 <label for="statusPernikahanData" class="col-sm-3 px-1">Status Pernikahan</label>
                                 <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="statusPernikahanDatas" id="statusPernikahanData" aria-label=".form-select-sm statusPernikahanData">
-                                    <option value="">-Status Pernikahan-</option>
-                                    <option value="Cerai">Cerai</option>
-                                    <option value="Belum Menikah">Belum Menikah</option>
-                                  </select>
+                                  <input type="text" name="statusPernikahanDatas" class="form-control form-control-sm" id="statusPernikahanData" placeholder="cth: Bandung">
                                 </div>
                               </div>
                               <div class="mb-3 row">
                                 <label for="suku" class="col-sm-3 px-1">Suku</label>
                                 <div class="col-sm-9">
                                   <input type="text" name="sukus" class="form-control form-control-sm" id="suku" placeholder="Sunda">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="noRekData" class="col-sm-3 px-1">Nomor Rekening</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="noRekDatas" class="form-control form-control-sm" id="noRekData" placeholder="123456789">
                                 </div>
                               </div>
                               <div id="sembunyiData3" class="divTampil3">
@@ -372,12 +363,7 @@
                               <div class="mb-3 row">
                                 <label for="negaraData" class="col-sm-3 px-1">Negara</label>
                                 <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="negaraDatas" id="negaraData" aria-label=".form-select-sm negaraData">
-                                    <option value="">-Negara-</option>
-                                    <option value="Indonesia">Indonesia</option>
-                                    <option value="USA">USA</option>
-                                    <option value="England">England</option>
-                                  </select>
+                                  <input type="text" name="negaraDatas" class="form-control form-control-sm" id="negaraData" placeholder="Negara">
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -413,9 +399,7 @@
                               <div class="mb-3 row">
                                 <label for="dusunData" class="col-sm-3 px-1">Dusun (Desa)</label>
                                 <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="dusunDatas" aria-label=".form-select-sm dusunData">
-                                    <option value="">-Dusun (desa)-</option>
-                                  </select>
+                                  <input type="text" name="dusunDatas" class="form-control form-control-sm" id="dusunData" placeholder="Kelurahan">
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -433,11 +417,7 @@
                               <div class="mb-3 row">
                                 <label for="areaData" class="col-sm-3 px-1">Area</label>
                                 <div class="col-sm-9">
-                                  <select class="form-select form-select-sm" name="areaDatas" id="areaData" aria-label=".form-select-sm areaData">
-                                    <option value="">-Area-</option>
-                                    <option value="021">021</option>
-                                    <option value="022">022</option>
-                                  </select>
+                                  <input type="text" name="areaDatas" class="form-control form-control-sm" id="areaData" placeholder="Area">
                                 </div>
                               </div>
                               <div class="mb-3 row">
@@ -516,7 +496,7 @@
                                 </div>
                               </div>
                               <div class="mb-3 row">
-                                <label for="emailData" class="col-sm-3 px-1">Email</label>
+                                <label for="emailData" class="col-sm-3 px-1">Email <span class="required-input">(*)</span></label>
                                 <div class="col-sm-9">
                                   <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData" placeholder="cth: email@gmail.com">
                                   @error('emailDatas')
@@ -770,12 +750,6 @@
                           <div class="input-center ps-5">
                             <div class="w-75">
                               <div class="mb-3 row">
-                                <label for="noRekData" class="col-sm-3 px-1">Nomor Rekening</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="noRekDatas" class="form-control form-control-sm" id="noRekData" placeholder="123456789">
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
                                 <label for="perBeasiswaData" class="col-sm-3 px-1">Periode Beasiswa</label>
                                 <div class="col-sm-9">
                                   <input type="text" name="perBeasiswaDatas" class="form-control form-control-sm" id="perBeasiswaData" placeholder="Periode Beasiswa">
@@ -833,6 +807,42 @@
                                 <label for="riwayatPelEData" class="col-sm-3 px-1">Riwayat Pelayanan 4</label>
                                 <div class="col-sm-9">
                                   <input type="text" name="riwayatPelEDatas" class="form-control form-control-sm" id="riwayatPelEData" placeholder="Riwayat Pelayanan 4">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="riwayatPelLData" class="col-sm-3 px-1">Riwayat Pelayanan 5</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="riwayatPelLDatas" class="form-control form-control-sm" id="riwayatPelLData" placeholder="Riwayat Pelayanan 4">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="riwayatPelEnData" class="col-sm-3 px-1">Riwayat Pelayanan 6</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="riwayatPelEnDatas" class="form-control form-control-sm" id="riwayatPelEnData" placeholder="Riwayat Pelayanan 4">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="riwayatPelTuData" class="col-sm-3 px-1">Riwayat Pelayanan 7</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="riwayatPelTuDatas" class="form-control form-control-sm" id="riwayatPelTuData" placeholder="Riwayat Pelayanan 4">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="riwayatPelDeData" class="col-sm-3 px-1">Riwayat Pelayanan 8</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="riwayatPelDeDatas" class="form-control form-control-sm" id="riwayatPelDeData" placeholder="Riwayat Pelayanan 4">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="riwayatPelSemData" class="col-sm-3 px-1">Riwayat Pelayanan 9</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="riwayatPelSemDatas" class="form-control form-control-sm" id="riwayatPelSemData" placeholder="Riwayat Pelayanan 4">
+                                </div>
+                              </div>
+                              <div class="mb-3 row">
+                                <label for="riwayatPelSepData" class="col-sm-3 px-1">Riwayat Pelayanan 10</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="riwayatPelSepDatas" class="form-control form-control-sm" id="riwayatPelSepData" placeholder="Riwayat Pelayanan 4">
                                 </div>
                               </div>
                             </div>
@@ -1741,6 +1751,14 @@
                                     <div class="col-8">{{$dataLembaga->jK}}</div>
                                   </div>
                                   <div class="row p-2 border-bottom">
+                                    <div class="col-4">Suku</div>
+                                    <div class="col-8">{{$dataLembaga->suku}}</div>
+                                  </div>
+                                  <div class="row p-2 border-bottom">
+                                    <div class="col-4">Nomor Rekening</div>
+                                    <div class="col-8">{{$dataLembaga->no_rekening}}</div>
+                                  </div>
+                                  <div class="row p-2 border-bottom">
                                     <div class="col-4">Golongan Darah</div>
                                     <div class="col-8">{{$dataLembaga->goldar}}</div>
                                   </div>
@@ -1949,10 +1967,6 @@
                                 </div>
                                 <div class="kolom-isian-text bg-white p-3 shadow rounded">
                                   <div class="row p-2 border-bottom">
-                                    <div class="col-4">Nomor Rekening</div>
-                                    <div class="col-8">{{$dataLembaga->no_rekening}}</div>
-                                  </div>
-                                  <div class="row p-2 border-bottom">
                                     <div class="col-4">Periode Beasiswa</div>
                                     <div class="col-8">{{$dataLembaga->periode_beasiswa}}</div>
                                   </div>
@@ -1975,6 +1989,30 @@
                                   <div class="row p-2">
                                     <div class="col-4">Riwayat Pelayanan 4</div>
                                     <div class="col-8">{{$dataLembaga->riwayat_pelayananEmpat}}</div>
+                                  </div>
+                                  <div class="row p-2">
+                                    <div class="col-4">Riwayat Pelayanan 5</div>
+                                    <div class="col-8">{{$dataLembaga->riwayat_pelayananLima}}</div>
+                                  </div>
+                                  <div class="row p-2">
+                                    <div class="col-4">Riwayat Pelayanan 6</div>
+                                    <div class="col-8">{{$dataLembaga->riwayat_pelayananEnam}}</div>
+                                  </div>
+                                  <div class="row p-2">
+                                    <div class="col-4">Riwayat Pelayanan 7</div>
+                                    <div class="col-8">{{$dataLembaga->riwayat_pelayananTujuh}}</div>
+                                  </div>
+                                  <div class="row p-2">
+                                    <div class="col-4">Riwayat Pelayanan 8</div>
+                                    <div class="col-8">{{$dataLembaga->riwayat_pelayananDelapan}}</div>
+                                  </div>
+                                  <div class="row p-2">
+                                    <div class="col-4">Riwayat Pelayanan 9</div>
+                                    <div class="col-8">{{$dataLembaga->riwayat_pelayananSembilan}}</div>
+                                  </div>
+                                  <div class="row p-2">
+                                    <div class="col-4">Riwayat Pelayanan 10</div>
+                                    <div class="col-8">{{$dataLembaga->riwayat_pelayananSepuluh}}</div>
                                   </div>
                                 </div>
                               </div>
@@ -2392,9 +2430,10 @@
                                       <select class="form-select form-select-sm" name="editUntukPendataans" id="editUntukPendataan{{$dataLembaga->id_user}}" aria-label=".form-select-sm editUntukPendataan{{$dataLembaga->id_user}}">
                                         <option value="">-Untuk-</option>
                                         <option value="Pengurus" {{($dataLembaga->data_lembaga == 'Pengurus' ? 'selected' : '')}}>Pengurus</option>
+                                        <option value="Ketua Kelompok" {{($dataLembaga->data_lembaga == 'Ketua Lokasi' ? 'selected' : '')}}>Ketua Lokasi</option>
                                         <option value="Utusan" {{($dataLembaga->data_lembaga == 'Utusan' ? 'selected' : '')}}>Utusan</option>
-                                        <option value="Beasiswa" {{($dataLembaga->data_lembaga == 'Beasiswa' ? 'selected' : '')}}>Beasiswa</option>
                                         <option value="Ketua Kelompok" {{($dataLembaga->data_lembaga == 'Ketua Kelompok' ? 'selected' : '')}}>Ketua Kelompok</option>
+                                        <option value="Beasiswa" {{($dataLembaga->data_lembaga == 'Beasiswa' ? 'selected' : '')}}>Beasiswa</option>
                                       </select>
                                       @error('editUntukPendataans')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -2444,11 +2483,7 @@
                                     <div class="mb-3 row">
                                       <label for="editSapaanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Sapaan</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="editSapaanDatas" id="editSapaanData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editSapaanData{{$dataLembaga->id_user}}">
-                                          <option value="">-Sapaan-</option>
-                                          <option value="Bapak" {{($dataLembaga->sapaan == 'Bapak' ? 'selected' : '')}}>Bapak</option>
-                                          <option value="Ibu" {{($dataLembaga->sapaan == 'Ibu' ? 'selected' : '')}}>Ibu</option>
-                                        </select>
+                                        <input type="text" name="editSapaanDatas" class="form-control form-control-sm" id="editSapaanData{{$dataLembaga->id_user}}" placeholder="Referensi Dari" value="{{$dataLembaga->sapaan}}">
                                       </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -2488,22 +2523,14 @@
                                     <div class="mb-3 row">
                                       <label for="editPeranData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Peran dalam Keluarga</label>
                                       <div class="col-sm-9">
-                                        <select class="form-select form-select-sm" name="editPeranDatas" id="editPeranData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editPeranData{{$dataLembaga->id_user}}">
-                                          <option value="">-Peran dalam Keluarga-</option>
-                                          <option value="Kepala Keluarga" {{($dataLembaga->peran == 'Kepala Keluarga' ? 'selected' : '')}}>Kepala Keluarga</option>
-                                          <option value="Ibu Rumah Tangga" {{($dataLembaga->peran == 'Ibu Rumah Tangga' ? 'selected' : '')}}>Ibu Rumah Tangga</option>
-                                        </select>
+                                        <input type="text" name="editPeranDatas" class="form-control form-control-sm" id="editPeranData{{$dataLembaga->id_user}}" placeholder="cth: Angel" value="{{$dataLembaga->peran}}">
                                       </div>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editJenisIdentitasData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Jenis Identitas</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editJenisIdentitasDatas" id="editJenisIdentitasData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editJenisIdentitasData{{$dataLembaga->id_user}}">
-                                        <option value="">-Jenis Identitas-</option>
-                                        <option value="KTP" {{($dataLembaga->jenis_identitas == 'KTP' ? 'selected' : '')}}>KTP</option>
-                                        <option value="SIM" {{($dataLembaga->jenis_identitas == 'SIM' ? 'selected' : '')}}>SIM</option>
-                                      </select>
+                                      <input type="text" name="editJenisIdentitasDatas" class="form-control form-control-sm" id="editJenisIdentitasData{{$dataLembaga->id_user}}" placeholder="cth: Angel" value="{{$dataLembaga->jenis_identitas}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
@@ -2542,27 +2569,29 @@
                                     <div class="col-sm-9">
                                       <select class="form-select form-select-sm" name="editGolonganDarahDatas" id="editGolonganDarahData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editGolonganDarahData{{$dataLembaga->id_user}}">
                                         <option value="">-Golongan Darah-</option>
-                                        <option value="A" {{$dataLembaga->goldar == 'A' ? 'checked' : ''}}>A</option>
-                                        <option value="B" {{$dataLembaga->goldar == 'B' ? 'checked' : ''}}>B</option>
-                                        <option value="AB" {{$dataLembaga->goldar == 'AB' ? 'checked' : ''}}>AB</option>
-                                        <option value="O" {{$dataLembaga->goldar == 'O' ? 'checked' : ''}}>O</option>
+                                        <option value="A" {{$dataLembaga->goldar == 'A' ? 'selected' : ''}}>A</option>
+                                        <option value="B" {{$dataLembaga->goldar == 'B' ? 'selected' : ''}}>B</option>
+                                        <option value="AB" {{$dataLembaga->goldar == 'AB' ? 'selected' : ''}}>AB</option>
+                                        <option value="O" {{$dataLembaga->goldar == 'O' ? 'selected' : ''}}>O</option>
                                       </select>
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editStatusPernikahanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Status Pernikahan</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editStatusPernikahanDatas" id="editStatusPernikahanData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editStatusPernikahanData{{$dataLembaga->id_user}}">
-                                        <option value="">-Status Pernikahan-</option>
-                                        <option value="Cerai" {{$dataLembaga->status_pernikahan == 'Cerai' ? 'checked' : ''}}>Cerai</option>
-                                        <option value="Belum Menikah" {{$dataLembaga->status_pernikahan == 'Belum Menikah' ? 'checked' : ''}}>Belum Menikah</option>
-                                      </select>
+                                      <input type="text" name="editStatusPernikahanDatas" class="form-control form-control-sm" id="editStatusPernikahanData{{$dataLembaga->id_user}}" placeholder="Sunda" value="{{$dataLembaga->status_pernikahan}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editSukuData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Suku</label>
                                     <div class="col-sm-9">
                                       <input type="text" name="editSukuDatas" class="form-control form-control-sm" id="editSukuData{{$dataLembaga->id_user}}" placeholder="Sunda" value="{{$dataLembaga->suku}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="editNoRekData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Nomor Rekening</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="editNoRekData{{$dataLembaga->id_user}}" class="form-control form-control-sm" id="editNoRekData{{$dataLembaga->id_user}}" placeholder="123456789" value="{{$dataLembaga->no_rekening}}">
                                     </div>
                                   </div>
                                   <div id="sembunyiDataEdit3{{$dataLembaga->id_user}}" class="divTampilEdit3{{$dataLembaga->id_user}}">
@@ -2625,72 +2654,61 @@
                                   <div class="mb-3 row">
                                     <label for="editNegaraData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Negara</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editNegaraDatas" id="editNegaraData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editNegaraData{{$dataLembaga->id_user}}">
-                                        <option value="">-Negara-</option>
-                                        <option value="Indonesia" {{$dataLembaga->negara == 'Indonesia' ? 'checked' : ''}}>Indonesia</option>
-                                        <option value="USA" {{$dataLembaga->negara == 'USA' ? 'checked' : ''}}>USA</option>
-                                        <option value="England" {{$dataLembaga->negara == 'England' ? 'checked' : ''}}>England</option>
-                                      </select>
+                                      <input type="text" name="editNegaraDatas" class="form-control form-control-sm" id="editNegaraData{{$dataLembaga->id_user}}" placeholder="Peta" value="{{$dataLembaga->negara}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editProvinsiData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Provinsi</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editProvinsiDatas" class="form-control form-control-sm" id="editProvinsiData{{$dataLembaga->id_user}}" placeholder="Provinsi">
+                                      <input type="text" name="editProvinsiDatas" class="form-control form-control-sm" id="editProvinsiData{{$dataLembaga->id_user}}" placeholder="Provinsi" value="{{$dataLembaga->provinsi}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editKotaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kota</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKotaDatas" class="form-control form-control-sm" id="editKotaData{{$dataLembaga->id_user}}" placeholder="Kota">
+                                      <input type="text" name="editKotaDatas" class="form-control form-control-sm" id="editKotaData{{$dataLembaga->id_user}}" placeholder="Kota" value="{{$dataLembaga->kota}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editKecamatanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kecamatan</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKecamatanDatas" class="form-control form-control-sm" id="editKecamatanData{{$dataLembaga->id_user}}" placeholder="Kecamatan">
+                                      <input type="text" name="editKecamatanDatas" class="form-control form-control-sm" id="editKecamatanData{{$dataLembaga->id_user}}" placeholder="Kecamatan" value="{{$dataLembaga->kecamatan}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editKelurahanData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kelurahan</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKelurahanDatas" class="form-control form-control-sm" id="editKelurahanData{{$dataLembaga->id_user}}" placeholder="Kelurahan">
+                                      <input type="text" name="editKelurahanDatas" class="form-control form-control-sm" id="editKelurahanData{{$dataLembaga->id_user}}" placeholder="Kelurahan" value="{{$dataLembaga->kelurahan}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editKodePosData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Kode Pos</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editKodePosDatas" class="form-control form-control-sm" id="editKodePosData{{$dataLembaga->id_user}}" placeholder="Kode Pos">
+                                      <input type="text" name="editKodePosDatas" class="form-control form-control-sm" id="editKodePosData{{$dataLembaga->id_user}}" placeholder="Kode Pos" value="{{$dataLembaga->kode_pos}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editDusunData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Dusun (Desa)</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editDusunDatas" aria-label=".form-select-sm editDusunData{{$dataLembaga->id_user}}">
-                                        <option value="">-Dusun (desa)-</option>
-                                      </select>
+                                      <input type="text" name="editDusunDatas" class="form-control form-control-sm" id="editDusunData{{$dataLembaga->id_user}}" placeholder="Kode Pos" value="{{$dataLembaga->dusun}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editRtData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">RT / RW</label>
                                     <div class="col-sm-4">
-                                      <input type="text" name="editRtDatas" class="form-control form-control-sm" id="editRtData{{$dataLembaga->id_user}}" placeholder="RT">
+                                      <input type="text" name="editRtDatas" class="form-control form-control-sm" id="editRtData{{$dataLembaga->id_user}}" placeholder="RT" value="{{$dataLembaga->rt}}">
                                     </div>
                                     <div class="col-sm-1">
                                       <p>/</p>
                                     </div>
                                     <div class="col-sm-4">
-                                      <input type="text" name="editRwDatas" class="form-control form-control-sm" id="editRtRwData{{$dataLembaga->id_user}}" placeholder="RW">
+                                      <input type="text" name="editRwDatas" class="form-control form-control-sm" id="editRtRwData{{$dataLembaga->id_user}}" placeholder="RW" value="{{$dataLembaga->rw}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
                                     <label for="editAreaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Area</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" name="editAreaDatas" id="editAreaData{{$dataLembaga->id_user}}" aria-label=".form-select-sm editAreaData{{$dataLembaga->id_user}}">
-                                        <option value="">-Area-</option>
-                                        <option value="021" {{$dataLembaga->area == 'Indonesia' ? '021' : ''}}>021</option>
-                                        <option value="022" {{$dataLembaga->area == 'Indonesia' ? '022' : ''}}>022</option>
-                                      </select>
+                                      <input type="text" name="editAreaDatas" class="form-control form-control-sm" id="editAreaData{{$dataLembaga->id_user}}" placeholder="RW" value="{{$dataLembaga->area}}">
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
@@ -2769,7 +2787,7 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="emailData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Email</label>
+                                    <label for="emailData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Email <span class="required-input">(*)</span></label>
                                     <div class="col-sm-9">
                                       <input type="email" name="emailDatas" class="form-control form-control-sm" id="emailData{{$dataLembaga->id_user}}" placeholder="cth: email@gmail.com">
                                       @error('emailDatas')
@@ -2787,7 +2805,7 @@
                                       <label for="editTerimaEmailData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Bisa Terima Email?</label>
                                       <div class="col-sm-9 pt-1">
                                         <div class="form-check form-switch">
-                                          <input class="form-check-input" name="editTerimaEmailDatas" type="checkbox" id="editTerimaEmailData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->no_hpsatu == 'Ya' ? 'checked' : ''}}>
+                                          <input class="form-check-input" name="editTerimaEmailDatas" type="checkbox" id="editTerimaEmailData{{$dataLembaga->id_user}}" value="Ya" {{$dataLembaga->bisa_email == 'Ya' ? 'checked' : ''}}>
                                           <label class="form-check-label" for="editTerimaEmailData{{$dataLembaga->id_user}}">Ya</label>
                                         </div>
                                       </div>
@@ -3023,12 +3041,6 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editNoRekData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Nomor Rekening</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" name="editNoRekData{{$dataLembaga->id_user}}" class="form-control form-control-sm" id="editNoRekData{{$dataLembaga->id_user}}" placeholder="123456789" value="{{$dataLembaga->no_rekening}}">
-                                    </div>
-                                  </div>
-                                  <div class="mb-3 row">
                                     <label for="editPerBeasiswaData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Periode Beasiswa</label>
                                     <div class="col-sm-9">
                                       <input type="text" name="editPerBeasiswaDatas" class="form-control form-control-sm" id="editPerBeasiswaData{{$dataLembaga->id_user}}" placeholder="Periode Beasiswa" value="{{$dataLembaga->periode_beasiswa}}">
@@ -3086,6 +3098,42 @@
                                     <label for="editRiwayatPelEData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 4</label>
                                     <div class="col-sm-9">
                                       <input type="text" name="editRiwayatPelEDatas" class="form-control form-control-sm" id="editRiwayatPelEData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 4" value="{{$dataLembaga->riwayat_pelayananEmpat}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="riwayatPelLData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 5</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="riwayatPelLDatas" class="form-control form-control-sm" id="riwayatPelLData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 5" value="{{$dataLembaga->riwayat_pelayananLima}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="riwayatPelEnData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 6</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="riwayatPelEnDatas" class="form-control form-control-sm" id="riwayatPelEnData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 6" value="{{$dataLembaga->riwayat_pelayananEnam}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="riwayatPelTuData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 7</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="riwayatPelTuDatas" class="form-control form-control-sm" id="riwayatPelTuData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 7" value="{{$dataLembaga->riwayat_pelayananTujuh}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="riwayatPelDeData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 8</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="riwayatPelDeDatas" class="form-control form-control-sm" id="riwayatPelDeData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 8" value="{{$dataLembaga->riwayat_pelayananDelapan}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="riwayatPelSemData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 9</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="riwayatPelSemDatas" class="form-control form-control-sm" id="riwayatPelSemData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 9" value="{{$dataLembaga->riwayat_pelayananSembilan}}">
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 row">
+                                    <label for="riwayatPelSepData{{$dataLembaga->id_user}}" class="col-sm-3 px-1">Riwayat Pelayanan 10</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" name="riwayatPelSepDatas" class="form-control form-control-sm" id="riwayatPelSepData{{$dataLembaga->id_user}}" placeholder="Riwayat Pelayanan 10" value="{{$dataLembaga->riwayat_pelayananSepuluh}}">
                                     </div>
                                   </div>
                                 </div>
@@ -4075,7 +4123,7 @@
     
       $('#editUntukPendataan'+idUser).on('change', function(){
         var isiData = $(this).val(); 
-        if (isiData == "Beasiswa" || isiData == "Utusan") {
+        if (isiData == "Beasiswa") {
           $("div.divTampilEdit1"+idUser).show();
           $("div.divTampilEdit2"+idUser).show();
           $("div.divTampilEdit3"+idUser).show();
@@ -4087,7 +4135,6 @@
           $("div.divTampilEdit9"+idUser).show();
           $("div.divTampilEdit10"+idUser).show();
           $("div.divTampilEdit11"+idUser).show();
-          $("div.divTampilEdit12"+idUser).show();
           $("#sembunyiDataEdit1"+idUser).hide();
           $("#sembunyiDataEdit2"+idUser).hide();
           $("#sembunyiDataEdit3"+idUser).hide();
@@ -4111,6 +4158,11 @@
           $("div.divTampilEdit9"+idUser).show();
           $("div.divTampilEdit10"+idUser).show();
           $("div.divTampilEdit11"+idUser).show();
+        }
+
+        if (isiData == "Beasiswa" || isiData == "Utusan") {
+          $("div.divTampilEdit12"+idUser).show();
+        } else {
           $("#sembunyiDataEdit12"+idUser).hide();
         }
       });
@@ -4132,7 +4184,7 @@
     $(document).ready(function(){
       $('#untukPendataan').on('change', function(){
         var isiData = $(this).val(); 
-        if (isiData == "Beasiswa" || isiData == "Utusan") {
+        if (isiData == "Beasiswa") {
           $("div.divTampil1").show();
           $("div.divTampil2").show();
           $("div.divTampil3").show();
@@ -4144,7 +4196,6 @@
           $("div.divTampil9").show();
           $("div.divTampil10").show();
           $("div.divTampil11").show();
-          $("div.divTampil12").show();
           $("#sembunyiData1").hide();
           $("#sembunyiData2").hide();
           $("#sembunyiData3").hide();
@@ -4168,7 +4219,12 @@
           $("div.divTampil9").show();
           $("div.divTampil10").show();
           $("div.divTampil11").show();
-          $("#sembunyiData12").hide();
+        }
+
+        if (isiData == "Beasiswa" || isiData == "Utusan") {
+          $("div.divTampilEdit12").show();
+        } else {
+          $("#sembunyiDataEdit12").hide();
         }
       });
     });

@@ -257,7 +257,7 @@ class KetuaLokasiController extends Controller
    */
   public function indexPengurusPM()
   {
-    $lokasis = Ketua_lokasi::where('institusiKL', 'GKP (Gereja Kristen Parousia)');
+    $lokasis = Ketua_lokasi::where('institusiKL', 'PM (Parousia Ministry)')->get();
     $no = 1;
     $lokasiWilayahs = Lokasi::all();
 
@@ -449,7 +449,7 @@ class KetuaLokasiController extends Controller
    */
   public function indexPengurusGKP()
   {
-    $lokasis = Ketua_lokasi::where('institusiKL', 'GKP (Gereja Kristen Parousia)');
+    $lokasis = Ketua_lokasi::where('institusiKL', 'GKP (Gereja Kristen Parousia)')->get();
     $no = 1;
     $lokasiWilayahs = Lokasi::all();
 

@@ -81,6 +81,12 @@ class CreateDataLembagasTable extends Migration
             $table->text('riwayat_pelayananDua')->nullable();
             $table->text('riwayat_pelayananTiga')->nullable();
             $table->text('riwayat_pelayananEmpat')->nullable();
+            $table->text('riwayat_pelayananLima')->nullable();
+            $table->text('riwayat_pelayananEnam')->nullable();
+            $table->text('riwayat_pelayananTujuh')->nullable();
+            $table->text('riwayat_pelayananDelapan')->nullable();
+            $table->text('riwayat_pelayananSembilan')->nullable();
+            $table->text('riwayat_pelayananSepuluh')->nullable();
             $table->string('kolom_cadanganPSatu', 50)->nullable();
             $table->string('kolom_cadanganPDua', 50)->nullable();
             $table->string('kolom_cadanganPTiga', 50)->nullable();

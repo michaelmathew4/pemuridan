@@ -453,9 +453,9 @@
                               <div class="input-center ps-5">
                                 <div class="w-75">
                                   <div class="mb-3 row">
-                                    <label for="editNamaADM" class="col-sm-3 px-1 form-label">Nama Lengkap</label>
+                                    <label for="editNamaADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">Nama Lengkap</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="editNamaADM" class="form-control form-control-sm" id="editNamaADM" placeholder="Nama Lengkap" value="{{$dataAdmin->namaADM}}">
+                                      <input type="text" name="editNamaADM" class="form-control form-control-sm" id="editNamaADM{{$dataAdmin->id}}" placeholder="Nama Lengkap" value="{{$dataAdmin->namaADM}}">
                                       @error('editNamaADM')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -467,15 +467,15 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editJkADM" class="col-sm-3 px-1 form-label">Jenis Kelamin</label>
+                                    <label for="editJkADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">Jenis Kelamin</label>
                                     <div class="col-sm-9">
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editJkADM"id="laki" value="Laki-laki" {{($dataAdmin->jkADM == 'Laki-laki') ? 'checked' : ''}} >
-                                        <label class="form-check-label" for="laki">Laki-laki</label>
+                                        <input class="form-check-input" type="radio" name="editJkADM"id="laki{{$dataAdmin->id}}" value="Laki-laki" {{($dataAdmin->jkADM == 'Laki-laki') ? 'checked' : ''}} >
+                                        <label class="form-check-label" for="laki{{$dataAdmin->id}}">Laki-laki</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="editJkADM" id="perempuan" value="Perempuan" {{($dataAdmin->jkADM == 'Perempuan') ? 'checked' : ''}}>
-                                        <label class="form-check-label" for="perempuan">Perempuan</label>
+                                        <input class="form-check-input" type="radio" name="editJkADM" id="perempuan{{$dataAdmin->id}}" value="Perempuan" {{($dataAdmin->jkADM == 'Perempuan') ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="perempuan{{$dataAdmin->id}}">Perempuan</label>
                                       </div>
                                       @error('editJkADM')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
@@ -488,9 +488,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editAlamatADM" class="col-sm-3 px-1 form-label">Alamat</label>
+                                    <label for="editAlamatADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">Alamat</label>
                                     <div class="col-sm-9">
-                                      <textarea class="form-control form-control-sm" name="editAlamatADM" id="editAlamatADM" rows="3" placeholder="Alamat">{{$dataAdmin->alamatADM}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editAlamatADM" id="editAlamatADM{{$dataAdmin->id}}" rows="3" placeholder="Alamat">{{$dataAdmin->alamatADM}}</textarea>
                                       @error('editAlamatADM')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -502,9 +502,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editNohpADM" class="col-sm-3 px-1 form-label">No Hp</label>
+                                    <label for="editNohpADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">No Hp</label>
                                     <div class="col-sm-9">
-                                      <input type="number" name="editNohpADM" class="form-control form-control-sm" id="editNohpADM" placeholder="08123456789" value="{{$dataAdmin->nohpADM}}">
+                                      <input type="number" name="editNohpADM" class="form-control form-control-sm" id="editNohpADM{{$dataAdmin->id}}" placeholder="08123456789" value="{{$dataAdmin->nohpADM}}">
                                       @error('editNohpADM')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -516,9 +516,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editAlamat_surelADM" class="col-sm-3 px-1 form-label">Alamat Surel</label>
+                                    <label for="editAlamat_surelADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">Alamat Surel</label>
                                     <div class="col-sm-9">
-                                      <input type="email" name="editAlamat_surelADM" class="form-control form-control-sm" id="editAlamat_surelADM" placeholder="Alamat Surel" value="{{$dataAdmin->alamat_surelADM}}">
+                                      <input type="email" name="editAlamat_surelADM" class="form-control form-control-sm" id="editAlamat_surelADM{{$dataAdmin->id}}" placeholder="Alamat Surel" value="{{$dataAdmin->alamat_surelADM}}">
                                       @error('editAlamat_surelADM')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -530,9 +530,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editKata_sandiADM" class="col-sm-3 px-1 form-label">Kata Sandi</label>
+                                    <label for="editKata_sandiADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">Kata Sandi</label>
                                     <div class="col-sm-9">
-                                      <input type="password" name="editKata_sandiADM" class="form-control form-control-sm" id="editKata_sandiADM" placeholder="******" value="{{$dataAdmin->kata_sandiADM}}">
+                                      <input type="password" name="editKata_sandiADM" class="form-control form-control-sm" id="editKata_sandiADM{{$dataAdmin->id}}" placeholder="******" value="{{$dataAdmin->kata_sandiADM}}">
                                       @error('editKata_sandiADM')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
@@ -544,9 +544,9 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editTingkatADM" class="col-sm-3 px-1 form-label">Tingkat</label>
+                                    <label for="editTingkatADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">Tingkat</label>
                                     <div class="col-sm-9">
-                                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editTingkatADM" id="editTingkatADM">
+                                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="editTingkatADM" id="editTingkatADM{{$dataAdmin->id}}">
                                         <option value="{{$dataAdmin->tingkatADM}}">{{$dataAdmin->tingkatADM}}</option>
                                         <option value="Admin Tingkat 1">Admin Tingkat 1</option>
                                         <option value="Admin Tingkat 2">Admin Tingkat 2</option>
@@ -562,7 +562,7 @@
                                     </div>
                                   </div>
                                   <div class="mb-3 row">
-                                    <label for="editFotoADM" class="col-sm-3 px-1 form-label">Foto</label>
+                                    <label for="editFotoADM{{$dataAdmin->id}}" class="col-sm-3 px-1 form-label">Foto</label>
                                     <div class="col-3">
                                       <div class="position-relative wrapping-img-icon">
                                         <div class="">
@@ -578,7 +578,7 @@
                                       </div>
                                     </div>
                                     <div class="col-6">
-                                      <input type="file" name="editFotoADM" class="form-control form-control-sm" id="editFotoADM" onchange="document.getElementById('outputEdit{{$dataAdmin->id}}').src = window.URL.createObjectURL(this.files[0])">
+                                      <input type="file" name="editFotoADM" class="form-control form-control-sm" id="editFotoADM{{$dataAdmin->id}}" onchange="document.getElementById('outputEdit{{$dataAdmin->id}}').src = window.URL.createObjectURL(this.files[0])">
                                       <input type="text" name="editFotoTextADM" id="editFotoTextADM{{$dataAdmin->id}}" value="{{$dataAdmin->fotoADM}}" hidden>
                                       @error('editFotoADM')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">

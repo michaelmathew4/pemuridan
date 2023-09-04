@@ -1,0 +1,15 @@
+1. Folder yang dipilih ditampilkan sesuai parent, misal Lokasi Gardujati, di beranda hanya tampil GII Gardujati, kalo folder yang dipilih ada di dalam folder GII Gardujati,
+   berarti yang tampil hanya GII Gardujati saja, misal yang dipilih GII Gardujati & Document (Di dalam Folder GII Gardujati), yang ada di beranda hanya GII Gardujati
+2. Folder yang dibuat oleh user yang login, bisa dihapus sendiri, tidak bisa dihapus orang lain, begitupun sebaliknya dan File juga sama
+3. Di file ada titik 3 buat menu
+
+No 2 diatas sudah ada di lokal, yang no 2, tinggal file saja
+
+YANG BELUM DI DEPLOY DAN MASIH DI KERJAKAN DI LOKAL
+1. FILE YANG BISA DIHAPUS HANYA USER YANG BUAT, TIDAK BISA HAPUS YANG ORANG LAIN ATAUPUN DIHAPUS SAMA ORANG LAIN -------------------(DONE)
+2. FOLDER YANG BISA DIHAPUS HANYA USER YANG BUAT, TIDAK BISA HAPUS YANG ORANG LAIN ATAUPUN DIHAPUS SAMA ORANG LAIN
+3. FOLDER YANG BISA DIHAPUS HANYA DI CHILDRENNYA AJA, YANG SELAIN CHILDREN PAGE TIDAK BISA
+4. NOMOR 1 YANG PALING ATAS
+5. HAPUS .PHP JIKA HAPUS FOLDER
+6. HAPUS FILE DAN SUBFOLDER JIKA FOLDER DIHAPUS
+7. DETAIL FILE ------------(DONE)

@@ -79,6 +79,7 @@
                         </div>
                         <div class="input-center ps-5">
                           <div class="w-75">
+                            <input type="text" name="inputMethod" value="tambahDataBaru" hidden>
                             <div class="mb-3 row">
                               <label for="tglKontakPeserta" class="col-sm-3 px-1">Tgl Kontak <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
@@ -121,7 +122,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span></label>
+                              <label for="skalaPeserta" class="col-sm-3 px-1">Skala <span class="default-value">(Nilai Bawaan -3)</span> <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="skalaPeserta" id="skalaPeserta" aria-label=".form-select-sm skalaPeserta">
                                   <option value="">-Skala-</option>
@@ -133,6 +134,16 @@
                                   <option value="2">Skala 2</option>
                                   <option value="3">Skala 3</option>
                                 </select>
+                                <!-- <input type="range" name="skalaPeserta"
+                                  data-provide="slider"
+                                  data-slider-ticks="[-3, -2, -1, 0, 1, 2, 3]"
+                                  data-slider-ticks-labels='["-3", "-2", "-1", "0", "1", "2", "3"]'
+                                  data-slider-ticks-positions="[0,16.6,33.2,49.8,66.4,83,100]"
+                                  data-slider-min="-3"
+                                  data-slider-max="3"
+                                  data-slider-step="1"
+                                  data-slider-value="-3"
+                                  data-slider-tooltip="hide"> -->
                                 @error('skalaPeserta')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
@@ -144,9 +155,9 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="catatanPeserta" class="col-sm-3 px-1">Catatan</label>
+                              <label for="catatanPeserta" class="col-sm-3 px-1">Catatan <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
-                                <textarea class="form-control" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
+                                <textarea class="form-control form-control-sm" name="catatanPeserta" id="catatanPeserta" rows="3" placeholder="Catatan Peserta"></textarea>
                                 @error('catatanPeserta')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
@@ -158,7 +169,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP</label>
+                              <label for="noHpPeserta" class="col-sm-3 px-1">Nomor HP <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <input class="form-control" type="text" name="noHpPeserta" placeholder="(9999)-999999999">
                                 @error('noHpPeserta')
@@ -172,9 +183,9 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="alamatPeserta" class="col-sm-3 px-1">Alamat</label>
+                              <label for="alamatPeserta" class="col-sm-3 px-1">Alamat <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
-                                <textarea class="form-control" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
+                                <textarea class="form-control form-control-sm" name="alamatPeserta" id="alamatPeserta" rows="3" placeholder="Alamat Peserta"></textarea>
                                 @error('alamatPeserta')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
@@ -186,7 +197,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir</label>
+                              <label for="tempatLahirPeserta" class="col-sm-3 px-1">Tempat, Tgl Lahir <span class="required-input">(*)</span></label>
                               <div class="col-sm-5">
                                 <input type="text" name="tempatLahirPeserta" class="form-control form-control-sm" id="tempatLahirPeserta" placeholder="cth: Bandung">
                                 @error('tempatLahirPeserta')
@@ -214,7 +225,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan</label>
+                              <label for="pekerjaanPeserta" class="col-sm-3 px-1">Pekerjaan <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="pekerjaanPeserta" id="pekerjaanPeserta" aria-label=".form-select-sm pekerjaanPeserta">
                                   <option value="">-Pekerjaan-</option>
@@ -238,7 +249,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku</label>
+                              <label for="sukuPeserta" class="col-sm-3 px-1">Berasal Dari Suku <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <input type="text" name="sukuPeserta" class="form-control form-control-sm" id="sukuPeserta" placeholder="cth: Sunda">
                                 @error('sukuPeserta')
@@ -252,7 +263,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="statusPeserta" class="col-sm-3 px-1">Status</label>
+                              <label for="statusPeserta" class="col-sm-3 px-1">Status <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <div class="form-check form-switch">
                                   <input class="form-check-input" name="statusPeserta" type="checkbox" id="aktif" value="Aktif">
@@ -269,7 +280,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak</label>
+                              <label for="lokasiPeserta" class="col-sm-3 px-1">Lokasi Kontak <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" name="lokasiPeserta" id="lokasiPeserta" aria-label=".form-select-sm lokasiPeserta">
                                   <option value="">-Lokasi Kontak-</option>
@@ -288,7 +299,7 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga</label>
+                              <label for="institusiPeserta" class="col-sm-3 px-1 form-label">Lembaga <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
                                 <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="institusiPeserta" id="institusiPeserta">
                                   <option value="">-Lembaga-</option>
@@ -306,10 +317,15 @@
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <label for="fotoPeserta" class="col-sm-3 px-1">Foto</label>
+                              <label for="pemintaInput" class="col-sm-3 px-1">Peminta Input <span class="required-input">(*)</span></label>
                               <div class="col-sm-9">
-                                <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
-                                @error('fotoPeserta')
+                                <select class="form-select form-select-sm" name="pemintaInput" id="pemintaInput" aria-label=".form-select-sm pemintaInput">
+                                  <option value="">-Peminta Input-</option>
+                                  @foreach ($dataLembagas as $dataLembaga)
+                                    <option value="{{$dataLembaga->id_user}}">{{$dataLembaga->nama_lengkap}} ({{$dataLembaga->data_lembaga}} / {{$dataLembaga->institusi}})</option>
+                                  @endforeach
+                                </select>
+                                @error('pemintaInput')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
                                       <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -319,31 +335,11 @@
                                 @enderror
                               </div>
                             </div>
-                            <input type="text" name="inputTambah" id="" value="tambahData" hidden>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group-input">
-                        <div class="form-header-group mb-3">
-                          <h6>Kelompok</h6>
-                        </div>
-                        <div class="input-center ps-5">
-                          <div class="w-75">
                             <div class="mb-3 row">
-                              <label for="kelompok" class="col-sm-3 px-1">Kelompok</label>
+                              <label for="fotoPeserta" class="col-sm-3 px-1">Foto</label>
                               <div class="col-sm-9">
-                                <select class="form-select form-select-sm" name="kelompok" id="kelompok" aria-label=".form-select-sm kelompok">
-                                  <option value="{{auth()->user()->id_user}}">Anda ({{auth()->user()->name}})</option>
-                                  <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
-                                  <option value="Aparat TNI - POLRI">Aparat TNI - POLRI</option>
-                                  <option value="Pegawai Swasta">Pegawai Swasta</option>
-                                  <option value="Guru / Dosen">Guru / Dosen</option>
-                                  <option value="Pelajar / Mahasiswa">Pelajar / Mahasiswa</option>
-                                  <option value="Petani / Peternak">Petani / Peternak</option>
-                                  <option value="Wiraswasta / Pengusaha">Wiraswasta / Pengusaha</option>
-                                  <option value="Lain-lain">Lain-lain</option>
-                                </select>
-                                @error('kelompok')
+                                <input type="file" name="fotoPeserta" class="form-control form-control-sm" id="fotoPeserta">
+                                @error('fotoPeserta')
                                   <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                     <p class="" style="font-size: 10pt;">
                                       <svg class="bi flex-shrink-0 me-2" width="15" height="15" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
@@ -433,7 +429,7 @@
                         </div>
                         <div class="modal-body">
                           <div class="container">
-                            <img src="{{ $peserta->foto_peserta != '' ? asset('images/Peserta/Foto/'.$peserta->foto_peserta) : asset('images/no-user.png') }}" class="img-fluid img-thumbnail rounded mx-auto d-block w-25" alt="...">
+                            <img src="{{ $peserta->foto_peserta != '' ? asset('images/Peserta/'.$peserta->foto_peserta) : asset('images/no-user.png') }}" class="img-fluid img-thumbnail rounded mx-auto d-block w-25" alt="...">
                           </div>
                           <hr>
                           <div class="content">
@@ -551,7 +547,7 @@
                                   <div class="mb-3 row">
                                     <label for="editAlamatPeserta" class="col-sm-3 px-1">Alamat</label>
                                     <div class="col-sm-9">
-                                      <textarea class="form-control" name="editAlamatPeserta" id="editAlamatPeserta" rows="3" placeholder="Alamat Peserta" value="{{$peserta->alamat_peserta}}">{{$peserta->alamat_peserta}}</textarea>
+                                      <textarea class="form-control form-control-sm" name="editAlamatPeserta" id="editAlamatPeserta" rows="3" placeholder="Alamat Peserta" value="{{$peserta->alamat_peserta}}">{{$peserta->alamat_peserta}}</textarea>
                                       @error('editAlamatPeserta')
                                         <div class="alert alert-danger d-flex align-items-center alert-size mt-2" role="alert">
                                           <p class="" style="font-size: 10pt;">
