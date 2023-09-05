@@ -106,7 +106,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-9">
-                <h5 class="card-title card-title-full"><i class="bi bi-people"></i> Data Kontak</h5>
+                <h5 class="card-title card-title-full"><i class="bi bi-people"></i> Data Kontak <span>({{count($pesertas)}} orang)</span></h5>
               </div>
               <div class="col-3 text-end">
                 <a href="#tambahData" class="icon-add-data text-success" data-bs-toggle="modal">

@@ -24,9 +24,12 @@
   <link href="{{asset('assets/vendor/quill/quill.snow.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-  <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+  <!-- <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet"> -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+  <!-- <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" /> -->
 
   <!-- Template Main CSS File -->
   <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
@@ -149,18 +152,20 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
   <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('assets/vendor/chart.js/chart.umd.js')}}"></script>
   <script src="{{asset('assets/vendor/echarts/echarts.min.js')}}"></script>
   <script src="{{asset('assets/vendor/quill/quill.min.js')}}"></script>
-  <script src="{{asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script>
+  <!-- <script src="{{asset('assets/vendor/simple-datatables/simple-datatables.js')}}"></script> -->
   <script src="{{asset('assets/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset('assets/vendor/php-email-form/validate.js')}}"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/i18n/id.js" type="text/javascript"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>

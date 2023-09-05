@@ -299,12 +299,44 @@
   /**
    * Initiate Datatables
    */
-  const datatables = select('.datatable', true)
+  const datatables = select('#datatable', true)
   datatables.forEach(datatable => {
-    new simpleDatatables.DataTable(datatable, {
-      info: false
+    const table = new DataTable(datatable, {
+      info: false,
+      language: {
+        infoEmpty: 'Tidak ada data.',
+        infoFiltered: '(filtered from _MAX_ total records)',
+        lengthMenu: 'Menampilkan _MENU_ Data Per Halaman',
+        zeroRecords: 'Mohon Maaf Data Yang Dicari Tidak Ditemukan.',
+        paginate: {
+          first: "Pertama",
+          last: "Terakhir",
+          next: "Selanjutnya",
+          previous: "Sebelumnya"
+        },
+        search: "Cari..."
+      },
+      columnDefs: [
+        {
+          searchable: false,
+          orderable: false,
+          targets: 0
+        }
+      ],
+      order: [[1, 'asc']]
     });
+    table.on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table
+            .cells(null, 0, { search: 'applied', order: 'applied' })
+            .every(function (cell) {
+                this.data(i++);
+            });
+    })
+    .draw();
   })
+    
 
   /**
    * Autoresize echart charts
